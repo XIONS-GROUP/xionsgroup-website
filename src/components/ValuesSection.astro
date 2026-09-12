@@ -1,0 +1,160 @@
+---
+const values = [
+  {
+    number: "01",
+    title: "EXCELLENCE",
+    description: "L'exigence de qualité dans chaque détail, de la formulation à la présentation.",
+  },
+  {
+    number: "02",
+    title: "ÉTHIQUE",
+    description: "La transparence et la responsabilité dans toutes nos actions et nos choix.",
+  },
+  {
+    number: "03",
+    title: "INNOVATION",
+    description: "La recherche constante de nouvelles solutions et de nouveaux territoires de beauté.",
+  },
+];
+---
+
+<section class="values-section" id="engagements">
+  <div class="values-container">
+    <h2 class="section-title">ENGAGEMENTS</h2>
+    
+    <div class="values-list">
+      {values.map((value) => (
+        <div class="value-item">
+          <div class="value-number">{value.number}</div>
+          <div class="value-content">
+            <h3>{value.title}</h3>
+            <p>{value.description}</p>
+          </div>
+        </div>
+      ))}
+    </div>
+  </div>
+</section>
+
+<style>
+  .values-section {
+    min-height: 100vh;
+    background: #FFFFFF;
+    padding: 160px 80px;
+  }
+  
+  .values-container {
+    max-width: 1400px;
+    margin: 0 auto;
+  }
+  
+  .section-title {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #000000;
+    margin-bottom: 100px;
+    position: relative;
+    display: inline-block;
+    font-weight: 400;
+  }
+  
+  .section-title::after {
+    content: '';
+    display: block;
+    width: 60px;
+    height: 0.5px;
+    background: #000000;
+    margin-top: 12px;
+  }
+  
+  .values-list {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .value-item {
+    border-top: 0.5px solid #E5E5E5;
+    padding: 60px 0;
+    display: grid;
+    grid-template-columns: 80px 1fr;
+    gap: 80px;
+    transition: border-color 0.6s ease;
+    cursor: pointer;
+  }
+  
+  .value-item:hover {
+    border-top-color: #000000;
+  }
+  
+  .value-number {
+    font-size: 14px;
+    color: #999999;
+    font-weight: 300;
+    transition: color 0.3s ease;
+  }
+  
+  .value-item:hover .value-number {
+    color: #C9A961;
+  }
+  
+  .value-content h3 {
+    font-size: 32px;
+    font-weight: 300;
+    letter-spacing: -0.01em;
+    color: #000000;
+    margin: 0 0 16px 0;
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .value-item:hover .value-content h3 {
+    transform: translateX(8px);
+  }
+  
+  .value-content p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #666666;
+    font-weight: 300;
+    max-width: 600px;
+  }
+  
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .values-section {
+      padding: 120px 60px;
+    }
+    
+    .section-title {
+      margin-bottom: 80px;
+    }
+    
+    .value-item {
+      gap: 60px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .values-section {
+      padding: 100px 24px;
+    }
+    
+    .section-title {
+      margin-bottom: 60px;
+    }
+    
+    .value-item {
+      grid-template-columns: 60px 1fr;
+      gap: 24px;
+      padding: 40px 0;
+    }
+    
+    .value-content h3 {
+      font-size: 24px;
+    }
+    
+    .value-content p {
+      font-size: 15px;
+    }
+  }
+</style>

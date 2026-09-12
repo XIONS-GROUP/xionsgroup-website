@@ -1,0 +1,218 @@
+---
+const brands = [
+  {
+    name: "L'ENTROPISTE",
+    tagline: "PARFUMERIE DE NICHE",
+    description: "Une maison de parfum d'art qui célèbre l'audace créative et l'excellence artisanale.",
+    image: "https://images.unsplash.com/photo-1541643600914-78b084683601?w=1200&auto=format&fit=crop",
+    href: "/fr/marques/lentropiste",
+    reverse: false,
+  },
+  {
+    name: "SUNLUTION",
+    tagline: "SCIENCE DE LA LUMIÈRE",
+    description: "Une marque de protection solaire et anti-âge fondée sur la science de la lumière et le savoir-faire dermatologique.",
+    image: "https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=1200&auto=format&fit=crop",
+    href: "/fr/marques/sunlution",
+    reverse: true,
+  },
+  {
+    name: "MASQLY",
+    tagline: "LES ZONES OUBLIÉES",
+    description: "Des masques innovants pour les bras et jambes, les zones oubliées du rituel beauté.",
+    image: "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=1200&auto=format&fit=crop",
+    href: "/fr/marques/masqly",
+    reverse: false,
+  },
+  {
+    name: "BETENOIR",
+    tagline: "COMING SOON",
+    description: "Bientôt révélé. Mystère et sophistication.",
+    image: "https://images.unsplash.com/photo-1617897903246-719242758050?w=1200&auto=format&fit=crop&blur=10",
+    href: null,
+    reverse: true,
+    comingSoon: true,
+  },
+];
+---
+
+<section class="brands-section" id="marques">
+  {brands.map((brand) => (
+    <article class="brand-slide" class:list={[{ reverse: brand.reverse }]}>
+      <div class="brand-image">
+        <img 
+          src={brand.image}
+          alt={brand.name}
+          loading="lazy"
+        />
+      </div>
+      
+      <div class="brand-content">
+        <h2 class="brand-name">{brand.name}</h2>
+        <p class="brand-tagline">{brand.tagline}</p>
+        <p class="brand-description">{brand.description}</p>
+        
+        {brand.href && !brand.comingSoon && (
+          <a href={brand.href} class="brand-link">
+            Découvrir {brand.name}
+          </a>
+        )}
+      </div>
+    </article>
+  ))}
+</section>
+
+<style>
+  .brands-section {
+    background: #FFFFFF;
+  }
+  
+  .brand-slide {
+    height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    position: relative;
+  }
+  
+  .brand-slide.reverse {
+    direction: rtl;
+  }
+  
+  .brand-slide.reverse > * {
+    direction: ltr;
+  }
+  
+  .brand-image {
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .brand-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .brand-slide:hover .brand-image img {
+    transform: scale(1.05);
+  }
+  
+  .brand-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 0 120px;
+    background: #F8F8F8;
+  }
+  
+  .brand-name {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 72px;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    color: #000000;
+    margin: 0 0 16px 0;
+    line-height: 0.9;
+  }
+  
+  .brand-tagline {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #C9A961;
+    margin-bottom: 48px;
+  }
+  
+  .brand-description {
+    font-size: 16px;
+    line-height: 1.8;
+    color: #666666;
+    font-weight: 300;
+    max-width: 400px;
+    margin-bottom: 48px;
+  }
+  
+  .brand-link {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: #000000;
+    text-decoration: none;
+    display: inline-block;
+    border-bottom: 0.5px solid #000000;
+    padding-bottom: 4px;
+    transition: all 0.4s ease;
+    align-self: flex-start;
+  }
+  
+  .brand-link:hover {
+    padding-bottom: 8px;
+    color: #C9A961;
+    border-color: #C9A961;
+  }
+  
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .brand-slide {
+      grid-template-columns: 1fr;
+      height: auto;
+    }
+    
+    .brand-slide.reverse {
+      direction: ltr;
+    }
+    
+    .brand-image {
+      height: 60vh;
+    }
+    
+    .brand-content {
+      padding: 80px 60px;
+    }
+    
+    .brand-name {
+      font-size: 56px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .brand-image {
+      height: 50vh;
+    }
+    
+    .brand-content {
+      padding: 60px 24px;
+    }
+    
+    .brand-name {
+      font-size: 48px;
+    }
+    
+    .brand-description {
+      font-size: 15px;
+      max-width: 100%;
+    }
+  }
+</style>
+
+<script>
+  // Intersection Observer for fade-in animation
+  const observerOptions = {
+    threshold: 0.2,
+    rootMargin: '0px 0px -100px 0px'
+  };
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+      }
+    });
+  }, observerOptions);
+  
+  document.querySelectorAll('.brand-slide').forEach(el => {
+    observer.observe(el);
+  });
+</script>
