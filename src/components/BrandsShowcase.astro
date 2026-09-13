@@ -3,87 +3,102 @@ const brands = [
   {
     name: "L'ENTROPISTE",
     tagline: "PARFUMERIE DE NICHE",
-    description: "Une maison de parfum d'art qui célèbre l'audace créative et l'excellence artisanale.",
+    description: "小众香水艺术",
+    fullDescription: "Une maison de parfum d'art qui célèbre l'audace créative et l'excellence artisanale.",
     image: "https://images.unsplash.com/photo-1541643600914-78b084683601?w=1200&auto=format&fit=crop",
     href: "/fr/marques/lentropiste",
-    reverse: false,
   },
   {
     name: "SUNLUTION",
     tagline: "SCIENCE DE LA LUMIÈRE",
-    description: "Une marque de protection solaire et anti-âge fondée sur la science de la lumière et le savoir-faire dermatologique.",
+    description: "光科学护肤",
+    fullDescription: "Une marque de protection solaire et anti-âge fondée sur la science de la lumière.",
     image: "https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=1200&auto=format&fit=crop",
     href: "/fr/marques/sunlution",
-    reverse: true,
   },
   {
     name: "MASQLY",
     tagline: "LES ZONES OUBLIÉES",
-    description: "Des masques innovants pour les bras et jambes, les zones oubliées du rituel beauté.",
+    description: "遗忘区域面膜",
+    fullDescription: "Des masques innovants pour les bras et jambes, les zones oubliées du rituel beauté.",
     image: "https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=1200&auto=format&fit=crop",
     href: "/fr/marques/masqly",
-    reverse: false,
   },
   {
     name: "BETENOIR",
     tagline: "COMING SOON",
-    description: "Bientôt révélé. Mystère et sophistication.",
+    description: "敬请期待",
+    fullDescription: "Bientôt révélé. Mystère et sophistication.",
     image: "https://images.unsplash.com/photo-1617897903246-719242758050?w=1200&auto=format&fit=crop&blur=10",
     href: null,
-    reverse: true,
     comingSoon: true,
   },
 ];
 ---
 
 <section class="brands-section" id="marques">
-  {brands.map((brand) => (
-    <article class="brand-slide" class:list={[{ reverse: brand.reverse }]}>
-      <div class="brand-image">
-        <img 
-          src={brand.image}
-          alt={brand.name}
-          loading="lazy"
-        />
-      </div>
-      
-      <div class="brand-content">
-        <h2 class="brand-name">{brand.name}</h2>
-        <p class="brand-tagline">{brand.tagline}</p>
-        <p class="brand-description">{brand.description}</p>
-        
-        {brand.href && !brand.comingSoon && (
-          <a href={brand.href} class="brand-link">
-            Découvrir {brand.name}
-          </a>
-        )}
-      </div>
-    </article>
-  ))}
+  <div class="brands-grid">
+    {brands.map((brand) => (
+      <article class="brand-card">
+        <a href={brand.href || '#'} class="brand-card-link" aria-label={brand.name}>
+          <div class="brand-image">
+            <img 
+              src={brand.image}
+              alt={brand.name}
+              loading="lazy"
+            />
+          </div>
+          
+          <div class="brand-overlay">
+            <h2 class="brand-name">{brand.name}</h2>
+            <p class="brand-tagline">{brand.tagline}</p>
+            <p class="brand-description">{brand.description}</p>
+            
+            {!brand.comingSoon && (
+              <span class="brand-arrow">→</span>
+            )}
+          </div>
+        </a>
+      </article>
+    ))}
+  </div>
 </section>
 
 <style>
   .brands-section {
+    background: #F8F8F8;
+    padding: 0;
+  }
+  
+  /* 2x2 Grid Layout - Analogue Agency Style */
+  .brands-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2px; /* Extremely fine separator */
+    max-width: 100%;
+    margin: 0 auto;
+  }
+  
+  .brand-card {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    overflow: hidden;
     background: #FFFFFF;
   }
   
-  .brand-slide {
-    height: 100vh;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+  .brand-card-link {
+    display: block;
+    width: 100%;
+    height: 100%;
+    text-decoration: none;
+    color: inherit;
     position: relative;
   }
   
-  .brand-slide.reverse {
-    direction: rtl;
-  }
-  
-  .brand-slide.reverse > * {
-    direction: ltr;
-  }
-  
+  /* Brand Image */
   .brand-image {
-    height: 100vh;
+    width: 100%;
+    height: 100%;
     overflow: hidden;
     position: relative;
   }
@@ -92,107 +107,159 @@ const brands = [
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 2s cubic-bezier(0.4, 0, 0.2, 1);
+    transform: scale(1);
+    transition: transform 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+    filter: grayscale(0.2);
   }
   
-  .brand-slide:hover .brand-image img {
+  .brand-card:hover .brand-image img {
     transform: scale(1.05);
+    filter: grayscale(0);
   }
   
-  .brand-content {
+  /* Brand Overlay */
+  .brand-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.85) 0%,
+      rgba(0, 0, 0, 0.4) 50%,
+      transparent 100%
+    );
     display: flex;
     flex-direction: column;
-    justify-content: center;
-    padding: 0 120px;
-    background: #F8F8F8;
+    justify-content: flex-end;
+    padding: 40px;
+    transition: background 0.4s ease;
   }
   
+  .brand-card:hover .brand-overlay {
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.9) 0%,
+      rgba(0, 0, 0, 0.5) 60%,
+      transparent 100%
+    );
+  }
+  
+  /* Brand Name */
   .brand-name {
     font-family: 'Cormorant Garamond', Georgia, serif;
-    font-size: 72px;
+    font-size: 48px;
     font-weight: 300;
-    letter-spacing: -0.02em;
-    color: #000000;
-    margin: 0 0 16px 0;
-    line-height: 0.9;
+    letter-spacing: -0.01em;
+    color: #FFFFFF;
+    margin: 0 0 8px 0;
+    line-height: 1;
+    transform: translateY(0);
+    transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
   }
   
+  .brand-card:hover .brand-name {
+    transform: translateY(-4px);
+  }
+  
+  /* Brand Tagline */
   .brand-tagline {
     font-size: 10px;
-    letter-spacing: 0.3em;
-    text-transform: uppercase;
-    color: #C9A961;
-    margin-bottom: 48px;
-  }
-  
-  .brand-description {
-    font-size: 16px;
-    line-height: 1.8;
-    color: #666666;
-    font-weight: 300;
-    max-width: 400px;
-    margin-bottom: 48px;
-  }
-  
-  .brand-link {
-    font-size: 11px;
     letter-spacing: 0.2em;
     text-transform: uppercase;
-    color: #000000;
-    text-decoration: none;
-    display: inline-block;
-    border-bottom: 0.5px solid #000000;
-    padding-bottom: 4px;
-    transition: all 0.4s ease;
-    align-self: flex-start;
-  }
-  
-  .brand-link:hover {
-    padding-bottom: 8px;
     color: #C9A961;
-    border-color: #C9A961;
+    margin-bottom: 16px;
+    opacity: 0.9;
   }
   
-  /* Responsive */
+  /* Brand Description (Chinese) */
+  .brand-description {
+    font-size: 14px;
+    letter-spacing: 0.05em;
+    color: #FFFFFF;
+    font-weight: 300;
+    opacity: 0;
+    transform: translateY(10px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .brand-card:hover .brand-description {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  
+  /* Arrow */
+  .brand-arrow {
+    font-size: 24px;
+    color: #FFFFFF;
+    position: absolute;
+    bottom: 40px;
+    right: 40px;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .brand-card:hover .brand-arrow {
+    opacity: 1;
+    transform: translateX(0);
+  }
+  
+  /* Responsive - Tablet */
   @media (max-width: 1024px) {
-    .brand-slide {
-      grid-template-columns: 1fr;
-      height: auto;
-    }
-    
-    .brand-slide.reverse {
-      direction: ltr;
-    }
-    
-    .brand-image {
-      height: 60vh;
-    }
-    
-    .brand-content {
-      padding: 80px 60px;
-    }
-    
     .brand-name {
-      font-size: 56px;
+      font-size: 40px;
+    }
+    
+    .brand-overlay {
+      padding: 32px;
     }
   }
   
-  @media (max-width: 768px) {
-    .brand-image {
-      height: 50vh;
+  /* Responsive - Mobile */
+  @media (max-width: 767px) {
+    .brands-grid {
+      grid-template-columns: 1fr;
+      gap: 0;
     }
     
-    .brand-content {
-      padding: 60px 24px;
+    .brand-card {
+      aspect-ratio: 4 / 5;
+      min-height: 70vh;
+    }
+    
+    .brand-overlay {
+      /* Mobile: always show text */
+      background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.9) 0%,
+        rgba(0, 0, 0, 0.5) 60%,
+        transparent 100%
+      );
+      padding: 24px;
     }
     
     .brand-name {
-      font-size: 48px;
+      font-size: 36px;
     }
     
     .brand-description {
+      /* Mobile: always visible */
+      opacity: 1;
+      transform: translateY(0);
       font-size: 15px;
-      max-width: 100%;
+    }
+    
+    .brand-arrow {
+      display: none;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .brand-name {
+      font-size: 32px;
+    }
+    
+    .brand-card {
+      min-height: 60vh;
     }
   }
 </style>

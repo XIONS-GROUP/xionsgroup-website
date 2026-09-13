@@ -134,9 +134,9 @@ const values = [
     }
   }
   
-  @media (max-width: 768px) {
+  @media (max-width: 767px) {
     .values-section {
-      padding: 100px 24px;
+      padding: 80px 24px;
     }
     
     .section-title {
@@ -144,17 +144,37 @@ const values = [
     }
     
     .value-item {
-      grid-template-columns: 60px 1fr;
+      grid-template-columns: 50px 1fr;
       gap: 24px;
-      padding: 40px 0;
+      padding: 36px 0;
+    }
+    
+    .value-number {
+      font-size: 12px;
     }
     
     .value-content h3 {
       font-size: 24px;
+      margin-bottom: 12px;
     }
     
     .value-content p {
       font-size: 15px;
+      line-height: 1.7;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .values-section {
+      padding: 60px 20px;
+    }
+    
+    .value-content h3 {
+      font-size: 22px;
+    }
+    
+    .value-content p {
+      font-size: 14px;
     }
   }
 </style>
