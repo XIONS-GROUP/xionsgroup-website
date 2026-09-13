@@ -14,6 +14,7 @@ command = "npm run build"
 
 [build.environment]
 NODE_VERSION = "26.6.0"
+ALLOW_INDEXING = "false"
 
 [build.processing]
 
@@ -31,6 +32,5 @@ NODE_VERSION = "26.6.0"
 for = "/*"
 
 [headers.values]
-X-Robots-Tag = "noindex, nofollow"
 X-Content-Type-Options = "nosniff"
 Referrer-Policy = "strict-origin-when-cross-origin"

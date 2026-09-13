@@ -1,0 +1,6 @@
+<svg viewBox="0 0 200 60" xmlns="http://www.w3.org/2000/svg">
+  <path d="M100 10 L110 25 L95 20 L105 20 L90 25 Z" fill="#0a0908"/>
+  <text x="100" y="50" font-family="serif" font-size="24" font-weight="700" text-anchor="middle" fill="#0a0908">
+    CÉSAR
+  </text>
+</svg>
