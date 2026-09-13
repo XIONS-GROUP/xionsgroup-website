@@ -1,232 +1,397 @@
 ---
-const navItems = [
-  { label: 'GROUPE', href: '/fr/groupe' },
-  { label: 'MARQUES', href: '/fr/marques' },
-  { label: 'ENGAGEMENTS', href: '/fr/engagements' },
-  { label: 'CONTACT', href: '/fr/contact' },
-];
+const megaMenuData = {
+  groupe: {
+    title: 'GROUPE',
+    href: '/fr/groupe',
+    sections: [
+      {
+        heading: 'VISION & HERITAGE',
+        links: [
+          { label: 'À propos du Groupe', href: '/fr/groupe', desc: 'Notre vision de la beauté de demain' },
+          { label: 'Fondateurs & Direction', href: '/fr/groupe#direction', desc: 'Denis Bellaïche, Kris Fang, Neo Su' },
+        ]
+      },
+      {
+        heading: 'RAYONNEMENT',
+        links: [
+          { label: 'Presse & Événements', href: '/fr/presse', desc: 'Oscars, Cannes, Fragrance Foundation' },
+          { label: 'Carrières', href: '/fr/carrieres', desc: 'Rejoindre nos équipes créatives' }
+        ]
+      }
+    ]
+  },
+  marques: {
+    title: 'MARQUES',
+    href: '/fr/marques',
+    sections: [
+      {
+        heading: 'PARFUMERIE DE NICHE',
+        links: [
+          { label: "L'Entropiste", href: '/fr/marques/lentropiste', badge: 'Award 2026', desc: 'Parfumerie libre et inattendue' },
+          { label: 'Betenoir', href: '/fr/marques/betenoir', badge: 'Coming 2026', desc: 'Prochaine création olfactive' }
+        ]
+      },
+      {
+        heading: 'COSMÉTIQUE & SOINS',
+        links: [
+          { label: 'Sunlution', href: '/fr/marques/sunlution', desc: 'La science de la lumière pour la peau' },
+          { label: 'Masqly', href: '/fr/marques/masqly', desc: 'Rituel beauté des zones ciblées' }
+        ]
+      }
+    ]
+  },
+  engagements: {
+    title: 'ENGAGEMENTS',
+    href: '/fr/engagements',
+    sections: [
+      {
+        heading: 'NOS PILIERS',
+        links: [
+          { label: 'Qualité & Excellence', href: '/fr/engagements#qualite', desc: 'Formules certifiées & haute exigence' },
+          { label: 'Responsabilité & Éthique', href: '/fr/engagements#responsabilite', desc: 'Transparence et traçabilité' },
+          { label: 'Environnement & Innovation', href: '/fr/engagements#environnement', desc: 'Développement durable et éco-conception' }
+        ]
+      }
+    ]
+  },
+  contact: {
+    title: 'CONTACT',
+    href: '/fr/contact',
+    sections: [
+      {
+        heading: 'BUREAUX & DEMANDES',
+        links: [
+          { label: 'Siège Paris', href: '/fr/contact?type=general', desc: 'Demandes générales & siège' },
+          { label: 'Presse & Public Relations', href: '/fr/contact?type=press', desc: 'Contact médias et partenaires' },
+          { label: 'Business & Distribution', href: '/fr/contact?type=business', desc: 'Opportunités de développement' }
+        ]
+      }
+    ]
+  }
+};
 ---
 
-<nav class="nav" aria-label="Navigation principale">
+<header class="nav-header">
   <div class="nav-container">
-    <a href="/fr" class="nav-logo" aria-label="XIONS GROUP - Accueil">
+    <!-- Logo -->
+    <a href="/fr" class="nav-logo" aria-label="XIONS GROUP">
       <img src="/XIONS_LOGO.svg" alt="XIONS GROUP" class="nav-logo-img" />
     </a>
     
-    <div class="nav-menu">
-      {navItems.map((item) => (
-        <a href={item.href} class="nav-link">
-          {item.label}
+    <!-- Mega Menu Nav Items -->
+    <nav class="nav-menu" aria-label="Navigation principale">
+      <!-- Item 1: GROUPE -->
+      <div class="nav-item">
+        <a href={megaMenuData.groupe.href} class="nav-link">
+          {megaMenuData.groupe.title}
+          <svg class="chevron" width="8" height="5" viewBox="0 0 8 5" fill="none"><path d="M1 1L4 4L7 1" stroke="currentColor" stroke-width="0.8"/></svg>
         </a>
-      ))}
-    </div>
+        <div class="mega-dropdown">
+          <div class="mega-dropdown-inner">
+            {megaMenuData.groupe.sections.map(section => (
+              <div class="mega-column">
+                <span class="mega-heading">{section.heading}</span>
+                {section.links.map(link => (
+                  <a href={link.href} class="mega-link">
+                    <span class="mega-link-title">{link.label}</span>
+                    <span class="mega-link-desc">{link.desc}</span>
+                  </a>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 2: MARQUES -->
+      <div class="nav-item">
+        <a href={megaMenuData.marques.href} class="nav-link">
+          {megaMenuData.marques.title}
+          <svg class="chevron" width="8" height="5" viewBox="0 0 8 5" fill="none"><path d="M1 1L4 4L7 1" stroke="currentColor" stroke-width="0.8"/></svg>
+        </a>
+        <div class="mega-dropdown">
+          <div class="mega-dropdown-inner">
+            {megaMenuData.marques.sections.map(section => (
+              <div class="mega-column">
+                <span class="mega-heading">{section.heading}</span>
+                {section.links.map(link => (
+                  <a href={link.href} class="mega-link">
+                    <div class="mega-link-header">
+                      <span class="mega-link-title">{link.label}</span>
+                      {link.badge && <span class="mega-badge">{link.badge}</span>}
+                    </div>
+                    <span class="mega-link-desc">{link.desc}</span>
+                  </a>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 3: ENGAGEMENTS -->
+      <div class="nav-item">
+        <a href={megaMenuData.engagements.href} class="nav-link">
+          {megaMenuData.engagements.title}
+          <svg class="chevron" width="8" height="5" viewBox="0 0 8 5" fill="none"><path d="M1 1L4 4L7 1" stroke="currentColor" stroke-width="0.8"/></svg>
+        </a>
+        <div class="mega-dropdown">
+          <div class="mega-dropdown-inner">
+            {megaMenuData.engagements.sections.map(section => (
+              <div class="mega-column mega-column--wide">
+                <span class="mega-heading">{section.heading}</span>
+                {section.links.map(link => (
+                  <a href={link.href} class="mega-link">
+                    <span class="mega-link-title">{link.label}</span>
+                    <span class="mega-link-desc">{link.desc}</span>
+                  </a>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <!-- Item 4: CONTACT -->
+      <div class="nav-item">
+        <a href={megaMenuData.contact.href} class="nav-link">
+          {megaMenuData.contact.title}
+          <svg class="chevron" width="8" height="5" viewBox="0 0 8 5" fill="none"><path d="M1 1L4 4L7 1" stroke="currentColor" stroke-width="0.8"/></svg>
+        </a>
+        <div class="mega-dropdown">
+          <div class="mega-dropdown-inner">
+            {megaMenuData.contact.sections.map(section => (
+              <div class="mega-column mega-column--wide">
+                <span class="mega-heading">{section.heading}</span>
+                {section.links.map(link => (
+                  <a href={link.href} class="mega-link">
+                    <span class="mega-link-title">{link.label}</span>
+                    <span class="mega-link-desc">{link.desc}</span>
+                  </a>
+                ))}
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </nav>
     
-    <div class="nav-right">
-      <button class="nav-lang" aria-label="Changer de langue">
-        FR
-      </button>
+    <div class="nav-actions">
+      <button class="lang-selector">FR</button>
     </div>
-    
-    <!-- Mobile menu button -->
-    <button class="nav-toggle" aria-label="Menu" aria-expanded="false">
-      <span></span>
-      <span></span>
-    </button>
   </div>
-  
-  <!-- Mobile menu -->
-  <div class="nav-mobile" aria-hidden="true">
-    {navItems.map((item) => (
-      <a href={item.href} class="nav-mobile-link">
-        {item.label}
-      </a>
-    ))}
-  </div>
-</nav>
+</header>
 
 <style>
-  .nav {
+  .nav-header {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
     z-index: 1000;
-    background: rgba(6, 6, 6, 0.82);
-    backdrop-filter: blur(16px);
-    -webkit-backdrop-filter: blur(16px);
-    border-bottom: 0.5px solid rgba(255, 255, 255, 0.1);
-    transition: background 0.3s ease, border-color 0.3s ease;
+    background: rgba(8, 8, 10, 0.85);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 0.5px solid rgba(255, 255, 255, 0.12);
   }
-  
+
   .nav-container {
     max-width: 1600px;
     margin: 0 auto;
-    padding: 0 80px;
+    padding: 0 60px;
     height: 80px;
     display: flex;
     align-items: center;
     justify-content: space-between;
   }
-  
-  /* Logo */
+
   .nav-logo {
     display: flex;
     align-items: center;
     text-decoration: none;
-    transition: opacity 0.3s ease;
-  }
-  
-  .nav-logo-img {
-    height: 32px;
-    width: auto;
-    filter: invert(1);
-    display: block;
   }
 
-  .nav-logo:hover {
+  .nav-logo-img {
+    height: 28px;
+    width: auto;
+    filter: invert(1);
+    transition: opacity 0.3s ease;
+  }
+
+  .nav-logo:hover .nav-logo-img {
     opacity: 0.75;
   }
-  
-  /* Navigation Links */
+
+  /* Navigation Links Container */
   .nav-menu {
     display: flex;
-    gap: 48px;
+    align-items: center;
+    gap: 54px;
+    height: 100%;
+  }
+
+  .nav-item {
+    position: relative;
+    height: 100%;
+    display: flex;
     align-items: center;
   }
-  
+
   .nav-link {
     font-size: 11px;
-    font-weight: 400;
+    font-weight: 500;
     letter-spacing: 0.22em;
-    text-transform: uppercase;
     color: rgba(255, 255, 255, 0.85);
     text-decoration: none;
-    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    height: 100%;
     transition: color 0.3s ease;
   }
-  
-  .nav-link::after {
-    content: '';
-    position: absolute;
-    bottom: -4px;
-    left: 50%;
-    width: 0;
-    height: 1px;
-    background: #FFFFFF;
-    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+
+  .chevron {
+    transition: transform 0.3s ease;
+    opacity: 0.6;
   }
-  
-  .nav-link:hover {
+
+  /* 🌟 Hover Auto-Dropdown Mega-Menu */
+  .mega-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 50%;
+    transform: translateX(-50%) translateY(12px);
+    background: rgba(12, 12, 14, 0.96);
+    backdrop-filter: blur(24px);
+    -webkit-backdrop-filter: blur(24px);
+    border: 0.5px solid rgba(255, 255, 255, 0.15);
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.8);
+    border-radius: 4px;
+    padding: 32px 40px;
+    min-width: 520px;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .nav-item:hover .nav-link {
     color: #FFFFFF;
   }
 
-  .nav-link:hover::after {
-    width: 100%;
-    left: 0;
+  .nav-item:hover .chevron {
+    transform: rotate(180deg);
+    opacity: 1;
   }
-  
-  /* Language Selector */
-  .nav-right {
+
+  /* 鼠标指向 (.nav-item:hover) 自动显示下拉菜单，免点击 */
+  .nav-item:hover .mega-dropdown {
+    opacity: 1;
+    pointer-events: all;
+    transform: translateX(-50%) translateY(0);
+  }
+
+  .mega-dropdown-inner {
+    display: flex;
+    gap: 48px;
+  }
+
+  .mega-column {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    min-width: 200px;
+  }
+
+  .mega-column--wide {
+    min-width: 320px;
+  }
+
+  .mega-heading {
+    font-size: 9px;
+    letter-spacing: 0.25em;
+    color: rgba(255, 255, 255, 0.4);
+    text-transform: uppercase;
+    padding-bottom: 8px;
+    border-bottom: 0.5px solid rgba(255, 255, 255, 0.1);
+  }
+
+  .mega-link {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    text-decoration: none;
+    padding: 6px 8px;
+    border-radius: 4px;
+    transition: background 0.2s ease;
+  }
+
+  .mega-link:hover {
+    background: rgba(255, 255, 255, 0.06);
+  }
+
+  .mega-link-header {
     display: flex;
     align-items: center;
-    gap: 24px;
+    justify-content: space-between;
   }
-  
-  .nav-lang {
+
+  .mega-link-title {
+    font-size: 13px;
+    font-weight: 400;
+    color: #FFFFFF;
+    letter-spacing: 0.04em;
+  }
+
+  .mega-link-desc {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.45);
+    font-weight: 300;
+  }
+
+  .mega-badge {
+    font-size: 9px;
+    letter-spacing: 0.1em;
+    padding: 2px 8px;
+    border-radius: 10px;
+    background: rgba(255, 255, 255, 0.15);
+    color: #FFFFFF;
+    text-transform: uppercase;
+  }
+
+  .nav-actions {
+    display: flex;
+    align-items: center;
+  }
+
+  .lang-selector {
     background: transparent;
     border: 0.5px solid rgba(255, 255, 255, 0.25);
-    color: rgba(255, 255, 255, 0.9);
-    padding: 6px 14px;
+    color: #FFFFFF;
     font-size: 10px;
     letter-spacing: 0.15em;
+    padding: 6px 14px;
+    border-radius: 16px;
     cursor: pointer;
     transition: all 0.3s ease;
-    border-radius: 20px;
   }
-  
-  .nav-lang:hover {
+
+  .lang-selector:hover {
     background: #FFFFFF;
     color: #000000;
   }
-  
-  /* Mobile Toggle */
-  .nav-toggle {
-    display: none;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 8px;
-    flex-direction: column;
-    gap: 6px;
-  }
-  
-  .nav-toggle span {
-    display: block;
-    width: 24px;
-    height: 1px;
-    background: #FFFFFF;
-    transition: transform 0.3s ease;
-  }
-  
-  /* Mobile Menu */
-  .nav-mobile {
-    display: none;
-  }
-  
+
   @media (max-width: 1024px) {
     .nav-container {
-      padding: 0 40px;
+      padding: 0 32px;
     }
-    
     .nav-menu {
       gap: 32px;
     }
   }
-  
+
   @media (max-width: 768px) {
-    .nav-container {
-      padding: 0 24px;
-      height: 70px;
-    }
-    
-    .nav-menu,
-    .nav-right {
+    .nav-menu {
       display: none;
-    }
-    
-    .nav-toggle {
-      display: flex;
-    }
-    
-    .nav-mobile {
-      display: flex;
-      flex-direction: column;
-      position: fixed;
-      top: 70px;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background: #060606;
-      padding: 40px 24px;
-      gap: 24px;
-      transform: translateY(-100%);
-      opacity: 0;
-      transition: all 0.4s ease;
-      pointer-events: none;
-    }
-    
-    .nav-mobile.is-active {
-      transform: translateY(0);
-      opacity: 1;
-      pointer-events: all;
-    }
-    
-    .nav-mobile-link {
-      font-size: 18px;
-      letter-spacing: 0.15em;
-      color: #FFFFFF;
-      text-decoration: none;
-      text-transform: uppercase;
     }
   }
 </style>
