@@ -1,0 +1,58 @@
+---
+interface Props {
+  quote: string;
+  author: string;
+  company: string;
+  rating: number;
+}
+
+const { quote, author, company, rating } = Astro.props;
+---
+
+<div class="testimonial-card">
+  <div class="stars">
+    {Array.from({length: rating}, () => '⭐').join('')}
+  </div>
+  <blockquote>"{quote}"</blockquote>
+  <div class="author">
+    <strong>{author}</strong>
+    <span>{company}</span>
+  </div>
+</div>
+
+<style>
+  .testimonial-card {
+    padding: 2rem;
+    background: white;
+    border-radius: 8px;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+  }
+
+  .stars {
+    font-size: 1.25rem;
+    margin-bottom: 1rem;
+  }
+
+  blockquote {
+    font-size: 1.125rem;
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+    font-style: italic;
+    color: var(--text-color);
+  }
+
+  .author {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .author strong {
+    color: var(--text-color);
+  }
+
+  .author span {
+    color: var(--text-color-light);
+    font-size: 0.875rem;
+  }
+</style>

@@ -1,0 +1,277 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ServiceCard from '../components/ServiceCard.astro';
+import TestimonialCard from '../components/TestimonialCard.astro';
+import CTAButton from '../components/CTAButton.astro';
+
+const pageTitle = "Home";
+const pageDescription = "Xions Group - Transform Your Business with Comprehensive Digital Solutions";
+---
+
+<BaseLayout title={pageTitle} description={pageDescription}>
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <h1>Transform Your Business with <span class="highlight">Comprehensive Digital Solutions</span></h1>
+      <p>Expert consulting, software development, and digital marketing services tailored to your success</p>
+      <div class="hero-cta">
+        <CTAButton href="/contact" variant="primary">Get Started</CTAButton>
+        <CTAButton href="/services" variant="secondary">Our Services</CTAButton>
+      </div>
+    </div>
+  </section>
+
+  <!-- Services Section -->
+  <section id="services" class="services-section">
+    <div class="container">
+      <h2>Our Services</h2>
+      <p class="section-subtitle">Comprehensive solutions to drive your business forward</p>
+      
+      <div class="services-grid">
+        <ServiceCard 
+          title="Business Consulting"
+          description="Strategic guidance to optimize operations and drive growth"
+          icon="💼"
+          href="/services/consulting"
+        />
+        <ServiceCard 
+          title="Software Development"
+          description="Custom applications built with cutting-edge technology"
+          icon="💻"
+          href="/services/development"
+        />
+        <ServiceCard 
+          title="Digital Marketing"
+          description="Data-driven campaigns that deliver measurable results"
+          icon="📊"
+          href="/services/marketing"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- Why Choose Us Section -->
+  <section class="why-section">
+    <div class="container">
+      <h2>Why Choose Xions Group</h2>
+      <div class="features-grid">
+        <div class="feature">
+          <div class="feature-icon">🎯</div>
+          <h3>Results-Driven</h3>
+          <p>We focus on delivering measurable outcomes that impact your bottom line</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">🔧</div>
+          <h3>Custom Solutions</h3>
+          <p>Tailored strategies and tools designed specifically for your business needs</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">👥</div>
+          <h3>Expert Team</h3>
+          <p>Seasoned professionals with deep industry knowledge and technical expertise</p>
+        </div>
+        <div class="feature">
+          <div class="feature-icon">🚀</div>
+          <h3>Proven Track Record</h3>
+          <p>Successfully delivered 100+ projects across diverse industries</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Testimonials Section -->
+  <section class="testimonials-section">
+    <div class="container">
+      <h2>Client Success Stories</h2>
+      <div class="testimonials-grid">
+        <TestimonialCard 
+          quote="Xions Group transformed our outdated systems into a modern, efficient platform. Revenue increased 40% in the first quarter."
+          author="Sarah Chen"
+          company="TechStart Inc."
+          rating={5}
+        />
+        <TestimonialCard 
+          quote="Their strategic consulting helped us identify and capitalize on market opportunities we didn't know existed."
+          author="Michael Rodriguez"
+          company="GrowthCo"
+          rating={5}
+        />
+        <TestimonialCard 
+          quote="The digital marketing campaign exceeded all our expectations. We saw a 3x return on investment within 6 months."
+          author="Emily Watson"
+          company="Retail Innovations"
+          rating={5}
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="container">
+      <h2>Ready to Transform Your Business?</h2>
+      <p>Let's discuss how our comprehensive solutions can drive your success</p>
+      <CTAButton href="/contact" variant="primary" size="large">Schedule a Consultation</CTAButton>
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .hero {
+    position: relative;
+    height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    margin-top: -2rem;
+  }
+
+  .hero-bg {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #1e3a8a 0%, #7c3aed 100%);
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 1;
+    text-align: center;
+    color: white;
+    max-width: 800px;
+    padding: 0 1rem;
+  }
+
+  .hero-content h1 {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+  }
+
+  .hero-content .highlight {
+    color: var(--accent-color);
+  }
+
+  .hero-content p {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    opacity: 0.9;
+  }
+
+  .hero-cta {
+    display: flex;
+    gap: 1rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .services-section,
+  .why-section,
+  .testimonials-section {
+    padding: 4rem 0;
+  }
+
+  .services-section {
+    background-color: var(--background-light);
+  }
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 1rem;
+  }
+
+  .container h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    color: var(--text-color);
+  }
+
+  .section-subtitle {
+    text-align: center;
+    font-size: 1.125rem;
+    color: var(--text-color-light);
+    margin-bottom: 3rem;
+  }
+
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+
+  .features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .feature {
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .feature-icon {
+    font-size: 3rem;
+    margin-bottom: 1rem;
+  }
+
+  .feature h3 {
+    font-size: 1.5rem;
+    margin-bottom: 0.5rem;
+    color: var(--text-color);
+  }
+
+  .feature p {
+    color: var(--text-color-light);
+  }
+
+  .testimonials-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+    margin-top: 3rem;
+  }
+
+  .cta-section {
+    background: linear-gradient(135deg, var(--primary-color), var(--accent-color));
+    color: white;
+    padding: 4rem 0;
+    text-align: center;
+  }
+
+  .cta-section h2 {
+    color: white;
+    margin-bottom: 1rem;
+  }
+
+  .cta-section p {
+    font-size: 1.25rem;
+    margin-bottom: 2rem;
+    opacity: 0.95;
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      height: 500px;
+    }
+
+    .hero-content h1 {
+      font-size: 2rem;
+    }
+
+    .hero-content p {
+      font-size: 1rem;
+    }
+
+    .services-grid,
+    .features-grid,
+    .testimonials-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

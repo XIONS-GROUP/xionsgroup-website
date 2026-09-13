@@ -1,0 +1,520 @@
+---
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+
+const pageTitle = 'XIONS GROUP — Imaginer la beauté de demain';
+const pageDescription = 'Un groupe français qui crée, développe et déploie des marques de beauté premium à l\'international.';
+---
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>{pageTitle}</title>
+  <meta name="description" content={pageDescription}>
+  
+  <!-- Fonts - 使用更独特的字重 -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Inter:wght@350;420;500;600&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <Navigation />
+  
+  <!-- ① 首屏 - 强主视觉 -->
+  <section class="hero">
+    <div class="hero-bg"></div>
+    <div class="hero-content">
+      <h1 class="hero-title">
+        <span>IMAGINER</span>
+        <span>LA BEAUTÉ</span>
+        <span>DE DEMAIN</span>
+      </h1>
+      <p class="hero-subtitle">
+        Un groupe français qui crée, développe et déploie<br>
+        des marques de beauté premium à l'international.
+      </p>
+      <a href="/fr/marques" class="hero-cta">Découvrir nos marques</a>
+    </div>
+    <div class="hero-scroll-hint">
+      <span>Défiler</span>
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+        <path d="M8 2L8 14M8 14L3 9M8 14L13 9" stroke="currentColor" stroke-width="1"/>
+      </svg>
+    </div>
+  </section>
+  
+  <!-- ② 品牌组合 - 四个世界 -->
+  <section class="brands-showcase">
+    <div class="brands-grid">
+      <article class="brand-item brand-item--large">
+        <a href="/fr/marques/lentropiste" class="brand-link">
+          <div class="brand-image">
+            <img src="https://images.unsplash.com/photo-1541643600914-78b084683601?w=1200&auto=format&fit=crop" alt="L'Entropiste" loading="lazy">
+          </div>
+          <div class="brand-info">
+            <h3 class="brand-name">L'ENTROPISTE</h3>
+            <p class="brand-position">Parfumerie de niche</p>
+            <span class="brand-status">2026 · Disponible</span>
+          </div>
+        </a>
+      </article>
+      
+      <article class="brand-item">
+        <a href="/fr/marques/sunlution" class="brand-link">
+          <div class="brand-image">
+            <img src="https://images.unsplash.com/photo-1556228578-8c89e6adf883?w=1200&auto=format&fit=crop" alt="Sunlution" loading="lazy">
+          </div>
+          <div class="brand-info">
+            <h3 class="brand-name">SUNLUTION</h3>
+            <p class="brand-position">Science de la lumière</p>
+            <span class="brand-status">2026 · Disponible</span>
+          </div>
+        </a>
+      </article>
+      
+      <article class="brand-item">
+        <a href="/fr/marques/masqly" class="brand-link">
+          <div class="brand-image">
+            <img src="https://images.unsplash.com/photo-1608248543803-ba4f8c70ae0b?w=1200&auto=format&fit=crop" alt="Masqly" loading="lazy">
+          </div>
+          <div class="brand-info">
+            <h3 class="brand-name">MASQLY</h3>
+            <p class="brand-position">Les zones oubliées</p>
+            <span class="brand-status">2026 · Disponible</span>
+          </div>
+        </a>
+      </article>
+      
+      <article class="brand-item brand-item--large brand-item--coming-soon">
+        <div class="brand-link">
+          <div class="brand-image">
+            <img src="https://images.unsplash.com/photo-1617897903246-719242758050?w=1200&auto=format&fit=crop" alt="Betenoir" loading="lazy">
+          </div>
+          <div class="brand-info">
+            <h3 class="brand-name">BETENOIR</h3>
+            <p class="brand-position">Bientôt révélé</p>
+            <span class="brand-status">Coming Soon</span>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+  
+  <!-- ③ 集团介绍 - 人物故事 -->
+  <section class="founders">
+    <div class="founders-container">
+      <div class="founders-image">
+        <img src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=1200&auto=format&fit=crop" alt="Fondateurs XIONS GROUP" loading="lazy">
+      </div>
+      <div class="founders-content">
+        <h2 class="section-label">Le Groupe</h2>
+        <h3 class="founders-title">Trois visionnaires,<br>une même passion</h3>
+        
+        <div class="founders-list">
+          <div class="founder-item">
+            <h4 class="founder-name">Denis Bellaïche</h4>
+            <p class="founder-role">Vision stratégique & développement</p>
+          </div>
+          <div class="founder-item">
+            <h4 class="founder-name">Kris Fang</h4>
+            <p class="founder-role">Innovation & création</p>
+          </div>
+          <div class="founder-item">
+            <h4 class="founder-name">Neo Su</h4>
+            <p class="founder-role">Opérations & international</p>
+          </div>
+        </div>
+        
+        <p class="founders-description">
+          Unis par la volonté de créer des marques de beauté qui allient 
+          créativité, rigueur et innovation responsable.
+        </p>
+        
+        <a href="/fr/groupe" class="text-link">En savoir plus sur le groupe</a>
+      </div>
+    </div>
+  </section>
+  
+  <!-- ④ 代表成果 - 具体证据 -->
+  <section class="achievements">
+    <div class="achievements-container">
+      <h2 class="section-label">Reconnaissance</h2>
+      <div class="achievement-feature">
+        <div class="achievement-image">
+          <img src="https://images.unsplash.com/photo-1540575467063-178a50c2df87?w=1400&auto=format&fit=crop" alt="Fragrance Foundation France Awards 2026" loading="lazy">
+        </div>
+        <div class="achievement-content">
+          <span class="achievement-date">Mai 2026</span>
+          <h3 class="achievement-title">Fragrance Foundation<br>France Awards</h3>
+          <p class="achievement-description">
+            L'Entropiste a été distingué lors du prestigieux Fragrance 
+            Foundation France Awards 2026 pour son approche innovante 
+            de la parfumerie d'art.
+          </p>
+          <a href="/fr/rayonnement" class="text-link">Voir nos réalisations</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  
+  <!-- ⑤ 品质与承诺 - 三个支柱 -->
+  <section class="commitments">
+    <div class="commitments-container">
+      <h2 class="section-label">Nos Engagements</h2>
+      
+      <div class="commitments-grid">
+        <article class="commitment-item">
+          <div class="commitment-icon">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+              <path d="M24 4L28 20L24 28L20 20L24 4Z" stroke="currentColor" stroke-width="1.5"/>
+              <circle cx="24" cy="24" r="19" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <h3 class="commitment-title">Qualité</h3>
+          <p class="commitment-description">L'exigence de l'excellence dans chaque détail</p>
+          <p class="commitment-example">→ Formules certifiées et testées</p>
+        </article>
+        
+        <article class="commitment-item">
+          <div class="commitment-icon">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+              <path d="M12 24L20 32L36 16" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <circle cx="24" cy="24" r="19" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <h3 class="commitment-title">Éthique</h3>
+          <p class="commitment-description">Transparence et responsabilité dans nos actions</p>
+          <p class="commitment-example">→ Sourcing éthique et traçable</p>
+        </article>
+        
+        <article class="commitment-item">
+          <div class="commitment-icon">
+            <svg width="48" height="48" viewBox="0 0 48 48" fill="none">
+              <path d="M24 8V24L32 28" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/>
+              <circle cx="24" cy="24" r="19" stroke="currentColor" stroke-width="1.5"/>
+            </svg>
+          </div>
+          <h3 class="commitment-title">Environnement</h3>
+          <p class="commitment-description">Pratiques durables et respect de la nature</p>
+          <p class="commitment-example">→ Éco-conception et recyclabilité</p>
+        </article>
+      </div>
+    </div>
+  </section>
+  
+  <!-- ⑥ 最新动态 - 精选内容 -->
+  <section class="news">
+    <div class="news-container">
+      <div class="news-header">
+        <h2 class="section-label">Actualités</h2>
+        <a href="/fr/actualites" class="text-link">Toutes les actualités</a>
+      </div>
+      
+      <div class="news-grid">
+        <article class="news-item news-item--featured">
+          <div class="news-image">
+            <img src="https://images.unsplash.com/photo-1556228453-efd6c1ff04f6?w=1200&auto=format&fit=crop" alt="Lancement L'Entropiste" loading="lazy">
+          </div>
+          <div class="news-content">
+            <time class="news-date">15 Mai 2026</time>
+            <h3 class="news-title">L'Entropiste fait ses débuts lors d'un événement exclusif à Paris</h3>
+            <p class="news-excerpt">Notre première maison de parfum a été présentée...</p>
+          </div>
+        </article>
+        
+        <article class="news-item">
+          <div class="news-image">
+            <img src="https://images.unsplash.com/photo-1515377905703-c4788e51af15?w=800&auto=format&fit=crop" alt="Sunlution dans Vogue" loading="lazy">
+          </div>
+          <div class="news-content">
+            <time class="news-date">10 Mai 2026</time>
+            <h3 class="news-title">Sunlution dans Vogue France</h3>
+          </div>
+        </article>
+        
+        <article class="news-item">
+          <div class="news-image">
+            <img src="https://images.unsplash.com/photo-1551818255-e6e10975bc17?w=800&auto=format&fit=crop" alt="XIONS GROUP annonce" loading="lazy">
+          </div>
+          <div class="news-content">
+            <time class="news-date">05 Mai 2026</time>
+            <h3 class="news-title">XIONS GROUP accélère son développement international</h3>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+  
+  <!-- ⑦ 联系与页脚 - 大字邀请 -->
+  <section class="contact-cta">
+    <div class="contact-cta-container">
+      <h2 class="contact-cta-title">
+        Entrons<br>
+        en contact
+      </h2>
+      <div class="contact-cta-buttons">
+        <a href="/fr/contact" class="cta-button cta-button--primary">Nous contacter</a>
+        <a href="/fr/carrieres" class="cta-button cta-button--secondary">Carrières</a>
+      </div>
+    </div>
+  </section>
+  
+  <Footer />
+</body>
+</html>
+
+<style is:global>
+  /* 全局样式 */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    font-family: 'Inter', sans-serif;
+    font-weight: 420; /* 不是标准的400 */
+    color: #0F0F0F; /* 温黑，不是纯黑 */
+    background: #FCFCFC; /* 冷白，不是纯白 */
+    overflow-x: hidden;
+  }
+  
+  /* ===================================
+     ① HERO - 强主视觉
+     =================================== */
+  
+  .hero {
+    min-height: 100vh;
+    position: relative;
+    display: flex;
+    align-items: center;
+    padding: 120px 80px 80px;
+    overflow: hidden;
+  }
+  
+  /* 背景图片 + 视差 */
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background-image: url('https://images.unsplash.com/photo-1615397349754-cfa2066a298e?w=2000&auto=format&fit=crop&q=80');
+    background-size: cover;
+    background-position: center;
+    filter: grayscale(0.3);
+    transform: scale(1.1);
+    z-index: 0;
+  }
+  
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      to right,
+      rgba(0, 0, 0, 0.7) 0%,
+      rgba(0, 0, 0, 0.4) 50%,
+      transparent 100%
+    );
+  }
+  
+  /* 内容 - 偏左，不居中 */
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    max-width: 800px;
+  }
+  
+  .hero-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: clamp(48px, 8vw, 110px);
+    font-weight: 350; /* 不是标准的300 */
+    letter-spacing: -0.02em;
+    line-height: 0.95;
+    color: #FFFFFF;
+    margin-bottom: 32px;
+  }
+  
+  .hero-title span {
+    display: block;
+    opacity: 0;
+    animation: fadeInUp 1.2s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  
+  .hero-title span:nth-child(1) { animation-delay: 0.1s; }
+  .hero-title span:nth-child(2) { animation-delay: 0.2s; }
+  .hero-title span:nth-child(3) { animation-delay: 0.35s; }
+  
+  .hero-subtitle {
+    font-size: 18px;
+    font-weight: 420;
+    line-height: 1.6;
+    color: rgba(255, 255, 255, 0.9);
+    margin-bottom: 48px;
+    opacity: 0;
+    animation: fadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) 0.5s both;
+  }
+  
+  .hero-cta {
+    display: inline-block;
+    padding: 16px 48px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    color: #0F0F0F;
+    background: #C9A961;
+    border: none;
+    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity: 0;
+    animation: fadeIn 1s cubic-bezier(0.16, 1, 0.3, 1) 0.7s both;
+  }
+  
+  .hero-cta:hover {
+    background: #D4AF37;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(201, 169, 97, 0.3);
+  }
+  
+  .hero-scroll-hint {
+    position: absolute;
+    bottom: 40px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    z-index: 2;
+    animation: float 2s ease-in-out infinite;
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translate(-50%, 0); }
+    50% { transform: translate(-50%, 10px); }
+  }
+  
+  /* 视差效果 */
+  @media (min-width: 1024px) {
+    .hero-bg {
+      will-change: transform;
+    }
+  }
+  
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(60px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+  }
+  
+  /* 响应式 */
+  @media (max-width: 1024px) {
+    .hero {
+      padding: 100px 60px 60px;
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .hero {
+      padding: 100px 24px 60px;
+      min-height: 90vh;
+    }
+    
+    .hero-bg {
+      transform: scale(1);
+    }
+    
+    .hero-bg::after {
+      background: linear-gradient(
+        to top,
+        rgba(0, 0, 0, 0.85) 0%,
+        rgba(0, 0, 0, 0.4) 70%,
+        transparent 100%
+      );
+    }
+    
+    .hero-content {
+      margin-top: auto;
+    }
+    
+    .hero-subtitle {
+      font-size: 16px;
+      margin-bottom: 32px;
+    }
+    
+    .hero-cta {
+      width: 100%;
+      text-align: center;
+      padding: 18px 32px;
+    }
+    
+    .hero-scroll-hint {
+      display: none;
+    }
+  }
+</style>
+
+<!-- 导入额外样式 -->
+<link rel="stylesheet" href="/src/styles/homepage-v2-part2.css">
+<link rel="stylesheet" href="/src/styles/homepage-v2-part3.css">
+
+<script>
+  // 视差滚动效果
+  if (window.matchMedia('(min-width: 1024px)').matches && 
+      !window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+    
+    const heroBg = document.querySelector('.hero-bg');
+    
+    window.addEventListener('scroll', () => {
+      const scrolled = window.pageYOffset;
+      const heroHeight = document.querySelector('.hero')?.offsetHeight || 0;
+      
+      if (scrolled < heroHeight && heroBg) {
+        const parallaxSpeed = 0.5;
+        heroBg.style.transform = `translateY(${scrolled * parallaxSpeed}px) scale(1.1)`;
+      }
+    }, { passive: true });
+  }
+  
+  // Intersection Observer 用于滚动触发动画
+  const observerOptions = {
+    threshold: 0.1,
+    rootMargin: '0px 0px -100px 0px'
+  };
+  
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in-view');
+      }
+    });
+  }, observerOptions);
+  
+  // 观察需要动画的元素
+  document.querySelectorAll('.brand-item, .commitment-item, .news-item').forEach(el => {
+    observer.observe(el);
+  });
+</script>
