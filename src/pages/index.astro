@@ -1,6 +1,7 @@
 ---
 import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
+import { robotsDirective } from '../config/indexing';
 
 const pageTitle = 'XIONS GROUP — Imaginer la beauté de demain';
 const pageDescription = 'Un groupe français indépendant qui crée, développe et déploie des marques de beauté premium à l\'international.';
@@ -11,7 +12,7 @@ const pageDescription = 'Un groupe français indépendant qui crée, développe 
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="robots" content="noindex, nofollow">
+  <meta name="robots" content={robotsDirective}>
   <title>{pageTitle}</title>
   <meta name="description" content={pageDescription}>
   

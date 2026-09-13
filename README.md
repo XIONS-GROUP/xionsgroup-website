@@ -8,12 +8,12 @@ Use the Node version in `.nvmrc`. Run `npm ci`, then `npm run dev`. Run `npm run
 
 ## Content
 
-French copy is in `src/content/home.fr.json`. The homepage uses `src/layouts/Base.astro`. Website-only media belongs in `public/images` or `src/assets/images`; originals stay outside the repository. Contact currently opens an email client; no form service or CMS is configured.
+French copy is documented in `content/home.fr.json`; the current visual homepage is `src/pages/index.astro`. Website-only media belongs in `public/images` or `src/assets/images`; originals stay outside the repository. Contact currently opens an email client; no form service or CMS is configured. Superseded homepage studies are kept in `archive/pages`, and the former duplicate project is preserved in `archive/legacy-site`; neither directory is deployed.
 
 ## Deployment
 
-Netlify build command: `npm run build`; publish directory: `dist`; base directory: repository root. Production branch: `main`; explicitly enable Branch Deploys for `dev` and Deploy Previews for PRs. GitHub/Netlify remote links are not configured until company ownership is confirmed.
+Netlify build command: `npm run build`; publish directory: `dist`; base directory: repository root. Production branch: `main`; Branch Deploys are enabled for `dev`, and Deploy Previews can be used for pull requests.
 
 Use feature branches and PRs into `dev`, then review `dev → main` releases. CI checks the build. Remote branch protection must be configured separately. Do not force-push shared branches.
 
-The pre-launch site intentionally blocks indexing in HTML, robots.txt and Netlify response headers. This is NOT access protection. When launching, remove the production indexing restrictions while preserving preview noindex behavior. Do not connect the domain before reviewing `docs/domain-cutover.md`.
+The pre-launch site intentionally blocks indexing in HTML and robots.txt. This is not access protection. At the public launch, set `ALLOW_INDEXING = "true"` only in `[context.production.environment]` in `netlify.toml`; branch deploys and pull-request previews remain excluded from search results.

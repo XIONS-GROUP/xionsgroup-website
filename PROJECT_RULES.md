@@ -5,6 +5,7 @@
 1. **核心代码存储唯一入口**：
    * 唯一生产代码库位于：`src/`（包括页面 `src/pages/`、组件 `src/components/`、静态资源 `public/`）。
    * 网站所有的生产资产改动均以 `src/` 目录为准。
+   * `archive/` 仅保留历史版本，不参与构建；所有命令从仓库根目录运行。
 
 2. **设计美学指导思想 (White Editorial Luxury Rule)**：
    * **定位**：法国顶级奢华美妆/香水集团（参照 Chanel, Byredo, Aesop, Le Labo 级别）。
