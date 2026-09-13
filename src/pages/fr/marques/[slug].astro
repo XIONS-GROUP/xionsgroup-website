@@ -1,0 +1,7 @@
+---
+import BrandPage from '../../../components/BrandPage.astro';
+import { brands } from '../../../data/brands';
+export function getStaticPaths() { return brands.map((brand, index) => ({ params: { slug: brand.slug }, props: { brand, index } })); }
+const { brand, index } = Astro.props;
+---
+<BrandPage brand={brand} index={index} />

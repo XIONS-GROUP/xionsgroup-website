@@ -8,7 +8,7 @@ Use the Node version in `.nvmrc`. Run `npm ci`, then `npm run dev`. Run `npm run
 
 ## Content
 
-French copy is documented in `content/home.fr.json`; the current visual homepage is `src/pages/index.astro`. Website-only media belongs in `public/images` or `src/assets/images`; originals stay outside the repository. Company source documents stay in the ignored `local-materials/` directory. Contact currently opens an email client; no form service or CMS is configured. Superseded code is kept in `archive/` and is not deployed.
+French source copy is documented in `content/home.fr.json`. Shared brand content lives in `src/data/brands.ts`; page-specific copy lives with its route in `src/pages/fr/`. Website-only media belongs in `public/images` or `src/assets/images`; originals stay outside the repository. Company source documents stay in the ignored `local-materials/` directory. The contact page uses Netlify Forms; no CMS is configured. Superseded code is kept in `archive/` and is not deployed.
 
 ## Deployment
 

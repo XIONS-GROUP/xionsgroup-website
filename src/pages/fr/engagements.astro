@@ -1,0 +1,15 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import PageHero from '../../components/PageHero.astro';
+const commitments = [
+  ['Qualité & excellence', 'La qualité guide la manière dont nous imaginons, développons et faisons évoluer chaque marque : partenaires, matières, formulation, production, design et expérience consommateur.'],
+  ['Responsabilité & éthique', 'Nous construisons des relations durables, transparentes et respectueuses, fondées sur la traçabilité, l’intégrité et une communication claire.'],
+  ['Environnement & innovation', 'Nous questionnons les matériaux, limitons le superflu et améliorons progressivement les emballages avec une approche pragmatique : mesurer, améliorer, avancer.']
+];
+---
+<SiteLayout title="Engagements — XIONS GROUP" description="La charte de qualité et les engagements de XIONS Group.">
+  <PageHero eyebrow="Engagements" title="L’exigence comme principe." intro="Performance, sensorialité, créativité, sécurité et responsabilité doivent progresser ensemble." />
+  <section class="section"><div class="measure numbered-list">{commitments.map((item, index) => <article class="numbered-item" id={index === 0 ? 'qualite' : index === 1 ? 'responsabilite' : 'environnement'} data-reveal><span class="num">0{index + 1}</span><h2 class="title-md">{item[0]}</h2><p>{item[1]}</p></article>)}</div></section>
+  <aside class="quote-panel"><blockquote>Promettre avec mesure.<br />Progresser avec constance.</blockquote></aside>
+  <section class="section"><div class="measure split"><p class="eyebrow">Notre méthode</p><div class="prose"><h2 class="title-lg">Une amélioration continue, à chaque étape.</h2><p>Nos engagements s’appliquent du choix des partenaires jusqu’à la mise sur le marché. Ils évoluent avec nos connaissances, nos outils de mesure et les exigences propres à chaque catégorie.</p></div></div></section>
+</SiteLayout>

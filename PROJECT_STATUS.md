@@ -30,7 +30,7 @@ The repository root is the only development and deployment entry point. Run all 
 
 ## Current website state
 
-- The `dev` branch contains the white editorial homepage and mega menu.
+- The `dev` branch contains the complete French multi-page site and the new luxury editorial design system.
 - The `main` branch still contains the approved pre-launch logo holding page.
 - DNS and TLS for `xionsgroup.com` are active through Netlify.
 - Preview builds block search indexing.
@@ -46,7 +46,7 @@ The repository root is the only development and deployment entry point. Run all 
 ## Next implementation work
 
 - Replace placeholder imagery with approved brand assets.
-- Build the linked French subpages and legal pages; current menu links are placeholders.
-- Connect structured copy to reusable page components or a CMS if browser-based editing is required.
-- Add and test the contact form.
+- Complete the company registration details in the legal notice before production launch.
+- Connect the remaining page copy to a CMS if browser-based editing is required.
+- Confirm Netlify Forms notification delivery with a real staging submission.
 - Review responsive behavior and accessibility before the `dev` to `main` release.

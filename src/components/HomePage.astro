@@ -1,0 +1,26 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import BrandGrid from './BrandGrid.astro';
+---
+<SiteLayout title="XIONS GROUP — Imaginer la beauté de demain" description="Groupe français indépendant dédié à la création et au rayonnement de marques de beauté nouvelle génération.">
+  <header class="home-hero">
+    <div class="hero-orbit" aria-hidden="true"></div>
+    <p class="eyebrow hero-kicker">Groupe de beauté indépendant · Paris</p>
+    <h1 class="display" data-reveal>Imaginer<br /><em>la beauté</em><br />de demain.</h1>
+    <div class="hero-foot"><p>Création · Science · Culture</p><a href="#vision">Découvrir ↓</a></div>
+  </header>
+  <section class="section" id="vision"><div class="measure split"><p class="eyebrow">Notre vision</p><div class="prose" data-reveal><h2 class="title-lg">Créer des maisons capables de redéfinir leur catégorie.</h2><p>XIONS Group est un groupe français indépendant qui crée, développe et déploie des marques de beauté premium à l’international.</p><p>Chaque maison possède son territoire, son langage et sa vision. Toutes partagent une même ambition : inventer de nouveaux standards.</p><a class="text-link" href="/fr/groupe">Découvrir le Groupe ↗</a></div></div></section>
+  <section class="section section-rule brand-section"><div class="measure section-head"><p class="eyebrow">Le portefeuille</p><h2 class="title-xl">Quatre maisons.<br />Quatre regards.</h2></div><BrandGrid compact /></section>
+  <section class="quote-panel"><blockquote data-reveal>« Une marque devient forte lorsqu’elle dépasse le produit pour entrer dans la culture. »</blockquote></section>
+  <section class="section"><div class="measure"><div class="section-head"><p class="eyebrow">Notre rôle</p><h2 class="title-lg">De l’idée au rayonnement.</h2></div><div class="numbered-list"><div class="numbered-item" data-reveal><span class="num">01</span><h3>Imaginer</h3><p>Vision entrepreneuriale, stratégie de marque et direction créative.</p></div><div class="numbered-item" data-reveal><span class="num">02</span><h3>Développer</h3><p>Innovation produit, expertise opérationnelle et construction des marchés.</p></div><div class="numbered-item" data-reveal><span class="num">03</span><h3>Rayonner</h3><p>Communication, culture et déploiement international.</p></div></div></div></section>
+  <div class="cta-band"><h2>Des marques françaises.<br />Une résonance internationale.</h2><a class="text-link" href="/fr/presse">Explorer ↗</a></div>
+</SiteLayout>
+<style>
+  .home-hero { position:relative; min-height:100svh; padding:calc(var(--header) + 4rem) var(--pad) 2.5rem; overflow:hidden; display:flex; flex-direction:column; justify-content:center; }
+  .hero-kicker { position:absolute; top:calc(var(--header) + 2rem); left:var(--pad); } .home-hero .display { position:relative; z-index:2; } .home-hero em { color:var(--wine); font-weight:400; }
+  .hero-orbit { position:absolute; width:min(52vw,44rem); aspect-ratio:1; right:-7vw; top:48%; transform:translateY(-50%); border-radius:50%; background:radial-gradient(circle at 36% 35%,#f6eee3 0 10%,#b27a67 28%,#632b34 56%,#171412 76%); box-shadow:inset 1rem -2rem 5rem rgba(0,0,0,.32); filter:saturate(.72); }
+  .hero-orbit::after { content:''; position:absolute; inset:-12%; border:1px solid var(--line); border-radius:50%; }
+  .hero-foot { position:absolute; bottom:2.5rem; inset-inline:var(--pad); display:flex; justify-content:space-between; font-size:.68rem; letter-spacing:.15em; text-transform:uppercase; } .hero-foot p { margin:0; } .hero-foot a { text-decoration:none; }
+  .section-head { display:flex; justify-content:space-between; align-items:start; gap:3rem; margin-bottom:4rem; } .brand-section { padding-bottom:0; } .brand-section :global(.brand-grid) { margin-inline:calc(var(--pad) * -1); }
+  @media(max-width:700px){ .hero-orbit { width:78vw; right:-34vw; opacity:.78; } .section-head { flex-direction:column; } }
+</style>

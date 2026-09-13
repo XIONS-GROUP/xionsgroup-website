@@ -1,0 +1,14 @@
+---
+interface Props { eyebrow: string; title: string; intro: string; folio?: string }
+const { eyebrow, title, intro, folio = 'XIONS GROUP · PARIS' } = Astro.props;
+---
+<header class="page-hero">
+  <div class="page-hero-copy" data-reveal>
+    <p class="eyebrow">{eyebrow}</p>
+    <h1 class="display">{title}</h1>
+  </div>
+  <div class="page-hero-aside" data-reveal>
+    <p>{intro}</p>
+    <span class="folio">{folio}</span>
+  </div>
+</header>

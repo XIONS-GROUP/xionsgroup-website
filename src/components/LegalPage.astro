@@ -1,0 +1,7 @@
+---
+import SiteLayout from '../layouts/SiteLayout.astro';
+import PageHero from './PageHero.astro';
+interface Props { title: string; intro: string; updated?: string }
+const { title, intro, updated = 'Septembre 2026' } = Astro.props;
+---
+<SiteLayout title={`${title} — XIONS GROUP`} description={intro}><PageHero eyebrow="Informations légales" title={title} intro={intro} folio={`Dernière mise à jour · ${updated}`} /><article class="section legal"><slot /></article></SiteLayout>

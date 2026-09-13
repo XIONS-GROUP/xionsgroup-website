@@ -32,6 +32,8 @@ Thumbs.db
 # Temporary files
 /tmp
 *.log
+output/
+.playwright-cli/
 
 # Company source material kept locally and outside the public website repository
 local-materials/*
