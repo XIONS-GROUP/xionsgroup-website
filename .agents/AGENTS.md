@@ -6,24 +6,19 @@
    * 唯一生产代码库位于：`src/`（包括页面 `src/pages/`、组件 `src/components/`、静态资源 `public/`）。
    * 网站所有的生产资产改动均以 `src/` 目录为准。
 
-2. **设计美学指导思想 (Luxury Aesthetic Rule)**：
-   * **定位**：法国顶级奢华美妆/香水集团（参照 Chanel, Byredo, Aesop, Le Labo, Saint Laurent 级别）。
-   * **调性**：拒绝接地气/廉价的通用模版美学。强调极致的字重对比、呼吸感留白、高定网格版式、细腻触感的颗粒噪点与纯代码控制的流体质感。
-   * **配色与光影**：采用高阶暗调（Matte Obsidian `#080808` / Charcoal `#0E0E10`），配合软白/银灰（`#FFFFFF` / `#A0A0A0`）文本，拒绝过暗无光或杂乱刺眼的强荧光色彩。
+2. **设计美学指导思想 (White Editorial Luxury Rule)**：
+   * **定位**：法国顶级奢华美妆/香水集团（参照 Chanel, Byredo, Aesop, Le Labo 级别）。
+   * **基调**：**高定白色极简社论风格 (White Editorial Luxury Theme)**（纯净高雅白背景 `#FFFFFF` + 黑字 `#0A0A0A`）。
+   * **排版**：强调极简衬线/无衬线高字重对比、呼吸感留白、高定单栏与多栏网格交错版式。
 
 3. **Logo 使用规范 (Restrained Logo Rule)**：
-   * **禁止在页面内滥用 Logo**。Logo 只允许优雅地呈现在**顶部导航栏 (Navigation Header)**。
-   * 页面主体（Hero、各内容模块）焦点留给品牌视觉大图与高定排版标题。
+   * **禁止在页面主体内滥用 Logo**。Logo (`XIONS_LOGO.svg`) 优雅呈现在**顶部导航栏 (Navigation Header)** 与页脚 (Footer)。
 
-4. **纯代码物理模拟/参数化流体背景 (Procedural Code Background)**：
-   * 页面背景禁用静态背景大图。
-   * 必须通过 HTML5 Canvas / CSS 代码动态生成黑白渐变流体网格与电影级胶片噪点颗粒遮罩（Film Grain Noise），呈现随参数慢速流转的物理柔光感。
+4. **自动悬停下拉大菜单 (Hover Dropdown Mega-Menu)**：
+   * 顶部导航栏分类（GROUPE, MARQUES, ENGAGEMENTS, CONTACT）支持**鼠标移入悬停自动触发下拉大菜单**（无需点击）。
+   * 下拉菜单清晰呈现集团完整的架构树与子页面导航。
 
-5. **自动悬停下拉大菜单 (Hover Dropdown Mega-Menu)**：
-   * 顶部导航栏分类（GROUPE, MARQUES, ENGAGEMENTS, CONTACT）必须支持**鼠标移入悬停自动触发下拉大菜单**（无需点击）。
-   * 下拉菜单需清晰呈现集团完整的架构树与子页面导航。
-
-6. **图片替换工作流 (Image Replacement Workflow)**：
+5. **图片替换工作流 (Image Replacement Workflow)**：
    * 用户提供图片或直接指定图片存放位置与对应组件。
    * AI 助手负责将图片归档至 `public/images/`，更新对应代码路径，并自动完成响应式与懒加载（`loading="lazy"`）优化。
 
