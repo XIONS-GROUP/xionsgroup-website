@@ -1,0 +1,483 @@
+/* 继续首页样式 - Part 2 */
+
+/* ===================================
+   ② BRANDS - 不等宽网格
+   =================================== */
+
+.brands-showcase {
+  padding: 100px 40px;
+  background: #F8F8F8;
+}
+
+.brands-grid {
+  max-width: 1600px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 38fr 62fr;
+  grid-template-rows: auto auto;
+  gap: 2px;
+}
+
+.brand-item {
+  position: relative;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  background: #FCFCFC;
+}
+
+.brand-item--large {
+  aspect-ratio: 16 / 10;
+}
+
+/* 黄金分割布局 */
+.brand-item:nth-child(1) {
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.brand-item:nth-child(2) {
+  grid-column: 2;
+  grid-row: 1;
+}
+
+.brand-item:nth-child(3) {
+  grid-column: 2;
+  grid-row: 2;
+}
+
+.brand-item:nth-child(4) {
+  grid-column: 1;
+  grid-row: 2;
+}
+
+.brand-link {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+}
+
+.brand-image {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.brand-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: grayscale(0.2);
+}
+
+.brand-item:hover .brand-image img {
+  transform: scale(1.08);
+  filter: grayscale(0);
+}
+
+.brand-info {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 40px;
+  background: linear-gradient(
+    to top,
+    rgba(0, 0, 0, 0.9) 0%,
+    rgba(0, 0, 0, 0.6) 50%,
+    transparent 100%
+  );
+  color: #FFFFFF;
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.brand-name {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 42px;
+  font-weight: 300;
+  letter-spacing: -0.01em;
+  line-height: 1;
+  margin-bottom: 12px;
+  transform: translateY(0);
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.brand-item:hover .brand-name {
+  transform: translateY(-4px);
+}
+
+.brand-position {
+  font-size: 11px;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: #C9A961;
+  margin-bottom: 16px;
+  opacity: 0.95;
+}
+
+.brand-status {
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  color: rgba(255, 255, 255, 0.6);
+  display: block;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.brand-item:hover .brand-status {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.brand-item--coming-soon .brand-image img {
+  filter: grayscale(0.8) blur(2px);
+}
+
+.brand-item--coming-soon:hover .brand-image img {
+  filter: grayscale(0.6) blur(1px);
+}
+
+/* 响应式 */
+@media (max-width: 1024px) {
+  .brands-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+  
+  .brand-item:nth-child(1),
+  .brand-item:nth-child(4) {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 767px) {
+  .brands-showcase {
+    padding: 60px 20px;
+  }
+  
+  .brands-grid {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  
+  .brand-item,
+  .brand-item--large {
+    aspect-ratio: 4 / 5;
+    min-height: 70vh;
+  }
+  
+  .brand-info {
+    background: linear-gradient(
+      to top,
+      rgba(0, 0, 0, 0.95) 0%,
+      rgba(0, 0, 0, 0.7) 60%,
+      transparent 100%
+    );
+    padding: 32px 24px;
+  }
+  
+  .brand-name {
+    font-size: 36px;
+  }
+  
+  .brand-status {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===================================
+   ③ FOUNDERS - 人物故事
+   =================================== */
+
+.founders {
+  padding: 140px 80px;
+  background: #FCFCFC;
+}
+
+.founders-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: 55fr 45fr;
+  gap: 100px;
+  align-items: center;
+}
+
+.founders-image {
+  overflow: hidden;
+}
+
+.founders-image img {
+  width: 100%;
+  height: auto;
+  filter: grayscale(0.4);
+  transition: filter 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.founders:hover .founders-image img {
+  filter: grayscale(0);
+}
+
+.section-label {
+  font-size: 10px;
+  letter-spacing: 0.3em;
+  text-transform: uppercase;
+  color: #999999;
+  margin-bottom: 24px;
+  position: relative;
+  display: inline-block;
+}
+
+.section-label::after {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: -8px;
+  width: 40px;
+  height: 0.5px;
+  background: #999999;
+}
+
+.founders-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 48px;
+  font-weight: 300;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  color: #0F0F0F;
+  margin-bottom: 48px;
+}
+
+.founders-list {
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  margin-bottom: 40px;
+}
+
+.founder-item {
+  padding-bottom: 32px;
+  border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
+}
+
+.founder-item:last-child {
+  border-bottom: none;
+  padding-bottom: 0;
+}
+
+.founder-name {
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: #0F0F0F;
+  margin-bottom: 8px;
+}
+
+.founder-role {
+  font-size: 14px;
+  font-weight: 420;
+  color: #666666;
+  line-height: 1.5;
+}
+
+.founders-description {
+  font-size: 16px;
+  font-weight: 420;
+  line-height: 1.7;
+  color: #666666;
+  margin-bottom: 32px;
+}
+
+.text-link {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  color: #0F0F0F;
+  text-decoration: none;
+  border-bottom: 1px solid #0F0F0F;
+  padding-bottom: 2px;
+  display: inline-block;
+  transition: all 0.3s ease;
+}
+
+.text-link:hover {
+  color: #C9A961;
+  border-color: #C9A961;
+  padding-bottom: 4px;
+}
+
+/* 响应式 */
+@media (max-width: 1024px) {
+  .founders {
+    padding: 100px 60px;
+  }
+  
+  .founders-container {
+    grid-template-columns: 1fr;
+    gap: 60px;
+  }
+  
+  .founders-title {
+    font-size: 42px;
+  }
+}
+
+@media (max-width: 767px) {
+  .founders {
+    padding: 80px 24px;
+  }
+  
+  .founders-container {
+    gap: 48px;
+  }
+  
+  .founders-title {
+    font-size: 36px;
+    margin-bottom: 36px;
+  }
+  
+  .founders-list {
+    gap: 24px;
+    margin-bottom: 32px;
+  }
+  
+  .founder-item {
+    padding-bottom: 24px;
+  }
+  
+  .founder-name {
+    font-size: 18px;
+  }
+  
+  .founder-role {
+    font-size: 13px;
+  }
+  
+  .founders-description {
+    font-size: 15px;
+  }
+}
+
+/* ===================================
+   ④ ACHIEVEMENTS - 代表成果
+   =================================== */
+
+.achievements {
+  padding: 100px 80px;
+  background: #0F0F0F;
+  color: #FCFCFC;
+}
+
+.achievements-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.achievements .section-label {
+  color: rgba(255, 255, 255, 0.5);
+  margin-bottom: 60px;
+}
+
+.achievements .section-label::after {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+.achievement-feature {
+  display: grid;
+  grid-template-columns: 60fr 40fr;
+  gap: 80px;
+  align-items: center;
+}
+
+.achievement-image {
+  overflow: hidden;
+}
+
+.achievement-image img {
+  width: 100%;
+  height: auto;
+  filter: grayscale(0.5);
+  transition: all 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.achievement-feature:hover .achievement-image img {
+  filter: grayscale(0);
+  transform: scale(1.05);
+}
+
+.achievement-date {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #C9A961;
+  display: block;
+  margin-bottom: 16px;
+}
+
+.achievement-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: 52px;
+  font-weight: 300;
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+  color: #FCFCFC;
+  margin-bottom: 24px;
+}
+
+.achievement-description {
+  font-size: 16px;
+  font-weight: 420;
+  line-height: 1.7;
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: 32px;
+}
+
+.achievements .text-link {
+  color: #FCFCFC;
+  border-color: #FCFCFC;
+}
+
+.achievements .text-link:hover {
+  color: #C9A961;
+  border-color: #C9A961;
+}
+
+/* 响应式 */
+@media (max-width: 1024px) {
+  .achievements {
+    padding: 80px 60px;
+  }
+  
+  .achievement-feature {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  
+  .achievement-title {
+    font-size: 42px;
+  }
+}
+
+@media (max-width: 767px) {
+  .achievements {
+    padding: 60px 24px;
+  }
+  
+  .achievement-feature {
+    gap: 36px;
+  }
+  
+  .achievement-title {
+    font-size: 36px;
+  }
+  
+  .achievement-description {
+    font-size: 15px;
+  }
+}
+
+/* 导出样式供 index.astro 使用 */
