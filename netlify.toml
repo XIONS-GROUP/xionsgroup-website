@@ -13,13 +13,68 @@
 [context.deploy-preview.environment]
   ALLOW_INDEXING = "false"
 
-# Change this value to "true" in the final launch pull request.
-# The application also checks that Netlify's context is production.
 [context.production.environment]
   ALLOW_INDEXING = "false"
+
+# Netlify Redirects for clean navigation routes
+[[redirects]]
+  from = "/groupe"
+  to = "/fr/groupe"
+  status = 302
+
+[[redirects]]
+  from = "/about"
+  to = "/fr/groupe"
+  status = 302
+
+[[redirects]]
+  from = "/marques"
+  to = "/fr/marques"
+  status = 302
+
+[[redirects]]
+  from = "/brands"
+  to = "/fr/marques"
+  status = 302
+
+[[redirects]]
+  from = "/engagements"
+  to = "/fr/engagements"
+  status = 302
+
+[[redirects]]
+  from = "/commitments"
+  to = "/fr/engagements"
+  status = 302
+
+[[redirects]]
+  from = "/presse"
+  to = "/fr/presse"
+  status = 302
+
+[[redirects]]
+  from = "/press"
+  to = "/fr/presse"
+  status = 302
+
+[[redirects]]
+  from = "/carrieres"
+  to = "/fr/carrieres"
+  status = 302
+
+[[redirects]]
+  from = "/careers"
+  to = "/fr/carrieres"
+  status = 302
+
+[[redirects]]
+  from = "/contact"
+  to = "/fr/contact"
+  status = 302
 
 [[headers]]
   for = "/*"
   [headers.values]
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
+

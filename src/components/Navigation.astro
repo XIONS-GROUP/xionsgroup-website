@@ -2,86 +2,195 @@
 import { brands } from '../data/brands';
 
 const currentPath = Astro.url.pathname;
-const lang = currentPath.startsWith('/fr') ? 'fr' : 'en';
 
-const brandsList = brands.map(brand => ({
-  name: brand.name,
-  href: `/${lang}/marques/${brand.slug}`
-}));
-
-const navItems = {
-  fr: [
-    { label: 'Le Groupe', href: '/fr/groupe' },
-    {
-      label: 'Marques',
-      href: '/fr/marques',
-      submenu: [
-        ...brandsList,
-        { name: 'Toutes nos marques', href: '/fr/marques', highlight: true }
-      ]
-    },
-    { label: 'Engagements', href: '/fr/engagements' },
-    { label: 'Rayonnement', href: '/fr/presse' },
-    { label: 'Carrières', href: '/fr/carrieres' },
-    { label: 'Contact', href: '/fr/contact' }
-  ],
-  en: [
-    { label: 'About', href: '/en/about' },
-    {
-      label: 'Brands',
-      href: '/en/brands',
-      submenu: [
-        ...brandsList,
-        { name: 'All our brands', href: '/en/brands', highlight: true }
-      ]
-    },
-    { label: 'Commitments', href: '/en/commitments' },
-    { label: 'Press', href: '/en/press' },
-    { label: 'Careers', href: '/en/careers' },
-    { label: 'Contact', href: '/en/contact' }
-  ]
-};
-
-const items = navItems[lang as keyof typeof navItems];
+const navItems = [
+  {
+    key: 'groupe',
+    label: 'Le Groupe',
+    href: '/fr/groupe',
+    sections: [
+      {
+        heading: 'Vision & Ambition',
+        links: [
+          { label: 'À propos du Groupe', href: '/fr/groupe', desc: 'Notre vision de la beauté nouvelle génération' },
+          { label: 'Fondateurs & Direction', href: '/fr/groupe#direction', desc: 'Denis Bellaïche, Kris Fang, Neo Su' }
+        ]
+      },
+      {
+        heading: 'Culture & Écosystème',
+        links: [
+          { label: 'Presse & Événements', href: '/fr/presse', desc: 'Oscars, Cannes, Fragrance Foundation' },
+          { label: 'Carrières & Talents', href: '/fr/carrieres', desc: 'Rejoindre nos équipes créatives' }
+        ]
+      }
+    ],
+    highlight: {
+      title: 'Maison de Haute Création',
+      desc: 'Un groupe français indépendant façonné par l\'exigence créative, la science et la culture.'
+    }
+  },
+  {
+    key: 'marques',
+    label: 'Nos Marques',
+    href: '/fr/marques',
+    sections: [
+      {
+        heading: 'Parfumerie de Niche',
+        links: [
+          { label: "L'Entropiste", href: '/fr/marques/lentropiste', badge: 'Award 2026', desc: 'Parfumerie libre, contemporaine et inattendue' },
+          { label: 'Betenoir', href: '/fr/marques/betenoir', badge: 'Coming 2026', desc: 'Prochaine création olfactive ténébreuse' }
+        ]
+      },
+      {
+        heading: 'Cosmétique & Soin',
+        links: [
+          { label: 'Sunlution', href: '/fr/marques/sunlution', desc: 'La science avancée de la lumière pour la peau' },
+          { label: 'Masqly', href: '/fr/marques/masqly', desc: 'Rituel soin ciblé et performance dermo-esthétique' }
+        ]
+      }
+    ],
+    highlight: {
+      title: 'Portefeuille Global',
+      desc: 'Quatre maisons indépendantes qui réinventent les codes de la beauté premium.',
+      actionLabel: 'Toutes nos marques →',
+      actionHref: '/fr/marques'
+    }
+  },
+  {
+    key: 'engagements',
+    label: 'Engagements',
+    href: '/fr/engagements',
+    sections: [
+      {
+        heading: 'Nos Piliers Exécutifs',
+        links: [
+          { label: 'Qualité & Formulation', href: '/fr/engagements#qualite', desc: 'Ingrédients d\'exception et normes élevées' },
+          { label: 'Éthique & Indépendance', href: '/fr/engagements#responsabilite', desc: 'Transparence totale et traçabilité' },
+          { label: 'Éco-conception', href: '/fr/engagements#environnement', desc: 'Durabilité et réduction de l\'empreinte carbone' }
+        ]
+      }
+    ],
+    highlight: {
+      title: 'Responsabilité & Futur',
+      desc: 'Des standards d\'exception pour imprimer un impact positif et durable.'
+    }
+  },
+  {
+    key: 'presse',
+    label: 'Rayonnement',
+    href: '/fr/presse',
+    sections: [
+      {
+        heading: 'Médias & Événements',
+        links: [
+          { label: 'Revue de Presse', href: '/fr/presse', desc: 'Articles, communiqués et actualités' },
+          { label: 'Grands Rendez-vous', href: '/fr/presse#evenements', desc: 'Cannes, Oscars, Golden Globes, Fashion Week' }
+        ]
+      }
+    ],
+    highlight: {
+      title: 'Présence Internationale',
+      desc: 'Une résonance mondiale au cœur des plus grands événements culturels.'
+    }
+  },
+  {
+    key: 'carrieres',
+    label: 'Carrières',
+    href: '/fr/carrieres',
+    sections: [
+      {
+        heading: 'Rejoindre l\'Aventure',
+        links: [
+          { label: 'Esprit & Culture', href: '/fr/carrieres', desc: 'Excellence, création et esprit d\'entreprendre' },
+          { label: 'Opportunités', href: '/fr/carrieres#postes', desc: 'Marketing, R&D, Création et Supply Chain' }
+        ]
+      }
+    ],
+    highlight: {
+      title: 'Talents & Ambition',
+      desc: 'Façonnez l\'avenir de la beauté aux côtés d\'équipes passionnées.'
+    }
+  },
+  {
+    key: 'contact',
+    label: 'Contact',
+    href: '/fr/contact',
+    sections: [
+      {
+        heading: 'Bureaux & Demandes',
+        links: [
+          { label: 'Siège Paris & Général', href: '/fr/contact?type=general', desc: 'Demandes institutionnelles et siège social' },
+          { label: 'Presse & Médias', href: '/fr/contact?type=press', desc: 'Relations presse et partenariats' },
+          { label: 'Business & Distribution', href: '/fr/contact?type=business', desc: 'Opportunités de développement international' }
+        ]
+      }
+    ],
+    highlight: {
+      title: 'Écrivez-nous',
+      desc: 'Nos équipes à Paris vous répondent pour toute opportunité de collaboration.'
+    }
+  }
+];
 ---
 
 <header class="site-header">
   <div class="header-container">
     <!-- Official Logo -->
-    <a href={`/${lang}`} class="header-logo" aria-label="XIONS GROUP">
+    <a href="/fr" class="header-logo" aria-label="XIONS GROUP">
       <img src="/XIONS_LOGO.svg" alt="XIONS GROUP" class="logo-img" onerror="this.src='/XIONS_Horizontal_White_LOGO.png'" />
     </a>
 
-    <!-- Desktop Navigation -->
+    <!-- Desktop Navigation with Full-Width Glass Mega Dropdowns -->
     <nav class="desktop-nav" aria-label="Navigation principale">
-      {items.map((item) => (
+      {navItems.map((item) => (
         <div class="nav-item-wrapper">
           <a
             href={item.href}
-            class:list={['nav-link', { active: currentPath === item.href }]}
+            class:list={['nav-link', { active: currentPath.startsWith(item.href) }]}
           >
             {item.label}
-            {item.submenu && (
-              <svg class="chevron" width="8" height="5" viewBox="0 0 8 5" fill="none"><path d="M1 1L4 4L7 1" stroke="currentColor" stroke-width="0.8"/></svg>
-            )}
+            <svg class="chevron" width="8" height="5" viewBox="0 0 8 5" fill="none">
+              <path d="M1 1L4 4L7 1" stroke="currentColor" stroke-width="0.8"/>
+            </svg>
           </a>
 
-          {item.submenu && (
-            <div class="mega-dropdown">
-              <div class="dropdown-bridge"></div>
-              <div class="dropdown-content">
-                <span class="dropdown-heading">{lang === 'fr' ? 'Nos Maisons' : 'Our Houses'}</span>
-                <div class="dropdown-links">
-                  {item.submenu.map(sub => (
-                    <a href={sub.href} class:list={['dropdown-link', { highlight: sub.highlight }]}>
-                      {sub.name}
-                      {sub.highlight && <span class="arrow">→</span>}
-                    </a>
-                  ))}
-                </div>
+          <!-- Full-Width Translucent Glassmorphism Mega Dropdown Menu -->
+          <div class="full-mega-dropdown">
+            <div class="dropdown-bridge"></div>
+            <div class="mega-container">
+              <div class="mega-sections">
+                {item.sections.map(section => (
+                  <div class="mega-column">
+                    <span class="mega-heading">{section.heading}</span>
+                    {section.links.map(link => (
+                      <a href={link.href} class="mega-link-item">
+                        <div class="mega-link-header">
+                          <span class="mega-link-title">{link.label}</span>
+                          {link.badge && <span class="mega-badge">{link.badge}</span>}
+                        </div>
+                        <span class="mega-link-desc">{link.desc}</span>
+                      </a>
+                    ))}
+                  </div>
+                ))}
               </div>
+
+              {item.highlight && (
+                <div class="mega-highlight-box">
+                  <div>
+                    <span class="highlight-eyebrow">XIONS GROUP</span>
+                    <h4 class="highlight-title">{item.highlight.title}</h4>
+                    <p class="highlight-desc">{item.highlight.desc}</p>
+                  </div>
+                  {item.highlight.actionHref && (
+                    <a href={item.highlight.actionHref} class="highlight-action">
+                      {item.highlight.actionLabel}
+                    </a>
+                  )}
+                </div>
+              )}
             </div>
-          )}
+          </div>
         </div>
       ))}
     </nav>
@@ -95,7 +204,22 @@ const items = navItems[lang as keyof typeof navItems];
     <button class="mobile-toggle" aria-label="Menu" aria-expanded="false">
       <span></span>
       <span></span>
+      <span></span>
     </button>
+  </div>
+
+  <!-- Mobile Overlay Menu -->
+  <div class="mobile-menu" aria-hidden="true">
+    <nav>
+      {navItems.map((item, idx) => (
+        <div class="mobile-nav-group">
+          <a href={item.href} class="mobile-link">
+            <span>0{idx + 1}</span> {item.label}
+          </a>
+        </div>
+      ))}
+      <a href="/fr/contact" class="mobile-link contact-mobile">CONTACT ↗</a>
+    </nav>
   </div>
 </header>
 
@@ -106,9 +230,9 @@ const items = navItems[lang as keyof typeof navItems];
     left: 0;
     right: 0;
     z-index: 1000;
-    background: rgba(254, 253, 251, 0.92);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
+    background: rgba(254, 253, 251, 0.90);
+    backdrop-filter: blur(24px) saturate(1.8);
+    -webkit-backdrop-filter: blur(24px) saturate(1.8);
     border-bottom: 0.5px solid rgba(10, 9, 8, 0.08);
     transition: background 0.3s ease, box-shadow 0.3s ease;
   }
@@ -143,7 +267,7 @@ const items = navItems[lang as keyof typeof navItems];
     opacity: 0.75;
   }
 
-  /* Desktop Nav Container */
+  /* Desktop Nav */
   .desktop-nav {
     display: none;
     align-items: center;
@@ -175,7 +299,8 @@ const items = navItems[lang as keyof typeof navItems];
     display: flex;
     align-items: center;
     gap: 0.35rem;
-    padding: 0.5rem 0;
+    height: 100%;
+    padding: 0 0.1rem;
     transition: color 0.3s ease, opacity 0.3s ease;
   }
 
@@ -188,8 +313,8 @@ const items = navItems[lang as keyof typeof navItems];
   }
 
   .chevron {
-    transition: transform 0.3s ease;
-    opacity: 0.5;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+    opacity: 0.45;
   }
 
   .nav-item-wrapper:hover .chevron {
@@ -197,87 +322,179 @@ const items = navItems[lang as keyof typeof navItems];
     opacity: 1;
   }
 
-  /* 🌟 Dropdown Menu Bug Fix & Clean Hover */
-  .mega-dropdown {
+  /* 🌟 FULL-WIDTH TRANSLUCENT GLASSMEGA DROPDOWN MENU (全屏宽磨砂半透明下拉菜单) */
+  .full-mega-dropdown {
     position: absolute;
     top: 100%;
     left: 50%;
-    transform: translateX(-50%) translateY(8px);
+    transform: translateX(-50%) translateY(10px);
+    width: 100vw;
+    background: rgba(254, 253, 251, 0.94);
+    backdrop-filter: blur(36px) saturate(1.8);
+    -webkit-backdrop-filter: blur(36px) saturate(1.8);
+    border-top: 0.5px solid rgba(10, 9, 8, 0.08);
+    border-bottom: 0.5px solid rgba(10, 9, 8, 0.08);
+    box-shadow: 0 30px 60px rgba(10, 9, 8, 0.07);
     opacity: 0;
     visibility: hidden;
     pointer-events: none;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    transition: opacity 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                visibility 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
     z-index: 1100;
   }
 
-  /* 无缝过渡垫 */
   .dropdown-bridge {
-    height: 12px;
-    width: 100%;
+    position: absolute;
+    top: -16px;
+    left: 0;
+    right: 0;
+    height: 16px;
   }
 
-  .dropdown-content {
-    background: rgba(255, 255, 255, 0.98);
-    backdrop-filter: blur(24px);
-    -webkit-backdrop-filter: blur(24px);
-    border: 0.5px solid rgba(10, 9, 8, 0.1);
-    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
-    border-radius: 4px;
-    padding: 1.5rem;
-    min-width: 220px;
-    display: flex;
-    flex-direction: column;
-    gap: 0.75rem;
-  }
-
-  .nav-item-wrapper:hover .mega-dropdown {
+  .nav-item-wrapper:hover .full-mega-dropdown {
     opacity: 1;
     visibility: visible;
     pointer-events: all;
     transform: translateX(-50%) translateY(0);
   }
 
-  .dropdown-heading {
+  .mega-container {
+    max-width: 86rem;
+    margin: 0 auto;
+    padding: 2.8rem 2.5rem;
+    display: grid;
+    grid-template-columns: minmax(0, 2.2fr) minmax(0, 1fr);
+    gap: 4rem;
+    align-items: start;
+  }
+
+  .mega-sections {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+    gap: 2.5rem;
+  }
+
+  .mega-column {
+    display: flex;
+    flex-direction: column;
+    gap: 0.85rem;
+  }
+
+  .mega-heading {
+    font-family: 'Faculty Glyphic', serif;
+    font-size: 1rem;
+    letter-spacing: 0.02em;
+    color: var(--ink);
+    padding-bottom: 0.5rem;
+    border-bottom: 0.5px solid rgba(10, 9, 8, 0.1);
+  }
+
+  .mega-link-item {
+    display: flex;
+    flex-direction: column;
+    gap: 0.2rem;
+    text-decoration: none;
+    padding: 0.5rem 0.6rem;
+    border-radius: 4px;
+    transition: background 0.25s ease, transform 0.25s ease;
+  }
+
+  .mega-link-item:hover {
+    background: rgba(10, 9, 8, 0.035);
+    transform: translateX(4px);
+  }
+
+  .mega-link-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5rem;
+  }
+
+  .mega-link-title {
     font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 0.6875rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--ink);
+  }
+
+  .mega-badge {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.65rem;
+    font-weight: 600;
+    letter-spacing: 0.08em;
+    padding: 0.15rem 0.5rem;
+    border-radius: 10px;
+    background: rgba(139, 38, 53, 0.08);
+    color: var(--wine);
+    text-transform: uppercase;
+  }
+
+  .mega-link-desc {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.78rem;
+    color: var(--muted);
+    font-weight: 400;
+    line-height: 1.4;
+  }
+
+  /* Highlight Box inside Mega Dropdown */
+  .mega-highlight-box {
+    background: rgba(10, 9, 8, 0.025);
+    border: 0.5px solid rgba(10, 9, 8, 0.08);
+    border-radius: 6px;
+    padding: 1.8rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 100%;
+  }
+
+  .highlight-eyebrow {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.65rem;
     font-weight: 600;
     letter-spacing: 0.18em;
     text-transform: uppercase;
     color: var(--muted);
-    padding-bottom: 0.5rem;
-    border-bottom: 0.5px solid rgba(10, 9, 8, 0.08);
+    display: block;
+    margin-bottom: 0.5rem;
   }
 
-  .dropdown-links {
-    display: flex;
-    flex-direction: column;
-    gap: 0.4rem;
-  }
-
-  .dropdown-link {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 0.875rem;
+  .highlight-title {
+    font-family: 'Faculty Glyphic', serif;
+    font-size: 1.3rem;
     font-weight: 400;
     color: var(--ink);
-    text-decoration: none;
-    padding: 0.4rem 0.6rem;
-    border-radius: 4px;
-    transition: background 0.2s ease, color 0.2s ease;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+    margin: 0 0 0.6rem 0;
+    line-height: 1.25;
   }
 
-  .dropdown-link:hover {
-    background: rgba(10, 9, 8, 0.04);
-    color: #000000;
+  .highlight-desc {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.83rem;
+    color: var(--muted);
+    line-height: 1.5;
+    margin: 0 0 1.2rem 0;
   }
 
-  .dropdown-link.highlight {
+  .highlight-action {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.75rem;
     font-weight: 600;
-    margin-top: 0.25rem;
-    border-top: 0.5px solid rgba(10, 9, 8, 0.08);
-    padding-top: 0.6rem;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--wine);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    transition: transform 0.25s ease;
+  }
+
+  .highlight-action:hover {
+    transform: translateX(4px);
   }
 
   /* Actions */
@@ -305,7 +522,7 @@ const items = navItems[lang as keyof typeof navItems];
     color: var(--paper);
   }
 
-  /* Mobile Toggle */
+  /* Mobile Toggle & Menu */
   .mobile-toggle {
     display: flex;
     flex-direction: column;
@@ -329,4 +546,71 @@ const items = navItems[lang as keyof typeof navItems];
     background: var(--ink);
     transition: transform 0.3s ease;
   }
+
+  .mobile-menu {
+    position: fixed;
+    top: 5rem;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(10, 9, 8, 0.98);
+    backdrop-filter: blur(32px);
+    display: none;
+    padding: 3rem 2.5rem;
+    flex-direction: column;
+    justify-content: space-between;
+    z-index: 999;
+  }
+
+  .mobile-menu.active {
+    display: flex;
+  }
+
+  .mobile-menu nav {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+  }
+
+  .mobile-link {
+    font-family: 'Faculty Glyphic', serif;
+    font-size: 2rem;
+    color: var(--paper);
+    text-decoration: none;
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    transition: transform 0.3s ease;
+  }
+
+  .mobile-link span {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 0.8rem;
+    color: rgba(255, 255, 255, 0.5);
+  }
+
+  .mobile-link:hover {
+    transform: translateX(0.5rem);
+  }
+
+  .contact-mobile {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 1rem;
+    letter-spacing: 0.15em;
+    color: var(--wine);
+    margin-top: 2rem;
+  }
 </style>
+
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggle = document.querySelector('.mobile-toggle');
+    const menu = document.querySelector('.mobile-menu');
+
+    toggle?.addEventListener('click', () => {
+      const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', (!isExpanded).toString());
+      menu?.classList.toggle('active');
+    });
+  });
+</script>
