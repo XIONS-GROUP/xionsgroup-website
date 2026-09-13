@@ -32,3 +32,7 @@ Thumbs.db
 # Temporary files
 /tmp
 *.log
+
+# Company source material kept locally and outside the public website repository
+local-materials/*
+!local-materials/README.md

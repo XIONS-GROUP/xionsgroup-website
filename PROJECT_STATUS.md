@@ -22,8 +22,9 @@ Pushing `dev` triggers the branch preview. Merging `dev` into `main` triggers th
 - `src/styles/` — shared styles
 - `public/` — deployable static assets
 - `content/` — editable source copy and content records
-- `archive/pages/` — retained homepage studies, excluded from builds
-- `archive/legacy-site/` — retained duplicate project, excluded from builds
+- `docs/` — supporting and archived project documentation
+- `local-materials/` — ignored business source files, kept out of the public repository
+- `archive/` — retained code studies and the duplicate project, excluded from builds
 
 The repository root is the only development and deployment entry point. Run all npm and Netlify commands from this directory.
 
