@@ -33,7 +33,7 @@ const socialLinks = [
       <!-- Logo -->
       <div class="footer-brand">
         <a href="/fr" class="footer-logo" aria-label="XIONS GROUP - Accueil">
-          XIONS
+          <img src="/XIONS_LOGO.svg" alt="XIONS GROUP" class="footer-logo-img" />
         </a>
       </div>
       
@@ -58,8 +58,8 @@ const socialLinks = [
           {socialLinks.map((link) => (
             <a 
               href={link.href} 
-              class="footer-link"
-              target="_blank"
+              class="footer-link" 
+              target="_blank" 
               rel="noopener noreferrer"
             >
               {link.label}
@@ -84,6 +84,7 @@ const socialLinks = [
       <span class="footer-copyright">
         © {currentYear} XIONS GROUP. Tous droits réservés.
       </span>
+      
       <div class="footer-legal">
         {footerLinks.legal.map((link, index) => (
           <>
@@ -98,9 +99,10 @@ const socialLinks = [
 
 <style>
   .footer {
-    background: var(--color-white);
-    border-top: 0.5px solid var(--color-light-gray);
+    background: #040404;
+    border-top: 0.5px solid rgba(255, 255, 255, 0.1);
     padding: 100px 0 60px;
+    color: #FFFFFF;
   }
   
   .footer-container {
@@ -109,7 +111,6 @@ const socialLinks = [
     padding: 0 80px;
   }
   
-  /* Content */
   .footer-content {
     display: flex;
     justify-content: space-between;
@@ -117,26 +118,22 @@ const socialLinks = [
     margin-bottom: 80px;
   }
   
-  /* Brand */
   .footer-brand {
     flex: 0 0 auto;
   }
   
-  .footer-logo {
-    font-family: var(--font-sans);
-    font-size: 18px;
-    font-weight: 300;
-    letter-spacing: 0.2em;
-    color: var(--color-black);
-    text-decoration: none;
+  .footer-logo-img {
+    height: 36px;
+    width: auto;
+    filter: invert(1);
+    display: block;
     transition: opacity 0.3s ease;
   }
   
-  .footer-logo:hover {
-    opacity: 0.6;
+  .footer-logo:hover .footer-logo-img {
+    opacity: 0.7;
   }
   
-  /* Links */
   .footer-links {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
@@ -154,38 +151,37 @@ const socialLinks = [
   .footer-title {
     font-size: 11px;
     font-weight: 600;
-    letter-spacing: 0.1em;
+    letter-spacing: 0.15em;
     text-transform: uppercase;
-    color: var(--color-black);
+    color: #FFFFFF;
     margin-bottom: 4px;
   }
   
   .footer-link {
-    font-size: 11px;
+    font-size: 12px;
     font-weight: 400;
-    letter-spacing: 0.1em;
-    color: var(--color-dark-gray);
+    letter-spacing: 0.08em;
+    color: rgba(255, 255, 255, 0.6);
     text-decoration: none;
     transition: color 0.3s ease;
   }
   
   .footer-link:hover {
-    color: var(--color-black);
+    color: #FFFFFF;
   }
   
-  /* Bottom */
   .footer-bottom {
     display: flex;
     justify-content: space-between;
     align-items: center;
     padding-top: 30px;
-    border-top: 0.5px solid var(--color-light-gray);
+    border-top: 0.5px solid rgba(255, 255, 255, 0.1);
   }
   
   .footer-copyright {
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    color: var(--color-mid-gray);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: rgba(255, 255, 255, 0.4);
   }
   
   .footer-legal {
@@ -195,23 +191,22 @@ const socialLinks = [
   }
   
   .footer-legal-link {
-    font-size: 10px;
-    letter-spacing: 0.1em;
-    color: var(--color-mid-gray);
+    font-size: 11px;
+    letter-spacing: 0.08em;
+    color: rgba(255, 255, 255, 0.4);
     text-decoration: none;
     transition: color 0.3s ease;
   }
   
   .footer-legal-link:hover {
-    color: var(--color-black);
+    color: #FFFFFF;
   }
   
   .footer-separator {
-    font-size: 10px;
-    color: var(--color-mid-gray);
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.3);
   }
   
-  /* Responsive */
   @media (max-width: 1024px) {
     .footer-container {
       padding: 0 60px;
