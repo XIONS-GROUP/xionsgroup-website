@@ -1,0 +1,267 @@
+---
+const navItems = [
+  { label: 'GROUPE', href: '/fr/groupe' },
+  { label: 'MARQUES', href: '/fr/marques' },
+  { label: 'ENGAGEMENTS', href: '/fr/engagements' },
+  { label: 'CONTACT', href: '/fr/contact' },
+];
+---
+
+<nav class="nav" aria-label="Navigation principale">
+  <div class="nav-container">
+    <a href="/fr" class="nav-logo" aria-label="XIONS GROUP - Accueil">
+      XIONS
+    </a>
+    
+    <div class="nav-menu">
+      {navItems.map((item) => (
+        <a href={item.href} class="nav-link">
+          {item.label}
+        </a>
+      ))}
+    </div>
+    
+    <div class="nav-right">
+      <button class="nav-lang" aria-label="Changer de langue">
+        FR
+      </button>
+    </div>
+    
+    <!-- Mobile menu button -->
+    <button class="nav-toggle" aria-label="Menu" aria-expanded="false">
+      <span></span>
+      <span></span>
+    </button>
+  </div>
+  
+  <!-- Mobile menu -->
+  <div class="nav-mobile" aria-hidden="true">
+    {navItems.map((item) => (
+      <a href={item.href} class="nav-mobile-link">
+        {item.label}
+      </a>
+    ))}
+  </div>
+</nav>
+
+<style>
+  .nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.98);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
+    transition: background 0.3s ease, border-color 0.3s ease;
+  }
+  
+  .nav-container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 80px;
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+  
+  /* Logo */
+  .nav-logo {
+    font-family: var(--font-sans);
+    font-size: 18px;
+    font-weight: 300;
+    letter-spacing: 0.2em;
+    color: var(--color-black);
+    text-decoration: none;
+    transition: opacity 0.3s ease;
+  }
+  
+  .nav-logo:hover {
+    opacity: 0.6;
+  }
+  
+  /* Navigation Links */
+  .nav-menu {
+    display: flex;
+    gap: 48px;
+    align-items: center;
+  }
+  
+  .nav-link {
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-black);
+    text-decoration: none;
+    position: relative;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -4px;
+    left: 50%;
+    width: 0;
+    height: 0.5px;
+    background: var(--color-black);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .nav-link:hover::after {
+    width: 100%;
+    left: 0;
+  }
+  
+  /* Language Selector */
+  .nav-right {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+  
+  .nav-lang {
+    font-family: var(--font-sans);
+    font-size: 10px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    color: var(--color-black);
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: opacity 0.3s ease;
+  }
+  
+  .nav-lang:hover {
+    opacity: 0.6;
+  }
+  
+  /* Mobile Toggle */
+  .nav-toggle {
+    display: none;
+    flex-direction: column;
+    gap: 6px;
+    background: none;
+    border: none;
+    padding: 8px;
+    cursor: pointer;
+  }
+  
+  .nav-toggle span {
+    display: block;
+    width: 24px;
+    height: 0.5px;
+    background: var(--color-black);
+    transition: all 0.3s ease;
+  }
+  
+  .nav-toggle[aria-expanded="true"] span:first-child {
+    transform: rotate(45deg) translateY(3px);
+  }
+  
+  .nav-toggle[aria-expanded="true"] span:last-child {
+    transform: rotate(-45deg) translateY(-3px);
+  }
+  
+  /* Mobile Menu */
+  .nav-mobile {
+    position: fixed;
+    top: 80px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: var(--color-white);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 48px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.4s ease;
+  }
+  
+  .nav-mobile[aria-hidden="false"] {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  
+  .nav-mobile-link {
+    font-size: 14px;
+    font-weight: 400;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--color-black);
+    text-decoration: none;
+    transition: color 0.3s ease;
+  }
+  
+  .nav-mobile-link:hover {
+    color: var(--color-gold);
+  }
+  
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .nav-container {
+      padding: 0 60px;
+    }
+    
+    .nav-menu {
+      gap: 32px;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .nav-container {
+      padding: 0 24px;
+      height: 64px;
+    }
+    
+    .nav-menu,
+    .nav-right {
+      display: none;
+    }
+    
+    .nav-toggle {
+      display: flex;
+    }
+    
+    .nav-mobile {
+      top: 64px;
+    }
+  }
+</style>
+
+<script>
+  // Mobile menu toggle
+  const toggle = document.querySelector('.nav-toggle');
+  const mobileMenu = document.querySelector('.nav-mobile');
+  
+  if (toggle && mobileMenu) {
+    toggle.addEventListener('click', () => {
+      const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', (!isExpanded).toString());
+      mobileMenu.setAttribute('aria-hidden', isExpanded.toString());
+    });
+  }
+  
+  // Scroll behavior
+  let lastScroll = 0;
+  const nav = document.querySelector('.nav');
+  
+  window.addEventListener('scroll', () => {
+    const currentScroll = window.pageYOffset;
+    
+    if (currentScroll > 100) {
+      nav?.classList.add('scrolled');
+    } else {
+      nav?.classList.remove('scrolled');
+    }
+    
+    lastScroll = currentScroll;
+  });
+</script>

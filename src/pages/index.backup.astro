@@ -1,0 +1,32 @@
+---
+import Base from '../layouts/Base.astro';
+import content from '../content/home.fr.json';
+---
+<Base title={content.title} description={content.description}>
+  <header><a class="wordmark" href="/" aria-label="Xions Group, accueil">XIONS <span>GROUP</span></a><a class="header-contact" href={`mailto:${content.email}`}>Contact ↗</a></header>
+  <main>
+    <div class="editorial"><p class="eyebrow">{content.eyebrow}</p><h1>{content.headline}<br /><em>{content.headlineAccent}</em></h1><p class="description">{content.description}</p><a class="contact" href={`mailto:${content.email}`}>{content.contactLabel}<span aria-hidden="true">↗</span></a></div>
+    <div class="art" aria-hidden="true"><div class="orbit one"></div><div class="orbit two"></div><div class="orbit three"></div><span>Création · Innovation · Beauté</span></div>
+  </main>
+  <footer><span>{content.status}</span><a href={`mailto:${content.email}`}>{content.email}</a><span>© {new Date().getFullYear()} XIONS GROUP</span></footer>
+</Base>
+<style>
+  header { display: flex; align-items: center; justify-content: space-between; padding: 35px 5vw; border-bottom: 1px solid #24282022; }
+  .wordmark { text-decoration: none; font-size: 27px; font-weight: 600; letter-spacing: -.06em; }
+  .wordmark span { font-size: 12px; letter-spacing: .19em; margin-left: 9px; font-weight: 400; }
+  .header-contact { font-size: 13px; text-decoration: none; }
+  main { display: grid; grid-template-columns: 1.35fr 1fr; min-height: 70vh; align-items: center; padding: 65px 5vw 85px; gap: 4vw; }
+  .eyebrow { font-size: 11px; letter-spacing: .19em; margin: 0 0 35px; }
+  h1 { font-size: clamp(46px, 6.5vw, 108px); letter-spacing: -.06em; line-height: 1.04; margin: 0 0 30px; font-weight: 400; }
+  h1 em { font-family: Georgia, 'Times New Roman', serif; font-weight: 400; }
+  .description { max-width: 440px; line-height: 1.8; font-size: 15px; color: #53594d; }
+  .contact { margin-top: 26px; display: inline-flex; gap: 50px; text-decoration: none; padding: 14px 0; border-bottom: 1px solid; font-size: 14px; }
+  .contact span { transition: transform .2s; }.contact:hover span { transform: translate(3px,-3px); }
+  .art { position: relative; aspect-ratio: 4/5; overflow: hidden; background: radial-gradient(ellipse at 30% 25%, #e0e0be, #9aa384 55%, #6f7e61); }
+  .orbit { position: absolute; border: 1px solid #f0f0d8aa; width: 82%; height: 82%; border-radius: 50%; top: 9%; left: 9%; transform: rotate(-30deg) scaleX(.6); }
+  .two { transform: rotate(30deg) scaleX(.6); }.three { transform: rotate(90deg) scaleX(.6); }
+  .art span { position: absolute; bottom: 22px; width: 100%; text-align: center; color: #f2f1e5; font-size: 10px; letter-spacing: .12em; }
+  footer { display: flex; gap: 18px; flex-wrap: wrap; justify-content: space-between; border-top: 1px solid #24282022; margin: 0 5vw; padding: 24px 0; font-size: 11px; color: #53594d; }
+  @media(max-width: 700px) { header { padding: 24px 6vw; } main { grid-template-columns: 1fr; padding: 50px 6vw; gap: 40px; } .art { aspect-ratio: 4/3; } footer { margin: 0 6vw; flex-direction: column; } }
+  @media(prefers-reduced-motion: reduce) { .contact span { transition: none; } }
+</style>
