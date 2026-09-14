@@ -1,4 +1,4 @@
-:root { --paper:#fefdfb; --ink:#0a0908; --muted:#6b6762; --line:rgba(10,9,8,.08); --wine:#8b2635; --display:'Faculty Glyphic',serif; --sans:'Plus Jakarta Sans',system-ui,sans-serif; --pad:clamp(1.25rem,4vw,4.5rem); --header:5rem; --ease-luxury:cubic-bezier(0.16,1,0.3,1); --duration-base:0.65s; }
+:root { --paper:#fefdfb; --ink:#0a0908; --muted:#6b6762; --line:rgba(10,9,8,.08); --wine:#c20000; --display:'Faculty Glyphic',serif; --sans:'Plus Jakarta Sans',system-ui,sans-serif; --pad:clamp(1.25rem,4vw,4.5rem); --header:5rem; --ease-luxury:cubic-bezier(0.16,1,0.3,1); --duration-base:0.65s; }
 * { box-sizing:border-box; }
 html { scroll-behavior:smooth; background:var(--paper); }
 body { margin:0; color:var(--ink); background:var(--paper); font-family:var(--sans); font-size:1rem; line-height:1.6; }

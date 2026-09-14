@@ -2,5 +2,5 @@
   <text x="100" y="35" font-family="serif" font-size="24" font-weight="700" text-anchor="middle" fill="#0a0908">
     FESTIVAL DE CANNES
   </text>
-  <path d="M30 45 L170 45" stroke="#8b2635" stroke-width="2"/>
+  <path d="M30 45 L170 45" stroke="#c20000" stroke-width="2"/>
 </svg>
