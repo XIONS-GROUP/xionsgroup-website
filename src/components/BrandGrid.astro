@@ -1,13 +1,18 @@
 ---
 import { brands } from '../data/brands';
+import { brandLogos } from '../data/brand-logos';
 interface Props { compact?: boolean }
 const { compact = false } = Astro.props;
 ---
-<div class="brand-grid">
-  {brands.map((brand, index) => (
-    <a class="brand-card" href={`/fr/marques/${brand.slug}`} data-reveal style={`--brand-tone:${brand.tone};${compact ? 'min-height:22rem' : ''}`}>
-      <div class="brand-card-top"><span>0{index + 1}</span><span>{brand.category}</span></div>
-      <div><h2>{brand.name}</h2><p>{brand.tagline}</p></div>
-    </a>
-  ))}
+<div class:list={['brand-grid', { 'brand-grid-compact': compact }]}>
+  {brands.map(brand => {
+    const logo = brandLogos[brand.slug];
+    return <a class="brand-card" href={`/fr/marques/${brand.slug}`} aria-label={`Découvrir ${brand.name}`}>
+      <p class="brand-category">{brand.category}</p>
+      <div class="brand-logo-slot">
+        {logo ? <img src={logo.src} alt={brand.name} width="600" height="240" loading="lazy" decoding="async" style={`max-width:${logo.width}px`} /> : <h2 class="brand-name-fallback">{brand.name}</h2>}
+      </div>
+      <p class="brand-description">{brand.tagline}</p>
+    </a>;
+  })}
 </div>

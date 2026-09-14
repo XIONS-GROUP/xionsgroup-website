@@ -1,642 +1,80 @@
 ---
 import { brands } from '../data/brands';
-
-const currentPath = Astro.url.pathname;
-
-const navItems = [
-  {
-    key: 'groupe',
-    label: 'Le Groupe',
-    href: '/fr/groupe',
-    sections: [
-      {
-        heading: 'Vision & Ambition',
-        links: [
-          { label: 'À propos du Groupe', href: '/fr/groupe', desc: 'Notre vision de la beauté nouvelle génération' },
-          { label: 'Fondateurs & Direction', href: '/fr/groupe#direction', desc: 'Denis Bellaïche, Kris Fang, Neo Su' }
-        ]
-      },
-      {
-        heading: 'Culture & Talents',
-        links: [
-          { label: 'Presse & Événements', href: '/fr/presse', desc: 'Oscars, Cannes, Fragrance Foundation' },
-          { label: 'Carrières & Opportunités', href: '/fr/carrieres', desc: 'Rejoindre nos équipes créatives' }
-        ]
-      }
-    ],
-    highlight: {
-      eyebrow: 'XIONS GROUP',
-      title: 'Maison de Haute Création',
-      desc: 'Un groupe français indépendant façonné par l\'exigence créative, la science et la culture.'
-    }
-  },
-  {
-    key: 'marques',
-    label: 'Nos Marques',
-    href: '/fr/marques',
-    sections: [
-      {
-        heading: 'Parfumerie de Niche',
-        links: [
-          { label: "L'Entropiste", href: '/fr/marques/lentropiste', badge: 'Award 2026', desc: 'Parfumerie libre, contemporaine et inattendue' },
-          { label: 'Betenoir', href: '/fr/marques/betenoir', badge: 'Coming 2026', desc: 'Prochaine création olfactive ténébreuse' }
-        ]
-      },
-      {
-        heading: 'Cosmétique & Soin',
-        links: [
-          { label: 'Sunlution', href: '/fr/marques/sunlution', desc: 'La science avancée de la lumière pour la peau' },
-          { label: 'Masqly', href: '/fr/marques/masqly', desc: 'Rituel soin ciblé et performance dermo-esthétique' }
-        ]
-      }
-    ],
-    highlight: {
-      eyebrow: 'PORTEFEUILLE',
-      title: 'Quatre Maisons Singulières',
-      desc: 'Chaque marque possède son territoire, son langage et sa vision créative propre.',
-      actionLabel: 'Toutes nos marques →',
-      actionHref: '/fr/marques'
-    }
-  },
-  {
-    key: 'engagements',
-    label: 'Engagements',
-    href: '/fr/engagements',
-    sections: [
-      {
-        heading: 'Nos Piliers Exécutifs',
-        links: [
-          { label: 'Qualité & Formulation', href: '/fr/engagements#qualite', desc: 'Ingrédients d\'exception et formulations certifiées' },
-          { label: 'Éthique & Transparence', href: '/fr/engagements#responsabilite', desc: 'Traçabilité rigoureuse et indépendance créative' },
-          { label: 'Éco-conception', href: '/fr/engagements#environnement', desc: 'Emballages durables et baisse de l\'empreinte carbone' }
-        ]
-      }
-    ],
-    highlight: {
-      eyebrow: 'RESPONSABILITÉ',
-      title: 'Standards d\'Exception',
-      desc: 'Inscrire chaque développement dans une démarche exigeante, éthique et durable.'
-    }
-  },
-  {
-    key: 'presse',
-    label: 'Press',
-    href: '/fr/presse',
-    sections: [
-      {
-        heading: 'Médias & Événements',
-        links: [
-          { label: 'Revue de Presse', href: '/fr/presse', desc: 'Articles, communiqués de presse et actualités' },
-          { label: 'Grands Rendez-vous', href: '/fr/presse#evenements', desc: 'Festival de Cannes, Oscars, Golden Globes, Fashion Week' }
-        ]
-      }
-    ],
-    highlight: {
-      eyebrow: 'RAYONNEMENT',
-      title: 'Présence Internationale',
-      desc: 'Une résonance mondiale au cœur des événements culturels et artistiques majeurs.'
-    }
-  },
-  {
-    key: 'carrieres',
-    label: 'Carrières',
-    href: '/fr/carrieres',
-    sections: [
-      {
-        heading: 'Rejoindre le Groupe',
-        links: [
-          { label: 'Esprit & Culture', href: '/fr/carrieres', desc: 'Excellence, autonomie et esprit d\'entreprendre' },
-          { label: 'Postes & Opportunités', href: '/fr/carrieres#postes', desc: 'Découvrez nos offres en marketing, R&D et création' }
-        ]
-      }
-    ],
-    highlight: {
-      eyebrow: 'TALENTS',
-      title: 'Rejoindre l\'Aventure',
-      desc: 'Façonnez l\'avenir de la beauté au sein d\'un groupe indépendant et dynamique.'
-    }
-  }
+const path = Astro.url.pathname.replace(/\/$/, '');
+const items = [
+  { label: 'Le groupe', href: '/fr/groupe', links: [
+    ['À propos', '/fr/groupe'], ['Notre équipe', '/fr/groupe#direction'],
+    ['Presse & rayonnement', '/fr/presse'], ['Carrières', '/fr/carrieres']
+  ] },
+  { label: 'Nos marques', href: '/fr/marques', links: [
+    ['Toutes nos marques', '/fr/marques'], ...brands.map(b => [b.name, `/fr/marques/${b.slug}`])
+  ] },
+  { label: 'Engagements', href: '/fr/engagements', links: [
+    ['Qualité', '/fr/engagements#qualite'], ['Responsabilité', '/fr/engagements#responsabilite'],
+    ['Environnement', '/fr/engagements#environnement']
+  ] }
 ];
 ---
-
-<header class="site-header">
-  <div class="header-container">
-    <div class="header-left">
-      <!-- Official Logo (Far Left) -->
-      <a href="/fr" class="header-logo" aria-label="XIONS GROUP">
-        <img src="/XIONS_LOGO.svg" alt="XIONS GROUP" class="logo-img" onerror="this.src='/XIONS_Horizontal_White_LOGO.png'" />
-      </a>
-
-      <!-- Desktop Navigation Links -->
-      <nav class="desktop-nav" aria-label="Navigation principale">
-        {navItems.map((item) => (
-          <div class="nav-item-wrapper">
-            <a
-              href={item.href}
-              class:list={['nav-link', { active: currentPath.startsWith(item.href) }]}
-            >
-              {item.label}
-              <svg class="chevron" width="8" height="5" viewBox="0 0 8 5" fill="none">
-                <path d="M1 1L4 4L7 1" stroke="currentColor" stroke-width="0.8"/>
-              </svg>
-            </a>
-
-            <!-- Full-Width Translucent Glassmorphism Mega Dropdown Menu -->
-            <div class="full-mega-dropdown">
-              <div class="dropdown-bridge"></div>
-              <div class="mega-container">
-                <div class="mega-sections">
-                  {item.sections.map(section => (
-                    <div class="mega-column">
-                      <span class="mega-heading">{section.heading}</span>
-                      {section.links.map(link => (
-                        <a href={link.href} class="mega-link-item">
-                          <div class="mega-link-header">
-                            <span class="mega-link-title">{link.label}</span>
-                            {link.badge && <span class="mega-badge">{link.badge}</span>}
-                          </div>
-                          <span class="mega-link-desc">{link.desc}</span>
-                        </a>
-                      ))}
-                    </div>
-                  ))}
-                </div>
-
-                {item.highlight && (
-                  <div class="mega-highlight-box">
-                    <div>
-                      <span class="highlight-eyebrow">{item.highlight.eyebrow}</span>
-                      <h4 class="highlight-title">{item.highlight.title}</h4>
-                      <p class="highlight-desc">{item.highlight.desc}</p>
-                    </div>
-                    {item.highlight.actionHref && (
-                      <a href={item.highlight.actionHref} class="highlight-action">
-                        {item.highlight.actionLabel}
-                      </a>
-                    )}
-                  </div>
-                )}
-              </div>
-            </div>
-          </div>
-        ))}
-      </nav>
-    </div>
-
-    <!-- Header Actions (Far Right: Email Icon + Mobile Menu) -->
-    <div class="header-actions">
-      <!-- Minimalist Contact Email Icon Button -->
-      <a href="/fr/contact" class="contact-email-btn" aria-label="Contactez-nous">
-        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.2" stroke-linecap="round" stroke-linejoin="round">
-          <rect x="2" y="4" width="20" height="16" rx="2"></rect>
-          <path d="M22 6L12 13L2 6"></path>
-        </svg>
-      </a>
-
-      <!-- Mobile Menu Toggle (Far Right) -->
-      <button class="mobile-toggle" aria-label="Menu" aria-expanded="false">
-        <span></span>
-        <span></span>
-        <span></span>
-      </button>
-    </div>
-  </div>
-
-  <!-- Mobile Overlay Menu -->
-  <div class="mobile-menu" aria-hidden="true">
-    <nav>
-      {navItems.map((item, idx) => (
-        <div class="mobile-nav-group">
-          <a href={item.href} class="mobile-link">
-            <span>0{idx + 1}</span> {item.label}
-          </a>
-        </div>
-      ))}
-      <a href="/fr/contact" class="mobile-link contact-mobile">CONTACT ↗</a>
-    </nav>
-  </div>
+<header class="navigation">
+  <a class="navigation-logo" href="/fr" aria-label="XIONS Group — Accueil"><img src="/XIONS_LOGO.svg" alt="XIONS Group" width="140" height="42" /></a>
+  <nav class="navigation-desktop" aria-label="Navigation principale">
+    {items.map((item, i) => <div class="navigation-item">
+      <button class:list={['navigation-trigger', {current: item.links.some(([,href]) => path === href.split('#')[0])}]} aria-expanded="false" aria-controls={`navigation-panel-${i}`}>{item.label}</button>
+      <div class="navigation-panel" id={`navigation-panel-${i}`} hidden>
+        <div class="navigation-panel-inner"><p>{item.label}</p><div>{item.links.map(([label, href]) => <a href={href} aria-current={path === href ? 'page' : undefined}>{label}</a>)}</div></div>
+      </div>
+    </div>)}
+    <a class="navigation-contact" href="/fr/contact" aria-current={path === '/fr/contact' ? 'page' : undefined}>Contact</a>
+  </nav>
+  <button class="navigation-toggle" aria-expanded="false" aria-controls="navigation-mobile">Menu</button>
+  <nav class="navigation-mobile" id="navigation-mobile" aria-label="Navigation mobile" hidden>
+    {items.map(item => <div><a class="mobile-primary" href={item.href}>{item.label}</a>{item.links.filter(([,href]) => href !== item.href).map(([label,href]) => <a href={href}>{label}</a>)}</div>)}
+    <a class="mobile-primary" href="/fr/contact">Contact</a>
+  </nav>
 </header>
-
 <style>
-  /* Header Container with Higher Glass Transparency */
-  .site-header {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-    width: 100%;
-    z-index: 1000;
-    background: rgba(254, 253, 251, 0.72); /* 🌟 更透的高级毛玻璃背景 */
-    backdrop-filter: blur(28px) saturate(1.8);
-    -webkit-backdrop-filter: blur(28px) saturate(1.8);
-    border-bottom: 0.5px solid rgba(10, 9, 8, 0.08);
-    transition: background 0.3s ease, box-shadow 0.3s ease;
-  }
-
-  .header-container {
-    max-width: 92rem;
-    margin: 0 auto;
-    padding: 0 2.5rem;
-    height: 5rem;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-  }
-
-  .header-left {
-    display: flex;
-    align-items: center;
-    gap: 4.5rem; /* Spacious gap between Logo and first menu item */
-    height: 100%;
-  }
-
-  /* Logo */
-  .header-logo {
-    display: flex;
-    align-items: center;
-    text-decoration: none;
-    flex-shrink: 0;
-  }
-
-  .logo-img {
-    height: 2.2rem;
-    width: auto;
-    display: block;
-    transition: opacity 0.3s ease;
-  }
-
-  .header-logo:hover .logo-img {
-    opacity: 0.75;
-  }
-
-  /* Desktop Navigation Links */
-  .desktop-nav {
-    display: none;
-    align-items: center;
-    gap: 2.8rem;
-    height: 100%;
-  }
-
-  @media (min-width: 1024px) {
-    .desktop-nav {
-      display: flex;
-    }
-  }
-
-  .nav-item-wrapper {
-    position: static;
-    height: 100%;
-    display: flex;
-    align-items: center;
-  }
-
-  .nav-link {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 0.8125rem;
-    font-weight: 500;
-    letter-spacing: 0.14em;
-    text-transform: uppercase;
-    color: var(--ink);
-    text-decoration: none;
-    white-space: nowrap;
-    display: flex;
-    align-items: center;
-    gap: 0.4rem;
-    height: 100%;
-    padding: 0;
-    transition: color 0.3s ease, opacity 0.3s ease;
-  }
-
-  .nav-link:hover {
-    opacity: 0.65;
-  }
-
-  .nav-link.active {
-    font-weight: 600;
-  }
-
-  .chevron {
-    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
-    opacity: 0.45;
-  }
-
-  .nav-item-wrapper:hover .chevron {
-    transform: rotate(180deg);
-    opacity: 1;
-  }
-
-  /* 🌟 Ultra-Translucent Glassmorphism Mega Dropdown Menu (全屏宽更透毛玻璃效果) */
-  .full-mega-dropdown {
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    width: 100%;
-    background: rgba(254, 253, 251, 0.78); /* 🌟 更透的下拉背景 */
-    backdrop-filter: blur(32px) saturate(1.8);
-    -webkit-backdrop-filter: blur(32px) saturate(1.8);
-    border-top: 0.5px solid rgba(10, 9, 8, 0.08);
-    border-bottom: 0.5px solid rgba(10, 9, 8, 0.08);
-    box-shadow: 0 30px 60px rgba(10, 9, 8, 0.07);
-    opacity: 0;
-    visibility: hidden;
-    pointer-events: none;
-    transition: opacity 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-                visibility 0.3s cubic-bezier(0.16, 1, 0.3, 1),
-                transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-    transform: translateY(8px);
-    z-index: 1100;
-  }
-
-  .dropdown-bridge {
-    position: absolute;
-    top: -16px;
-    left: 0;
-    right: 0;
-    height: 16px;
-  }
-
-  .nav-item-wrapper:hover .full-mega-dropdown {
-    opacity: 1;
-    visibility: visible;
-    pointer-events: all;
-    transform: translateY(0);
-  }
-
-  .mega-container {
-    max-width: 90rem;
-    margin: 0 auto;
-    padding: 3rem 2.5rem;
-    display: grid;
-    grid-template-columns: minmax(0, 2.2fr) minmax(0, 1fr);
-    gap: 4rem;
-    align-items: start;
-  }
-
-  .mega-sections {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-    gap: 2.8rem;
-  }
-
-  .mega-column {
-    display: flex;
-    flex-direction: column;
-    gap: 0.85rem;
-  }
-
-  .mega-heading {
-    font-family: 'Faculty Glyphic', serif;
-    font-size: 1.05rem;
-    letter-spacing: 0.02em;
-    color: var(--ink);
-    padding-bottom: 0.5rem;
-    border-bottom: 0.5px solid rgba(10, 9, 8, 0.1);
-  }
-
-  .mega-link-item {
-    display: flex;
-    flex-direction: column;
-    gap: 0.2rem;
-    text-decoration: none;
-    padding: 0.5rem 0.6rem;
-    border-radius: 4px;
-    transition: background 0.25s ease, transform 0.25s ease;
-  }
-
-  .mega-link-item:hover {
-    background: rgba(10, 9, 8, 0.04);
-    transform: translateX(4px);
-  }
-
-  .mega-link-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    gap: 0.5rem;
-  }
-
-  .mega-link-title {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 0.875rem;
-    font-weight: 500;
-    color: var(--ink);
-  }
-
-  .mega-badge {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 0.65rem;
-    font-weight: 600;
-    letter-spacing: 0.08em;
-    padding: 0.15rem 0.5rem;
-    border-radius: 10px;
-    background: rgba(139, 38, 53, 0.08);
-    color: var(--wine);
-    text-transform: uppercase;
-  }
-
-  .mega-link-desc {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 0.78rem;
-    color: var(--muted);
-    font-weight: 400;
-    line-height: 1.4;
-  }
-
-  /* Highlight Box inside Mega Dropdown */
-  .mega-highlight-box {
-    background: rgba(254, 253, 251, 0.5);
-    border: 0.5px solid rgba(10, 9, 8, 0.08);
-    border-radius: 6px;
-    padding: 1.8rem;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    min-height: 100%;
-  }
-
-  .highlight-eyebrow {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 0.65rem;
-    font-weight: 600;
-    letter-spacing: 0.18em;
-    text-transform: uppercase;
-    color: var(--muted);
-    display: block;
-    margin-bottom: 0.5rem;
-  }
-
-  .highlight-title {
-    font-family: 'Faculty Glyphic', serif;
-    font-size: 1.35rem;
-    font-weight: 400;
-    color: var(--ink);
-    margin: 0 0 0.6rem 0;
-    line-height: 1.25;
-  }
-
-  .highlight-desc {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 0.83rem;
-    color: var(--muted);
-    line-height: 1.5;
-    margin: 0 0 1.2rem 0;
-  }
-
-  .highlight-action {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 0.75rem;
-    font-weight: 600;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--wine);
-    text-decoration: none;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.4rem;
-    transition: transform 0.25s ease;
-  }
-
-  .highlight-action:hover {
-    transform: translateX(4px);
-  }
-
-  /* 🌟 Header Actions (Far Right: Email Icon + Mobile Menu) */
-  .header-actions {
-    display: flex;
-    align-items: center;
-    gap: 1.2rem;
-    flex-shrink: 0;
-    margin-left: auto; /* Force to absolute far right */
-  }
-
-  /* Minimalist Email Icon Button */
-  .contact-email-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 2.4rem;
-    height: 2.4rem;
-    border-radius: 50%;
-    border: 0.5px solid rgba(10, 9, 8, 0.18);
-    background: rgba(254, 253, 251, 0.4);
-    color: var(--ink);
-    text-decoration: none;
-    transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .contact-email-btn:hover {
-    background: var(--ink);
-    color: var(--paper);
-    border-color: var(--ink);
-    transform: scale(1.05);
-  }
-
-  /* Mobile Toggle & Menu Layout */
-  .mobile-toggle {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    gap: 5px;
-    background: none;
-    border: none;
-    cursor: pointer;
-    padding: 6px;
-    height: 2.4rem;
-    width: 2.4rem;
-    align-items: center;
-  }
-
-  @media (min-width: 1024px) {
-    .mobile-toggle {
-      display: none;
-    }
-  }
-
-  .mobile-toggle span {
-    display: block;
-    width: 22px;
-    height: 1px;
-    background: var(--ink);
-    transition: transform 0.3s ease;
-  }
-
-  .mobile-menu {
-    position: fixed;
-    top: 5rem;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: rgba(10, 9, 8, 0.98);
-    backdrop-filter: blur(32px);
-    display: none;
-    padding: 3rem 2.5rem;
-    flex-direction: column;
-    justify-content: space-between;
-    z-index: 999;
-  }
-
-  .mobile-menu.active {
-    display: flex;
-  }
-
-  .mobile-menu nav {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-  }
-
-  .mobile-link {
-    font-family: 'Faculty Glyphic', serif;
-    font-size: 2rem;
-    color: var(--paper);
-    text-decoration: none;
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    transition: transform 0.3s ease;
-  }
-
-  .mobile-link span {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 0.8rem;
-    color: rgba(255, 255, 255, 0.5);
-  }
-
-  .mobile-link:hover {
-    transform: translateX(0.5rem);
-  }
-
-  .contact-mobile {
-    font-family: 'Plus Jakarta Sans', sans-serif;
-    font-size: 1rem;
-    letter-spacing: 0.15em;
-    color: var(--wine);
-    margin-top: 2rem;
-  }
-
-  @media (max-width: 600px) {
-    .header-container {
-      padding: 0 1.5rem;
-    }
-    .header-left {
-      gap: 1.5rem;
-    }
-    .header-actions {
-      gap: 0.75rem;
-    }
+  .navigation { position:fixed; inset:0 0 auto; z-index:100; height:var(--header); padding-inline:var(--pad); display:flex; justify-content:space-between; align-items:center; background:var(--paper); }
+  .navigation-logo img { width:8.75rem; height:2.6rem; object-fit:contain; }
+  .navigation-desktop { display:flex; align-items:center; gap:clamp(1.5rem,3vw,3.5rem); height:100%; }
+  .navigation-item { display:flex; align-items:center; height:100%; }
+  .navigation-trigger,.navigation-contact,.navigation-toggle { padding:.7rem 0; color:var(--ink); border:0; background:none; font:inherit; font-size:.85rem; letter-spacing:0; text-decoration:none; cursor:pointer; }
+  .navigation-trigger:hover,.navigation-contact:hover,.navigation-trigger.current { color:var(--muted); }
+  .navigation-panel { position:absolute; inset:100% 0 auto; background:var(--paper); padding:2rem var(--pad) 3rem; }
+  .navigation-panel[hidden],.navigation-mobile[hidden] { display:none; }
+  .navigation-panel-inner { max-width:78rem; margin:auto; display:grid; grid-template-columns:1fr 2fr; gap:3rem; }
+  .navigation-panel p { color:var(--muted); font-size:.8rem; margin:0; }
+  .navigation-panel-inner>div { display:grid; grid-template-columns:1fr 1fr; gap:1rem 3rem; }
+  .navigation-panel a { font-size:1.1rem; text-decoration:none; }
+  .navigation-panel a:hover { color:var(--muted); }
+  .navigation-toggle,.navigation-mobile { display:none; }
+  @media(max-width:900px) {
+    .navigation-desktop { display:none; }
+    .navigation-toggle { display:block; }
+    .navigation-mobile:not([hidden]) { display:block; position:absolute; inset:100% 0 auto; max-height:calc(100svh - var(--header)); overflow:auto; background:var(--paper); padding:1rem var(--pad) 3rem; }
+    .navigation-mobile>div { margin-bottom:1.75rem; }
+    .navigation-mobile a { display:block; width:fit-content; padding:.3rem 0; text-decoration:none; font-size:.95rem; }
+    .navigation-mobile a.mobile-primary { font-family:var(--display); font-size:1.7rem; margin-bottom:.4rem; }
   }
 </style>
-
 <script>
-  document.addEventListener('DOMContentLoaded', () => {
-    const toggle = document.querySelector('.mobile-toggle');
-    const menu = document.querySelector('.mobile-menu');
-
-    toggle?.addEventListener('click', () => {
-      const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
-      toggle.setAttribute('aria-expanded', (!isExpanded).toString());
-      menu?.classList.toggle('active');
-    });
+  const header = document.querySelector<HTMLElement>('.navigation')!;
+  const triggers = [...header.querySelectorAll<HTMLButtonElement>('.navigation-trigger')];
+  const mobileButton = header.querySelector<HTMLButtonElement>('.navigation-toggle')!;
+  const mobile = header.querySelector<HTMLElement>('.navigation-mobile')!;
+  const panels = triggers.map(button => document.getElementById(button.getAttribute('aria-controls')!)!);
+  function closeDesktop() { triggers.forEach((button,i) => { button.setAttribute('aria-expanded','false'); panels[i].hidden=true; }); }
+  function openPanel(index:number) { closeDesktop(); triggers[index].setAttribute('aria-expanded','true'); panels[index].hidden=false; }
+  function closeMobile() { mobile.hidden=true; mobileButton.setAttribute('aria-expanded','false'); mobileButton.textContent='Menu'; }
+  triggers.forEach((button,i) => {
+    button.addEventListener('click',event => { if(event.detail > 0) openPanel(i); else button.getAttribute('aria-expanded') === 'true' ? closeDesktop() : openPanel(i); });
+    button.parentElement!.addEventListener('pointerenter',event => { if(event.pointerType === 'mouse') openPanel(i); });
+    button.addEventListener('keydown',event => { if(event.key === 'ArrowDown') { event.preventDefault(); openPanel(i); panels[i].querySelector('a')?.focus(); } });
   });
+  header.addEventListener('pointerleave',event => { if(event.pointerType === 'mouse' && !panels.some(panel => panel.contains(document.activeElement))) closeDesktop(); });
+  header.addEventListener('focusout',event => { if(!header.contains(event.relatedTarget as Node)) { closeDesktop(); closeMobile(); } });
+  mobileButton.addEventListener('click',() => { const open=mobile.hidden; mobile.hidden=!open; mobileButton.setAttribute('aria-expanded',String(open)); mobileButton.textContent=open?'Fermer':'Menu'; });
+  mobile.querySelectorAll('a').forEach(a => a.addEventListener('click',closeMobile));
+  document.addEventListener('pointerdown',event => { if(!header.contains(event.target as Node)) { closeDesktop(); closeMobile(); } });
+  document.addEventListener('keydown',event => { if(event.key !== 'Escape') return; const active=triggers.findIndex(b => b.getAttribute('aria-expanded') === 'true'); if(active>=0) { closeDesktop(); triggers[active].focus(); } if(!mobile.hidden) { closeMobile(); mobileButton.focus(); } });
+  matchMedia('(max-width:900px)').addEventListener('change',() => { closeDesktop(); closeMobile(); });
 </script>
