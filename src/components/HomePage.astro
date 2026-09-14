@@ -1,10 +1,14 @@
 ---
 import SiteLayout from '../layouts/SiteLayout.astro';
 import BrandGrid from './BrandGrid.astro';
+import { heroSlides } from '../data/home-hero';
 ---
 <SiteLayout title="XIONS GROUP — Imaginer la beauté de demain" description="Groupe français indépendant dédié à la création et au rayonnement de marques de beauté nouvelle génération.">
   <header class="home-hero">
-    <div class="hero-orbit" aria-hidden="true"></div>
+    <div class:list={['hero-media', { 'hero-media-empty': heroSlides.length === 0 }]} aria-hidden={heroSlides.length === 0 ? 'true' : undefined}>
+      {heroSlides.map((slide, index) => <img class:list={['hero-slide', { active: index === 0 }]} src={slide.src} alt={slide.alt} loading={index === 0 ? 'eager' : 'lazy'} />)}
+      {heroSlides.length > 1 && <div class="hero-pagination" aria-label="Visuels de campagne">{heroSlides.map((_, index) => <button class:list={{ active: index === 0 }} type="button" aria-label={`Afficher le visuel ${index + 1}`}></button>)}</div>}
+    </div>
     <p class="eyebrow hero-kicker">Groupe de beauté indépendant · Paris</p>
     <h1 class="display" data-reveal>Imaginer<br /><em>la beauté</em><br />de demain.</h1>
     <div class="hero-foot"><p>Création · Science · Culture</p><a href="#vision">Découvrir ↓</a></div>
@@ -123,26 +127,23 @@ import BrandGrid from './BrandGrid.astro';
     font-weight:400; 
   }
   
-  .hero-orbit { 
+  .hero-media {
     position:absolute; 
-    width:min(52vw,44rem); 
-    aspect-ratio:1; 
-    right:-7vw; 
-    top:48%; 
-    transform:translateY(-50%); 
-    border-radius:50%; 
-    background:radial-gradient(circle at 36% 35%,#f6eee3 0 10%,#b27a67 28%,#632b34 56%,#171412 76%); 
-    box-shadow:inset 1rem -2rem 5rem rgba(0,0,0,.32); 
-    filter:saturate(.72); 
+    inset:0;
+    z-index:0;
   }
-  
-  .hero-orbit::after { 
-    content:''; 
-    position:absolute; 
-    inset:-12%; 
-    border:1px solid var(--line); 
-    border-radius:50%; 
-  }
+  .hero-media-empty { background:#fff; }
+  .hero-slide { position:absolute; inset:0; width:100%; height:100%; object-fit:cover; opacity:0; transition:opacity .7s var(--ease-luxury); }
+  .hero-slide.active { opacity:1; }
+  .hero-pagination { position:absolute; right:var(--pad); bottom:2.5rem; z-index:3; display:flex; gap:.5rem; }
+  .hero-pagination button { width:2rem; height:1px; padding:0; border:0; background:rgba(10,9,8,.25); cursor:pointer; }
+  .hero-pagination button.active { background:var(--ink); }
+  .home-hero:has(.hero-slide) { color:var(--paper); }
+  .home-hero:has(.hero-slide) .home-hero em { color:inherit; }
+  .home-hero:has(.hero-slide)::after { content:''; position:absolute; inset:0; z-index:1; background:linear-gradient(90deg,rgba(0,0,0,.38),rgba(0,0,0,.04)); }
+  .home-hero > :not(.hero-media) { z-index:2; }
+  .home-hero:has(.hero-slide) .hero-pagination button { background:rgba(255,255,255,.42); }
+  .home-hero:has(.hero-slide) .hero-pagination button.active { background:#fff; }
   
   .hero-foot { 
     position:absolute; 
@@ -228,12 +229,6 @@ import BrandGrid from './BrandGrid.astro';
   }
   
   @media(max-width:700px){ 
-    .hero-orbit { 
-      width:78vw; 
-      right:-34vw; 
-      opacity:.78; 
-    } 
-    
     .section-head { 
       flex-direction:column; 
     }
@@ -248,3 +243,17 @@ import BrandGrid from './BrandGrid.astro';
     }
   }
 </style>
+<script>
+  const slides = [...document.querySelectorAll<HTMLImageElement>('.hero-slide')];
+  const controls = [...document.querySelectorAll<HTMLButtonElement>('.hero-pagination button')];
+  if (slides.length > 1) {
+    let current = 0;
+    const show = (index: number) => {
+      current = index;
+      slides.forEach((slide, i) => slide.classList.toggle('active', i === current));
+      controls.forEach((control, i) => control.classList.toggle('active', i === current));
+    };
+    controls.forEach((control, index) => control.addEventListener('click', () => show(index)));
+    window.setInterval(() => show((current + 1) % slides.length), 6500);
+  }
+</script>

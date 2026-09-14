@@ -3,17 +3,17 @@ import { brands } from '../data/brands';
 const path = Astro.url.pathname.replace(/\/$/, '');
 const items = [
   { label: 'Le groupe', href: '/fr/groupe', links: [
-    ['À propos', '/fr/groupe'], ['Notre équipe', '/fr/groupe#direction'],
-    ['Presse & rayonnement', '/fr/presse'], ['Carrières', '/fr/carrieres']
+    ['À propos', '/fr/groupe'], ['Notre équipe', '/fr/groupe#direction']
   ] },
   { label: 'Nos marques', href: '/fr/marques', links: [
     ['Toutes nos marques', '/fr/marques'], ...brands.map(b => [b.name, `/fr/marques/${b.slug}`])
-  ] },
-  { label: 'Engagements', href: '/fr/engagements', links: [
-    ['Qualité', '/fr/engagements#qualite'], ['Responsabilité', '/fr/engagements#responsabilite'],
-    ['Environnement', '/fr/engagements#environnement']
   ] }
 ];
+const directLinks = [
+  ['Press', '/fr/presse'],
+  ['Engagements', '/fr/engagements'],
+  ['Carrières', '/fr/carrieres']
+] as const;
 ---
 <header class="navigation">
   <a class="navigation-logo" href="/fr" aria-label="XIONS Group — Accueil"><img src="/XIONS_LOGO.svg" alt="XIONS Group" width="140" height="42" /></a>
@@ -24,21 +24,23 @@ const items = [
         <div class="navigation-panel-inner"><p>{item.label}</p><div>{item.links.map(([label, href]) => <a href={href} aria-current={path === href ? 'page' : undefined}>{label}</a>)}</div></div>
       </div>
     </div>)}
+    {directLinks.map(([label, href]) => <a class:list={['navigation-direct', {current: path === href}]} href={href} aria-current={path === href ? 'page' : undefined}>{label}</a>)}
     <a class="navigation-contact" href="/fr/contact" aria-current={path === '/fr/contact' ? 'page' : undefined}>Contact</a>
   </nav>
   <button class="navigation-toggle" aria-expanded="false" aria-controls="navigation-mobile">Menu</button>
   <nav class="navigation-mobile" id="navigation-mobile" aria-label="Navigation mobile" hidden>
     {items.map(item => <div><a class="mobile-primary" href={item.href}>{item.label}</a>{item.links.filter(([,href]) => href !== item.href).map(([label,href]) => <a href={href}>{label}</a>)}</div>)}
+    {directLinks.map(([label, href]) => <a class="mobile-primary" href={href}>{label}</a>)}
     <a class="mobile-primary" href="/fr/contact">Contact</a>
   </nav>
 </header>
 <style>
   .navigation { position:fixed; inset:0 0 auto; z-index:100; height:var(--header); padding-inline:var(--pad); display:flex; justify-content:space-between; align-items:center; background:var(--paper); }
   .navigation-logo img { width:8.75rem; height:2.6rem; object-fit:contain; }
-  .navigation-desktop { display:flex; align-items:center; gap:clamp(1.5rem,3vw,3.5rem); height:100%; }
+  .navigation-desktop { display:flex; align-items:center; gap:clamp(1rem,2vw,2.5rem); height:100%; }
   .navigation-item { display:flex; align-items:center; height:100%; }
-  .navigation-trigger,.navigation-contact,.navigation-toggle { padding:.7rem 0; color:var(--ink); border:0; background:none; font:inherit; font-size:.85rem; letter-spacing:0; text-decoration:none; cursor:pointer; }
-  .navigation-trigger:hover,.navigation-contact:hover,.navigation-trigger.current { color:var(--muted); }
+  .navigation-trigger,.navigation-direct,.navigation-contact,.navigation-toggle { padding:.7rem 0; color:var(--ink); border:0; background:none; font:inherit; font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; text-decoration:none; cursor:pointer; }
+  .navigation-trigger:hover,.navigation-direct:hover,.navigation-contact:hover,.navigation-trigger.current,.navigation-direct.current { color:var(--muted); }
   .navigation-panel { position:absolute; inset:100% 0 auto; background:var(--paper); padding:2rem var(--pad) 3rem; }
   .navigation-panel[hidden],.navigation-mobile[hidden] { display:none; }
   .navigation-panel-inner { max-width:78rem; margin:auto; display:grid; grid-template-columns:1fr 2fr; gap:3rem; }
