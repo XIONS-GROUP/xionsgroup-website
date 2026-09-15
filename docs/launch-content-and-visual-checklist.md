@@ -51,6 +51,49 @@
 
 图片交付请一起给：用途、批准版本、主体不能裁掉的区域、说明文字、来源/使用许可、可公开时间。摄影上线优先WebP/AVIF；首屏目标约300–600KB，其余约150–350KB（按质量调整）。SVG保持矢量，不转成大位图。
 
-## 设计收尾方向
+## 逐张文件命名（交付用）
+
+统一使用英文小写、半角连字符，无空格、重音和中文。下列 JPG 是摄影交付原稿；上线时由开发导出同名 WebP。PNG 不应仅改扩展名冒充 JPG。原稿可加 -v01、-v02 管理版本，发布文件保留稳定名称。
+
+| 使用位置 | 文件名 | 尺寸 |
+| --- | --- | --- |
+| 图标母稿 | xionsgroup-icon.svg；xionsgroup-icon-512.png | 矢量 / 512×512 |
+| 发布图标（开发导出） | favicon.svg；favicon.ico；apple-touch-icon.png | 矢量 / ICO含16、32、48 / 180×180 |
+| 首页第1张 | xionsgroup-home-hero-01-desktop.jpg；xionsgroup-home-hero-01-mobile.jpg | 2560×1440 / 1200×1600 |
+| 首页第2张（可选） | xionsgroup-home-hero-02-desktop.jpg；xionsgroup-home-hero-02-mobile.jpg | 2560×1440 / 1200×1600 |
+| 首页第3张（可选） | xionsgroup-home-hero-03-desktop.jpg；xionsgroup-home-hero-03-mobile.jpg | 2560×1440 / 1200×1600 |
+| 团队合照 | xionsgroup-leadership-group.jpg | 2400×1600 |
+| 可选单人照 | xionsgroup-denis-bellaiche-portrait.jpg；xionsgroup-kris-fang-portrait.jpg；xionsgroup-neo-su-portrait.jpg | 各1600×2000 |
+| L’Entropiste Logo | lentropiste-logo-black.svg；lentropiste-logo-white.svg | 矢量；PNG替代1200×480透明 |
+| Betenoir Logo | betenoir-logo-black.svg；betenoir-logo-white.svg | 同上 |
+| Sunlution Logo | sunlution-logo-black.svg；sunlution-logo-white.svg | 同上 |
+| Masqly Logo | masqly-logo-black.svg；masqly-logo-white.svg | 同上 |
+| L’Entropiste全系列 | lentropiste-collection-01.jpg | 2400×1600 |
+| L’Entropiste奖项 | lentropiste-dorians-spleen-award-2026.jpg | 1600×2000 |
+| Sunlution主视觉 | sunlution-hero-01.jpg | 2400×1600 |
+| Sunlution产品 | sunlution-products-01.jpg | 1600×2000 |
+| Sunlution研究或质地（可选） | sunlution-research-01.jpg 或 sunlution-texture-01.jpg（按实际内容选） | 1600×2000 |
+| Masqly产品主视觉 | masqly-products-01.jpg | 2400×1600 |
+| Masqly手臂使用 | masqly-hands-arms-01.jpg | 1600×2000 |
+| Masqly腿部使用 | masqly-feet-legs-01.jpg | 1600×2000 |
+| Betenoir预告（可选） | betenoir-teaser-01.jpg | 2560×1440 |
+| Cannes活动 | xionsgroup-cannes-YYYY-01.jpg | 2400×1800 |
+| Oscars活动 | xionsgroup-oscars-YYYY-01.jpg | 2400×1800 |
+| Golden Globes活动 | xionsgroup-golden-globes-YYYY-01.jpg | 2400×1800 |
+| Grammy活动 | xionsgroup-grammys-YYYY-01.jpg | 2400×1800 |
+| Emmy活动 | xionsgroup-emmys-YYYY-01.jpg | 2400×1800 |
+| César活动 | xionsgroup-cesar-YYYY-01.jpg | 2400×1800 |
+| 户外广告（可选） | xionsgroup-outdoor-01.jpg、-02.jpg、-03.jpg | 长边2400 |
+| 媒体报道（可选） | xionsgroup-press-01.jpg、-02.jpg、-03.jpg | 长边2000，保留原比例 |
+| 社交传播（可选） | xionsgroup-social-campaign-01.jpg、-02.jpg、-03.jpg | 长边2400，保留原比例 |
+| 全站分享封面 | xionsgroup-og.jpg | 1200×630 |
+| Engagements配图（可选） | xionsgroup-commitments-01.jpg | 2400×1600 |
+| Carrières配图（可选） | xionsgroup-careers-01.jpg | 2400×1600 |
+
+活动文件中的 YYYY 必须替换成实际年份，多张按 01、02、03 递增；只有真实存在且确认可公开的活动才提供，不需要凑齐。
+
+交付目录放在 local-materials/visuals/ 下，按 icons/、home/、group/、brands/lentropiste/、brands/betenoir/、brands/sunlution/、brands/masqly/、events/、press/、social/、commitments/、careers/ 分类。上传网站前再转为 public/ 下的压缩资产并接入页面。命名本身不会自动替换网页。
+
+## 页面设计收尾
 
 首页保留一个视觉重点与四品牌入口；品牌页用“主视觉 → 简介 → 一组产品/证据 → 品牌官网入口”，替换现在重复的三条原则与大号重复标语。先确认各品牌正式官网URL再加入链接。保持共享模板，但允许 Betenoir 采用更短的预告版。无需每页增加图片，否则会重新变成长页面。
