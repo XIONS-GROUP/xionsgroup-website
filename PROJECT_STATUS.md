@@ -47,10 +47,12 @@ The repository root is the only development and deployment entry point. Run all 
 
 ### Visual planning update — 2026-09-16
 
-- `src/data/visuals.json` is the source of truth for 21 named visual assets, including one optional Betenoir teaser.
+- `src/data/visuals.json` is the source of truth for 28 named visual assets, including one optional Betenoir teaser.
 - Home uses separate desktop and mobile cover compositions; body photography uses 3:2 and 4:5 frames. Logos, social cover and icon use dedicated formats.
 - Dev renders labeled image placeholders; `/fr/visual-plan` lists placements and sizes. Production builds omit empty placeholders and the review route.
-- Brand pages share one image-led template. Presse uses three neutral image positions pending actual event captions and photography.
+- Brand pages share one image-led template. Presse follows the corrected source copy: seven event galleries and three communication galleries, pending actual captions and photography. Home restores six existing event marks.
+- Mobile navigation fills the viewport beneath the header, hides Groupe sublinks, and shows all four brands. Navigation surfaces share the same translucent white treatment; desktop all-brands link is separate beneath the brands.
+- Content and positioning review: ignored `local-materials/website-content-review-2026-09-16.md`.
 - The user's checklist now lives in ignored `local-materials/launch-content-and-visual-checklist.md`; the older copy is backed up under `local-materials/visual-kit/`.
 - `node scripts/generate-visual-kit.mjs` generates the checklist, CSV, named SVG groups and Illustrator artboard script from the manifest. Affinity native artboards are not claimed; desktop import still needs verification.
 - Home currently uses a single desktop/mobile pair. Additional carousel images and accessible playback controls are deferred until the first composition is approved.
