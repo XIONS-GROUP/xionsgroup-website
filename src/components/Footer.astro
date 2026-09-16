@@ -1,5 +1,6 @@
 ---
 import Arrow from './Arrow.astro';
+import { visualPreview } from '../config/visual-preview';
 const year = new Date().getFullYear();
 ---
 <footer class="site-footer">
@@ -15,6 +16,7 @@ const year = new Date().getFullYear();
   </div>
   <div class="footer-bottom">
     <p>© {year} XIONS GROUP</p>
+    {visualPreview && <a href="/fr/visual-plan">Plan des visuels · preview</a>}
     <div><a href="/fr/conditions-generales">Conditions d’utilisation</a><a href="/fr/mentions-legales">Mentions légales</a><a href="/fr/politique-confidentialite">Confidentialité</a><a href="/fr/politique-cookies">Cookies</a></div>
   </div>
 </footer>

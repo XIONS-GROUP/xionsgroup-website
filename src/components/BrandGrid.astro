@@ -1,18 +1,26 @@
 ---
 import { brands } from '../data/brands';
 import { brandLogos } from '../data/brand-logos';
+import VisualSlot from './VisualSlot.astro';
+import { visualPreview } from '../config/visual-preview';
+import visuals from '../data/visuals.json';
 interface Props { compact?: boolean }
 const { compact = false } = Astro.props;
 ---
 <div class:list={['brand-grid', { 'brand-grid-compact': compact }]}>
   {brands.map(brand => {
     const logo = brandLogos[brand.slug];
+    const plannedLogo = visuals.find(v => v.id === `${brand.slug}-logo`);
     return <a class="brand-card" href={`/fr/marques/${brand.slug}`} aria-label={`Découvrir ${brand.name}`}>
       <p class="brand-category">{brand.category}</p>
       <div class="brand-logo-slot">
-        {logo ? <img src={logo.src} alt={brand.name} width="600" height="240" loading="lazy" decoding="async" style={`max-width:${logo.width}px`} /> : <h2 class="brand-name-fallback">{brand.name}</h2>}
+        {plannedLogo?.src ? <div style="width:17.5rem;max-width:100%"><VisualSlot id={`${brand.slug}-logo`} compact /></div> : logo ? <img src={logo.src} alt={brand.name} width="600" height="240" loading="lazy" decoding="async" style={`max-width:${logo.width}px`} /> : visualPreview ? <div style="width:17.5rem;max-width:100%"><VisualSlot id={`${brand.slug}-logo`} compact /></div> : <h2 class="brand-name-fallback">{brand.name}</h2>}
       </div>
       <p class="brand-description">{brand.tagline}</p>
     </a>;
   })}
 </div>
+<style>
+  .brand-card { min-width:0; }
+  .brand-logo-slot { min-width:0; }
+</style>

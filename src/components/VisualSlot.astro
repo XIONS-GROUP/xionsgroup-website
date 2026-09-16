@@ -1,0 +1,28 @@
+---
+import visuals from '../data/visuals.json';
+import { visualPreview } from '../config/visual-preview';
+interface Props { id: string; bleed?: boolean; eager?: boolean; compact?: boolean }
+const { id, bleed = false, eager = false, compact = false } = Astro.props;
+const asset = visuals.find(item => item.id === id);
+if (!asset) throw new Error(`Unknown visual slot: ${id}`);
+---
+{(asset.src || visualPreview) && <div class:list={['visual-slot', {bleed, compact, 'is-placeholder':!asset.src}]} data-visual-id={id} style={`--slot-ratio:${asset.ratio}`}>
+  {asset.src ? <img src={asset.src} alt={asset.alt} width={asset.width} height={asset.height} loading={eager ? 'eager' : 'lazy'} decoding="async" style={`object-fit:${asset.fit}`} /> : <div class="visual-placeholder">
+    <span class="visual-index">Visual study · {asset.ratio.replaceAll(' / ', ':')}</span>
+    <div class="visual-copy"><strong>{asset.label}</strong><span>{asset.width} × {asset.height} px</span><code>{asset.name}</code></div>
+    <span class="visual-note">{asset.fit === 'contain' ? 'Image entière · sans recadrage' : 'Cadrage adaptable'} · visuel à fournir</span>
+  </div>}
+</div>}
+<style>
+  .visual-slot { position:relative; width:100%; aspect-ratio:var(--slot-ratio); overflow:hidden; background:#f1f1f1; }
+  .visual-slot.bleed { height:100%; aspect-ratio:auto; }
+  .visual-slot.compact:not(.is-placeholder) { background:transparent; }
+  img { width:100%; height:100%; }
+  .visual-placeholder { height:100%; min-height:inherit; padding:clamp(1rem,3vw,2.5rem); display:flex; flex-direction:column; justify-content:space-between; color:#444; background:linear-gradient(145deg,transparent 49.9%,#ddd 50%,transparent 50.1%),linear-gradient(35deg,#eee,#fafafa); border:1px solid #ddd; }
+  .visual-index,.visual-note { font:500 .65rem/1.5 var(--sans); letter-spacing:.04em; }
+  .visual-copy { display:flex; flex-direction:column; gap:.65rem; text-align:center; }
+  strong { font-family:var(--display); font-size:clamp(1.1rem,2.3vw,2rem); font-weight:400; }
+  .visual-copy span { font-size:.8rem; } code { font-size:.62rem; overflow-wrap:anywhere; }
+  .compact .visual-placeholder { padding:.6rem; justify-content:center; }
+  .compact strong { font-size:1rem; } .compact .visual-index,.compact .visual-note { display:none; }
+</style>

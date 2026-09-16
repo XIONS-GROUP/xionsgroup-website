@@ -1,0 +1,23 @@
+[
+  {"id":"home-desktop","name":"xionsgroup-home-hero-01-desktop","label":"Accueil · campagne desktop","use":"首页桌面首屏背景；左侧标题留白","width":2560,"height":1440,"ratio":"16 / 9","fit":"cover","page":"/fr/","src":"","alt":""},
+  {"id":"home-mobile","name":"xionsgroup-home-hero-01-mobile","label":"Accueil · campagne mobile","use":"手机全屏首屏背景；中央主体，顶部及底部保留裁切余量","width":1440,"height":3120,"ratio":"6 / 13","fit":"cover","page":"/fr/","src":"","alt":""},
+  {"id":"group-team","name":"xionsgroup-leadership-group","label":"Le groupe · portrait collectif","use":"集团团队区；三人合照，完整保留人物","width":2400,"height":1600,"ratio":"3 / 2","fit":"contain","page":"/fr/groupe","src":"","alt":""},
+  {"id":"lentropiste-logo","name":"lentropiste-logo-black","label":"L’Entropiste · logo","use":"首页与品牌总览共用；透明背景，不拉伸","width":1200,"height":480,"ratio":"5 / 2","fit":"contain","page":"/fr/marques","src":"","alt":""},
+  {"id":"betenoir-logo","name":"betenoir-logo-black","label":"Betenoir · logo","use":"首页与品牌总览共用；透明背景，不拉伸","width":1200,"height":480,"ratio":"5 / 2","fit":"contain","page":"/fr/marques","src":"","alt":""},
+  {"id":"sunlution-logo","name":"sunlution-logo-black","label":"Sunlution · logo","use":"首页与品牌总览共用；透明背景，不拉伸","width":1200,"height":480,"ratio":"5 / 2","fit":"contain","page":"/fr/marques","src":"","alt":""},
+  {"id":"masqly-logo","name":"masqly-logo-black","label":"Masqly · logo","use":"首页与品牌总览共用；透明背景，不拉伸","width":1200,"height":480,"ratio":"5 / 2","fit":"contain","page":"/fr/marques","src":"","alt":""},
+  {"id":"lentropiste-hero","name":"lentropiste-collection-01","label":"L’Entropiste · collection","use":"品牌标题下方横图，桌面手机均3:2","width":2400,"height":1600,"ratio":"3 / 2","fit":"contain","page":"/fr/marques/lentropiste","src":"","alt":""},
+  {"id":"lentropiste-detail-01","name":"lentropiste-dorians-spleen-award-2026","label":"L’Entropiste · distinction","use":"品牌详情与获奖信息并列；证书完整保留，不裁字","width":1600,"height":2000,"ratio":"4 / 5","fit":"contain","page":"/fr/marques/lentropiste","src":"","alt":""},
+  {"id":"betenoir-hero","name":"betenoir-teaser-01","label":"Betenoir · avant-première","use":"品牌预告横图，可暂缓交付；文字预告仍可发布","width":2400,"height":1600,"ratio":"3 / 2","fit":"cover","page":"/fr/marques/betenoir","src":"","alt":"","optional":true},
+  {"id":"sunlution-hero","name":"sunlution-hero-01","label":"Sunlution · univers","use":"品牌标题下方横图，桌面手机均3:2","width":2400,"height":1600,"ratio":"3 / 2","fit":"cover","page":"/fr/marques/sunlution","src":"","alt":""},
+  {"id":"sunlution-detail-01","name":"sunlution-products-01","label":"Sunlution · produit","use":"详情双图左侧；完整产品","width":1600,"height":2000,"ratio":"4 / 5","fit":"contain","page":"/fr/marques/sunlution","src":"","alt":""},
+  {"id":"sunlution-detail-02","name":"sunlution-texture-01","label":"Sunlution · texture","use":"详情双图右侧；质地或已确认的研究图","width":1600,"height":2000,"ratio":"4 / 5","fit":"cover","page":"/fr/marques/sunlution","src":"","alt":""},
+  {"id":"masqly-hero","name":"masqly-products-01","label":"Masqly · produits","use":"品牌标题下方横图，桌面手机均3:2","width":2400,"height":1600,"ratio":"3 / 2","fit":"contain","page":"/fr/marques/masqly","src":"","alt":""},
+  {"id":"masqly-detail-01","name":"masqly-hands-arms-01","label":"Masqly · mains & bras","use":"详情双图左侧；使用方式","width":1600,"height":2000,"ratio":"4 / 5","fit":"cover","page":"/fr/marques/masqly","src":"","alt":""},
+  {"id":"masqly-detail-02","name":"masqly-feet-legs-01","label":"Masqly · pieds & jambes","use":"详情双图右侧；使用方式","width":1600,"height":2000,"ratio":"4 / 5","fit":"cover","page":"/fr/marques/masqly","src":"","alt":""},
+  {"id":"press-01","name":"xionsgroup-press-event-01","label":"Rayonnement · événement","use":"Press第一张；确定实际活动后填写标题、时间与参与方式","width":2400,"height":1600,"ratio":"3 / 2","fit":"cover","page":"/fr/presse","src":"","alt":""},
+  {"id":"press-02","name":"xionsgroup-press-campaign-01","label":"Rayonnement · campagne","use":"Press第二张；真实户外广告或传播项目","width":2400,"height":1600,"ratio":"3 / 2","fit":"cover","page":"/fr/presse","src":"","alt":""},
+  {"id":"press-03","name":"xionsgroup-press-editorial-01","label":"Rayonnement · publication","use":"Press第三张；媒体报道完整置入横框，留白不裁字","width":2400,"height":1600,"ratio":"3 / 2","fit":"contain","page":"/fr/presse","src":"","alt":""},
+  {"id":"social-cover","name":"xionsgroup-og","label":"Partage · couverture","use":"社交分享元数据封面；不作为正文模块展示","width":1200,"height":630,"ratio":"40 / 21","fit":"contain","page":"/fr/visual-plan","src":"","alt":""},
+  {"id":"site-icon","name":"xionsgroup-icon-512","label":"Navigateur · icône","use":"标签页图标母版，后续导出SVG、ICO及Apple touch icon","width":512,"height":512,"ratio":"1 / 1","fit":"contain","page":"/fr/visual-plan","src":"","alt":""}
+]

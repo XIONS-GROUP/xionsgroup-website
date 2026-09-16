@@ -1,0 +1,36 @@
+---
+import SiteLayout from '../../layouts/SiteLayout.astro';
+import VisualSlot from '../../components/VisualSlot.astro';
+import visuals from '../../data/visuals.json';
+import { visualPreview } from '../../config/visual-preview';
+export function getStaticPaths() {
+  return visualPreview ? [{params:{review:'visual-plan'}}] : [];
+}
+---
+<SiteLayout title="XIONS GROUP — Plan des visuels" description="Document de travail : emplacements et formats des images.">
+  <section class="section review"><div class="measure">
+    <p class="eyebrow">Dev preview · document de travail</p>
+    <h1 class="title-lg">图片位置与制作规格</h1>
+    <p>这是内部图片规划页。正式生产构建不生成此页，也不显示空图片框。摄影素材只用四类母版；Logo、分享封面与图标单列。</p>
+    <p>首页按屏幕高度显示，桌面和手机分别构图，使用 cover 填满并允许裁切。其他正文图片框固定比例；完整产品、人物与报道使用 contain 保留全部内容。规格是导出像素，不是网页显示像素。</p>
+    <p>首页先完成一组桌面／手机素材。轮播第 2、3 张暂不列入制作任务，待首组画面确认后再扩展。</p>
+    <div class="plan-grid">{visuals.map(v => <article>
+      <div class="sample"><VisualSlot id={v.id} /></div>
+      <h2>{v.label}</h2><p>{v.use}</p>
+      <p><strong>{v.width} × {v.height} px</strong> · {v.ratio.replaceAll(' / ', ':')} · {v.fit}</p>
+      <code>{v.name}{v.id.endsWith('-logo') ? '.svg / .png' : '.jpg / .png'}</code>
+      <p>{v.optional ? '可选 · 可暂缓' : '计划素材'} · {v.page !== '/fr/visual-plan' ? <a href={v.page}>查看实际页面位置 →</a> : '浏览器／分享预览用途'}</p>
+    </article>)}</div>
+  </div></section>
+</SiteLayout>
+<style>
+  .review { padding-top:calc(var(--header) + 4rem); }
+  h1 { margin-block:1rem 2rem; } p { line-height:1.8; max-width:70ch; }
+  .plan-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:3rem 2rem; margin-top:3rem; }
+  .sample { height:280px; background:#fafafa; display:flex; justify-content:center; }
+  .sample :global(.visual-slot) { width:auto; max-width:100%; height:100%; }
+  .sample :global(.visual-placeholder) { padding:0; }
+  .sample :global(.visual-copy),.sample :global(.visual-index),.sample :global(.visual-note) { display:none; }
+  h2 { font-size:1.2rem; margin-top:1.5rem; } code { overflow-wrap:anywhere; font-size:.75rem; }
+  @media(max-width:700px) { .plan-grid { grid-template-columns:1fr; } }
+</style>
