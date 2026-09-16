@@ -18,22 +18,45 @@ const height=Math.max(...boards.map(v=>v.y+v.height));
 if(width>16000||height>16000) throw new Error('Artboard canvas exceeds standard Illustrator bounds');
 const svg=`<svg xmlns="http://www.w3.org/2000/svg" width="${width}px" height="${height}px" viewBox="0 0 ${width} ${height}">\n${boards.map(v=>`<g id="${v.name}" transform="translate(${v.x} ${v.y})"><title>${escape(v.name)}</title><rect width="${v.width}" height="${v.height}" fill="white"/></g>`).join('\n')}\n</svg>`;
 await fs.writeFile(path.join(out,'xionsgroup-named-groups.svg'),svg);
-const data=JSON.stringify(boards.map(v=>({name:v.name,x:v.x-width/2,y:height/2-v.y,w:v.width,h:v.height})));
+const data=JSON.stringify(boards.map((v,index)=>({
+  index:index + 1,
+  name:v.name,
+  x:v.x-width/2,
+  y:height/2-v.y,
+  w:v.width,
+  h:v.height,
+  type:v.id.endsWith('-logo') ? 'SVG / transparent PNG' : v.id === 'site-icon' ? 'PNG' : 'JPG',
+  page:v.page
+})));
 const jsx=`#target illustrator
-// Creates a NEW document. Never changes or saves an existing document.
-(function(){
-  var boards=${data};
-  var doc=app.documents.add(DocumentColorSpace.RGB,boards[0].w,boards[0].h);
-  for(var i=0;i<boards.length;i++){
-    var b=boards[i], rect=[b.x,b.y,b.x+b.w,b.y-b.h];
-    var board=i===0?doc.artboards[0]:doc.artboards.add(rect);
-    board.artboardRect=rect; board.name=b.name;
+/*
+  XIONS GROUP — website visual artboards
+  Generated from src/data/visuals.json on ${new Date().toISOString().slice(0,10)}.
+  This script creates a NEW RGB document with ${visuals.length} native Illustrator artboards.
+  It does not open, edit, overwrite, or save an existing Illustrator file.
+
+  Each artboard name is the exact website delivery filename without its extension.
+  Export at 1x and enable “Use Artboards” to retain the required pixel dimensions.
+*/
+(function () {
+  var boards = ${data};
+  var doc = app.documents.add(DocumentColorSpace.RGB, boards[0].w, boards[0].h);
+
+  for (var i = 0; i < boards.length; i++) {
+    var spec = boards[i];
+    var rect = [spec.x, spec.y, spec.x + spec.w, spec.y - spec.h];
+    var artboard = i === 0 ? doc.artboards[0] : doc.artboards.add(rect);
+    artboard.artboardRect = rect;
+    artboard.name = spec.name;
   }
+
   doc.artboards.setActiveArtboardIndex(0);
-  alert('Created '+boards.length+' named artboards. Save as .ai; fill artwork; export artboards at 1x.');
-})();
+  alert('Created ' + boards.length + ' XIONS GROUP artboards.\\n\\nSave this new file as an .ai master, add visuals, then export at 1x with Use Artboards.');
+}());
 `;
-await fs.writeFile(path.join(out,'create-xionsgroup-artboards.jsx'),jsx);
+await fs.writeFile(path.join(out,'create-xionsgroup-web-artboards.jsx'),jsx);
+const artboardList=`# Illustrator artboard index\n\nGenerated from the website visual manifest. The script creates these ${visuals.length} native artboards in this order.\n\n| # | Artboard name / output filename | Pixels | Format | Website page |\n| ---: | --- | ---: | --- | --- |\n${visuals.map((v,index)=>`| ${index + 1} | \`${v.name}\` | ${v.width} × ${v.height} | ${v.id.endsWith('-logo') ? 'SVG / transparent PNG' : v.id === 'site-icon' ? 'PNG' : 'JPG'} | ${v.page} |`).join('\n')}\n`;
+await fs.writeFile(path.join(out,'illustrator-artboard-index.md'),artboardList);
 const csv=['filename,width_px,height_px,ratio,fit,page,optional',...visuals.map(v=>[v.name,v.width,v.height,v.ratio,v.fit,v.page,!!v.optional].join(','))].join('\n');
 await fs.writeFile(path.join(out,'visual-manifest.csv'),csv+'\n');
 const groups=Map.groupBy ? Map.groupBy(visuals,v=>`${v.width} × ${v.height}`) : visuals.reduce((m,v)=>{const k=`${v.width} × ${v.height}`;m.set(k,[...(m.get(k)||[]),v]);return m;},new Map());
@@ -94,10 +117,10 @@ await fs.writeFile(path.join(out,'README.md'),`# 图片制作模板
 
 ## 推荐路径：Illustrator 原生画板 → 制作／批量导出
 
-1. Illustrator：文件 → 脚本 → 其他脚本，选择 create-xionsgroup-artboards.jsx。
+1. Illustrator：文件 → 脚本 → 其他脚本，选择 **create-xionsgroup-web-artboards.jsx**。
 2. 脚本新建RGB文档，创建${visuals.length}个不重叠、已命名、尺寸正确的空画板；不会操作或覆盖现有文档。另存AI文件。
 3. 把对应图片放入画板，按框裁切／留白。使用“导出为屏幕所用格式”，选择所有画板、1×、使用画板名称。照片JPG；Logo与图标透明PNG或SVG。
-4. 脚本以1pt对应72ppi导出的1px建板；若手动改成300ppi输出，会导致像素尺寸放大。交付前对照visual-manifest.csv核对实际像素。
+4. 脚本以1pt对应72ppi导出的1px建板；若手动改成300ppi输出，会导致像素尺寸放大。交付前对照 illustrator-artboard-index.md 或 visual-manifest.csv 核对实际像素。
 
 ## Affinity 优先的替代路径：分组模板 → 切片
 
