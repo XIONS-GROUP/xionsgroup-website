@@ -48,8 +48,8 @@
     "ratio": "5 / 2",
     "fit": "contain",
     "page": "/fr/marques",
-    "src": "",
-    "alt": ""
+    "src": "/images/brands/logos/lentropiste-logo-black.svg",
+    "alt": "Logo L’Entropiste"
   },
   {
     "id": "betenoir-logo",
@@ -61,8 +61,8 @@
     "ratio": "5 / 2",
     "fit": "contain",
     "page": "/fr/marques",
-    "src": "",
-    "alt": ""
+    "src": "/images/brands/logos/betenoir-logo-black.svg",
+    "alt": "Logo Betenoir"
   },
   {
     "id": "sunlution-logo",
@@ -74,8 +74,8 @@
     "ratio": "5 / 2",
     "fit": "contain",
     "page": "/fr/marques",
-    "src": "",
-    "alt": ""
+    "src": "/images/brands/logos/sunlution-logo-black.svg",
+    "alt": "Logo Sunlution"
   },
   {
     "id": "masqly-logo",
@@ -87,8 +87,8 @@
     "ratio": "5 / 2",
     "fit": "contain",
     "page": "/fr/marques",
-    "src": "",
-    "alt": ""
+    "src": "/images/brands/logos/masqly-logo-black.svg",
+    "alt": "Logo Masqly"
   },
   {
     "id": "lentropiste-hero",
@@ -100,8 +100,8 @@
     "ratio": "3 / 2",
     "fit": "contain",
     "page": "/fr/marques/lentropiste",
-    "src": "",
-    "alt": ""
+    "src": "/images/brands/lentropiste/lentropiste-collection-01.png",
+    "alt": "Collection de parfums L’Entropiste"
   },
   {
     "id": "lentropiste-detail-01",
@@ -179,8 +179,8 @@
     "ratio": "3 / 2",
     "fit": "contain",
     "page": "/fr/marques/masqly",
-    "src": "",
-    "alt": ""
+    "src": "/images/brands/masqly/masqly-products-01.png",
+    "alt": "Produits Masqly"
   },
   {
     "id": "masqly-detail-01",

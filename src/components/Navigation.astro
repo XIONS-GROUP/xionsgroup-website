@@ -16,7 +16,7 @@ const directLinks = [
 ] as const;
 ---
 <header class="navigation">
-  <a class="navigation-logo" href="/fr" aria-label="XIONS Group — Accueil"><img src="/XIONS_LOGO.svg" alt="XIONS Group" width="140" height="42" /></a>
+  <a class="navigation-logo" href="/fr" aria-label="XIONS Group — Accueil"><img src="/images/site/xions-logo.svg" alt="XIONS Group" width="140" height="42" /></a>
   <nav class="navigation-desktop" aria-label="Navigation principale">
     {items.map((item, i) => <div class="navigation-item">
       <a href={item.href} class:list={['navigation-trigger', {current: item.links.some(([,href]) => path === href.split('#')[0])}]} aria-current={path === item.href ? 'page' : undefined} aria-expanded="false" aria-controls={`navigation-panel-${i}`}>{item.label}</a>
@@ -35,22 +35,22 @@ const directLinks = [
   </nav>
 </header>
 <style>
-  .navigation { position:fixed; inset:0 0 auto; z-index:100; height:var(--header); padding-inline:var(--pad); display:flex; justify-content:space-between; align-items:center; background:#fff; }
-  .navigation::before { content:''; position:absolute; inset:0; z-index:-1; pointer-events:none; }
+  .navigation { --dropdown-height:0px; position:fixed; inset:0 0 auto; z-index:100; isolation:isolate; height:var(--header); padding-inline:var(--pad); display:flex; justify-content:space-between; align-items:center; background:#fff; }
+  .navigation::before { content:''; position:absolute; inset:0 0 calc(var(--dropdown-height) * -1); z-index:-1; pointer-events:none; background:#fff; transition:inset .45s var(--ease-luxury),background .35s ease; }
   @supports ((backdrop-filter:blur(20px)) or (-webkit-backdrop-filter:blur(20px))) {
     .navigation { background:transparent; }
-    .navigation::before,.navigation-panel,.navigation-mobile:not([hidden]) { background:rgba(255,255,255,.78); -webkit-backdrop-filter:blur(20px); backdrop-filter:blur(20px); }
+    .navigation::before { background:rgba(255,255,255,.72); -webkit-backdrop-filter:blur(20px); backdrop-filter:blur(20px); }
   }
   .navigation-logo img { width:8.75rem; height:2.6rem; object-fit:contain; }
   .navigation-desktop { display:flex; align-items:center; gap:clamp(1rem,2vw,2.5rem); height:100%; }
   .navigation-item { display:flex; align-items:center; height:100%; }
   .navigation-trigger,.navigation-direct,.navigation-contact,.navigation-toggle { padding:.7rem 0; color:var(--ink); border:0; background:none; font:inherit; font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; text-decoration:none; cursor:pointer; }
   .navigation-trigger:hover,.navigation-direct:hover,.navigation-contact:hover,.navigation-trigger.current,.navigation-direct.current { color:var(--muted); }
-  .navigation-panel { position:absolute; inset:100% 0 auto; padding:2rem var(--pad) 3rem; }
+  .navigation-panel { position:absolute; inset:100% 0 auto; padding:2rem var(--pad) 3rem; background:transparent; }
   .navigation-panel[hidden],.navigation-mobile[hidden] { display:none; }
   .navigation-panel-inner { max-width:78rem; margin:auto; display:grid; grid-template-columns:1fr 2fr; gap:3rem; }
   .navigation-panel p { color:var(--muted); font-size:.8rem; margin:0; }
-  .panel-links { display:grid; grid-template-columns:1fr 1fr; gap:1rem 3rem; }
+  .panel-links { display:grid; grid-template-columns:repeat(2,minmax(12rem,1fr)); column-gap:clamp(4rem,9vw,9rem); row-gap:1rem; }
   .panel-content { display:flex; flex-direction:column; align-items:flex-start; }
   .navigation-panel a.panel-all { margin-top:2.5rem; font-size:.8rem; text-decoration:underline; text-underline-offset:.35em; }
   .navigation-panel a { font-size:1.1rem; text-decoration:none; }
@@ -59,13 +59,11 @@ const directLinks = [
   @media(max-width:900px) {
     .navigation-desktop { display:none; }
     .navigation-toggle { display:block; }
-    .navigation-mobile:not([hidden]) { display:block; position:absolute; inset:100% 0 auto; height:calc(100vh - var(--header)); height:calc(100dvh - var(--header)); overflow-y:auto; overscroll-behavior:contain; padding:2rem var(--pad) max(3rem,env(safe-area-inset-bottom)); }
+    .navigation-mobile,.navigation-mobile[hidden] { display:block; position:absolute; inset:100% 0 auto; height:calc(100vh - var(--header)); height:calc(100dvh - var(--header)); overflow-y:auto; overscroll-behavior:contain; padding:2rem var(--pad) max(3rem,env(safe-area-inset-bottom)); background:transparent; opacity:0; visibility:hidden; pointer-events:none; transform:translateY(-1rem); transition:opacity .35s ease,transform .45s var(--ease-luxury),visibility 0s linear .45s; }
+    .navigation.is-mobile-open .navigation-mobile:not([hidden]) { opacity:1; visibility:visible; pointer-events:auto; transform:translateY(0); transition-delay:0s; }
     .navigation-mobile>div { margin-bottom:1.75rem; }
     .navigation-mobile a { display:block; width:fit-content; padding:.3rem 0; text-decoration:none; font-size:.95rem; }
     .navigation-mobile a.mobile-primary { font-family:var(--display); font-size:1.7rem; margin-bottom:.4rem; }
-  }
-  @supports not ((backdrop-filter:blur(20px)) or (-webkit-backdrop-filter:blur(20px))) {
-    .navigation-panel,.navigation-mobile:not([hidden]) { background:#fff; }
   }
 </style>
 <script>
@@ -74,11 +72,31 @@ const directLinks = [
   const mobileButton = header.querySelector<HTMLButtonElement>('.navigation-toggle')!;
   const mobile = header.querySelector<HTMLElement>('.navigation-mobile')!;
   const panels = triggers.map(button => document.getElementById(button.getAttribute('aria-controls')!)!);
-  function closeDesktop() { triggers.forEach((button,i) => { button.setAttribute('aria-expanded','false'); panels[i].hidden=true; }); }
-  function openPanel(index:number) { closeDesktop(); triggers[index].setAttribute('aria-expanded','true'); panels[index].hidden=false; }
+  let mobileCloseTimer: ReturnType<typeof setTimeout> | undefined;
+  function setSurfaceHeight(height: number) { header.style.setProperty('--dropdown-height', `${Math.max(0, Math.ceil(height))}px`); }
+  function closeDesktop() {
+    triggers.forEach((button,i) => { button.setAttribute('aria-expanded','false'); panels[i].hidden=true; });
+    if (!header.classList.contains('is-mobile-open')) setSurfaceHeight(0);
+  }
+  function openPanel(index:number) {
+    closeDesktop();
+    triggers[index].setAttribute('aria-expanded','true');
+    panels[index].hidden=false;
+    setSurfaceHeight(panels[index].getBoundingClientRect().height);
+  }
   const background = [...document.querySelectorAll<HTMLElement>('main,.site-footer')];
   let previousOverflow = '';
-  function closeMobile() { if(!mobile.hidden) document.body.style.overflow=previousOverflow; mobile.hidden=true; background.forEach(el=>el.inert=false); mobileButton.setAttribute('aria-expanded','false'); mobileButton.textContent='Menu'; }
+  function closeMobile() {
+    if (mobile.hidden) return;
+    document.body.style.overflow=previousOverflow;
+    background.forEach(el=>el.inert=false);
+    mobileButton.setAttribute('aria-expanded','false');
+    mobileButton.textContent='Menu';
+    header.classList.remove('is-mobile-open');
+    mobileCloseTimer = setTimeout(() => {
+      if (!header.classList.contains('is-mobile-open')) { mobile.hidden=true; setSurfaceHeight(0); }
+    }, 450);
+  }
   triggers.forEach((button,i) => {
     button.parentElement!.addEventListener('pointerenter',event => { if(event.pointerType === 'mouse') openPanel(i); });
     button.addEventListener('keydown',event => { if(event.key === 'ArrowDown') { event.preventDefault(); openPanel(i); panels[i].querySelector('a')?.focus(); } });
@@ -91,10 +109,23 @@ const directLinks = [
   });
   header.addEventListener('pointerleave',event => { if(event.pointerType === 'mouse' && !panels.some(panel => panel.contains(document.activeElement))) closeDesktop(); });
   header.addEventListener('focusout',event => { if(!header.contains(event.relatedTarget as Node)) { closeDesktop(); closeMobile(); } });
-  mobileButton.addEventListener('click',() => { if(!mobile.hidden) { closeMobile(); return; } closeDesktop(); previousOverflow=document.body.style.overflow; document.body.style.overflow='hidden'; background.forEach(el=>el.inert=true); mobile.hidden=false; mobileButton.setAttribute('aria-expanded','true'); mobileButton.textContent='Fermer'; });
+  mobileButton.addEventListener('click',() => {
+    if(!mobile.hidden) { closeMobile(); return; }
+    if (mobileCloseTimer) clearTimeout(mobileCloseTimer);
+    closeDesktop();
+    previousOverflow=document.body.style.overflow;
+    document.body.style.overflow='hidden';
+    background.forEach(el=>el.inert=true);
+    mobile.hidden=false;
+    setSurfaceHeight(window.innerHeight - header.getBoundingClientRect().height);
+    mobileButton.setAttribute('aria-expanded','true');
+    mobileButton.textContent='Fermer';
+    requestAnimationFrame(() => header.classList.add('is-mobile-open'));
+  });
   header.addEventListener('keydown',event=>{ if(event.key!=='Tab'||mobile.hidden)return; const focusable=[header.querySelector<HTMLAnchorElement>('.navigation-logo')!,mobileButton,...mobile.querySelectorAll<HTMLAnchorElement>('a')]; const first=focusable[0],last=focusable[focusable.length-1]; if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();} });
   mobile.querySelectorAll('a').forEach(a => a.addEventListener('click',closeMobile));
   document.addEventListener('pointerdown',event => { if(!header.contains(event.target as Node)) { closeDesktop(); closeMobile(); } });
   document.addEventListener('keydown',event => { if(event.key !== 'Escape') return; const active=triggers.findIndex(b => b.getAttribute('aria-expanded') === 'true'); if(active>=0) { closeDesktop(); triggers[active].focus(); } if(!mobile.hidden) { closeMobile(); mobileButton.focus(); } });
   matchMedia('(max-width:900px)').addEventListener('change',() => { closeDesktop(); closeMobile(); });
+  window.addEventListener('resize',() => { if (header.classList.contains('is-mobile-open')) setSurfaceHeight(window.innerHeight - header.getBoundingClientRect().height); });
 </script>
