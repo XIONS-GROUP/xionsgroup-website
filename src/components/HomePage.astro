@@ -45,9 +45,9 @@ const mobile = visuals.find(v => v.id === 'home-mobile')!;
   .section-rule .section-head { align-items:flex-start; margin-bottom:clamp(2.5rem,5vw,4rem); }
   .section-rule .section-head .title-lg { max-width:15ch; line-height:1.08; }
   .awards-section .title-lg { max-width:20ch; line-height:1.08; }
-  .awards-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:2rem 3rem; margin:3rem 0 2rem; }
-  .award-logo { display:flex; align-items:center; justify-content:center; min-height:5rem; }
-  .award-logo img { width:100%; max-width:13rem; height:4rem; object-fit:contain; }
+  .awards-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:2.5rem 3rem; margin:3.5rem 0 2.5rem; }
+  .award-logo { display:flex; align-items:center; justify-content:center; min-height:clamp(7rem,11vw,10rem); }
+  .award-logo img { width:min(100%,17rem); height:auto; aspect-ratio:3 / 2; object-fit:contain; }
   .awards-caption { font-size:.75rem; color:var(--muted); margin-bottom:2rem; }
   @media(max-width:700px) {
     .desktop-media,.desktop-spec { display:none; } .mobile-media,.mobile-spec { display:block; }
@@ -56,6 +56,7 @@ const mobile = visuals.find(v => v.id === 'home-mobile')!;
     .hero-media :global(.visual-copy) { position:absolute; right:var(--pad); bottom:7rem; max-width:75%; margin:0; text-align:right; }
     .hero-media :global(.visual-copy strong) { font-size:.8rem; }
     .section-head { flex-direction:column; }
-    .awards-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:1.5rem; }
+    .awards-grid { grid-template-columns:repeat(2,minmax(0,1fr)); gap:1.75rem 1.5rem; }
+    .award-logo { min-height:7rem; }
   }
 </style>

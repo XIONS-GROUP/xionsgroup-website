@@ -93,8 +93,9 @@ const directLinks = [
     mobileButton.setAttribute('aria-expanded','false');
     mobileButton.textContent='Menu';
     header.classList.remove('is-mobile-open');
+    setSurfaceHeight(0);
     mobileCloseTimer = setTimeout(() => {
-      if (!header.classList.contains('is-mobile-open')) { mobile.hidden=true; setSurfaceHeight(0); }
+      if (!header.classList.contains('is-mobile-open')) mobile.hidden=true;
     }, 450);
   }
   triggers.forEach((button,i) => {
