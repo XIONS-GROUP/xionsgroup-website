@@ -5,33 +5,26 @@ import PageHero from '../../components/PageHero.astro';
 ---
 <SiteLayout title="Contact — XIONS GROUP" description="Contacter XIONS Group à Paris.">
   <PageHero eyebrow="Contact" title="Entrons en contact." intro="Groupe, marques, presse, distribution, partenariats ou carrières : adressez votre demande à notre équipe." />
-  <section class="section"><div class="measure split"><div><p class="eyebrow">Paris · France</p><p class="body-copy"><a href="mailto:contact@xionsgroup.com">contact@xionsgroup.com</a></p></div><form name="contact" method="POST" action="/fr/merci/" data-netlify="true" netlify-honeypot="bot-field" data-reveal><input type="hidden" name="form-name" value="contact" /><p hidden><label>Ne pas remplir <input name="bot-field" /></label></p><div class="form-grid"><div class="field"><label for="name">Nom et prénom *</label><input id="name" name="name" autocomplete="name" required /></div><div class="field"><label for="email">E-mail *</label><input id="email" name="email" type="email" autocomplete="email" required /></div><div class="field"><label for="company">Société</label><input id="company" name="company" autocomplete="organization" /></div><div class="field"><label for="subject">Objet *</label><select id="subject" name="subject" required><option value="">Sélectionner</option><option>Informations générales</option><option>Presse & Médias</option><option>Distribution & Commercial</option><option>Partenariats</option><option>Carrières</option><option>Nos marques</option><option value="Autre">Autre</option></select></div><div class="field full" id="other-subject-field" hidden><label for="other-subject">Précisez l’objet de votre demande *</label><input id="other-subject" name="other-subject" autocomplete="off" /></div><div class="field full"><label for="message">Votre message *</label><textarea id="message" name="message" required></textarea></div></div><p class="form-privacy">Vos informations sont utilisées uniquement pour répondre à votre demande. <a href="/fr/politique-confidentialite">En savoir plus</a></p><button class="submit-button" type="submit">Envoyer la demande <Arrow /></button><p class="form-submit-error" id="form-submit-error" role="alert" hidden>La demande n’a pas pu être envoyée. Réessayez ou écrivez-nous à <a href="mailto:contact@xionsgroup.com">contact@xionsgroup.com</a>.</p></form></div></section>
+  <section class="section"><div class="measure split"><div><p class="eyebrow">Paris · France</p><p class="body-copy"><a href="mailto:contact@xionsgroup.com">contact@xionsgroup.com</a></p></div><form name="contact" method="POST" action="/fr/merci/" data-netlify="true" netlify-honeypot="bot-field" data-reveal><input type="hidden" name="form-name" value="contact" /><p hidden><label>Ne pas remplir <input name="bot-field" /></label></p><div class="form-grid"><div class="field"><label for="name">Nom et prénom *</label><input id="name" name="name" autocomplete="name" required /></div><div class="field"><label for="email">E-mail *</label><input id="email" name="email" type="email" autocomplete="email" required /></div><div class="field full"><label for="company">Société</label><input id="company" name="company" autocomplete="organization" /></div><div class="field"><label for="subject">Objet *</label><select id="subject" name="subject" required><option value="">Sélectionner</option><option>Informations générales</option><option>Presse & Médias</option><option>Distribution & Commercial</option><option>Partenariats</option><option>Carrières</option><option>Nos marques</option><option value="Autre">Autre</option></select></div><div class="field"><label for="subject-detail">Précisez l’objet <span>(facultatif)</span></label><input id="subject-detail" name="subject-detail" autocomplete="off" /></div><div class="field full"><label for="message">Votre message *</label><textarea id="message" name="message" required></textarea></div></div><p class="form-privacy">Vos informations sont utilisées uniquement pour répondre à votre demande. <a href="/fr/politique-confidentialite">En savoir plus</a></p><button class="submit-button" type="submit">Envoyer la demande <Arrow /></button><p class="form-submit-error" id="form-submit-error" role="alert" hidden>La demande n’a pas pu être envoyée. Réessayez ou écrivez-nous à <a href="mailto:contact@xionsgroup.com">contact@xionsgroup.com</a>.</p></form></div></section>
 </SiteLayout>
-<style>.form-privacy { margin:2rem 0 0; color:#514d46; font-size:.78rem; } .form-privacy a { text-underline-offset:.2em; } .form-submit-error { margin:1.25rem 0 0; color:var(--wine); font-size:.82rem; } .form-submit-error a { text-underline-offset:.2em; }</style>
+<style>.field label span { color:var(--muted); font-weight:400; } .form-privacy { margin:2rem 0 0; color:#514d46; font-size:.78rem; } .form-privacy a,.form-submit-error a { text-underline-offset:.2em; } .form-submit-error { margin:1.25rem 0 0; color:var(--wine); font-size:.82rem; }</style>
 <script>
   const form = document.querySelector<HTMLFormElement>('form[name="contact"]')!;
-  const subject = form.querySelector<HTMLSelectElement>('#subject')!;
-  const otherSubjectField = form.querySelector<HTMLElement>('#other-subject-field')!;
-  const otherSubject = form.querySelector<HTMLInputElement>('#other-subject')!;
   const submitError = form.querySelector<HTMLElement>('#form-submit-error')!;
-  function updateOtherSubject() {
-    const isOther = subject.value === 'Autre';
-    otherSubjectField.hidden = !isOther;
-    otherSubject.required = isOther;
-    if (!isOther) otherSubject.value = '';
-  }
-  subject.addEventListener('change', updateOtherSubject);
   form.addEventListener('submit', async event => {
     event.preventDefault();
     if (!form.reportValidity()) return;
     submitError.hidden = true;
-    const formData = new FormData(form);
-    const response = await fetch('/__forms.html', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-      body: new URLSearchParams(formData as unknown as Record<string, string>).toString()
-    });
-    if (response.ok) window.location.assign('/fr/merci/');
-    else submitError.hidden = false;
+    try {
+      const response = await fetch('/', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+        body: new URLSearchParams(new FormData(form) as unknown as Record<string, string>).toString()
+      });
+      if (!response.ok) throw new Error(`Form submission failed: ${response.status}`);
+      window.location.assign('/fr/merci/');
+    } catch {
+      submitError.hidden = false;
+    }
   });
 </script>
