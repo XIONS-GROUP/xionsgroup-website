@@ -1,6 +1,9 @@
 export const brands = [
   {
     slug: 'lentropiste',
+    website: 'https://lentropiste.com/',
+    instagram: 'https://www.instagram.com/lentropiste/',
+    websiteLive: true,
     name: "L’Entropiste",
     category: 'Parfumerie de niche',
     status: 'Maison active · Paris',
@@ -19,6 +22,9 @@ export const brands = [
   },
   {
     slug: 'betenoir',
+    website: 'https://betenoir.com/',
+    instagram: null,
+    websiteLive: false,
     name: 'Betenoir',
     category: 'Parfumerie',
     status: 'À venir · 2026',
@@ -37,6 +43,9 @@ export const brands = [
   },
   {
     slug: 'sunlution',
+    website: 'https://sunlutionskincare.com/',
+    instagram: 'https://www.instagram.com/sunlution_skincare/',
+    websiteLive: true,
     name: 'Sunlution',
     category: 'Cosmétique · Science',
     status: 'Light-conscious skincare',
@@ -55,6 +64,9 @@ export const brands = [
   },
   {
     slug: 'masqly',
+    website: 'https://masqly.com/',
+    instagram: 'https://www.instagram.com/masqly.paris/',
+    websiteLive: true,
     name: 'Masqly',
     category: 'Body care · Rituals',
     status: 'Soin intensif',
