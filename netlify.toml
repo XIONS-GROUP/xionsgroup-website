@@ -24,7 +24,7 @@
 
 [[redirects]]
   from = "/about"
-  to = "/fr/groupe"
+  to = "/en/group"
   status = 302
 
 [[redirects]]
@@ -34,7 +34,7 @@
 
 [[redirects]]
   from = "/brands"
-  to = "/fr/marques"
+  to = "/en/brands"
   status = 302
 
 [[redirects]]
@@ -44,7 +44,7 @@
 
 [[redirects]]
   from = "/commitments"
-  to = "/fr/engagements"
+  to = "/en/commitments"
   status = 302
 
 [[redirects]]
@@ -54,7 +54,7 @@
 
 [[redirects]]
   from = "/press"
-  to = "/fr/presse"
+  to = "/en/press"
   status = 302
 
 [[redirects]]
@@ -64,23 +64,13 @@
 
 [[redirects]]
   from = "/careers"
-  to = "/fr/carrieres"
+  to = "/en/careers"
   status = 302
 
 [[redirects]]
   from = "/contact"
   to = "/fr/contact"
   status = 302
-
-[[redirects]]
-  from = "/en/*"
-  to = "/en/404/index.html"
-  status = 404
-
-[[redirects]]
-  from = "/fr/*"
-  to = "/fr/404/index.html"
-  status = 404
 
 [[headers]]
   for = "/*"
