@@ -1,6 +1,8 @@
 ---
 import { brands } from '../data/brands';
-const path = Astro.url.pathname.replace(/\/$/, '');
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import { localizedPath } from '../i18n/routes';
+const path = localizedPath(Astro.url.pathname, 'fr').replace(/\/$/, '');
 const items = [
   { label: 'Le groupe', href: '/fr/groupe', links: [
     ['À propos', '/fr/groupe'], ['Notre équipe', '/fr/groupe#direction']
@@ -32,6 +34,7 @@ const directLinks = [
     {items.map((item,i) => <div><a class="mobile-primary" href={item.href}>{item.label}</a>{i === 1 && item.links.map(([label,href]) => <a href={href}>{label}</a>)}</div>)}
     {directLinks.map(([label, href]) => <a class="mobile-primary" href={href}>{label}</a>)}
     <a class="mobile-primary" href="/fr/contact">Contact</a>
+    <LanguageSwitcher />
   </nav>
 </header>
 <style>
@@ -120,7 +123,7 @@ const directLinks = [
     mobile.hidden=false;
     setSurfaceHeight(window.innerHeight - header.getBoundingClientRect().height);
     mobileButton.setAttribute('aria-expanded','true');
-    mobileButton.textContent='Fermer';
+    mobileButton.textContent=document.documentElement.lang === 'en' ? 'Close' : 'Fermer';
     requestAnimationFrame(() => header.classList.add('is-mobile-open'));
   });
   header.addEventListener('keydown',event=>{ if(event.key!=='Tab'||mobile.hidden)return; const focusable=[header.querySelector<HTMLAnchorElement>('.navigation-logo')!,mobileButton,...mobile.querySelectorAll<HTMLAnchorElement>('a')]; const first=focusable[0],last=focusable[focusable.length-1]; if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();} });

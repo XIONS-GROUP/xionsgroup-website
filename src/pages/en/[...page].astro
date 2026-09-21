@@ -1,0 +1,24 @@
+---
+import Home from '../../components/HomePage.astro';
+import Group from '../fr/groupe.astro';
+import Brands from '../fr/marques/index.astro';
+import Brand from '../../components/BrandPage.astro';
+import Commitments from '../fr/engagements.astro';
+import Press from '../fr/presse.astro';
+import Careers from '../fr/carrieres.astro';
+import Contact from '../fr/contact.astro';
+import Thanks from '../fr/merci.astro';
+import Legal from '../fr/mentions-legales.astro';
+import Terms from '../fr/conditions-generales.astro';
+import Privacy from '../fr/politique-confidentialite.astro';
+import Cookies from '../fr/politique-cookies.astro';
+import NotFound from '../404.astro';
+import { brands } from '../../data/brands';
+import { routes } from '../../i18n/routes';
+export function getStaticPaths() { return routes.map(row => ({params:{page:row[1] || undefined}})); }
+const pages = { '':Home, group:Group, brands:Brands, commitments:Commitments, press:Press, careers:Careers, contact:Contact, 'thank-you':Thanks, 'legal-notice':Legal, terms:Terms, privacy:Privacy, cookies:Cookies, '404':NotFound };
+const slug = Astro.params.page || '';
+const brand = brands.find(b => slug === `brands/${b.slug}`);
+const Page = pages[slug as keyof typeof pages];
+---
+{brand ? <Brand brand={brand} index={brands.indexOf(brand)} /> : <Page />}

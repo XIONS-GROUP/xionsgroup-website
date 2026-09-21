@@ -2,18 +2,60 @@
 import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
 import { robotsDirective } from '../config/indexing';
+import { origin, localeFor, localizedPath, routeFor, isPublicPage } from '../i18n/routes';
+import { translate } from '../i18n/en';
+import { shareImageOrigin } from '../config/seo';
 import '../styles/global.css';
 
 interface Props { title: string; description: string; className?: string }
 const { title, description, className = '' } = Astro.props;
+const locale = localeFor(Astro.url.pathname);
+const canonical = origin + localizedPath(Astro.url.pathname, locale);
+const publicPage = isPublicPage(Astro.url.pathname);
+const t = (value: string) => locale === 'en' ? translate(value) : value;
+const image = `${shareImageOrigin}/images/social/xionsgroup-og.png`;
+const schema = {
+  '@context':'https://schema.org',
+  '@graph':[
+    {'@type':'Organization','@id':`${origin}/#organization`,name:'XIONS GROUP',legalName:'XIONS GROUP',url:origin,
+      logo:`${origin}/images/site/xionsgroup-icon-512.png`,email:'contact@xionsgroup.com',
+      address:{'@type':'PostalAddress',streetAddress:'253 rue Saint-Honoré',postalCode:'75001',addressLocality:'Paris',addressCountry:'FR'},
+      sameAs:['https://instagram.com/xionsgroup','https://linkedin.com/company/xionsgroup']},
+    {'@type':'WebSite','@id':`${origin}/#website`,url:origin,name:'XIONS GROUP',inLanguage:['fr','en'],publisher:{'@id':`${origin}/#organization`}},
+    {'@type':'WebPage','@id':`${canonical}#webpage`,url:canonical,name:t(title),description:t(description),inLanguage:locale,isPartOf:{'@id':`${origin}/#website`}}
+  ]
+};
 ---
 <!doctype html>
-<html lang="fr">
+<html lang={locale}>
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
-    <meta name="robots" content={robotsDirective} />
+    <meta name="robots" content={publicPage ? robotsDirective : 'noindex, nofollow'} />
+    <link rel="canonical" href={canonical} />
+    {routeFor(Astro.url.pathname) && <>
+      <link rel="alternate" hreflang="fr" href={origin + localizedPath(Astro.url.pathname, 'fr')} />
+      <link rel="alternate" hreflang="en" href={origin + localizedPath(Astro.url.pathname, 'en')} />
+      <link rel="alternate" hreflang="x-default" href={origin + localizedPath(Astro.url.pathname, 'fr')} />
+    </>}
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content="XIONS GROUP" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:locale" content={locale === 'fr' ? 'fr_FR' : 'en_GB'} />
+    <meta property="og:locale:alternate" content={locale === 'fr' ? 'en_GB' : 'fr_FR'} />
+    <meta property="og:image" content={image} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="XIONS GROUP" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={image} />
+    <meta name="twitter:image:alt" content="XIONS GROUP" />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(schema).replace(/</g, '\\u003c')} />
     <meta name="theme-color" content="#ffffff" />
     <link rel="icon" href="/images/site/xionsgroup-icon-512.png?v=20260917" type="image/png" sizes="512x512" />
     <link rel="apple-touch-icon" href="/images/site/xionsgroup-icon-512.png?v=20260917" />

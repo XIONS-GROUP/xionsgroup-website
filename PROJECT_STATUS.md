@@ -1,6 +1,6 @@
 # XIONS GROUP Website — Project Status
 
-Last updated: 2026-09-16
+Last updated: 2026-09-21
 
 ## Deployment chain
 
@@ -30,7 +30,7 @@ The repository root is the only development and deployment entry point. Run all 
 
 ## Current website state
 
-- The `dev` branch contains the complete French multi-page site and the new luxury editorial design system.
+- The `dev` branch contains the French and English multi-page site with shared templates and a luxury editorial design system.
 - The `main` branch still contains the approved pre-launch logo holding page.
 - DNS and TLS for `xionsgroup.com` are active through Netlify.
 - Preview builds block search indexing.
@@ -58,10 +58,22 @@ The repository root is the only development and deployment entry point. Run all 
 - Home currently uses a single desktop/mobile pair. Additional carousel images and accessible playback controls are deferred until the first composition is approved.
 - Dev and production builds/link checks pass. Responsive previews checked at approximately 390×844, 320×568 and 1440×900 CSS pixels.
 
+### Bilingual and SEO update — 2026-09-21
+
+- 17 corresponding routes per language (including thank-you and 404); 30 public URLs in the bilingual sitemap.
+- FR / EN switching in the footer and full-screen mobile menu; footer visual-plan link removed.
+- Static English HTML, localized metadata and image alt text, canonical/hreflang, Open Graph/Twitter, Organization/WebSite/WebPage JSON-LD.
+- Public root image uploads organized into social and awards directories; new share cover wired into metadata.
+- Contact field names and category values preserved across languages; English success/error UI included.
+- Automatic build checks cover full translation, internal links, locale pairs, SEO, assets and form schema.
+- Maintenance and launch instructions: `docs/bilingual-seo.md`.
+
 ### Remaining release work
 
 - Replace placeholder imagery with approved brand assets.
-- Complete the company registration details in the legal notice before production launch.
+- Confirm the privacy policy's legal basis: its checkbox consent wording does not match the current form. Company registration details are already populated.
 - Connect the remaining page copy to a CMS if browser-based editing is required.
 - Confirm Netlify Forms notification delivery with a real staging submission.
 - Review responsive behavior and accessibility before the `dev` to `main` release.
+- Enable indexing only in the production release and submit the sitemap in Search Console.
+- Schedule maintenance for existing Astro/build dependency security advisories.

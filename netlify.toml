@@ -72,9 +72,23 @@
   to = "/fr/contact"
   status = 302
 
+[[redirects]]
+  from = "/en/*"
+  to = "/en/404/index.html"
+  status = 404
+
+[[redirects]]
+  from = "/fr/*"
+  to = "/fr/404/index.html"
+  status = 404
+
 [[headers]]
   for = "/*"
   [headers.values]
     X-Content-Type-Options = "nosniff"
     Referrer-Policy = "strict-origin-when-cross-origin"
 
+[[headers]]
+  for = "/__forms.html"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"

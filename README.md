@@ -1,6 +1,8 @@
 # XIONS GROUP website
 
-Astro pre-launch holding page and deployment foundation. The full corporate website is not yet implemented.
+Astro corporate website for XIONS GROUP. The `dev` branch contains the French and English site; `main` remains the pre-launch holding page until the approved release.
+
+French and English pages share templates. Translation files live in `src/i18n/`; `npm run build` checks translation coverage, language links, SEO and contact field compatibility. See [bilingual and SEO maintenance](docs/bilingual-seo.md).
 
 ## Local use
 

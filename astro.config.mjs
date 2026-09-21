@@ -4,5 +4,6 @@ export default defineConfig({
   srcDir: './src',
   publicDir: './public',
   outDir: './dist',
-  site: 'https://xionsgroup.com'
+  site: 'https://www.xionsgroup.com',
+  trailingSlash: 'always'
 });

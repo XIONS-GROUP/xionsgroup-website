@@ -3,7 +3,7 @@ import { allowIndexing } from '../config/indexing';
 
 export const GET: APIRoute = () => {
   const body = allowIndexing
-    ? 'User-agent: *\nAllow: /\n'
+    ? 'User-agent: *\nAllow: /\nSitemap: https://www.xionsgroup.com/sitemap.xml\n'
     : 'User-agent: *\nDisallow: /\n';
 
   return new Response(body, {

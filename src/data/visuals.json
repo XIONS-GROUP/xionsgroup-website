@@ -348,20 +348,20 @@
     "ratio": "40 / 21",
     "fit": "contain",
     "page": "/fr/visual-plan",
-    "src": "",
-    "alt": ""
+    "src": "/images/social/xionsgroup-og.png",
+    "alt": "XIONS GROUP"
   },
   {
     "id": "site-icon",
     "name": "xionsgroup-icon-512",
     "label": "Navigateur · icône",
-    "use": "标签页图标母版，后续导出SVG、ICO及Apple touch icon",
+    "use": "白底PNG标签页图标；Apple touch icon共用",
     "width": 512,
     "height": 512,
     "ratio": "1 / 1",
     "fit": "contain",
     "page": "/fr/visual-plan",
-    "src": "",
-    "alt": ""
+    "src": "/images/site/xionsgroup-icon-512.png",
+    "alt": "XIONS GROUP"
   }
 ]

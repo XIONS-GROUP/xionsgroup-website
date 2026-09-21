@@ -17,8 +17,6 @@ for (const file of htmlFiles) {
   for (const match of html.matchAll(/(?:href|action)="([^"]+)"/g)) {
     const raw = match[1];
     if (!raw.startsWith('/') || raw.startsWith('//')) continue;
-    // Skip English pages (not yet implemented)
-    if (raw.startsWith('/en')) continue;
     const pathname = raw.split(/[?#]/)[0];
     if (!pathname) continue;
     const assetPath = join('dist', pathname);

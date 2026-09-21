@@ -8,6 +8,8 @@ Current operating information lives at the repository root:
 
 Supporting documentation:
 
+- `bilingual-seo.md` — 法英页面维护、素材位置、SEO 与正式上线步骤
+
 - `content/` — legal and content templates
 - `deployment/` — optional CI examples
 - `archive/planning/` — superseded design and structure studies

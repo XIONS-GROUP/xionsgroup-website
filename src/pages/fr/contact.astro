@@ -9,7 +9,8 @@ import PageHero from '../../components/PageHero.astro';
 </SiteLayout>
 <style>.field label span { color:var(--muted); font-weight:400; } .form-privacy { margin:2rem 0 0; color:#514d46; font-size:.78rem; } .form-privacy a,.form-submit-error a { text-underline-offset:.2em; } .form-submit-error { margin:1.25rem 0 0; color:var(--wine); font-size:.82rem; }</style>
 <script>
-  const form = document.querySelector<HTMLFormElement>('form[name="contact"]')!;
+  const form = document.querySelector<HTMLFormElement>('form[name="contact"]');
+  if (form) {
   const submitError = form.querySelector<HTMLElement>('#form-submit-error')!;
   form.addEventListener('submit', async event => {
     event.preventDefault();
@@ -22,9 +23,10 @@ import PageHero from '../../components/PageHero.astro';
         body: new URLSearchParams(new FormData(form) as unknown as Record<string, string>).toString()
       });
       if (!response.ok) throw new Error(`Form submission failed: ${response.status}`);
-      window.location.assign('/fr/merci/');
+      window.location.assign(form.action);
     } catch {
       submitError.hidden = false;
     }
   });
+  }
 </script>

@@ -5,13 +5,14 @@
   "scripts": {
     "dev": "astro dev",
     "start": "astro dev",
-    "build": "node scripts/clean-dist.mjs && astro build && node scripts/check-build.mjs && node scripts/check-links.mjs",
+    "build": "node scripts/clean-dist.mjs && astro build && node scripts/check-build.mjs && node scripts/check-links.mjs && node scripts/check-localization.mjs",
     "preview": "astro preview",
     "astro": "astro"
   },
   "dependencies": {
     "@astrojs/check": "^0.9.4",
     "astro": "^4.16.18",
+    "parse5": "^7.3.0",
     "typescript": "^5.7.3"
   },
   "devDependencies": {
