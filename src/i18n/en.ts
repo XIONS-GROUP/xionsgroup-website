@@ -233,6 +233,7 @@ Erreur 404|Error 404
 Page|Page
 introuvable.|not found.
 La page demandée n’existe pas ou a été déplacée.|The page you requested does not exist or has moved.
+Festival de Cannes, César, Golden Globes, Oscars, Grammy Awards, Emmy Awards.|Festival de Cannes, César, Golden Globes, Oscars, Grammy Awards, Emmy Awards.
 Les fondateurs de XIONS Group|The founders of XIONS Group
 Le trophée Fragrance Foundation France 2026 aux côtés du parfum Dorian's Spleen|The Fragrance Foundation France 2026 trophy beside the Dorian's Spleen fragrance
 La gamme Sunlution au complet|The complete Sunlution range

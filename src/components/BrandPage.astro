@@ -8,7 +8,8 @@ import type { brands } from '../data/brands';
 type Brand = (typeof brands)[number];
 interface Props { brand: Brand; index: number }
 const { brand } = Astro.props;
-const details = visuals.filter(v => v.id.startsWith(`${brand.slug}-detail`) && (v.src || visualPreview));
+// Only real photography: empty slots used to render as labelled placeholders.
+const details = visuals.filter(v => v.id.startsWith(`${brand.slug}-detail`) && v.src);
 ---
 <SiteLayout title={`${brand.name} — XIONS GROUP`} description={brand.intro}>
   <header class="brand-heading shell measure"><p class="eyebrow">{brand.category}</p><h1>{brand.name}</h1><p>{brand.tagline}</p></header>
@@ -17,7 +18,7 @@ const details = visuals.filter(v => v.id.startsWith(`${brand.slug}-detail`) && (
     {brand.websiteLive ? <a class="text-link" href={brand.website} target="_blank" rel="noopener noreferrer" aria-label={`Site officiel de ${brand.name} (nouvel onglet)`}>Site officiel <Arrow /></a> : <span class="brand-coming-soon">betenoir.com · Bientôt en ligne</span>}
     {brand.instagram && <a class="text-link" href={brand.instagram} target="_blank" rel="noopener noreferrer" aria-label={`Instagram de ${brand.name} (nouvel onglet)`}>Instagram <Arrow /></a>}
   </div></div></div></section>
-  {details.length > 0 && <section class="detail-section shell"><div class:list={['measure','detail-grid',{'single-detail':details.length === 1}]}>{details.map(asset => <figure><VisualSlot id={asset.id} /><figcaption>{asset.label}</figcaption></figure>)}{details.length === 1 && <div class="detail-copy"><p class="eyebrow">La distinction</p><h2 class="title-md">Dorian’s Spleen</h2><p>{brand.pillars[2][1]}</p></div>}</div></section>}
+  {details.length > 0 && <section class="detail-section shell"><div class:list={['measure','detail-grid',{'single-detail':details.length === 1}]}>{details.map(asset => <figure><VisualSlot id={asset.id} ratio="4 / 5" /></figure>)}{details.length === 1 && <div class="detail-copy"><p class="eyebrow">La distinction</p><h2 class="title-md">Dorian’s Spleen</h2><p>{brand.pillars[2][1]}</p></div>}</div></section>}
   <section class="section"><div class="measure principle-grid">{brand.pillars.map(pillar => <div><h2>{pillar[0]}</h2><p>{pillar[1]}</p></div>)}</div></section>
   <div class="cta-band"><h2>Découvrir nos autres maisons</h2><a class="text-link" href="/fr/marques/">Toutes les marques <Arrow /></a></div>
 </SiteLayout>
@@ -29,7 +30,6 @@ const details = visuals.filter(v => v.id.startsWith(`${brand.slug}-detail`) && (
   .brand-destinations { display:flex; flex-wrap:wrap; align-items:center; gap:1.5rem 2.5rem; margin-top:2rem; }
   .brand-coming-soon { font-size:.74rem; color:var(--muted); }
   .detail-grid { display:grid; grid-template-columns:1fr 1fr; gap:2rem; } figure { min-width:0; margin:0; }
-  figcaption { font-size:.7rem; margin-top:1rem; color:var(--muted); }
   .detail-copy { align-self:center; padding:clamp(1rem,5vw,5rem); } .detail-copy h2 { margin-top:1rem; }
   .principle-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:2rem; border-top:1px solid var(--line); padding-top:2rem; }
   .principle-grid h2 { font-size:1rem; font-weight:500; } .principle-grid p { font-size:.9rem; color:var(--muted); }

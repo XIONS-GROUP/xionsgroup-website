@@ -39,7 +39,16 @@ import { eventMarks } from '../data/rayonnement';
   .awards-section { position:relative; isolation:isolate; overflow:hidden; background:#0b0b0b; color:#f4f1ec; }
   .awards-section::before { content:''; position:absolute; z-index:-1; inset:0 -12% 0 auto; width:min(62%,54rem);
     background:url('/images/home/xionsgroup-hero-light.svg') center right / cover no-repeat; opacity:.85;
-    mask-image:linear-gradient(to right,transparent,#000 48%); -webkit-mask-image:linear-gradient(to right,transparent,#000 48%); }
+    mask-image:linear-gradient(to right,transparent,#000 48%); -webkit-mask-image:linear-gradient(to right,transparent,#000 48%);
+    transform-origin:72% 50%; animation:awards-drift 26s var(--ease-luxury) infinite; }
+  /* Slow, uneven breathing so the X reads as lit rather than looping. */
+  @keyframes awards-drift {
+    0%   { transform:scale(1) translate3d(0,0,0); opacity:.78; }
+    38%  { transform:scale(1.07) translate3d(-1.2%,1.4%,0); opacity:.92; }
+    64%  { transform:scale(1.03) translate3d(1.4%,-0.8%,0); opacity:.82; }
+    100% { transform:scale(1) translate3d(0,0,0); opacity:.78; }
+  }
+  @media(prefers-reduced-motion:reduce) { .awards-section::before { animation:none; } }
   .awards-section .body-copy { color:#cdc7bf; }
   .awards-section .awards-caption { color:#8f8981; }
   .awards-section .section-head { margin-bottom:clamp(4rem,8vw,7rem); }

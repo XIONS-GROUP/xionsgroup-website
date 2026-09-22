@@ -9,7 +9,17 @@ const commitments = [
 ---
 <SiteLayout title="Engagements — XIONS GROUP" description="La charte de qualité et les engagements de XIONS Group.">
   <PageHero eyebrow="Engagements" title="L’exigence comme principe." intro="Performance, sensorialité, créativité, sécurité et responsabilité doivent progresser ensemble." />
-  <section class="section"><div class="measure numbered-list">{commitments.map((item, index) => <article class="numbered-item" id={index === 0 ? 'qualite' : index === 1 ? 'responsabilite' : 'environnement'} data-reveal><span class="num">0{index + 1}</span><h2 class="title-md">{item[0]}</h2><p>{item[1]}</p></article>)}</div></section>
-  <aside class="quote-panel"><blockquote>Promettre avec mesure.<br />Progresser avec constance.</blockquote></aside>
+  <section class="section"><div class="measure commitment-grid">{commitments.map((item, index) => <article class="commitment" id={index === 0 ? 'qualite' : index === 1 ? 'responsabilite' : 'environnement'} data-reveal><h2 class="title-md">{item[0]}</h2><p>{item[1]}</p></article>)}</div></section>
+  <aside class="statement"><blockquote>Promettre avec mesure.<br />Progresser avec constance.</blockquote></aside>
   <section class="section"><div class="measure split"><p class="eyebrow">Notre méthode</p><div class="prose"><h2 class="title-lg">Une amélioration continue, à chaque étape.</h2><p>Nos engagements s’appliquent du choix des partenaires jusqu’à la mise sur le marché. Ils évoluent avec nos connaissances, nos outils de mesure et les exigences propres à chaque catégorie.</p></div></div></section>
 </SiteLayout>
+<style>
+  /* Three columns instead of a numbered ledger; the numbers added no information. */
+  .commitment-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:clamp(2.5rem,5vw,5rem); border-top:1px solid var(--line); padding-top:clamp(2.5rem,4vw,3.5rem); }
+  .commitment h2 { margin:0 0 1.1rem; }
+  .commitment p { margin:0; color:#514d46; }
+  /* Was a full-bleed wine panel. The site is black and white, so the statement carries on tone. */
+  .statement { padding:clamp(5rem,10vw,10rem) var(--pad); background:#0b0b0b; color:#f4f1ec; }
+  .statement blockquote { max-width:65rem; margin:0 auto; font-family:var(--display); font-weight:400; font-size:clamp(2.2rem,4.6vw,4.6rem); line-height:1.02; letter-spacing:-.02em; text-align:center; }
+  @media(max-width:800px) { .commitment-grid { grid-template-columns:1fr; gap:2.5rem; } }
+</style>

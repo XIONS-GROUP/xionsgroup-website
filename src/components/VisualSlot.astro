@@ -1,13 +1,14 @@
 ---
 import visuals from '../data/visuals.json';
 import { visualPreview } from '../config/visual-preview';
-interface Props { id: string; bleed?: boolean; eager?: boolean; compact?: boolean }
-const { id, bleed = false, eager = false, compact = false } = Astro.props;
+// `ratio` overrides the asset's own aspect so a grid of mixed-shape photos can line up.
+interface Props { id: string; bleed?: boolean; eager?: boolean; compact?: boolean; ratio?: string }
+const { id, bleed = false, eager = false, compact = false, ratio } = Astro.props;
 const asset = visuals.find(item => item.id === id);
 if (!asset) throw new Error(`Unknown visual slot: ${id}`);
 ---
-{(asset.src || visualPreview) && <div class:list={['visual-slot', {bleed, compact, 'is-placeholder':!asset.src}]} data-visual-id={id} style={`--slot-ratio:${asset.ratio}`}>
-  {asset.src ? <img src={asset.src} alt={asset.alt} width={asset.width} height={asset.height} loading={eager ? 'eager' : 'lazy'} decoding="async" style={`object-fit:${asset.fit}`} /> : <div class="visual-placeholder">
+{(asset.src || visualPreview) && <div class:list={['visual-slot', {bleed, compact, 'is-placeholder':!asset.src}]} data-visual-id={id} style={`--slot-ratio:${ratio ?? asset.ratio}`}>
+  {asset.src ? <img src={asset.src} alt={asset.alt} width={asset.width} height={asset.height} loading={eager ? 'eager' : 'lazy'} decoding="async" style={`object-fit:${ratio ? 'cover' : asset.fit}`} /> : <div class="visual-placeholder">
     <span class="visual-index">Visual study · {asset.ratio.replaceAll(' / ', ':')}</span>
     <div class="visual-copy"><strong>{asset.label}</strong><span>{asset.width} × {asset.height} px</span><code>{asset.name}</code></div>
     <span class="visual-note">{asset.fit === 'contain' ? 'Image entière · sans recadrage' : 'Cadrage adaptable'} · visuel à fournir</span>

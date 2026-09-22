@@ -1,7 +1,9 @@
 // Subtle scroll reveal, applied site-wide from SiteLayout.
 // Progressive enhancement: the hiding CSS is scoped to [data-reveal-ready], which only this
 // script sets, so without JavaScript every element renders normally.
-const TARGETS = '.section-head,.split,.prose,.brand-card,.event-item,.role-step,.numbered-item,.page-hero-copy,.page-hero-aside,.footer-lead,.cta-band,.quote-panel blockquote,.awards-foot,.brand-intro-foot';
+// `[data-reveal]` lets a template opt in directly. Without it, hand-marked elements would be
+// hidden by the CSS but never observed, so they would never appear at all.
+const TARGETS = '[data-reveal],.section-head,.split,.prose,.brand-card,.event-item,.role-step,.numbered-item,.page-hero-copy,.page-hero-aside,.footer-lead,.cta-band,.statement blockquote,.awards-foot,.brand-intro-foot,.commitment,.direction,.event-layout';
 const STAGGER = 70;
 const MAX_STAGGER = 4;
 
