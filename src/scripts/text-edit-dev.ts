@@ -28,14 +28,58 @@ function describe(el: HTMLElement) {
   return path.slice(-4).join(' > ');
 }
 
+// Type overrides are written as media-query-scoped rules, not inline styles. An inline
+// font-size wins at every width, so a desktop value used to leak onto mobile and blow the
+// type up there. The preview frame is resized to the device being edited, so the matching
+// query is the one that applies.
+type Override = { fontFamily?: string; fontSize?: number; lineHeight?: number };
+const SCOPES = { mobile: '@media (max-width:700px)', desktop: '@media (min-width:701px)' } as const;
+type Scope = keyof typeof SCOPES;
+const overrides = new Map<number, Partial<Record<Scope, Override>>>();
+let styleSeed = 0;
+let overrideSheet: HTMLStyleElement | null = null;
+
+function keyFor(el: HTMLElement) {
+  if (!el.dataset.xionsStyle) el.dataset.xionsStyle = String(++styleSeed);
+  return Number(el.dataset.xionsStyle);
+}
+
+function writeSheet() {
+  if (!overrideSheet) {
+    overrideSheet = document.createElement('style');
+    overrideSheet.id = 'xions-text-overrides';
+    document.head.append(overrideSheet);
+  }
+  const blocks: string[] = [];
+  for (const [scope, query] of Object.entries(SCOPES) as [Scope, string][]) {
+    const rules: string[] = [];
+    for (const [id, byScope] of overrides) {
+      const value = byScope[scope];
+      if (!value) continue;
+      // Astro scopes component rules as `.display[data-astro-cid-…]`, which outranks a plain
+      // attribute selector, so this deliberate override layer has to win explicitly.
+      const declarations = [
+        value.fontFamily ? `font-family:${value.fontFamily} !important` : '',
+        value.fontSize ? `font-size:${value.fontSize}px !important` : '',
+        value.lineHeight ? `line-height:${value.lineHeight} !important` : ''
+      ].filter(Boolean).join(';');
+      if (declarations) rules.push(`[data-xions-style="${id}"]{${declarations}}`);
+    }
+    if (rules.length) blocks.push(`${query}{${rules.join('')}}`);
+  }
+  overrideSheet.textContent = blocks.join('\n');
+}
+
 function report() {
   if (!focused) return post('xions:text-selected', null);
   const style = getComputedStyle(focused);
+  const stored = overrides.get(keyFor(focused)) ?? {};
   post('xions:text-selected', {
     path: describe(focused),
     text: clean(focused.textContent || ''),
-    fontFamily: focused.style.fontFamily || '',
+    overrides: stored,
     fontSize: Math.round(parseFloat(style.fontSize) * 10) / 10,
+    lineHeight: Math.round((parseFloat(style.lineHeight) / parseFloat(style.fontSize)) * 100) / 100,
     computedFamily: style.fontFamily.split(',')[0].replace(/["']/g, '')
   });
 }
@@ -49,7 +93,7 @@ function changes() {
     const before = ORIGINAL.get(el);
     if (!before) return [];
     const text = clean(el.textContent || '');
-    const styled = el.style.fontFamily || el.style.fontSize;
+    const styled = el.dataset.xionsStyle ? overrides.get(Number(el.dataset.xionsStyle)) : undefined;
     if (text === before.text && el.innerHTML === before.html && !styled) return [];
     return [{
       path: describe(el),
@@ -57,8 +101,7 @@ function changes() {
       updated: text,
       originalHtml: before.html === clean(before.html) ? undefined : before.html,
       updatedHtml: el.innerHTML === text ? undefined : el.innerHTML,
-      fontFamily: el.style.fontFamily || undefined,
-      fontSize: el.style.fontSize || undefined
+      style: styled || undefined
     }];
   });
 }
@@ -129,8 +172,16 @@ addEventListener('message', event => {
   const { type, detail } = event.data || {};
   if (type === 'xions:text-edit-mode') setEditing(!!detail?.enabled);
   if (type === 'xions:text-style' && focused) {
-    if (detail?.fontFamily !== undefined) focused.style.fontFamily = detail.fontFamily;
-    if (detail?.fontSize !== undefined) focused.style.fontSize = detail.fontSize ? `${detail.fontSize}px` : '';
+    const scope: Scope = detail?.scope === 'mobile' ? 'mobile' : 'desktop';
+    const id = keyFor(focused);
+    const byScope = overrides.get(id) ?? {};
+    const value: Override = { ...byScope[scope] };
+    if (detail?.fontFamily !== undefined) value.fontFamily = detail.fontFamily || undefined;
+    if (detail?.fontSize !== undefined) value.fontSize = detail.fontSize || undefined;
+    if (detail?.lineHeight !== undefined) value.lineHeight = detail.lineHeight || undefined;
+    byScope[scope] = value;
+    overrides.set(id, byScope);
+    writeSheet();
     report();
     post('xions:text-dirty', { count: changes().length });
   }
@@ -140,9 +191,9 @@ addEventListener('message', event => {
       const before = ORIGINAL.get(el);
       if (!before) continue;
       el.innerHTML = before.html;
-      el.style.fontFamily = '';
-      el.style.fontSize = '';
     }
+    overrides.clear();
+    writeSheet();
     post('xions:text-dirty', { count: 0 });
     report();
   }

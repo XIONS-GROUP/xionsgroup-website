@@ -104,6 +104,8 @@ XIONS GROUP — Imaginer la beauté de demain|XIONS GROUP — Imagining the beau
 Accueil · campagne desktop|Home · desktop campaign
 Accueil · campagne mobile|Home · mobile campaign
 Groupe de beauté indépendant · Paris|Independent beauty group · Paris
+Groupe de beauté indépendant|Independent beauty group
+Paris · Shanghai · Palm Beach|Paris · Shanghai · Palm Beach
 Imaginer|Imagining
 la beauté|the beauty
 de demain.|of tomorrow.

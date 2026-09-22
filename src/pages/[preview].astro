@@ -29,7 +29,10 @@ export function getStaticPaths() {
         </select>
         <label for="edit-size">字号 <output id="edit-size-value"></output></label>
         <input id="edit-size" type="number" min="8" max="200" step="1" />
-        <button id="edit-size-clear" type="button">清除字号覆盖</button>
+        <label for="edit-leading">行距 <output id="edit-leading-value"></output></label>
+        <input id="edit-leading" type="number" min="0.8" max="3" step="0.02" />
+        <button id="edit-size-clear" type="button">清除本端覆盖</button>
+        <small id="edit-scope-note"></small>
       </div>
       <div class="edit-actions"><button id="edit-save" type="button">保存修改</button><button id="edit-revert" type="button">还原本页</button></div>
       <p id="edit-status" aria-live="polite"></p>
@@ -104,7 +107,8 @@ export function getStaticPaths() {
   #edit-hint,#edit-status{margin:10px 0 0;font-size:11px;color:#777;line-height:1.5}
   #edit-target{margin:0 0 4px;font-size:11px;color:#111;overflow-wrap:anywhere}
   #edit-controls{margin-top:14px;padding-top:14px;border-top:1px solid #eee}
-  #edit-font,#edit-size{width:100%;margin-top:10px;padding:7px 9px;background:white;border:1px solid #ccc;border-radius:5px;font:inherit;color:#111}
+  #edit-font,#edit-size,#edit-leading{width:100%;margin-top:10px;padding:7px 9px;background:white;border:1px solid #ccc;border-radius:5px;font:inherit;color:#111}
+  #edit-scope-note{margin-top:10px}
   #edit-size-clear{margin-top:8px;padding:5px 10px;border:1px solid #ccc;background:white;border-radius:5px;font-size:11px}
   .edit-actions{display:flex;gap:8px;margin-top:14px}
   .edit-actions button{flex:1;padding:8px 10px;border:1px solid #bbb;background:white;border-radius:6px}

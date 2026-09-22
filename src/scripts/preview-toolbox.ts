@@ -193,11 +193,19 @@ function setEditing(next:boolean){
 }
 editToggle.addEventListener('click',()=>setEditing(!editingOn));
 byId('edit-revert').addEventListener('click',()=>{toFrame('xions:text-revert');editStatus.textContent='已还原本页的未保存修改。';});
-fontSelect.addEventListener('change',()=>toFrame('xions:text-style',{fontFamily:fontSelect.value}));
+// Overrides are stored per device, so the frame needs to know which one is being edited.
+const leadingInput=byId('edit-leading') as HTMLInputElement;
+fontSelect.addEventListener('change',()=>toFrame('xions:text-style',{scope:device,fontFamily:fontSelect.value}));
 sizeInput.addEventListener('input',()=>{
-  if(Number.isFinite(sizeInput.valueAsNumber))toFrame('xions:text-style',{fontSize:sizeInput.valueAsNumber});
+  if(Number.isFinite(sizeInput.valueAsNumber))toFrame('xions:text-style',{scope:device,fontSize:sizeInput.valueAsNumber});
 });
-byId('edit-size-clear').addEventListener('click',()=>{sizeInput.value='';toFrame('xions:text-style',{fontSize:0});});
+leadingInput.addEventListener('input',()=>{
+  if(Number.isFinite(leadingInput.valueAsNumber))toFrame('xions:text-style',{scope:device,lineHeight:leadingInput.valueAsNumber});
+});
+byId('edit-size-clear').addEventListener('click',()=>{
+  sizeInput.value='';leadingInput.value='';fontSelect.value='';
+  toFrame('xions:text-style',{scope:device,fontSize:0,lineHeight:0,fontFamily:''});
+});
 let pendingSave=false;
 byId('edit-save').addEventListener('click',()=>{
   if(!editingOn)return void(editStatus.textContent='先解锁文字编辑。');
@@ -215,9 +223,12 @@ addEventListener('message',async event=>{
   if(type==='xions:text-selected'){
     editControls.hidden=!detail;
     if(!detail)return;
-    editTarget.textContent=`${detail.path} · 当前 ${detail.computedFamily} ${detail.fontSize}px`;
-    fontSelect.value=detail.fontFamily||'';
-    if(sizeInput!==document.activeElement)sizeInput.value=String(detail.fontSize);
+    editTarget.textContent=`${detail.path} · 当前 ${detail.computedFamily} ${detail.fontSize}px / 行距 ${detail.lineHeight}`;
+    const scoped=detail.overrides?.[device]||{};
+    fontSelect.value=scoped.fontFamily||'';
+    if(sizeInput!==document.activeElement)sizeInput.value=scoped.fontSize??String(detail.fontSize);
+    if(leadingInput!==document.activeElement)leadingInput.value=scoped.lineHeight??String(detail.lineHeight);
+    byId('edit-scope-note').textContent=`正在编辑${device==='mobile'?'手机端':'桌面端'}的覆盖值。两端各自独立保存，改桌面不会影响手机。`;
   }
   if(type==='xions:text-changes'&&pendingSave){
     pendingSave=false;
