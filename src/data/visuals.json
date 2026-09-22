@@ -30,13 +30,13 @@
     "name": "xionsgroup-leadership-group",
     "label": "Le groupe · portrait collectif",
     "use": "集团团队区；三人合照，完整保留人物",
-    "width": 2400,
+    "width": 900,
     "height": 1600,
-    "ratio": "3 / 2",
-    "fit": "contain",
+    "ratio": "9 / 16",
+    "fit": "cover",
     "page": "/fr/groupe/",
-    "src": "",
-    "alt": ""
+    "src": "/images/group/xionsgroup-leadership-group.jpg",
+    "alt": "Les fondateurs de XIONS Group"
   },
   {
     "id": "lentropiste-logo",
@@ -108,13 +108,13 @@
     "name": "lentropiste-dorians-spleen-award-2026",
     "label": "L’Entropiste · distinction",
     "use": "品牌详情与获奖信息并列；证书完整保留，不裁字",
-    "width": 1600,
-    "height": 2000,
+    "width": 1280,
+    "height": 1600,
     "ratio": "4 / 5",
     "fit": "contain",
     "page": "/fr/marques/lentropiste/",
-    "src": "",
-    "alt": ""
+    "src": "/images/brands/lentropiste/lentropiste-dorians-spleen-award-2026.jpg",
+    "alt": "Le trophée Fragrance Foundation France 2026 aux côtés du parfum Dorian's Spleen"
   },
   {
     "id": "betenoir-hero",
@@ -136,38 +136,38 @@
     "label": "Sunlution · univers",
     "use": "品牌标题下方横图，桌面手机均3:2",
     "width": 2400,
-    "height": 1600,
-    "ratio": "3 / 2",
+    "height": 1351,
+    "ratio": "16 / 9",
     "fit": "cover",
     "page": "/fr/marques/sunlution/",
-    "src": "",
-    "alt": ""
+    "src": "/images/brands/sunlution/sunlution-hero-01.jpg",
+    "alt": "La gamme Sunlution au complet"
   },
   {
     "id": "sunlution-detail-01",
     "name": "sunlution-products-01",
     "label": "Sunlution · produit",
     "use": "详情双图左侧；完整产品",
-    "width": 1600,
-    "height": 2000,
-    "ratio": "4 / 5",
-    "fit": "contain",
+    "width": 1121,
+    "height": 1600,
+    "ratio": "7 / 10",
+    "fit": "cover",
     "page": "/fr/marques/sunlution/",
-    "src": "",
-    "alt": ""
+    "src": "/images/brands/sunlution/sunlution-products-01.jpg",
+    "alt": "La crème Collagène Revive de Sunlution"
   },
   {
     "id": "sunlution-detail-02",
     "name": "sunlution-texture-01",
     "label": "Sunlution · texture",
     "use": "详情双图右侧；质地或已确认的研究图",
-    "width": 1600,
-    "height": 2000,
-    "ratio": "4 / 5",
+    "width": 1061,
+    "height": 1600,
+    "ratio": "2 / 3",
     "fit": "cover",
     "page": "/fr/marques/sunlution/",
-    "src": "",
-    "alt": ""
+    "src": "/images/brands/sunlution/sunlution-collection-01.jpg",
+    "alt": "La collection Sunlution présentée sur socles"
   },
   {
     "id": "masqly-hero",
@@ -187,39 +187,39 @@
     "name": "masqly-hands-arms-01",
     "label": "Masqly · mains & bras",
     "use": "详情双图左侧；使用方式",
-    "width": 1600,
-    "height": 2000,
+    "width": 1200,
+    "height": 1500,
     "ratio": "4 / 5",
     "fit": "cover",
     "page": "/fr/marques/masqly/",
-    "src": "",
-    "alt": ""
+    "src": "/images/brands/masqly/masqly-ingredients-01.jpg",
+    "alt": "Les actifs des masques Masqly"
   },
   {
     "id": "masqly-detail-02",
     "name": "masqly-feet-legs-01",
     "label": "Masqly · pieds & jambes",
     "use": "详情双图右侧；使用方式",
-    "width": 1600,
-    "height": 2000,
+    "width": 1280,
+    "height": 1600,
     "ratio": "4 / 5",
     "fit": "cover",
     "page": "/fr/marques/masqly/",
-    "src": "",
-    "alt": ""
+    "src": "/images/brands/masqly/masqly-lifestyle-01.jpg",
+    "alt": "Les masques Masqly mis en scène"
   },
   {
     "id": "press-event-cannes",
     "name": "xionsgroup-event-cannes-01",
     "label": "Festival de Cannes",
     "use": "活动图库；戛纳现场、品牌与活动关系说明",
-    "width": 2400,
-    "height": 1600,
-    "ratio": "3 / 2",
+    "width": 1200,
+    "height": 1800,
+    "ratio": "2 / 3",
     "fit": "cover",
     "page": "/fr/presse/",
-    "src": "",
-    "alt": ""
+    "src": "/images/press/xionsgroup-event-cannes-01.jpg",
+    "alt": "Sur le photocall L'Entropiste de la TIME Cannes House"
   },
   {
     "id": "press-event-oscars",

@@ -11,9 +11,7 @@ const { compact = false } = Astro.props;
   {brands.map(brand => {
     const logo = brandLogos[brand.slug];
     const plannedLogo = visuals.find(v => v.id === `${brand.slug}-logo`);
-    const backdrop = visuals.find(v => v.id === `${brand.slug}-hero`)?.src;
-    return <a class:list={['brand-card', { 'has-backdrop': backdrop }]} href={`/fr/marques/${brand.slug}/`} aria-label={`Découvrir ${brand.name}`}>
-      {backdrop && <img class="brand-backdrop" src={backdrop} alt="" aria-hidden="true" loading="lazy" decoding="async" />}
+    return <a class="brand-card" href={`/fr/marques/${brand.slug}/`} aria-label={`Découvrir ${brand.name}`}>
       <p class="brand-category">{brand.category}</p>
       <div class="brand-logo-slot">
         {plannedLogo?.src ? <div style="width:17.5rem;max-width:100%"><VisualSlot id={`${brand.slug}-logo`} compact /></div> : logo ? <img src={logo.src} alt={brand.name} width="600" height="240" loading="lazy" decoding="async" style={`max-width:${logo.width}px`} /> : visualPreview ? <div style="width:17.5rem;max-width:100%"><VisualSlot id={`${brand.slug}-logo`} compact /></div> : <h2 class="brand-name-fallback">{brand.name}</h2>}
@@ -25,11 +23,4 @@ const { compact = false } = Astro.props;
 <style>
   .brand-card { min-width:0; }
   .brand-logo-slot { min-width:0; }
-  /* The two available brand photos are tonally opposite (one dark, one bright yellow), so they
-     sit far back by default and only come forward on hover. Cards without a photo stay plain. */
-  .has-backdrop { position:relative; isolation:isolate; overflow:hidden; }
-  .brand-backdrop { position:absolute; inset:0; z-index:-1; width:100%; height:100%; object-fit:cover;
-    opacity:.09; transform:scale(1.02); transition:opacity .55s var(--ease-luxury), transform .55s var(--ease-luxury); }
-  .has-backdrop:hover .brand-backdrop,.has-backdrop:focus-visible .brand-backdrop { opacity:.26; transform:scale(1); }
-  @media(prefers-reduced-motion:reduce) { .brand-backdrop { transition:none; } }
 </style>

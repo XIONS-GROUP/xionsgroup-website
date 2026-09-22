@@ -233,6 +233,14 @@ Erreur 404|Error 404
 Page|Page
 introuvable.|not found.
 La page demandée n’existe pas ou a été déplacée.|The page you requested does not exist or has moved.
+Les fondateurs de XIONS Group|The founders of XIONS Group
+Le trophée Fragrance Foundation France 2026 aux côtés du parfum Dorian's Spleen|The Fragrance Foundation France 2026 trophy beside the Dorian's Spleen fragrance
+La gamme Sunlution au complet|The complete Sunlution range
+La crème Collagène Revive de Sunlution|Sunlution's Collagen Revive cream
+La collection Sunlution présentée sur socles|The Sunlution collection shown on plinths
+Les actifs des masques Masqly|The active ingredients in Masqly masks
+Les masques Masqly mis en scène|Masqly masks in context
+Sur le photocall L'Entropiste de la TIME Cannes House|At the L'Entropiste photocall at TIME Cannes House
 `;
 export const translations: Record<string, string> = Object.fromEntries(`${copy.trim()}\n${legalCopy.trim()}`.split('\n').map(line => line.split('|')));
 for (const brand of ['L’Entropiste', 'Betenoir', 'Sunlution', 'Masqly']) {
