@@ -20,9 +20,13 @@ import { eventMarks } from '../data/rayonnement';
     </div>
   </header>
   <section class="section" id="vision"><div class="measure split"><p class="eyebrow">Notre vision</p><div class="prose"><h2 class="title-lg">Créer des maisons capables de redéfinir leur catégorie.</h2><p>XIONS Group est un groupe français indépendant qui crée, développe et déploie des marques de beauté premium à l’international.</p><p>Chaque maison possède son territoire, son langage et sa vision. Toutes partagent une même ambition : inventer de nouveaux standards.</p><a class="text-link" href="/fr/groupe/">Découvrir le Groupe <Arrow /></a></div></div></section>
-  <section class="brand-section"><div class="section"><div class="measure section-head"><p class="eyebrow">Nos marques</p><div class="brand-intro"><h2 class="title-lg">Quatre maisons.<br />Quatre regards.</h2><div class="brand-intro-foot"><a class="text-link" href="/fr/marques/">Voir les marques <Arrow /></a></div></div></div></div><BrandGrid compact /></section>
+  <section class="brand-section"><div class="section"><div class="measure brand-intro"><h2 class="title-lg">Quatre maisons.<br />Quatre regards.</h2><a class="text-link" href="/fr/marques/">Voir les marques <Arrow /></a></div></div><BrandGrid compact /></section>
   <section class="section awards-section"><div class="measure"><div class="section-head"><p class="eyebrow">Présence internationale</p><div><h2 class="title-lg">Au cœur des grands rendez-vous internationaux.</h2><p class="body-copy">Les marques de Xions Group s’inscrivent dans les grands rendez-vous de la culture, du cinéma, de la musique, de la mode et du divertissement.</p></div></div><ul class="event-index">{eventMarks.map(mark=><li class="event-item">{mark.name}</li>)}</ul><div class="awards-foot"><p class="awards-caption">Cannes · Paris · Los Angeles · Hollywood · New York · Londres</p><a class="text-link" href="/fr/presse/">Explorer le rayonnement <Arrow /></a></div></div></section>
-  <section class="section section-rule role-section"><div class="measure"><div class="section-head"><p class="eyebrow">Notre rôle</p><h2 class="title-lg">De l’idée au rayonnement.</h2></div><div class="role-grid"><article class="role-step"><span class="counter">01</span><h3 class="title-md">Imaginer</h3><p>Vision entrepreneuriale, stratégie de marque et direction créative.</p></article><article class="role-step"><span class="counter">02</span><h3 class="title-md">Développer</h3><p>Innovation produit, expertise opérationnelle et construction des marchés.</p></article><article class="role-step"><span class="counter">03</span><h3 class="title-md">Rayonner</h3><p>Communication, culture et déploiement international.</p></article></div></div></section>
+  <section class="section section-rule role-section"><div class="measure"><div class="section-head"><p class="eyebrow">Notre rôle</p><h2 class="title-lg">De l’idée au rayonnement.</h2></div><div class="role-list">
+    <article class="role-step" data-reveal><h3>Imaginer</h3><p>Nous partons d’une intuition et lui donnons une vision, un territoire et une direction créative.</p></article>
+    <article class="role-step" data-reveal><h3>Développer</h3><p>Nous transformons cette vision en produits, en savoir-faire et en marchés.</p></article>
+    <article class="role-step" data-reveal><h3>Rayonner</h3><p>Nous portons chaque maison dans la culture, les médias et les grandes capitales.</p></article>
+  </div></div></section>
 </SiteLayout>
 <style>
   .home-hero { position:relative; min-height:max(44rem,100svh); background:#090909; padding:calc(var(--header) + 2rem) var(--pad) 3.5rem; display:flex; isolation:isolate; }
@@ -43,8 +47,10 @@ import { eventMarks } from '../data/rayonnement';
   .hero-scroll { display:inline-flex; align-items:center; gap:.6rem; font-size:.72rem; text-decoration:none; }
   .has-image { color:white; } .has-image em { color:inherit; }
   .counter { font-size:.72rem; letter-spacing:.06em; color:var(--muted); font-variant-numeric:tabular-nums; }
+  /* Centred on the page. The "Nos marques" label repeated what the section already says, and
+     the rule under the title added a division the centred composition does not need. */
+  .brand-intro { display:grid; justify-items:center; gap:clamp(2rem,3.5vw,3rem); text-align:center; }
   .brand-intro .title-lg { max-width:14ch; line-height:1.02; }
-  .brand-intro-foot { display:flex; justify-content:space-between; align-items:baseline; gap:2rem; margin-top:clamp(2rem,3.5vw,3rem); padding-top:1.1rem; border-top:1px solid var(--line); }
   .awards-section,.role-section { padding-block:clamp(5rem,9vw,9.5rem); }
   /* One dark band breaks the run of four near-identical white sections, and carries the hero's
      X back into the page. The poster SVG is already dark-on-dark, so it needs no scrim. */
@@ -71,10 +77,13 @@ import { eventMarks } from '../data/rayonnement';
   .awards-caption { margin:0; font-size:.75rem; color:var(--muted); }
   .role-section .section-head { align-items:flex-start; margin-bottom:clamp(4rem,8vw,7rem); }
   .role-section .section-head .title-lg { max-width:15ch; line-height:1.08; }
-  .role-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:clamp(3rem,6vw,6rem); }
-  .role-step { display:grid; gap:1.2rem; align-content:start; }
-  .role-step .title-md { font-size:clamp(1.8rem,2.8vw,2.6rem); }
-  .role-step p { margin:0; max-width:26rem; color:#514d46; }
+  /* Three equal boxes with 01/02/03 read like a table of contents. As rows — verb left,
+     sentence right — it reads as a sequence, which is what the copy actually describes. */
+  .role-list { display:grid; gap:clamp(2.5rem,4vw,3.5rem); }
+  .role-step { display:grid; grid-template-columns:minmax(0,.9fr) minmax(0,1.6fr); gap:clamp(1.5rem,5vw,5rem); align-items:baseline; }
+  .role-step h3 { margin:0; font-family:var(--display); font-weight:400; font-size:clamp(2.1rem,4vw,3.4rem); line-height:1; letter-spacing:-.02em; }
+  .role-step p { margin:0; max-width:34rem; font-size:clamp(1rem,1.2vw,1.12rem); line-height:1.65; color:#514d46; }
+  @media(max-width:700px) { .role-step { grid-template-columns:1fr; gap:.9rem; } }
   @media(max-width:900px) {
     .event-index { grid-template-columns:repeat(2,minmax(0,1fr)); }
     .role-grid { grid-template-columns:1fr; gap:clamp(2.5rem,7vw,3.5rem); }

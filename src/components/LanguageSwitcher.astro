@@ -14,7 +14,10 @@ const other = locale === 'fr' ? 'en' : 'fr';
 <style>
   .language-switcher { display:flex; align-items:center; gap:.7rem; font-size:.75rem; letter-spacing:.08em; }
   .language-switcher a { display:inline-flex; align-items:center; min-height:44px; padding:.35rem; text-decoration:none; color:var(--muted); }
-  .language-switcher a[aria-current] { color:var(--ink); text-decoration:underline; text-underline-offset:.35em; }
+  /* Both options underlined: in the mobile drawer only the active one was, so the other read
+     as plain text rather than the thing you tap to switch. */
+  .language-switcher a { text-decoration:underline; text-underline-offset:.35em; }
+  .language-switcher a[aria-current] { color:var(--ink); }
   .language-switcher a:hover { color:var(--wine); }
   :global(.site-footer) .language-switcher { --ink:#fff; --muted:#b9b6b1; }
   :global(.navigation-mobile) .language-switcher { margin-top:2rem; padding-top:1rem; }

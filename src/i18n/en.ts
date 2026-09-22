@@ -135,6 +135,9 @@ Explorer le rayonnement|Explore our presence
 Notre rôle|Our role
 De l’idée au rayonnement.|From idea to international presence.
 Vision entrepreneuriale, stratégie de marque et direction créative.|Entrepreneurial vision, brand strategy and creative direction.
+Nous partons d’une intuition et lui donnons une vision, un territoire et une direction créative.|We start from an instinct and give it a vision, a territory and a creative direction.
+Nous transformons cette vision en produits, en savoir-faire et en marchés.|We turn that vision into products, expertise and markets.
+Nous portons chaque maison dans la culture, les médias et les grandes capitales.|We carry each maison into culture, media and the world’s major capitals.
 Développer|Developing
 Innovation produit, expertise opérationnelle et construction des marchés.|Product innovation, operational expertise and market development.
 Rayonner|Growing our presence

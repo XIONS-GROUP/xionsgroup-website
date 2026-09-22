@@ -11,18 +11,22 @@ const year = new Date().getFullYear();
   <div class="footer-grid">
     <a class="footer-logo" href="/fr/"><img src="/images/site/xions-logo.svg" alt="XIONS GROUP" /></a>
     <div><span>Explorer</span><a href="/fr/groupe/">Le groupe</a><a href="/fr/marques/">Nos marques</a><a href="/fr/engagements/">Engagements</a></div>
-    <div><span>Découvrir</span><a href="/fr/presse/">Presse & rayonnement</a><a href="/fr/carrieres/">Carrières</a><a href="/fr/contact/">Contact</a></div>
-    <div><span>Suivre</span><a href="https://instagram.com/xionsgroup" target="_blank" rel="noreferrer">Instagram</a><a href="https://linkedin.com/company/xionsgroup" target="_blank" rel="noreferrer">LinkedIn</a><a href="mailto:contact@xionsgroup.com">Email</a></div>
+    <div><a href="/fr/presse/">Presse & rayonnement</a><a href="/fr/carrieres/">Carrières</a><a href="/fr/contact/">Contact</a></div>
+    <div><span>Suivre</span><a href="https://instagram.com/xionsgroup" target="_blank" rel="noreferrer">Instagram</a><a href="https://www.linkedin.com/company/xions-group" target="_blank" rel="noreferrer">LinkedIn</a><a href="mailto:contact@xionsgroup.com">Email</a></div>
   </div>
   <div class="footer-bottom">
     <p>© {year} XIONS GROUP</p>
-    <div class="footer-legal"><LanguageSwitcher compact /><a href="/fr/conditions-generales/">Conditions d’utilisation</a><a href="/fr/mentions-legales/">Mentions légales</a><a href="/fr/politique-confidentialite/">Confidentialité</a><a href="/fr/politique-cookies/">Cookies</a></div>
+    <LanguageSwitcher compact />
   </div>
+  <div class="footer-legal"><a href="/fr/conditions-generales/">Conditions d’utilisation</a><a href="/fr/mentions-legales/">Mentions légales</a><a href="/fr/politique-confidentialite/">Confidentialité</a><a href="/fr/politique-cookies/">Cookies</a></div>
 </footer>
 <style>
   /* Keep the arrow on its own line on desktop. Left to wrap naturally it follows the last word
      or not depending on how long the phrase is, so French and English broke differently. */
   @media(min-width:701px) { .footer-lead > a span { display:block; } }
-  .footer-bottom { align-items:baseline; gap:1rem 2rem; }
-  .footer-legal { align-items:baseline; flex-wrap:wrap; }
+  /* The language toggle was buried in the legal row; it now shares the copyright line and sits
+     hard right, where it reads as a control rather than one more legal link. */
+  .footer-bottom { display:flex; justify-content:space-between; align-items:baseline; gap:1rem 2rem; }
+  .footer-legal { display:flex; align-items:baseline; flex-wrap:wrap; gap:.6rem 1.75rem; margin-top:1.25rem; }
+  @media(max-width:700px) { .footer-legal { gap:.5rem 1.25rem; } }
 </style>
