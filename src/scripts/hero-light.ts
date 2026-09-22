@@ -48,13 +48,10 @@ void main(){
 export function initHeroLight(root: HTMLElement) {
   const canvas = root.querySelector('canvas')!;
   const button = root.querySelector('button')!;
-  const controls = root.querySelector<HTMLElement>('[data-noise-controls]');
-  const amount = root.querySelector<HTMLInputElement>('[data-grain-amount]');
-  const size = root.querySelector<HTMLInputElement>('[data-grain-size]');
   const storageKey = 'xions-hero-grain-v2';
   let grainAmount: number = heroLightDefaults.grainAmount, grainSize: number = heroLightDefaults.grainSize, pixelScale = 1, artHeight = 704;
   try {
-    const saved = controls && JSON.parse(localStorage.getItem(storageKey) || 'null');
+    const saved = import.meta.env.DEV && JSON.parse(localStorage.getItem(storageKey) || 'null');
     if (saved && Number.isFinite(saved.amount) && Number.isFinite(saved.size)) {
       grainAmount = Math.max(0,Math.min(1,saved.amount));
       grainSize = Math.max(.5,Math.min(4,saved.size));
@@ -158,28 +155,23 @@ export function initHeroLight(root: HTMLElement) {
   }
   if (!setup()) { context.deleteBuffer(buffer); context.deleteProgram(program); return; }
   root.dataset.ready='true';
-  function updateControls() {
-    if (!controls || !amount || !size) return;
-    amount.value=String(Math.round(grainAmount*100)); size.value=String(grainSize);
-    controls.querySelector('output[data-amount-value]')!.textContent=amount.value+'%';
-    controls.querySelector('output[data-size-value]')!.textContent=grainSize.toFixed(1)+' px';
-    draw();
-  }
-  const onGrain=()=>{
-    grainAmount=Number(amount!.value)/100; grainSize=Number(size!.value);
-    updateControls();
-    try {localStorage.setItem(storageKey,JSON.stringify({amount:grainAmount,size:grainSize}));} catch {}
-  };
-  if (controls) {controls.hidden=false;updateControls();amount!.addEventListener('input',onGrain);size!.addEventListener('input',onGrain);}
-
   const observer=new IntersectionObserver(([entry])=>{visible=entry.isIntersecting;sync();});
   observer.observe(root);
   const sizing=new ResizeObserver(resize);
   sizing.observe(root);
+  sizing.observe(root.querySelector('.light-poster')!);
   const toggle=()=>{paused=!paused;root.dataset.paused=String(paused);sync();};
-  const replayButton=root.querySelector<HTMLButtonElement>('[data-replay-intro]');
   const replay=()=>{elapsed=0;paused=false;root.dataset.paused='false';sync();};
-  replayButton?.addEventListener('click',replay);
+  const onSettings=(event:Event)=>{
+    const detail=(event as CustomEvent).detail;
+    if (!Number.isFinite(detail?.amount)||!Number.isFinite(detail?.size))return;
+    grainAmount=Math.max(0,Math.min(1,detail.amount));grainSize=Math.max(.5,Math.min(4,detail.size));
+    resize();
+  };
+  if(import.meta.env.DEV){
+    window.addEventListener('xions:hero-settings',onSettings);
+    window.addEventListener('xions:hero-replay',replay);
+  }
   const onLost=(event:Event)=>{event.preventDefault();lost=true;root.dataset.ready='false';sync();};
   const onRestored=()=>{lost=false;if(setup()){root.dataset.ready='true';resize();sync();}else{lost=true;sync();}};
   button.addEventListener('click',toggle);
@@ -189,8 +181,8 @@ export function initHeroLight(root: HTMLElement) {
   canvas.addEventListener('webglcontextrestored',onRestored);
   resize();sync();
   document.addEventListener('astro:before-swap',()=>{
-    amount?.removeEventListener('input',onGrain);size?.removeEventListener('input',onGrain);
-    replayButton?.removeEventListener('click',replay);
+    window.removeEventListener('xions:hero-settings',onSettings);
+    window.removeEventListener('xions:hero-replay',replay);
     disposed=true;cancelAnimationFrame(frame);observer.disconnect();sizing.disconnect();
     reduced.removeEventListener('change',sync);document.removeEventListener('visibilitychange',sync);
     button.removeEventListener('click',toggle);canvas.removeEventListener('webglcontextlost',onLost);
