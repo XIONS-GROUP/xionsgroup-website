@@ -27,6 +27,10 @@ const year = new Date().getFullYear();
   /* The language toggle was buried in the legal row; it now shares the copyright line and sits
      hard right, where it reads as a control rather than one more legal link. */
   .footer-bottom { display:flex; justify-content:space-between; align-items:baseline; gap:1rem 2rem; }
-  .footer-legal { display:flex; align-items:baseline; flex-wrap:wrap; gap:.6rem 1.75rem; margin-top:1.25rem; }
+  /* Moved out of .footer-bottom, so it lost that block's small type and its link reset —
+     which is why these read larger and underlined. Restored here. */
+  .footer-legal { display:flex; align-items:baseline; flex-wrap:wrap; gap:.6rem 1.75rem; margin-top:1.25rem;
+    color:#918d85; font-size:.67rem; letter-spacing:.02em; }
+  .footer-legal a { text-decoration:none; }
   @media(max-width:700px) { .footer-legal { gap:.5rem 1.25rem; } }
 </style>

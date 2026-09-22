@@ -12,7 +12,7 @@ import { eventMarks } from '../data/rayonnement';
     </div>
     <div class="hero-content">
       <p class="hero-eyebrow">Groupe de beauté indépendant<br />Paris · Shanghai · Palm Beach</p>
-      <h1 class="display">Imaginer<br /><em>la beauté</em><br />de demain.</h1>
+      <h1 class="display"><span>Imaginer</span><em>la beauté</em><span>de demain.</span></h1>
       <div class="hero-foot">
         <p class="hero-sub">Création · Science · Culture</p>
         <a class="hero-scroll" href="#vision">Découvrir <Arrow direction="down" /></a>
@@ -40,7 +40,15 @@ import { eventMarks } from '../data/rayonnement';
   /* Readable floor: the eyebrow was at .68rem inherited from the global utility, which is fine
      beside body copy but not as standalone type over an animation. */
   .hero-eyebrow { margin:0; font-size:.82rem; line-height:1.75; font-weight:500; letter-spacing:.06em; }
-  .display { align-self:center; max-width:14ch; font-size:clamp(1.7rem,3.6vw,2.9rem); line-height:1.04; letter-spacing:-.015em; }
+  /* Desktop reads as one line spanning the hero — left, centre, right — sitting on the X's
+     waist. Phones keep the three fragments stacked. */
+  .display { align-self:center; justify-self:stretch; width:100%; max-width:none; display:grid;
+    grid-template-columns:1fr auto 1fr; align-items:baseline; gap:clamp(2rem,6vw,7rem);
+    font-size:clamp(1.7rem,3.6vw,2.9rem); line-height:1.04; letter-spacing:-.015em; }
+  /* Equal outer tracks, so the middle fragment lands on the X's centre line rather than being
+     pushed off it by the differing widths of the words either side. */
+  .display > :first-child { justify-self:start; }
+  .display > :last-child { justify-self:end; }
   em { color:var(--wine); font-weight:400; }
   .hero-foot { display:grid; justify-items:center; gap:1.1rem; }
   .hero-sub { margin:0; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; }
@@ -91,7 +99,8 @@ import { eventMarks } from '../data/rayonnement';
   @media(max-width:700px) {
     /* Extra clearance so the eyebrow does not crowd the centred wordmark above it. */
     .home-hero { min-height:max(40rem,100svh); padding-top:calc(var(--header) + 3.25rem); }
-    .display { font-size:30px; max-width:12ch; }
+    .display { grid-template-columns:1fr; justify-items:center; gap:0; justify-self:center; width:auto; font-size:30px; max-width:12ch; }
+    .display > :first-child,.display > :last-child { justify-self:center; }
     /* Back to the pre-resize value on phones; only desktop needed the readability bump. */
     .hero-eyebrow { font-size:.68rem; line-height:1.7; }
     .hero-core { gap:1.1rem; }
