@@ -5,7 +5,8 @@
 ## 分支与运行
 
 - 根目录是唯一运行/部署入口；Astro静态输出dist。
-- dev：法英完整多页站。已推送提交 9857b3a（可调缓动、工具箱版本保存、20秒时长）。上几个实现提交 2493143（退场改为开场倒放）、b5ee5a5（流光全程循环）、ba6eae3（390/650px与文档整理）。
+- dev：法英完整多页站。已推送提交 d83dfb2（预览内改文字、离线副本、日志索引补齐）与 3dd0140（首页标题统一、模块重做、深色段落、全站滚动动效）。上几个实现提交 9857b3a（可调缓动与版本保存）、2493143（退场改为开场倒放）、b5ee5a5（流光全程循环）、ba6eae3（390/650px与文档整理）。
+- 仓库位置已从 Documents/Xionsgroup 移到 **Developer/web-build/Xionsgroup**；node_modules 未随迁，换机需重新 npm ci。
 - 本地main / 已知origin/main：9b56a72预热Logo占位页。本轮未fetch，不把快照当实时云端状态。
 - GitHub：XIONS-GROUP/xionsgroup-website；预览 https://dev--xionsgroup.netlify.app；主域配置 https://www.xionsgroup.com。
 - Netlify：根目录 npm run build → dist；推送触发构建，部署成功需另验。
@@ -49,6 +50,14 @@
 ## 本轮已验证
 
 构建通过；38个HTML内部链接与34个双语页面检查通过；Astro 48文件0错误/警告；`npx tsc --noEmit` 无输出。缓动在 power 1 / 2.5 / 5 / 8 下接缝处装配进度与旋转角全部连续，形成与退场镜像时刻装配进度差 < 1e-12，旋转峰值角速度 45 / 112.5 / 225 / 359.8 °/s 与理论斜率吻合。预设端点实测空目录、路径穿越消毒、保存/列出/载入完整走通。构建后grep确认 `dist` 已无工具箱JS与dev端点字符串。`/design-preview/` 清空本地存储后读到20秒 / 1-6-1-4-2-6 / 缓动3.0 / 290% / 0.55×。尚未做实体手机GPU验收或远端部署验证。
+
+## 未跟踪的大体积素材（需要处理）
+
+`public/` 下出现了 156MB 未跟踪的原始素材：`public/XIONS/`（四品牌与创始人照片 127MB，含一个浏览器无法显示的 .HEIC）和 `public/all visual of xions site.ai`（29MB Illustrator 源文件）。
+
+它们**未被 git 跟踪**，所以不在任何提交里，Netlify 也拿不到。但 `public/` 会被 Astro 原样复制进 `dist/`，本地构建产物已从 7MB 涨到 178MB；一旦有人 `git add -A`，这些文件就会进仓库并发布到线上——Illustrator 源文件会变成可下载的公开资源。
+
+正确位置是 gitignore 覆盖的 `local-materials/`。其中的品牌照片很可能正是当前缺的素材（Sunlution、Betenoir 主图、Press 页图片），需要挑选、压缩、按 `src/data/visuals.json` 的命名规范放进 `public/images/` 后再使用。**等用户确认后处理，助手未擅自移动。**
 
 ## 已有工作保护
 
