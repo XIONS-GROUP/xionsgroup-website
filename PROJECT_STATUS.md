@@ -5,7 +5,7 @@
 ## 分支与运行
 
 - 根目录是唯一运行/部署入口；Astro静态输出dist。
-- dev：法英完整多页站。已推送提交 ba6eae3（390/650px、15秒动画、流光与文档整理）。
+- dev：法英完整多页站。已推送提交 b5ee5a5（流光全程循环、23秒时长、290%强度）。上一实现提交 ba6eae3（390/650px、15秒动画与文档整理）。
 - 本地main / 已知origin/main：9b56a72预热Logo占位页。本轮未fetch，不把快照当实时云端状态。
 - GitHub：XIONS-GROUP/xionsgroup-website；预览 https://dev--xionsgroup.netlify.app；主域配置 https://www.xionsgroup.com。
 - Netlify：根目录 npm run build → dist；推送触发构建，部署成功需另验。
