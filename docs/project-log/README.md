@@ -14,11 +14,12 @@
 8. [2026-09-22 · 首页排版统一与模块重做](2026-09-22-homepage-typography.md)：标题字号统一、奖项去 logo、Notre rôle 重做。
 9. [2026-09-22 · 页面内直接改文字](2026-09-22-inline-text-editing.md)：工具箱全局文字编辑、字体字号控制、可双击打开的离线副本。
 10. [2026-09-22 · 品牌卡底图、深色段落与滚动动效](2026-09-22-homepage-rhythm-and-motion.md)：打破四段同构、延续 X 语言、全站细微动效。
-11. [上线前检查](../launch-readiness-2026-09-22.md)：距离上线还缺什么，按阻塞程度排序。
-12. [视觉方向备忘 09-17](../visual-direction-2026-09-17.md)：早期的图片与动态优化设想，部分已被后续决定替代。
-13. [Hero 参数历史](hero-parameters.md)：每轮视觉调整及当前确认值。
-14. [Git 提交快照](git-history.md)：截至上一实现提交 `406e803` 的完整可达提交记录；此后的变更以 Git 实时日志为准。
-15. 按任务查阅 [项目规则](../../PROJECT_RULES.md)、[Hero 技术说明](../home-hero-animation.md)、[双语与 SEO](../bilingual-seo.md)。
+11. [2026-09-22 · 自助启动预览与全站尾斜杠](2026-09-22-preview-launcher-and-slashes.md)：双击即可开预览；修掉点导航就 404 的问题。
+12. [上线前检查](../launch-readiness-2026-09-22.md)：距离上线还缺什么，按阻塞程度排序。
+13. [视觉方向备忘 09-17](../visual-direction-2026-09-17.md)：早期的图片与动态优化设想，部分已被后续决定替代。
+14. [Hero 参数历史](hero-parameters.md)：每轮视觉调整及当前确认值。
+15. [Git 提交快照](git-history.md)：截至上一实现提交 `406e803` 的完整可达提交记录；此后的变更以 Git 实时日志为准。
+16. 按任务查阅 [项目规则](../../PROJECT_RULES.md)、[Hero 技术说明](../home-hero-animation.md)、[双语与 SEO](../bilingual-seo.md)。
 
 ## 本次交接
 

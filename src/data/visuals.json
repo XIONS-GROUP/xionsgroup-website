@@ -34,7 +34,7 @@
     "height": 1600,
     "ratio": "3 / 2",
     "fit": "contain",
-    "page": "/fr/groupe",
+    "page": "/fr/groupe/",
     "src": "",
     "alt": ""
   },
@@ -47,7 +47,7 @@
     "height": 480,
     "ratio": "5 / 2",
     "fit": "contain",
-    "page": "/fr/marques",
+    "page": "/fr/marques/",
     "src": "/images/brands/logos/lentropiste-logo-black.svg",
     "alt": "Logo L’Entropiste"
   },
@@ -60,7 +60,7 @@
     "height": 480,
     "ratio": "5 / 2",
     "fit": "contain",
-    "page": "/fr/marques",
+    "page": "/fr/marques/",
     "src": "/images/brands/logos/betenoir-logo-black.svg",
     "alt": "Logo Betenoir"
   },
@@ -73,7 +73,7 @@
     "height": 480,
     "ratio": "5 / 2",
     "fit": "contain",
-    "page": "/fr/marques",
+    "page": "/fr/marques/",
     "src": "/images/brands/logos/sunlution-logo-black.svg",
     "alt": "Logo Sunlution"
   },
@@ -86,7 +86,7 @@
     "height": 480,
     "ratio": "5 / 2",
     "fit": "contain",
-    "page": "/fr/marques",
+    "page": "/fr/marques/",
     "src": "/images/brands/logos/masqly-logo-black.svg",
     "alt": "Logo Masqly"
   },
@@ -99,7 +99,7 @@
     "height": 1600,
     "ratio": "3 / 2",
     "fit": "contain",
-    "page": "/fr/marques/lentropiste",
+    "page": "/fr/marques/lentropiste/",
     "src": "/images/brands/lentropiste/lentropiste-collection-01.png",
     "alt": "Collection de parfums L’Entropiste"
   },
@@ -112,7 +112,7 @@
     "height": 2000,
     "ratio": "4 / 5",
     "fit": "contain",
-    "page": "/fr/marques/lentropiste",
+    "page": "/fr/marques/lentropiste/",
     "src": "",
     "alt": ""
   },
@@ -125,7 +125,7 @@
     "height": 1600,
     "ratio": "3 / 2",
     "fit": "cover",
-    "page": "/fr/marques/betenoir",
+    "page": "/fr/marques/betenoir/",
     "src": "",
     "alt": "",
     "optional": true
@@ -139,7 +139,7 @@
     "height": 1600,
     "ratio": "3 / 2",
     "fit": "cover",
-    "page": "/fr/marques/sunlution",
+    "page": "/fr/marques/sunlution/",
     "src": "",
     "alt": ""
   },
@@ -152,7 +152,7 @@
     "height": 2000,
     "ratio": "4 / 5",
     "fit": "contain",
-    "page": "/fr/marques/sunlution",
+    "page": "/fr/marques/sunlution/",
     "src": "",
     "alt": ""
   },
@@ -165,7 +165,7 @@
     "height": 2000,
     "ratio": "4 / 5",
     "fit": "cover",
-    "page": "/fr/marques/sunlution",
+    "page": "/fr/marques/sunlution/",
     "src": "",
     "alt": ""
   },
@@ -178,7 +178,7 @@
     "height": 1600,
     "ratio": "3 / 2",
     "fit": "contain",
-    "page": "/fr/marques/masqly",
+    "page": "/fr/marques/masqly/",
     "src": "/images/brands/masqly/masqly-products-01.png",
     "alt": "Produits Masqly"
   },
@@ -191,7 +191,7 @@
     "height": 2000,
     "ratio": "4 / 5",
     "fit": "cover",
-    "page": "/fr/marques/masqly",
+    "page": "/fr/marques/masqly/",
     "src": "",
     "alt": ""
   },
@@ -204,7 +204,7 @@
     "height": 2000,
     "ratio": "4 / 5",
     "fit": "cover",
-    "page": "/fr/marques/masqly",
+    "page": "/fr/marques/masqly/",
     "src": "",
     "alt": ""
   },
@@ -217,7 +217,7 @@
     "height": 1600,
     "ratio": "3 / 2",
     "fit": "cover",
-    "page": "/fr/presse",
+    "page": "/fr/presse/",
     "src": "",
     "alt": ""
   },
@@ -230,7 +230,7 @@
     "height": 1600,
     "ratio": "3 / 2",
     "fit": "cover",
-    "page": "/fr/presse",
+    "page": "/fr/presse/",
     "src": "",
     "alt": ""
   },
@@ -243,7 +243,7 @@
     "height": 1600,
     "ratio": "3 / 2",
     "fit": "cover",
-    "page": "/fr/presse",
+    "page": "/fr/presse/",
     "src": "",
     "alt": ""
   },
@@ -256,7 +256,7 @@
     "height": 1600,
     "ratio": "3 / 2",
     "fit": "cover",
-    "page": "/fr/presse",
+    "page": "/fr/presse/",
     "src": "",
     "alt": ""
   },
@@ -269,7 +269,7 @@
     "height": 1600,
     "ratio": "3 / 2",
     "fit": "cover",
-    "page": "/fr/presse",
+    "page": "/fr/presse/",
     "src": "",
     "alt": ""
   },
@@ -282,7 +282,7 @@
     "height": 1600,
     "ratio": "3 / 2",
     "fit": "cover",
-    "page": "/fr/presse",
+    "page": "/fr/presse/",
     "src": "",
     "alt": ""
   },
@@ -295,7 +295,7 @@
     "height": 1600,
     "ratio": "3 / 2",
     "fit": "cover",
-    "page": "/fr/presse",
+    "page": "/fr/presse/",
     "src": "",
     "alt": ""
   },
@@ -308,7 +308,7 @@
     "height": 1600,
     "ratio": "3 / 2",
     "fit": "cover",
-    "page": "/fr/presse",
+    "page": "/fr/presse/",
     "src": "",
     "alt": ""
   },
@@ -321,7 +321,7 @@
     "height": 1600,
     "ratio": "3 / 2",
     "fit": "contain",
-    "page": "/fr/presse",
+    "page": "/fr/presse/",
     "src": "",
     "alt": ""
   },
@@ -334,7 +334,7 @@
     "height": 1600,
     "ratio": "3 / 2",
     "fit": "contain",
-    "page": "/fr/presse",
+    "page": "/fr/presse/",
     "src": "",
     "alt": ""
   },
@@ -347,7 +347,7 @@
     "height": 630,
     "ratio": "40 / 21",
     "fit": "contain",
-    "page": "/fr/visual-plan",
+    "page": "/fr/visual-plan/",
     "src": "/images/social/xionsgroup-og.png",
     "alt": "XIONS GROUP"
   },
@@ -360,7 +360,7 @@
     "height": 512,
     "ratio": "1 / 1",
     "fit": "contain",
-    "page": "/fr/visual-plan",
+    "page": "/fr/visual-plan/",
     "src": "/images/site/xionsgroup-icon-512.png",
     "alt": "XIONS GROUP"
   }

@@ -19,7 +19,7 @@ export function getStaticPaths() {
       <h2>{v.label}</h2><p>{v.use}</p>
       <p><strong>{v.width} × {v.height} px</strong> · {v.ratio.replaceAll(' / ', ':')} · {v.fit}</p>
       <code>{v.name}{v.id.endsWith('-logo') ? '.svg / .png' : '.jpg / .png'}</code>
-      <p>{v.optional ? '可选 · 可暂缓' : '计划素材'} · {v.page !== '/fr/visual-plan' ? <a href={v.page}>查看实际页面位置 →</a> : '浏览器／分享预览用途'}</p>
+      <p>{v.optional ? '可选 · 可暂缓' : '计划素材'} · {v.page !== '/fr/visual-plan/' ? <a href={v.page}>查看实际页面位置 →</a> : '浏览器／分享预览用途'}</p>
     </article>)}</div>
   </div></section>
 </SiteLayout>

@@ -2,38 +2,39 @@
 import { brands } from '../data/brands';
 import LanguageSwitcher from './LanguageSwitcher.astro';
 import { localizedPath } from '../i18n/routes';
-const path = localizedPath(Astro.url.pathname, 'fr').replace(/\/$/, '');
+// Keep the trailing slash: every href below carries one, and localizedPath already emits one.
+const path = localizedPath(Astro.url.pathname, 'fr');
 const items = [
-  { label: 'Le groupe', href: '/fr/groupe', links: [
-    ['À propos', '/fr/groupe'], ['Notre équipe', '/fr/groupe#direction']
+  { label: 'Le groupe', href: '/fr/groupe/', links: [
+    ['À propos', '/fr/groupe/'], ['Notre équipe', '/fr/groupe/#direction']
   ] },
-  { label: 'Nos marques', href: '/fr/marques', links: [
-    ...brands.map(b => [b.name, `/fr/marques/${b.slug}`])
+  { label: 'Nos marques', href: '/fr/marques/', links: [
+    ...brands.map(b => [b.name, `/fr/marques/${b.slug}/`])
   ] }
 ];
 const directLinks = [
-  ['Press', '/fr/presse'],
-  ['Engagements', '/fr/engagements'],
-  ['Carrières', '/fr/carrieres']
+  ['Press', '/fr/presse/'],
+  ['Engagements', '/fr/engagements/'],
+  ['Carrières', '/fr/carrieres/']
 ] as const;
 ---
 <header class="navigation">
-  <a class="navigation-logo" href="/fr" aria-label="XIONS Group — Accueil"><img src="/images/site/xions-logo.svg" alt="XIONS Group" width="140" height="42" /></a>
+  <a class="navigation-logo" href="/fr/" aria-label="XIONS Group — Accueil"><img src="/images/site/xions-logo.svg" alt="XIONS Group" width="140" height="42" /></a>
   <nav class="navigation-desktop" aria-label="Navigation principale">
     {items.map((item, i) => <div class="navigation-item">
       <a href={item.href} class:list={['navigation-trigger', {current: item.links.some(([,href]) => path === href.split('#')[0])}]} aria-current={path === item.href ? 'page' : undefined} aria-expanded="false" aria-controls={`navigation-panel-${i}`}>{item.label}</a>
       <div class="navigation-panel" id={`navigation-panel-${i}`} hidden>
-        <div class="navigation-panel-inner"><p>{item.label}</p><div class="panel-content"><div class="panel-links">{item.links.map(([label, href]) => <a href={href} aria-current={path === href ? 'page' : undefined}>{label}</a>)}</div>{i === 1 && <a class="panel-all" href="/fr/marques">Toutes nos marques</a>}</div></div>
+        <div class="navigation-panel-inner"><p>{item.label}</p><div class="panel-content"><div class="panel-links">{item.links.map(([label, href]) => <a href={href} aria-current={path === href ? 'page' : undefined}>{label}</a>)}</div>{i === 1 && <a class="panel-all" href="/fr/marques/">Toutes nos marques</a>}</div></div>
       </div>
     </div>)}
     {directLinks.map(([label, href]) => <a class:list={['navigation-direct', {current: path === href}]} href={href} aria-current={path === href ? 'page' : undefined}>{label}</a>)}
-    <a class="navigation-contact" href="/fr/contact" aria-current={path === '/fr/contact' ? 'page' : undefined}>Contact</a>
+    <a class="navigation-contact" href="/fr/contact/" aria-current={path === '/fr/contact/' ? 'page' : undefined}>Contact</a>
   </nav>
   <button class="navigation-toggle" aria-expanded="false" aria-controls="navigation-mobile">Menu</button>
   <nav class="navigation-mobile" id="navigation-mobile" aria-label="Navigation mobile" hidden>
     {items.map((item,i) => <div><a class="mobile-primary" href={item.href}>{item.label}</a>{i === 1 && item.links.map(([label,href]) => <a href={href}>{label}</a>)}</div>)}
     {directLinks.map(([label, href]) => <a class="mobile-primary" href={href}>{label}</a>)}
-    <a class="mobile-primary" href="/fr/contact">Contact</a>
+    <a class="mobile-primary" href="/fr/contact/">Contact</a>
     <LanguageSwitcher />
   </nav>
 </header>

@@ -12,7 +12,7 @@ const { compact = false } = Astro.props;
     const logo = brandLogos[brand.slug];
     const plannedLogo = visuals.find(v => v.id === `${brand.slug}-logo`);
     const backdrop = visuals.find(v => v.id === `${brand.slug}-hero`)?.src;
-    return <a class:list={['brand-card', { 'has-backdrop': backdrop }]} href={`/fr/marques/${brand.slug}`} aria-label={`Découvrir ${brand.name}`}>
+    return <a class:list={['brand-card', { 'has-backdrop': backdrop }]} href={`/fr/marques/${brand.slug}/`} aria-label={`Découvrir ${brand.name}`}>
       {backdrop && <img class="brand-backdrop" src={backdrop} alt="" aria-hidden="true" loading="lazy" decoding="async" />}
       <p class="brand-category">{brand.category}</p>
       <div class="brand-logo-slot">
