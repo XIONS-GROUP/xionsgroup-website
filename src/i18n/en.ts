@@ -2,6 +2,10 @@
 // so every localized URL contains complete HTML without client-side translation.
 import { legalCopy } from './legal-en.ts';
 const copy = `
+Réglages du grain|Grain settings
+Intensité du grain|Grain intensity
+Taille du grain|Grain size
+Prévisualisation locale · réglages mémorisés dans ce navigateur.|Local preview · settings saved in this browser.
 Mettre l’animation en pause|Pause animation
 Reprendre l’animation|Resume animation
 Rejoindre les équipes de XIONS Group.|Join the teams at XIONS Group.
