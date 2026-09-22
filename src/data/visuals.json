@@ -117,6 +117,19 @@
     "alt": "Le trophée Fragrance Foundation France 2026 aux côtés du parfum Dorian’s Spleen"
   },
   {
+    "id": "lentropiste-detail-02",
+    "name": "lentropiste-collection-campaign-01",
+    "label": "L’Entropiste · campagne",
+    "use": "品牌页细节网格第二格",
+    "width": 1440,
+    "height": 1800,
+    "ratio": "4 / 5",
+    "fit": "cover",
+    "page": "/fr/marques/lentropiste/",
+    "src": "/images/brands/lentropiste/lentropiste-collection-campaign-01.jpg",
+    "alt": "La collection L’Entropiste en campagne"
+  },
+  {
     "id": "betenoir-hero",
     "name": "betenoir-teaser-01",
     "label": "Betenoir · avant-première",
@@ -222,6 +235,45 @@
     "alt": "Sur le photocall L’Entropiste de la TIME Cannes House"
   },
   {
+    "id": "press-gallery-01",
+    "name": "xionsgroup-event-cannes-02",
+    "label": "Photocall · Cannes",
+    "use": "Press 活动图集",
+    "width": 1200,
+    "height": 1800,
+    "ratio": "2 / 3",
+    "fit": "cover",
+    "page": "/fr/presse/",
+    "src": "/images/press/xionsgroup-event-cannes-02.jpg",
+    "alt": "Photocall L’Entropiste à la TIME Cannes House"
+  },
+  {
+    "id": "press-gallery-02",
+    "name": "xionsgroup-event-launch-01",
+    "label": "Lancement · Paris",
+    "use": "Press 活动图集",
+    "width": 1200,
+    "height": 1600,
+    "ratio": "2 / 3",
+    "fit": "cover",
+    "page": "/fr/presse/",
+    "src": "/images/press/xionsgroup-event-launch-01.jpg",
+    "alt": "Présentation des parfums L’Entropiste lors d’un événement"
+  },
+  {
+    "id": "press-gallery-03",
+    "name": "xionsgroup-event-talent-01",
+    "label": "Talents · Los Angeles",
+    "use": "Press 活动图集",
+    "width": 1800,
+    "height": 1200,
+    "ratio": "2 / 3",
+    "fit": "cover",
+    "page": "/fr/presse/",
+    "src": "/images/press/xionsgroup-event-talent-01.jpg",
+    "alt": "Les masques Masqly entre les mains d’une personnalité lors d’un événement"
+  },
+  {
     "id": "press-event-oscars",
     "name": "xionsgroup-event-oscars-01",
     "label": "Oscars",
@@ -317,13 +369,13 @@
     "name": "xionsgroup-press-editorial-01",
     "label": "Presse & couvertures médiatiques",
     "use": "媒体报道图库；完整保留媒体名称、日期与文字",
-    "width": 2400,
-    "height": 1600,
-    "ratio": "3 / 2",
-    "fit": "contain",
+    "width": 860,
+    "height": 1200,
+    "ratio": "43 / 60",
+    "fit": "cover",
     "page": "/fr/presse/",
-    "src": "",
-    "alt": ""
+    "src": "/images/brands/lentropiste/lentropiste-collection-lockup-01.jpg",
+    "alt": "Visuel de campagne L’Entropiste"
   },
   {
     "id": "press-campaign-digital",

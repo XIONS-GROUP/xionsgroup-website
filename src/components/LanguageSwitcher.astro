@@ -20,6 +20,8 @@ const other = locale === 'fr' ? 'en' : 'fr';
   :global(.navigation-mobile) .language-switcher { margin-top:2rem; padding-top:1rem; }
   :global(.navigation-mobile) .language-switcher a { display:inline-flex; min-width:44px; justify-content:center; }
   .language-switcher.compact { font-size:inherit; line-height:inherit; letter-spacing:inherit; }
-  .language-switcher.compact a { position:relative; display:inline; min-height:0; padding:0; color:inherit; }
+  /* Underlined so it reads as a control: on its own in the footer it otherwise looks like a
+     static label rather than the language toggle. */
+  .language-switcher.compact a { position:relative; display:inline; min-height:0; padding:0; color:inherit; text-decoration:underline; text-underline-offset:.35em; }
   .language-switcher.compact a::after { content:''; position:absolute; inset:-12px -10px; }
 </style>

@@ -6,6 +6,8 @@ import VisualSlot from '../../components/VisualSlot.astro';
 import visuals from '../../data/visuals.json';
 // Real photography only. The placeholder tiles made the page look like a wireframe.
 const events = visuals.filter(v=>v.id.startsWith('press-event-')&&v.src);
+const gallery = visuals.filter(v=>v.id.startsWith('press-gallery-')&&v.src);
+const campaigns = visuals.filter(v=>v.id.startsWith('press-campaign-')&&v.src);
 ---
 <SiteLayout title="Press & rayonnement — XIONS GROUP" description="Relations presse, événements internationaux, campagnes et communication des marques XIONS Group.">
   <PageHero eyebrow="Rayonnement & communication" title="Des marques françaises. Une résonance internationale." intro="Chez Xions Group, créer une marque forte ne suffit pas. Notre ambition est de la faire vivre, la faire voir et la faire rayonner à l’échelle internationale." />
@@ -19,7 +21,13 @@ const events = visuals.filter(v=>v.id.startsWith('press-event-')&&v.src);
     <ul class="event-index">{['Festival de Cannes','César','Golden Globes','Oscars','Grammy Awards','Emmy Awards'].map(name=><li>{name}</li>)}</ul>
     <p class="cities">Cannes. Paris. Los Angeles. Hollywood. New York. Londres…</p>
   </div></section>
-  <section class="section section-rule" id="campagnes"><div class="measure split"><p class="eyebrow">Affichage · Presse · Digital</p><div class="prose"><h2 class="title-lg">Une visibilité qui dépasse les frontières.</h2><p>Notre communication se construit également dans la rue, dans les médias et au plus près des consommateurs.</p><p>Campagnes d’affichage, presse, digital, social media, influence et activations terrain permettent à nos marques d’occuper l’espace et de construire leur présence sur leurs différents marchés.</p><p>Des campagnes pensées en France et déployées à travers le monde, avec une même exigence créative et une identité propre à chaque marque.</p></div></div></section>
+  {gallery.length>0&&<section class="gallery-section"><div class="measure gallery" data-reveal>
+    {gallery.map(asset=><div class="gallery-frame"><VisualSlot id={asset.id} ratio="2 / 3" /></div>)}
+  </div></section>}
+  <section class="section section-rule" id="campagnes"><div class="measure campaign-layout" data-reveal>
+    <div class="campaign-copy"><p class="eyebrow">Affichage · Presse · Digital</p><h2 class="title-lg">Une visibilité qui dépasse les frontières.</h2><p>Notre communication se construit également dans la rue, dans les médias et au plus près des consommateurs.</p><p>Campagnes d’affichage, presse, digital, social media, influence et activations terrain permettent à nos marques d’occuper l’espace et de construire leur présence sur leurs différents marchés.</p><p>Des campagnes pensées en France et déployées à travers le monde, avec une même exigence créative et une identité propre à chaque marque.</p></div>
+    {campaigns.length>0&&<div class="campaign-frame">{campaigns.map(asset=><VisualSlot id={asset.id} ratio="43 / 60" />)}</div>}
+  </div></section>
   <section class="approach"><div class="measure approach-inner" data-reveal>
     <p class="eyebrow">Notre approche</p>
     <h2 class="title-lg">Créer des marques.<br />Créer des moments.</h2>
@@ -44,14 +52,24 @@ const events = visuals.filter(v=>v.id.startsWith('press-event-')&&v.src);
   .event-index { list-style:none; margin:clamp(3rem,5vw,4.5rem) 0 0; padding:0; display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:clamp(2.25rem,4vw,3.5rem) clamp(2rem,4vw,4rem); }
   .event-index li { font-family:var(--display); font-weight:400; font-size:clamp(1.5rem,2.4vw,2.2rem); line-height:1.05; letter-spacing:-.01em; }
   .cities { margin:clamp(3rem,5vw,4rem) 0 0; font-size:.85rem; color:var(--muted); }
+  .gallery-section { padding:0 var(--pad) clamp(4rem,7vw,7rem); }
+  .gallery { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:clamp(1rem,2vw,1.75rem); }
+  .gallery-frame { min-width:0; }
+  /* Campaign visual sits beside its copy rather than under it, mirroring the opening block. */
+  .campaign-layout { display:grid; grid-template-columns:minmax(0,1.25fr) minmax(0,1fr); gap:clamp(2.5rem,6vw,6rem); align-items:center; }
+  .campaign-copy p:not(.eyebrow) { margin:0 0 1.5rem; max-width:38rem; }
+  .campaign-copy p:last-child { margin-bottom:0; }
+  .campaign-frame { min-width:0; }
   /* Dark full-bleed close, so the last two sections no longer read as the same block twice. */
   .approach { padding:clamp(5rem,9vw,9.5rem) var(--pad); background:#0b0b0b; color:#f4f1ec; }
   .approach .title-lg { max-width:16ch; margin:1.5rem 0 clamp(3rem,5vw,4rem); }
   .approach-columns { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:clamp(2rem,4vw,4rem); }
   .approach-columns p { margin:0; color:#cdc7bf; max-width:34rem; }
   @media(max-width:800px) {
-    .ambition-layout { grid-template-columns:1fr; gap:2.5rem; }
+    .ambition-layout,.campaign-layout { grid-template-columns:1fr; gap:2.5rem; }
     .event-index { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .gallery { grid-template-columns:repeat(2,minmax(0,1fr)); }
+    .gallery-frame:first-child { grid-column:span 2; }
     .approach-columns { grid-template-columns:1fr; gap:1.5rem; }
   }
   @media(max-width:600px) { .event-index { grid-template-columns:1fr; gap:1.25rem; } }

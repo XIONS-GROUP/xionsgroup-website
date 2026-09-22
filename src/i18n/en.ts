@@ -113,17 +113,17 @@ Création · Science · Culture|Creativity · Science · Culture
 2560 × 1440 · fond recadré à l’écran|2560 × 1440 · background cropped to screen
 1440 × 3120 · plein écran · recadrage adaptable|1440 × 3120 · full screen · adaptable crop
 Notre vision|Our vision
-Créer des maisons capables de redéfinir leur catégorie.|Creating houses that redefine their category.
+Créer des maisons capables de redéfinir leur catégorie.|Creating maisons that redefine their category.
 XIONS Group est un groupe français indépendant qui crée, développe et déploie des marques de beauté premium à l’international.|XIONS Group is an independent French group that creates, develops and grows premium beauty brands internationally.
-Chaque maison possède son territoire, son langage et sa vision. Toutes partagent une même ambition : inventer de nouveaux standards.|Each house has its own territory, language and vision. All share one ambition: to set new standards.
+Chaque maison possède son territoire, son langage et sa vision. Toutes partagent une même ambition : inventer de nouveaux standards.|Each maison has its own territory, language and vision. All share one ambition: to set new standards.
 Découvrir le Groupe|Discover the Group
 Le portefeuille|The portfolio
-Quatre maisons.|Four houses.
+Quatre maisons.|Four maisons.
 Quatre regards.|Four perspectives.
 Parfumerie de niche|Niche perfumery
 Une parfumerie libre, audacieuse et inattendue.|Perfumery that is free, bold and unexpected.
 Parfumerie|Perfumery
-Une nouvelle maison est en préparation.|A new house is taking shape.
+Une nouvelle maison est en préparation.|A new maison is taking shape.
 Cosmétique · Science|Skincare · Science
 La science de la lumière au service de la longévité de la peau.|The science of light for skin longevity.
 Le soin intensif des zones oubliées.|Intensive care for overlooked areas.
@@ -141,28 +141,28 @@ Rayonner|Growing our presence
 Communication, culture et déploiement international.|Communication, culture and international growth.
 Betenoir rejoindra prochainement le portefeuille parfumerie de XIONS Group avec une identité et un territoire olfactif qui lui seront propres.|Betenoir will soon join XIONS Group’s fragrance portfolio with an identity and olfactory territory of its own.
 Betenoir · avant-première|Betenoir · preview
-La maison|The house
+La maison|The maison
 Le projet se construit dans la discrétion, autour d’une vision forte de la parfumerie contemporaine.|The project is developing behind the scenes, shaped by a strong vision of contemporary perfumery.
 Une nouvelle identité. Un nouveau territoire olfactif. Une nouvelle histoire à découvrir.|A new identity. A new olfactory territory. A new story to discover.
 betenoir.com · Bientôt en ligne|betenoir.com · Coming soon
 Territoire|Territory
-Une maison pensée pour occuper un espace distinct dans la parfumerie.|A house conceived to occupy a distinctive space in perfumery.
+Une maison pensée pour occuper un espace distinct dans la parfumerie.|A maison conceived to occupy a distinctive space in perfumery.
 Écriture|Expression
 Une expression visuelle et olfactive développée comme un langage complet.|A visual and olfactory expression developed as a complete language.
 Lancement|Launch
-La maison sera révélée progressivement au cours de l’année 2026.|The house will be revealed progressively throughout 2026.
-Découvrir nos autres maisons|Discover our other houses
+La maison sera révélée progressivement au cours de l’année 2026.|The maison will be revealed progressively throughout 2026.
+Découvrir nos autres maisons|Discover our other maisons
 Toutes les marques|All brands
 Le portefeuille de marques de XIONS Group.|The XIONS Group brand portfolio.
 Nos Marques — XIONS GROUP|Our Brands — XIONS GROUP
 Regarder là où les autres ne regardent pas encore.|Looking where others have yet to look.
-Parfum, science de la lumière et zones oubliées du corps : quatre maisons, quatre territoires singuliers.|Fragrance, the science of light and overlooked areas of the body: four houses, four distinctive territories.
+Parfum, science de la lumière et zones oubliées du corps : quatre maisons, quatre territoires singuliers.|Fragrance, the science of light and overlooked areas of the body: four maisons, four distinctive territories.
 Le portefeuille · 2026|The portfolio · 2026
 Construire les nouveaux standards.|Setting new standards.
 L’Entropiste bouscule les conventions à travers des créations olfactives construites autour de contrastes, de matières et d’associations inattendues.|L’Entropiste challenges conventions through olfactory creations built around contrasts, materials and unexpected combinations.
 Collection de parfums L’Entropiste|L’Entropiste fragrance collection
 De Dorian’s Spleen, gourmand fumé aux accents de whisky, café et cendres, à Ensang Noir, Altamura, Blanc Sada, Dawn Whispers, Jodhpur 6am, Semence Douce et White Blood, chaque parfum affirme son propre caractère.|From Dorian’s Spleen, a smoky gourmand with notes of whisky, coffee and ashes, to Ensang Noir, Altamura, Blanc Sada, Dawn Whispers, Jodhpur 6am, Semence Douce and White Blood, each fragrance expresses its own character.
-Signées par le maître parfumeur Bertrand Duchaufour, les fragrances composent une maison contemporaine, expressive et sans compromis.|Created by master perfumer Bertrand Duchaufour, these fragrances define a contemporary, expressive and uncompromising house.
+Signées par le maître parfumeur Bertrand Duchaufour, les fragrances composent une maison contemporaine, expressive et sans compromis.|Created by master perfumer Bertrand Duchaufour, these fragrances define a contemporary, expressive and uncompromising maison.
 Site officiel|Official website
 L’Entropiste · distinction|L’Entropiste · award
 La distinction|The award
@@ -201,7 +201,7 @@ Votre demande a bien été transmise. Notre équipe l’examinera et reviendra v
 Retour à l’accueil|Back to home
 En attendant|In the meantime
 Découvrir XIONS Group.|Discover XIONS Group.
-Explorez notre vision, nos maisons et les projets qui façonnent le Groupe.|Explore our vision, our houses and the projects shaping the Group.
+Explorez notre vision, nos maisons et les projets qui façonnent le Groupe.|Explore our vision, our maisons and the projects shaping the Group.
 Pour toute question complémentaire :|For any further enquiries:
 Relations presse, événements internationaux, campagnes et communication des marques XIONS Group.|Press relations, international events, campaigns and communications for XIONS Group brands.
 Press & rayonnement — XIONS GROUP|Press & International Presence — XIONS GROUP
@@ -239,6 +239,15 @@ Page|Page
 introuvable.|not found.
 La page demandée n’existe pas ou a été déplacée.|The page you requested does not exist or has moved.
 Festival de Cannes, César, Golden Globes, Oscars, Grammy Awards, Emmy Awards.|Festival de Cannes, César, Golden Globes, Oscars, Grammy Awards, Emmy Awards.
+La collection L’Entropiste en campagne|The L’Entropiste collection in campaign
+Photocall L’Entropiste à la TIME Cannes House|The L’Entropiste photocall at TIME Cannes House
+Présentation des parfums L’Entropiste lors d’un événement|The L’Entropiste fragrances presented at an event
+Les masques Masqly entre les mains d’une personnalité lors d’un événement|Masqly masks in the hands of a guest at an event
+Visuel de campagne L’Entropiste|L’Entropiste campaign visual
+L’Entropiste · campagne|L’Entropiste · campaign
+Photocall · Cannes|Photocall · Cannes
+Lancement · Paris|Launch · Paris
+Talents · Los Angeles|Talent · Los Angeles
 Les fondateurs de XIONS Group|The founders of XIONS Group
 Le trophée Fragrance Foundation France 2026 aux côtés du parfum Dorian’s Spleen|The Fragrance Foundation France 2026 trophy beside the Dorian’s Spleen fragrance
 La gamme Sunlution au complet|The complete Sunlution range
