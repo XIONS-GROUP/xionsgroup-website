@@ -54,9 +54,12 @@ for (const [fr, en] of routes) {
     for (const lang of ['fr','en']) {
       assert.equal(attr(find('link','hreflang',lang),'href'), origin + paths[lang], at);
       const switchers = doc.nodes.filter(n => n.tagName === 'a' && attr(n,'data-language') === lang);
-      assert.equal(switchers.length, 2, `Footer and mobile switchers: ${at}`);
+      assert.equal(switchers.length, lang === locale ? 1 : 2, `Mobile choices and single footer toggle: ${at}`);
       for (const link of switchers) assert.equal(attr(link,'href'), paths[lang], at);
     }
+    const toggle=doc.nodes.find(n=>n.tagName==='a' && attr(n,'data-language-toggle')!==undefined);
+    assert.equal(toggle.childNodes.map(n=>n.value||'').join(''),locale.toUpperCase(),`Footer shows current language: ${at}`);
+    assert.equal(attr(toggle,'href'),paths[locale==='fr'?'en':'fr'],`Footer switches language: ${at}`);
     const excluded = ['merci','404'].includes(fr);
     assert.equal(attr(find('meta','name','robots'),'content'), live && !excluded ? 'index, follow' : 'noindex, nofollow', at);
     assert.equal(attr(find('meta','property','og:url'),'content'), origin + at, at);

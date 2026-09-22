@@ -1,11 +1,15 @@
 ---
 import { localeFor, localizedPath } from '../i18n/routes';
 const locale = localeFor(Astro.url.pathname);
+const { compact = false } = Astro.props;
+const other = locale === 'fr' ? 'en' : 'fr';
 ---
-<div class="language-switcher" role="group" aria-label={locale === 'en' ? 'Language' : 'Langue'}>
+<div class:list={['language-switcher', {compact}]} role="group" aria-label={locale === 'en' ? 'Language' : 'Langue'}>
+  {compact ? <a href={localizedPath(Astro.url.pathname,other)} hreflang={other} data-language={other} data-language-toggle aria-label={locale === 'fr' ? 'Langue actuelle : français. Passer en anglais.' : 'Current language: English. Switch to French.'}>{locale.toUpperCase()}</a> : <>
   <a href={localizedPath(Astro.url.pathname, 'fr')} lang="fr" hreflang="fr" data-language="fr" aria-current={locale === 'fr' ? 'true' : undefined} aria-label="Français">FR</a>
   <span aria-hidden="true">/</span>
   <a href={localizedPath(Astro.url.pathname, 'en')} lang="en" hreflang="en" data-language="en" aria-current={locale === 'en' ? 'true' : undefined} aria-label="English">EN</a>
+  </>}
 </div>
 <style>
   .language-switcher { display:flex; align-items:center; gap:.7rem; font-size:.75rem; letter-spacing:.08em; }
@@ -15,4 +19,7 @@ const locale = localeFor(Astro.url.pathname);
   :global(.site-footer) .language-switcher { --ink:#fff; --muted:#b9b6b1; }
   :global(.navigation-mobile) .language-switcher { margin-top:2rem; padding-top:1rem; }
   :global(.navigation-mobile) .language-switcher a { display:inline-flex; min-width:44px; justify-content:center; }
+  .language-switcher.compact { font-size:inherit; line-height:inherit; letter-spacing:inherit; }
+  .language-switcher.compact a { position:relative; display:inline; min-height:0; padding:0; color:inherit; }
+  .language-switcher.compact a::after { content:''; position:absolute; inset:-12px -10px; }
 </style>

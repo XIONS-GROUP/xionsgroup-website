@@ -16,7 +16,10 @@ const year = new Date().getFullYear();
   </div>
   <div class="footer-bottom">
     <p>© {year} XIONS GROUP</p>
-    <LanguageSwitcher />
-    <div><a href="/fr/conditions-generales">Conditions d’utilisation</a><a href="/fr/mentions-legales">Mentions légales</a><a href="/fr/politique-confidentialite">Confidentialité</a><a href="/fr/politique-cookies">Cookies</a></div>
+    <div class="footer-legal"><LanguageSwitcher compact /><a href="/fr/conditions-generales">Conditions d’utilisation</a><a href="/fr/mentions-legales">Mentions légales</a><a href="/fr/politique-confidentialite">Confidentialité</a><a href="/fr/politique-cookies">Cookies</a></div>
   </div>
 </footer>
+<style>
+  .footer-bottom { align-items:baseline; gap:1rem 2rem; }
+  .footer-legal { align-items:baseline; flex-wrap:wrap; }
+</style>

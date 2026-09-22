@@ -1,4 +1,4 @@
-import { heroLightDefaults, heroLightTiming } from '../config/hero-light';
+import { heroLightDefaults, heroLightTiming, heroFrame, normalizeTiming, totalDuration } from '../config/hero-light';
 // Analytic light on a fixed silhouette; grain never animates.
 const vertex = `attribute vec2 position;
 void main(){gl_Position=vec4(position,0.,1.);}`;
@@ -10,11 +10,18 @@ uniform float grainSize;
 uniform float pixelScale;
 uniform float artHeight;
 uniform float motion;
+uniform float formation;
+uniform float returning;
+uniform float angle;
 float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
 void main(){
   vec2 uv=gl_FragCoord.xy/resolution;
   // One scale for both axes. Width changes crop, never shrink, the artwork.
-  vec2 p=(uv-.5)*resolution/vec2(artHeight*(2876./1580.),artHeight);
+  // Rotate in isotropic physical coordinates before applying the reference aspect.
+  vec2 physical=(uv-.5)*resolution/artHeight;
+  float c=cos(angle),s=sin(angle);
+  vec2 rotated=mat2(c,-s,s,c)*physical;
+  vec2 p=rotated/vec2(2876./1580.,1.);
   float y=abs(p.y);
   float width=.100+.205*pow(y*2.,1.75);
   float d=width-abs(p.x);
@@ -27,7 +34,8 @@ void main(){
   // X geometry lives in art coordinates; the animation field covers the entire canvas.
   // Extra space above/below a small mobile X belongs to the same light field.
   vec2 extent=resolution/(2.*vec2(artHeight*(2876./1580.),artHeight));
-  float cycle=mix(12.,mod(time,${heroLightTiming.cycle.toFixed(1)}),motion);
+  // Preserve the approved white-to-X sequence, remapped to its adjustable duration.
+  float cycle=mix(2.,10.,formation);
   float sides=smoothstep(2.,7.,cycle);
   float slide=(max(extent.x,.6)+.35)*(1.-sides);
   float sideShadow=1.-smoothstep(-softness,softness,d+slide);
@@ -37,18 +45,22 @@ void main(){
   float innerLight=.042+.86*(1.-.96*wedge)*falloff;
   float interior=mix(1.,innerLight,topBottom);
   float assembled=mix(interior,.042,sideShadow);
-  float formed=smoothstep(7.,${heroLightTiming.intro.toFixed(1)},cycle);
+  float formed=smoothstep(7.,10.,cycle);
   float reference=.042+light+halo*falloff;
-  // A final highlight settles into a long, fully formed X hold (10–23 seconds).
+  // The formation highlight settles before the timed hold and rotation stages.
   float sweep=exp(-pow((p.y-mix(.6,-.6,smoothstep(7.,10.,cycle)))/.12,2.));
   float glint=.09*sweep*exp(-pow(d/(softness*2.5),2.))*falloff;
   glint*=smoothstep(7.,7.6,cycle)*(1.-smoothstep(9.4,10.,cycle))*motion;
   float value=mix(assembled,reference,formed)+glint;
-  value+=.012*sin((cycle-10.)*.5)*light*formed*motion;
-  // Light expands beyond every corner, returning the whole viewport to white.
-  float exitProgress=smoothstep(23.,28.,cycle);
-  float radius=exitProgress*(length(extent)+.4);
-  float dissolve=(1.-smoothstep(radius-.15,radius+.15,length(p)))*smoothstep(23.,23.6,cycle);
+  value+=.012*sin(time*.5)*light*formed*motion;
+  // A branched light field follows all four X arms, then fills the full crop.
+  float reach=returning*returning*(3.-2.*returning);
+  float armDistance=abs(abs(p.x)-(.035+.34*y));
+  float travel=.4*y+1.2*armDistance;
+  float maxTravel=.4*extent.y+1.2*(extent.x+.035+.34*extent.y)+.4;
+  float spread=reach*maxTravel;
+  float dissolve=(1.-smoothstep(spread-.12,spread+.12,travel))*smoothstep(0.,.12,returning);
+  dissolve=mix(dissolve,1.,smoothstep(.82,1.,returning));
   value=mix(value,1.,dissolve);
   float texture=smoothstep(2.,8.,cycle)*(1.-dissolve);
   vec2 cell=floor(gl_FragCoord.xy/max(.5,grainSize*pixelScale));
@@ -81,8 +93,10 @@ export function initHeroLight(root: HTMLElement) {
   let timeLocation: WebGLUniformLocation | null = null;
   let resolutionLocation: WebGLUniformLocation | null = null;
   let amountLocation: WebGLUniformLocation | null = null, sizeLocation: WebGLUniformLocation | null = null, scaleLocation: WebGLUniformLocation | null = null;
+  let formationLocation: WebGLUniformLocation | null = null, exitLocation: WebGLUniformLocation | null = null, angleLocation: WebGLUniformLocation | null = null;
   let heightLocation: WebGLUniformLocation | null = null, motionLocation: WebGLUniformLocation | null = null;
-  let frame = 0, elapsed = 0, previous = 0;
+  let timing={...heroLightTiming};
+  let frame = 0, elapsed = 0, previous = 0, lastProgress=-1;
   let visible = true, paused = false, lost = false, disposed = false;
 
   function setup() {
@@ -120,12 +134,20 @@ export function initHeroLight(root: HTMLElement) {
     scaleLocation=context.getUniformLocation(program,'pixelScale');
     heightLocation=context.getUniformLocation(program,'artHeight');
     motionLocation=context.getUniformLocation(program,'motion');
+    formationLocation=context.getUniformLocation(program,'formation');
+    exitLocation=context.getUniformLocation(program,'returning');
+    angleLocation=context.getUniformLocation(program,'angle');
     return true;
   }
   function draw() {
     if (lost || disposed) return;
     context.uniform2f(resolutionLocation,canvas.width,canvas.height);
-    context.uniform1f(timeLocation,elapsed);
+    const state=heroFrame(elapsed,timing,reduced.matches);
+    context.uniform1f(timeLocation,state.time);context.uniform1f(formationLocation,state.formation);
+    context.uniform1f(exitLocation,state.exit);context.uniform1f(angleLocation,state.angle);
+    if(import.meta.env.DEV && (Math.abs(elapsed-lastProgress)>.15 || paused)){
+      lastProgress=elapsed;window.dispatchEvent(new CustomEvent('xions:hero-progress',{detail:{...state,paused}}));
+    }
     context.uniform1f(amountLocation,grainAmount);
     context.uniform1f(sizeLocation,grainSize);
     context.uniform1f(scaleLocation,pixelScale);
@@ -173,11 +195,23 @@ export function initHeroLight(root: HTMLElement) {
     const detail=(event as CustomEvent).detail;
     if (!Number.isFinite(detail?.amount)||!Number.isFinite(detail?.size))return;
     grainAmount=Math.max(0,Math.min(1,detail.amount));grainSize=Math.max(.5,Math.min(4,detail.size));
+    const next=normalizeTiming(detail.timing);
+    const changed=JSON.stringify(next)!==JSON.stringify(timing);
+    if(changed){timing=next;elapsed=0;lastProgress=-1;paused=false;root.dataset.paused='false';}
     resize();
+    if(changed)sync();
   };
+  const seek=(event:Event)=>{
+    const at=(event as CustomEvent).detail?.time;
+    if(!Number.isFinite(at))return;
+    elapsed=Math.max(0,Math.min(totalDuration(timing)-.001,at));paused=true;root.dataset.paused='true';sync();
+  };
+  const previewToggle=()=>{toggle();lastProgress=-1;draw();};
   if(import.meta.env.DEV){
     window.addEventListener('xions:hero-settings',onSettings);
     window.addEventListener('xions:hero-replay',replay);
+    window.addEventListener('xions:hero-seek',seek);
+    window.addEventListener('xions:hero-toggle',previewToggle);
   }
   const onLost=(event:Event)=>{event.preventDefault();lost=true;root.dataset.ready='false';sync();};
   const onRestored=()=>{lost=false;if(setup()){root.dataset.ready='true';resize();sync();}else{lost=true;sync();}};
@@ -190,6 +224,8 @@ export function initHeroLight(root: HTMLElement) {
   document.addEventListener('astro:before-swap',()=>{
     window.removeEventListener('xions:hero-settings',onSettings);
     window.removeEventListener('xions:hero-replay',replay);
+    window.removeEventListener('xions:hero-seek',seek);
+    window.removeEventListener('xions:hero-toggle',previewToggle);
     disposed=true;cancelAnimationFrame(frame);observer.disconnect();sizing.disconnect();
     reduced.removeEventListener('change',sync);document.removeEventListener('visibilitychange',sync);
     button.removeEventListener('click',toggle);canvas.removeEventListener('webglcontextlost',onLost);

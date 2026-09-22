@@ -6,7 +6,7 @@ export function getStaticPaths() {
 <!doctype html>
 <html lang="zh-CN">
 <head><meta charset="utf-8"/><meta name="viewport" content="width=device-width,initial-scale=1"/><meta name="robots" content="noindex,nofollow"/><title>XIONS · 本地设计预览</title></head>
-<body>
+<body class="toolbox-open">
   <main class="stage"><div class="frame-wrap"><iframe title="网站响应式预览" src="/fr/" /></div></main>
   <button class="launcher" aria-expanded="true" aria-controls="toolbox">设计工具箱</button>
   <aside id="toolbox">
@@ -15,13 +15,33 @@ export function getStaticPaths() {
     <p id="dimensions"></p>
     <label>当前可见区域</label><p id="region" aria-live="polite">首页 Hero</p>
     <div id="hero-options">
+      <details open><summary>尺寸与构图</summary>
+      <div id="desktop-options" hidden><label for="desktop-height">桌面 X 高度 <output id="desktop-height-value"></output></label><input id="desktop-height" type="range" min="500" max="1400" step="10" value="900"/></div>
       <div id="mobile-options">
         <label for="hero-height">手机首屏高度 <output id="hero-height-value"></output></label><input id="hero-height" type="range" min="480" max="1100" step="1" value="844"/>
         <label for="x-height">手机 X 高度 <output id="x-height-value"></output></label><input id="x-height" type="range" min="360" max="1100" step="10" value="360"/>
       </div>
+      </details>
+      <details><summary>噪点质感</summary>
       <label for="grain">噪点强度 <output id="grain-value"></output></label><input id="grain" type="range" min="0" max="100" step="1" value="12"/>
       <label for="size">颗粒大小 <output id="size-value"></output></label><input id="size" type="range" min="0.5" max="4" step="0.1" value="0.9"/>
-      <button id="replay">重播开场</button>
+      </details>
+      <details open><summary>动画时长 <span id="total-time"></span></summary>
+        <div class="timing-grid">
+          <label for="time-white">白场停留<input id="time-white" data-timing="white" type="number" min="0" max="30" step="0.5" value="2"/></label>
+          <label for="time-formation">白场 → X<input id="time-formation" data-timing="formation" type="number" min="1" max="30" step="0.5" value="8"/></label>
+          <label for="time-hold">旋转前停留<input id="time-hold" data-timing="hold" type="number" min="0" max="30" step="0.5" value="4"/></label>
+          <label for="time-rotation">旋转 180°<input id="time-rotation" data-timing="rotation" type="number" min="1" max="30" step="0.5" value="6"/></label>
+          <label for="time-settle">旋转后停留<input id="time-settle" data-timing="settle" type="number" min="0" max="30" step="0.5" value="3"/></label>
+          <label for="time-exit">X → 白场<input id="time-exit" data-timing="exit" type="number" min="1" max="30" step="0.5" value="5"/></label>
+        </div>
+        <small>单位：秒。更改时长后自动从头计时。旋转曲线：先慢后快，末端柔和停稳。</small>
+      </details>
+      <div class="transport">
+        <label for="timeline">时间轴 · 拖动暂停检查</label><input id="timeline" type="range" min="0" max="1000" step="1" value="0"/>
+        <p id="time-status" aria-live="off"></p>
+        <div class="transport-buttons"><button id="replay">重播开场</button><button id="playback">暂停</button></div>
+      </div>
     </div>
     <p id="no-options" hidden>此区域暂时没有可调参数。滚回首页首屏即可调整 X。</p>
     <small>自动跟随画面区域，无需选中元素。参数仅保存在此浏览器；确认后再应用到网站默认值。</small>
@@ -34,7 +54,11 @@ export function getStaticPaths() {
   :global(*){box-sizing:border-box} :global(body){margin:0;background:#e8e8e8;font:13px/1.5 system-ui,sans-serif;color:#171717}
   .stage{position:fixed;inset:0;display:grid;place-items:center;overflow:hidden}.frame-wrap{position:relative;background:white;box-shadow:0 5px 35px #0002}iframe{position:absolute;inset:0;border:0;transform-origin:top left;background:white}
   .launcher{position:fixed;bottom:18px;right:18px;z-index:3;border:0;background:#111;color:white;border-radius:25px;padding:12px 18px;cursor:pointer}
-  aside{position:fixed;z-index:4;right:18px;bottom:72px;width:min(300px,calc(100vw - 36px));max-height:calc(100svh - 100px);overflow:auto;padding:18px;border:1px solid #ddd;border-radius:14px;background:#ffffffed;box-shadow:0 8px 36px #0002;backdrop-filter:blur(18px)}
+  aside{position:fixed;z-index:4;right:18px;bottom:72px;width:min(380px,calc(100vw - 36px));max-height:calc(100svh - 100px);overflow:auto;padding:18px;border:1px solid #ddd;border-radius:14px;background:#ffffffed;box-shadow:0 8px 36px #0002;backdrop-filter:blur(18px)}
+  @media(min-width:1100px){:global(.toolbox-open) .stage{right:416px}aside{top:18px;bottom:72px;max-height:none}}
+  details{border-top:1px solid #ddd;padding:14px 0}summary{cursor:pointer;font-weight:600}summary span{float:right;font-weight:400;color:#777}
+  .timing-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}.timing-grid input{padding:7px 9px;background:white;border:1px solid #ccc;border-radius:5px;font:inherit;color:#111}
+  .transport{border-top:1px solid #ddd;padding-top:2px}.transport-buttons{display:flex;gap:8px}.transport-buttons button{padding:8px 12px;border:1px solid #bbb;background:white;border-radius:6px;margin:0!important}#time-status{font-size:11px;font-variant-numeric:tabular-nums;color:#555}
   aside[hidden], [hidden]{display:none!important}header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}button{font:inherit;cursor:pointer}header button{background:none;border:0;font-size:23px;line-height:1;padding:6px}.devices{display:flex;gap:8px}.devices button{flex:1;padding:8px;border:1px solid #ccc;border-radius:7px;background:white}.devices [aria-pressed=true]{background:#171717;color:white;border-color:#171717}
   label{display:block;margin-top:15px;font-size:12px;color:#555}output{float:right;color:#111}input{width:100%;margin:10px 0 0;accent-color:#171717}#region{font-weight:600;margin:4px 0 12px}#dimensions{font-size:11px;color:#777}#replay{margin-top:14px;padding:8px 12px;border:1px solid #bbb;background:white;border-radius:6px}small{display:block;margin-top:16px;color:#777;font-size:11px}a{display:inline-block;margin-top:14px;color:#555;font-size:11px}
 </style>
