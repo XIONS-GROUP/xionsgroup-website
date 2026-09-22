@@ -1,5 +1,5 @@
 ---
-import { heroLightDefaults, heroLightTiming, heroLightFlow } from '../config/hero-light';
+import { heroLightDefaults, heroLightTiming, heroLightFlow, heroLightEase } from '../config/hero-light';
 export function getStaticPaths() {
   return process.env.NODE_ENV !== 'production' ? [{params:{preview:'design-preview'}}] : [];
 }
@@ -41,7 +41,18 @@ export function getStaticPaths() {
           <label for="time-settle">旋转后停留<input id="time-settle" data-timing="settle" type="number" min="0" max="30" step="0.5" value={heroLightTiming.settle}/></label>
           <label for="time-exit">X → 白场<input id="time-exit" data-timing="exit" type="number" min="1" max="30" step="0.5" value={heroLightTiming.exit}/></label>
         </div>
-        <small>单位：秒。更改时长后自动从头计时。缓进缓出 S 曲线：起步慢、中段快、末端慢。X → 白场是「白场 → X」的倒放，所以一轮的末帧与首帧相同，循环无缝。</small>
+        <small>单位：秒。更改时长后自动从头计时。X → 白场是「白场 → X」的倒放，所以一轮的末帧与首帧相同，循环无缝。</small>
+      </details>
+      <details open><summary>缓动</summary>
+        <label for="ease-power">缓动强度 <output id="ease-power-value"></output></label><input id="ease-power" type="range" min="1" max="8" step="0.1" value={heroLightEase.power}/>
+        <small>形成、旋转和退场共用这条 S 曲线。1.0 是匀速无缓动；数值越大，两端停得越久、中段加速越明显。曲线对称，所以调它不会破坏首尾衔接。</small>
+      </details>
+      <details open><summary>保存与版本</summary>
+        <label for="preset-name">版本名称</label><input id="preset-name" type="text" maxlength="40" placeholder="例如 20秒慢旋转"/>
+        <button id="preset-save" type="button">保存当前参数</button>
+        <p id="preset-status" aria-live="polite"></p>
+        <ul id="preset-list"></ul>
+        <small>保存到 local-materials/hero-presets/，不进仓库也不会部署。存的是工具箱全部参数：尺寸、噪点、流光、缓动和时长。</small>
       </details>
       <div class="transport">
         <label for="timeline">时间轴 · 拖动暂停检查</label><input id="timeline" type="range" min="0" max="1000" step="1" value="0"/>
@@ -64,10 +75,18 @@ export function getStaticPaths() {
   @media(min-width:1100px){:global(.toolbox-open) .stage{right:416px}aside{top:18px;bottom:72px;max-height:none}}
   details{border-top:1px solid #ddd;padding:14px 0}summary{cursor:pointer;font-weight:600}summary span{float:right;font-weight:400;color:#777}
   .timing-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}.timing-grid input{padding:7px 9px;background:white;border:1px solid #ccc;border-radius:5px;font:inherit;color:#111}
+  #preset-name{padding:7px 9px;background:white;border:1px solid #ccc;border-radius:5px;font:inherit;color:#111}
+  #preset-save{margin-top:10px;padding:8px 12px;border:1px solid #bbb;background:white;border-radius:6px}
+  #preset-status{margin:8px 0 0;font-size:11px;color:#555;min-height:1em}
+  #preset-list{list-style:none;margin:10px 0 0;padding:0;display:grid;gap:6px}
+  #preset-list li{display:flex;align-items:baseline;justify-content:space-between;gap:8px;font-size:11px;color:#555}
+  #preset-list strong{font-weight:600;color:#111}
+  #preset-list button{padding:4px 9px;border:1px solid #ccc;background:white;border-radius:5px;font-size:11px;flex:none}
   .transport{border-top:1px solid #ddd;padding-top:2px}.transport-buttons{display:flex;gap:8px}.transport-buttons button{padding:8px 12px;border:1px solid #bbb;background:white;border-radius:6px;margin:0!important}#time-status{font-size:11px;font-variant-numeric:tabular-nums;color:#555}
   aside[hidden], [hidden]{display:none!important}header{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}button{font:inherit;cursor:pointer}header button{background:none;border:0;font-size:23px;line-height:1;padding:6px}.devices{display:flex;gap:8px}.devices button{flex:1;padding:8px;border:1px solid #ccc;border-radius:7px;background:white}.devices [aria-pressed=true]{background:#171717;color:white;border-color:#171717}
   label{display:block;margin-top:15px;font-size:12px;color:#555}output{float:right;color:#111}input{width:100%;margin:10px 0 0;accent-color:#171717}#region{font-weight:600;margin:4px 0 12px}#dimensions{font-size:11px;color:#777}#replay{margin-top:14px;padding:8px 12px;border:1px solid #bbb;background:white;border-radius:6px}small{display:block;margin-top:16px;color:#777;font-size:11px}a{display:inline-block;margin-top:14px;color:#555;font-size:11px}
 </style>
 <script>
-  import '../scripts/preview-toolbox';
+  // The route itself is dev-only; this keeps its bundle out of production builds too.
+  if (import.meta.env.DEV) import('../scripts/preview-toolbox');
 </script>

@@ -1,4 +1,4 @@
-import { heroLightDefaults, heroLightTiming, heroLightFlow, heroFrame, normalizeTiming, normalizeFlow, totalDuration } from '../config/hero-light';
+import { heroLightDefaults, heroLightTiming, heroLightFlow, heroFrame, normalizeTiming, normalizeFlow, normalizeEase, totalDuration } from '../config/hero-light';
 // Analytic light on a fixed silhouette; grain never animates.
 const vertex = `attribute vec2 position;
 void main(){gl_Position=vec4(position,0.,1.);}`;
@@ -98,6 +98,7 @@ export function initHeroLight(root: HTMLElement) {
   let heightLocation: WebGLUniformLocation | null = null, motionLocation: WebGLUniformLocation | null = null;
   let timing={...heroLightTiming};
   let flow=normalizeFlow();
+  let ease=normalizeEase();
   let frame = 0, elapsed = 0, previous = 0, lastProgress=-1;
   let visible = true, paused = false, lost = false, disposed = false;
 
@@ -144,7 +145,7 @@ export function initHeroLight(root: HTMLElement) {
   function draw() {
     if (lost || disposed) return;
     context.uniform2f(resolutionLocation,canvas.width,canvas.height);
-    const state=heroFrame(elapsed,timing,reduced.matches);
+    const state=heroFrame(elapsed,timing,reduced.matches,ease.power);
     context.uniform1f(flowTimeLocation,state.flowTime*flow.speed);context.uniform1f(flowAmountLocation,state.flowAmount*flow.strength);
     context.uniform1f(formationLocation,state.formation);
     context.uniform1f(angleLocation,state.angle);
@@ -200,6 +201,7 @@ export function initHeroLight(root: HTMLElement) {
     if (!Number.isFinite(detail?.amount)||!Number.isFinite(detail?.size))return;
     grainAmount=Math.max(0,Math.min(1,detail.amount));grainSize=Math.max(.5,Math.min(4,detail.size));
     if(detail.flow)flow=normalizeFlow(detail.flow);
+    if(detail.ease)ease=normalizeEase(detail.ease);
     const next=normalizeTiming(detail.timing);
     const changed=JSON.stringify(next)!==JSON.stringify(timing);
     if(changed){timing=next;elapsed=0;lastProgress=-1;paused=false;root.dataset.paused='false';}

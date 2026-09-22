@@ -1,4 +1,4 @@
-import { heroLightDefaults, heroLightTiming, normalizeTiming, normalizeFlow, totalDuration, type HeroTiming } from '../config/hero-light';
+import { heroLightDefaults, heroLightTiming, normalizeTiming, normalizeFlow, normalizeEase, totalDuration, type HeroTiming } from '../config/hero-light';
 const iframe=document.querySelector<HTMLIFrameElement>('iframe')!;
 const panel=document.querySelector<HTMLElement>('#toolbox')!;
 const launcher=document.querySelector<HTMLButtonElement>('.launcher')!;
@@ -6,8 +6,11 @@ const byId=(id:string)=>document.getElementById(id)!;
 const inputs={desktop:byId('desktop-height') as HTMLInputElement,height:byId('hero-height') as HTMLInputElement,x:byId('x-height') as HTMLInputElement,grain:byId('grain') as HTMLInputElement,size:byId('size') as HTMLInputElement};
 const timingInputs=[...document.querySelectorAll<HTMLInputElement>('[data-timing]')];
 const flowInputs={strength:byId('flow-strength') as HTMLInputElement,speed:byId('flow-speed') as HTMLInputElement};
+const easeInput=byId('ease-power') as HTMLInputElement;
 const flowKey='xions-preview-flow-v1';
+const easeKey='xions-preview-ease-v1';
 let flow=normalizeFlow();
+let ease=normalizeEase();
 let device:'mobile'|'desktop'='mobile';
 const layoutKey='xions-preview-layout-v3';
 const timingKey='xions-preview-timing-v2';
@@ -24,6 +27,7 @@ try {
   if(Number.isFinite(stored?.desktop))settings.desktop=Math.max(500,Math.min(1400,stored.desktop));
   timing=normalizeTiming(JSON.parse(localStorage.getItem(timingKey)||'null')||{});
   flow=normalizeFlow(JSON.parse(localStorage.getItem(flowKey)||'null')||{});
+  ease=normalizeEase(JSON.parse(localStorage.getItem(easeKey)||'null')||{});
   const grain=JSON.parse(localStorage.getItem('xions-hero-grain-v2')||'null');
   if(Number.isFinite(grain?.amount))settings.grain=Math.max(0,Math.min(100,grain.amount*100));
   if(Number.isFinite(grain?.size))settings.size=Math.max(.5,Math.min(4,grain.size));
@@ -46,6 +50,8 @@ function apply(){
   flowInputs.strength.value=String(flow.strength*100);flowInputs.speed.value=String(flow.speed);
   byId('flow-strength-value').textContent=`${Math.round(flow.strength*100)}%`;
   byId('flow-speed-value').textContent=`${flow.speed.toFixed(2)}×`;
+  easeInput.value=String(ease.power);
+  byId('ease-power-value').textContent=ease.power<=1?'1.0 · 匀速':`${ease.power.toFixed(1)}`;
   timingInputs.forEach(input=>{
     if(input!==document.activeElement)input.value=String(timing[input.dataset.timing as keyof HeroTiming]);
   });
@@ -53,7 +59,7 @@ function apply(){
   let style=doc.getElementById('preview-height-style');
   if(!style){style=doc.createElement('style');style.id='preview-height-style';doc.head.append(style);}
   style.textContent=`astro-dev-toolbar{display:none!important}@media(min-width:701px){.hero-light{--x-art-height:${settings.desktop}px!important}}@media(max-width:700px){.home-hero{min-height:${settings.height}px!important}.hero-light{--x-art-height:${settings.x}px!important}}`;
-  iframe.contentWindow?.dispatchEvent(new CustomEvent('xions:hero-settings',{detail:{amount:settings.grain/100,size:settings.size,timing,flow}}));
+  iframe.contentWindow?.dispatchEvent(new CustomEvent('xions:hero-settings',{detail:{amount:settings.grain/100,size:settings.size,timing,flow,ease}}));
 }
 const phaseNames:Record<string,string>={white:'白场',formation:'聚合成 X',hold:'旋转前停留',rotation:'旋转',settle:'旋转后停留',exit:'回到白场'};
 function progress(event:Event){
@@ -99,6 +105,64 @@ for(const [key,input] of Object.entries(flowInputs))input.addEventListener('inpu
   apply();
   try{localStorage.setItem(flowKey,JSON.stringify(flow));}catch{}
 });
+easeInput.addEventListener('input',()=>{
+  ease=normalizeEase({power:Number(easeInput.value)});apply();
+  try{localStorage.setItem(easeKey,JSON.stringify(ease));}catch{}
+});
+const presetName=byId('preset-name') as HTMLInputElement;
+const presetStatus=byId('preset-status'),presetList=byId('preset-list');
+type Preset={file:string;name:string;savedAt:string;settings:{layout?:typeof settings;timing?:Partial<HeroTiming>;flow?:{strength?:number;speed?:number};ease?:{power?:number}}};
+function store(){
+  try{
+    localStorage.setItem(layoutKey,JSON.stringify(settings));
+    localStorage.setItem('xions-hero-grain-v2',JSON.stringify({amount:settings.grain/100,size:settings.size}));
+    localStorage.setItem(timingKey,JSON.stringify(timing));
+    localStorage.setItem(flowKey,JSON.stringify(flow));
+    localStorage.setItem(easeKey,JSON.stringify(ease));
+  }catch{}
+}
+function load(preset:Preset){
+  const saved=preset.settings||{};
+  if(saved.layout)for(const key of Object.keys(settings) as (keyof typeof settings)[]){
+    if(Number.isFinite(saved.layout[key]))settings[key]=saved.layout[key];
+  }
+  timing=normalizeTiming(saved.timing);flow=normalizeFlow(saved.flow);ease=normalizeEase(saved.ease);
+  store();apply();
+  // Timing edits restart the hero on their own; a reload keeps the preview in step regardless.
+  iframe.contentWindow?.dispatchEvent(new CustomEvent('xions:hero-replay'));
+  presetStatus.textContent=`已载入「${preset.name}」`;
+}
+function render(presets:Preset[]){
+  presetList.textContent='';
+  for(const preset of presets.slice(0,20)){
+    const item=document.createElement('li'),label=document.createElement('span');
+    const stamp=new Date(preset.savedAt);
+    label.append(Object.assign(document.createElement('strong'),{textContent:preset.name}),
+      ` · ${Number.isNaN(stamp.getTime())?preset.savedAt:stamp.toLocaleString('zh-CN',{month:'2-digit',day:'2-digit',hour:'2-digit',minute:'2-digit'})}`);
+    const button=Object.assign(document.createElement('button'),{type:'button',textContent:'载入'});
+    button.addEventListener('click',()=>load(preset));
+    item.append(label,button);presetList.append(item);
+  }
+}
+async function refresh(){
+  try{
+    const response=await fetch('/__hero-presets');
+    if(!response.ok)throw new Error(String(response.status));
+    render((await response.json()).presets||[]);
+  }catch{presetStatus.textContent='读不到已保存的版本，确认开发服务器在运行。';}
+}
+byId('preset-save').addEventListener('click',async()=>{
+  presetStatus.textContent='保存中…';
+  try{
+    const response=await fetch('/__hero-presets',{method:'POST',headers:{'content-type':'application/json'},
+      body:JSON.stringify({name:presetName.value,settings:{layout:settings,timing,flow,ease}})});
+    const body=await response.json();
+    if(!response.ok)throw new Error(body?.error||String(response.status));
+    presetStatus.textContent=`已保存 local-materials/hero-presets/${body.preset.file}`;
+    presetName.value='';refresh();
+  }catch(error){presetStatus.textContent=`保存失败：${error instanceof Error?error.message:'未知错误'}`;}
+});
+refresh();
 document.querySelectorAll<HTMLButtonElement>('[data-device]').forEach(button=>button.addEventListener('click',()=>{
   device=button.dataset.device as typeof device;
   document.querySelectorAll('[data-device]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));

@@ -62,9 +62,10 @@ flowchart LR
 
 | 任务 | 首先看 |
 | --- | --- |
-| Hero 高度、噪点、时长 | `src/config/hero-light.ts`；历史见 `project-log/hero-parameters.md` |
+| Hero 高度、噪点、时长、缓动 | `src/config/hero-light.ts`；历史见 `project-log/hero-parameters.md` |
 | X 形状、运动、播放性能 | `src/scripts/hero-light.ts`、`src/components/HeroLight.astro` |
 | 本地工具箱 | `src/pages/[preview].astro`、`src/scripts/preview-toolbox.ts` |
+| 工具箱版本保存 | `scripts/design-presets-dev.mjs`（dev-only Vite 插件）→ 忽略的 `local-materials/hero-presets/` |
 | 首页结构/文案 | `src/components/HomePage.astro` |
 | 全站字号、间距、颜色 | `src/styles/global.css`，再检查组件局部样式 |
 | 菜单/页脚 | `Navigation.astro`、`Footer.astro`、`LanguageSwitcher.astro` |
@@ -95,4 +96,4 @@ flowchart LR
 
 GoDaddy 管理域名解析，网站内容由 Netlify 托管，源码在 GitHub；域名不直接连接 GitHub。表单成功页、后台存储、邮箱投递是三个独立检查点。Astro 本地服务不能代替 Netlify Forms 端到端验收。
 
-`/design-preview/` 仅本地 dev 存在；`/fr/visual-plan/` 是另一种素材规划页，可在非生产预览构建出现。两者都不是正式公开导航项。`docs/`、`archive/`、`local-materials/` 不会作为网站页面部署。
+`/design-preview/` 仅本地 dev 存在，它保存的参数版本走 dev-only 的 `/__hero-presets` 端点写入 `local-materials/hero-presets/`，该端点不存在于构建产物。`/fr/visual-plan/` 是另一种素材规划页，可在非生产预览构建出现。两者都不是正式公开导航项。`docs/`、`archive/`、`local-materials/` 不会作为网站页面部署。
