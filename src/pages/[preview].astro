@@ -30,7 +30,7 @@ export function getStaticPaths() {
       <details open><summary>持续流光</summary>
         <label for="flow-strength">流光强度 <output id="flow-strength-value"></output></label><input id="flow-strength" type="range" min="0" max="300" step="5" value={heroLightFlow.strength*100}/>
         <label for="flow-speed">流光速度 <output id="flow-speed-value"></output></label><input id="flow-speed" type="range" min="0.25" max="3" step="0.05" value={heroLightFlow.speed}/>
-        <small>0% 关闭流光；100% 为原强度。速度只影响光的游走，不改变旋转和各阶段时长。退场沿用最后一帧光影，再自然融入白场。</small>
+        <small>流光不分阶段，全程不停循环。0% 关闭流光；100% 为原强度。速度只影响光的游走，不改变旋转和各阶段时长。</small>
       </details>
       <details open><summary>动画时长 <span id="total-time"></span></summary>
         <div class="timing-grid">

@@ -53,7 +53,7 @@ void main(){
   float glint=.09*sweep*exp(-pow(d/(softness*2.5),2.))*falloff;
   glint*=smoothstep(7.,7.6,cycle)*(1.-smoothstep(9.4,10.,cycle))*motion;
   float value=mix(assembled,reference,formed)+glint;
-  // Light moves during the complete-X stages; its last state is carried into exit.
+  // The flow light never stops; only the exit's white dissolve covers it.
   // Both travel in X coordinates, so they follow its silhouette through rotation.
   float broadPosition=-.55*cos(flowTime*6.2831853/${heroLightFlow.widePeriod.toFixed(1)});
   float broad=exp(-pow((p.x*.8+p.y*.7-broadPosition)/.23,2.));
