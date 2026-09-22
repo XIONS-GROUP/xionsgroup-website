@@ -24,24 +24,38 @@ void main(){
   float wedge=exp(-pow(p.x/(.025+.23*y),2.))*smoothstep(.10,.51,y);
   float falloff=1.-smoothstep(.12,.66,y);
   float light=.86*body*(1.-.96*wedge)*falloff;
-  float cycle=mod(max(time-${heroLightTiming.intro.toFixed(1)},0.),${heroLightTiming.cycle.toFixed(1)});
-  float active=smoothstep(.3,1.4,cycle)*(1.-smoothstep(7.,9.,cycle))*motion;
-  float path=p.y*(smoothstep(-.018,.018,p.x)*2.-1.);
-  float head=mix(.60,-.60,smoothstep(.6,7.2,cycle));
-  float softHead=mix(.60,-.60,smoothstep(1.,8.,cycle));
-  float edgeBeam=exp(-pow((path-head)/.10,2.));
-  float softBeam=exp(-pow((path-softHead)/.19,2.));
-  float edgeLight=exp(-pow(d/(softness*2.8),2.));
-  float meeting=exp(-pow((cycle-3.9)/.85,2.))*exp(-dot(p*vec2(7.,10.),p*vec2(7.,10.)));
-  light=light*(1.-.23*active)+active*falloff*(.22*edgeBeam*edgeLight+.15*softBeam*body+.10*meeting*body);
-  float reveal=mix(1.,mix(.13,1.,smoothstep(0.,${heroLightTiming.intro.toFixed(1)},time)),motion);
-  light*=reveal;
-  float value=.042+light+halo*falloff;
+  // X geometry lives in art coordinates; the animation field covers the entire canvas.
+  // Extra space above/below a small mobile X belongs to the same light field.
+  vec2 extent=resolution/(2.*vec2(artHeight*(2876./1580.),artHeight));
+  float cycle=mix(12.,mod(time,${heroLightTiming.cycle.toFixed(1)}),motion);
+  float sides=smoothstep(2.,7.,cycle);
+  float slide=(max(extent.x,.6)+.35)*(1.-sides);
+  float sideShadow=1.-smoothstep(-softness,softness,d+slide);
+  float vertical=smoothstep(3.2,8.,cycle);
+  float front=mix(max(extent.y,.5)+.3,-.15,vertical);
+  float topBottom=smoothstep(front-.12,front+.12,y)*smoothstep(3.2,3.7,cycle);
+  float innerLight=.042+.86*(1.-.96*wedge)*falloff;
+  float interior=mix(1.,innerLight,topBottom);
+  float assembled=mix(interior,.042,sideShadow);
+  float formed=smoothstep(7.,${heroLightTiming.intro.toFixed(1)},cycle);
+  float reference=.042+light+halo*falloff;
+  // A final highlight settles into a long, fully formed X hold (10–23 seconds).
+  float sweep=exp(-pow((p.y-mix(.6,-.6,smoothstep(7.,10.,cycle)))/.12,2.));
+  float glint=.09*sweep*exp(-pow(d/(softness*2.5),2.))*falloff;
+  glint*=smoothstep(7.,7.6,cycle)*(1.-smoothstep(9.4,10.,cycle))*motion;
+  float value=mix(assembled,reference,formed)+glint;
+  value+=.012*sin((cycle-10.)*.5)*light*formed*motion;
+  // Light expands beyond every corner, returning the whole viewport to white.
+  float exitProgress=smoothstep(23.,28.,cycle);
+  float radius=exitProgress*(length(extent)+.4);
+  float dissolve=(1.-smoothstep(radius-.15,radius+.15,length(p)))*smoothstep(23.,23.6,cycle);
+  value=mix(value,1.,dissolve);
+  float texture=smoothstep(2.,8.,cycle)*(1.-dissolve);
   vec2 cell=floor(gl_FragCoord.xy/max(.5,grainSize*pixelScale));
   float grain=hash(cell)+hash(cell+19.7)-1.;
-  value+=grain*grainAmount*(.08+.35*sqrt(max(light,0.)));
+  value+=grain*grainAmount*(.08+.35*sqrt(max(light,0.)))*texture;
   float dither=fract(52.9829189*fract(dot(gl_FragCoord.xy,vec2(.06711056,.00583715))));
-  value+=(dither-.5)/255.;
+  value+=(dither-.5)/255.*texture;
   gl_FragColor=vec4(vec3(clamp(value,0.,1.)),1.);
 }`;
 
@@ -58,9 +72,6 @@ export function initHeroLight(root: HTMLElement) {
     }
   } catch { /* Storage is optional. */ }
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
-  const introKey='xions-hero-intro-v1';
-  let introSeen=false;
-  try {introSeen=sessionStorage.getItem(introKey)==='true';} catch {}
   let gl: WebGLRenderingContext | null = null;
   try { gl = canvas.getContext('webgl', { alpha:false, antialias:false, depth:false, powerPreference:'low-power' }); } catch { return; }
   if (!gl) return; // The SVG is also the no-JavaScript / unsupported-device poster.
@@ -71,7 +82,7 @@ export function initHeroLight(root: HTMLElement) {
   let resolutionLocation: WebGLUniformLocation | null = null;
   let amountLocation: WebGLUniformLocation | null = null, sizeLocation: WebGLUniformLocation | null = null, scaleLocation: WebGLUniformLocation | null = null;
   let heightLocation: WebGLUniformLocation | null = null, motionLocation: WebGLUniformLocation | null = null;
-  let frame = 0, elapsed = introSeen ? heroLightTiming.intro : 0, previous = 0;
+  let frame = 0, elapsed = 0, previous = 0;
   let visible = true, paused = false, lost = false, disposed = false;
 
   function setup() {
@@ -139,10 +150,6 @@ export function initHeroLight(root: HTMLElement) {
     const delta=now-previous;
     if (delta<1000/30) return;
     elapsed+=Math.min(delta,100)/1000;
-    if (!introSeen && elapsed>=heroLightTiming.intro) {
-      introSeen=true;
-      try {sessionStorage.setItem(introKey,'true');} catch {}
-    }
     previous=now;
     draw();
   }

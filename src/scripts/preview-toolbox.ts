@@ -5,9 +5,15 @@ const launcher=document.querySelector<HTMLButtonElement>('.launcher')!;
 const byId=(id:string)=>document.getElementById(id)!;
 const inputs={height:byId('hero-height') as HTMLInputElement,x:byId('x-height') as HTMLInputElement,grain:byId('grain') as HTMLInputElement,size:byId('size') as HTMLInputElement};
 let device:'mobile'|'desktop'='mobile';
-let settings={height:844,x:640,grain:heroLightDefaults.grainAmount*100,size:Number(heroLightDefaults.grainSize)};
+const layoutKey='xions-preview-layout-v2';
+let settings={height:844,x:Number(heroLightDefaults.mobileXHeight),grain:heroLightDefaults.grainAmount*100,size:Number(heroLightDefaults.grainSize)};
 try {
-  const stored=JSON.parse(localStorage.getItem('xions-preview-layout-v1')||'null');
+  const stored=JSON.parse(localStorage.getItem(layoutKey)||'null');
+  // Keep the earlier screen-height choice while adopting the approved 360px X.
+  if(!stored){
+    const previous=JSON.parse(localStorage.getItem('xions-preview-layout-v1')||'null');
+    if(Number.isFinite(previous?.height))settings.height=Math.max(480,Math.min(1100,previous.height));
+  }
   for(const key of ['height','x'] as const) if(Number.isFinite(stored?.[key]))settings[key]=Math.max(key==='height'?480:360,Math.min(1100,stored[key]));
   const grain=JSON.parse(localStorage.getItem('xions-hero-grain-v2')||'null');
   if(Number.isFinite(grain?.amount))settings.grain=Math.max(0,Math.min(100,grain.amount*100));
@@ -52,7 +58,7 @@ iframe.addEventListener('load',()=>{
 });
 for(const [key,input] of Object.entries(inputs))input.addEventListener('input',()=>{
   settings[key as keyof typeof settings]=Number(input.value);apply();
-  try{localStorage.setItem('xions-preview-layout-v1',JSON.stringify(settings));localStorage.setItem('xions-hero-grain-v2',JSON.stringify({amount:settings.grain/100,size:settings.size}));}catch{}
+  try{localStorage.setItem(layoutKey,JSON.stringify(settings));localStorage.setItem('xions-hero-grain-v2',JSON.stringify({amount:settings.grain/100,size:settings.size}));}catch{}
 });
 document.querySelectorAll<HTMLButtonElement>('[data-device]').forEach(button=>button.addEventListener('click',()=>{
   device=button.dataset.device as typeof device;

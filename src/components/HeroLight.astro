@@ -1,4 +1,7 @@
-<div class="hero-light" data-hero-light data-paused="false">
+---
+import { heroLightDefaults } from '../config/hero-light';
+---
+<div class="hero-light" data-hero-light data-paused="false" style={`--mobile-x-height:${heroLightDefaults.mobileXHeight}px`}>
   <div class="light-art" aria-hidden="true">
     <img class="light-poster" src="/images/home/xionsgroup-hero-light.svg" alt="" width="2876" height="1580" fetchpriority="high" />
     <canvas></canvas>
@@ -28,5 +31,5 @@
   [data-paused="true"] .play-icon,[data-paused="true"] .play-label { display:block; }
   .pause-label,.play-label { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
   .light-toggle:hover { border-color:#ffffff99; }
-  @media(max-width:700px) { .hero-light { --x-art-height:40rem; } }
+  @media(max-width:700px) { .hero-light { --x-art-height:var(--mobile-x-height); } }
 </style>
