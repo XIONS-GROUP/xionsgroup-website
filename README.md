@@ -20,8 +20,9 @@ XIONS GROUP 集团官网：Astro 静态多页网站，法语 / 英语共享模�
 | 09-22 · 页面内改文字 | 工具箱可解锁全站文字直接编辑并存到本地；可双击打开的离线副本 |
 | 09-22 · 素材与重排 | 压缩市场部原片接入空槽位；集团创始人左右并列、品牌图等高去图注、Press去占位图、Engagements去红色 |
 | 09-22 · 节奏与动效 | 奖项段改深色并延续X；全站细微滚动动效（品牌卡底图与粒子动画已按用户要求撤回） |
+| 09-23 · 导航与文案 | 首屏导航透明反色、集团页居中、Press重排、242条翻译核查；main换用X动画占位页 |
 
-详细记录：[需求与实施时间线](docs/project-log/2026-09-12-to-22.md) · [流光循环](docs/project-log/2026-09-22-flow-loop.md) · [首尾衔接](docs/project-log/2026-09-22-loop-seam.md) · [缓动与版本](docs/project-log/2026-09-22-easing-and-presets.md) · [首页排版](docs/project-log/2026-09-22-homepage-typography.md) · [页面内改文字](docs/project-log/2026-09-22-inline-text-editing.md) · [节奏与动效](docs/project-log/2026-09-22-homepage-rhythm-and-motion.md) · [素材与重排](docs/project-log/2026-09-22-assets-and-page-redesign.md) · [Hero参数历史](docs/project-log/hero-parameters.md) · [Git历史](docs/project-log/git-history.md)。
+详细记录：[需求与实施时间线](docs/project-log/2026-09-12-to-22.md) · [流光循环](docs/project-log/2026-09-22-flow-loop.md) · [首尾衔接](docs/project-log/2026-09-22-loop-seam.md) · [缓动与版本](docs/project-log/2026-09-22-easing-and-presets.md) · [首页排版](docs/project-log/2026-09-22-homepage-typography.md) · [页面内改文字](docs/project-log/2026-09-22-inline-text-editing.md) · [节奏与动效](docs/project-log/2026-09-22-homepage-rhythm-and-motion.md) · [素材与重排](docs/project-log/2026-09-22-assets-and-page-redesign.md) · [导航与文案](docs/project-log/2026-09-23-nav-copy-audit-and-main-holding.md) · [Hero参数历史](docs/project-log/hero-parameters.md) · [Git历史](docs/project-log/git-history.md)。
 
 上线前缺口清单：[上线前检查](docs/launch-readiness-2026-09-22.md)。
 
@@ -66,7 +67,7 @@ Graphify原地图属于L’Entropiste Shopify项目；本仓库Map已独立核�
 
 本地 → GitHub dev → Netlify分支预览 → 验收 → dev合并main → Netlify生产。
 
-仓库：XIONS-GROUP/xionsgroup-website；[dev预览](https://dev--xionsgroup.netlify.app)；[正式域名](https://www.xionsgroup.com)。main目前仍是预热占位页。Netlify从根目录执行 npm run build，发布 dist。推送只触发构建，不等同部署成功；远端DNS/TLS发布时重新核对。本轮先保留本地修改。
+仓库：XIONS-GROUP/xionsgroup-website；[dev预览](https://dev--xionsgroup.netlify.app)；[正式域名](https://www.xionsgroup.com)。main 现为 X 动画占位页（提交 1814787），仍非完整站点。Netlify从根目录执行 npm run build，发布 dist。推送只触发构建，不等同部署成功；远端DNS/TLS发布时重新核对。本轮先保留本地修改。
 
 预览禁索引；正式发布确认后才将 netlify.toml 的 production context 中 ALLOW_INDEXING 设为 true，其他context保持false。Netlify Forms成功页与邮件投递分开验收；未启用Resend原型。
 

@@ -1,13 +1,13 @@
 # XIONS GROUP — 当前项目状态
 
-更新：2026-09-22。历史在[项目日志](docs/project-log/README.md)，结构在[Map](docs/project-map.md)。
+更新：2026-09-23。历史在[项目日志](docs/project-log/README.md)，结构在[Map](docs/project-map.md)。
 
 ## 分支与运行
 
 - 根目录是唯一运行/部署入口；Astro静态输出dist。
-- dev：法英完整多页站。已推送提交 acddfc3（集团/品牌/Press/Engagements 重排、奖项段背景动效）与 1a491c4（市场部素材压缩接入）。更早：a25dd52（自助启动器与全站尾斜杠）、d83dfb2、3dd0140。
+- dev：法英完整多页站。已推送提交 532f20d（导航反色、集团页居中、Press重排、文案核查）。更早：acddfc3、1a491c4、a25dd52。
 - 仓库位置已从 Documents/Xionsgroup 移到 **Developer/web-build/Xionsgroup**；node_modules 未随迁，换机需重新 npm ci。
-- 本地main / 已知origin/main：9b56a72预热Logo占位页。本轮未fetch，不把快照当实时云端状态。
+- main：**已更新为 X 动画占位页**（提交 1814787，2026-09-23 推送）。仅移植 HeroLight 组件与其脚本/配置，未合并 dev 的任何站点内容；仍 noindex。Netlify 实际部署未验证。
 - GitHub：XIONS-GROUP/xionsgroup-website；预览 https://dev--xionsgroup.netlify.app；主域配置 https://www.xionsgroup.com。
 - Netlify：根目录 npm run build → dist；推送触发构建，部署成功需另验。
 - 用户曾确认域名连通，09-21又提供Pending DNS/SSL提示。本轮未重查远端DNS、证书或队列；旧“DNS/TLS已正常”已撤下。
@@ -51,15 +51,11 @@
 
 构建通过；38个HTML内部链接与34个双语页面检查通过；Astro 48文件0错误/警告；`npx tsc --noEmit` 无输出。缓动在 power 1 / 2.5 / 5 / 8 下接缝处装配进度与旋转角全部连续，形成与退场镜像时刻装配进度差 < 1e-12，旋转峰值角速度 45 / 112.5 / 225 / 359.8 °/s 与理论斜率吻合。预设端点实测空目录、路径穿越消毒、保存/列出/载入完整走通。构建后grep确认 `dist` 已无工具箱JS与dev端点字符串。`/design-preview/` 清空本地存储后读到20秒 / 1-6-1-4-2-6 / 缓动3.0 / 290% / 0.55×。尚未做实体手机GPU验收或远端部署验证。
 
-## 未跟踪的大体积素材（需要处理）
+## 市场部素材
 
-`public/` 下出现了 156MB 未跟踪的原始素材：`public/XIONS/`（四品牌与创始人照片 127MB，含一个浏览器无法显示的 .HEIC）和 `public/all visual of xions site.ai`（29MB Illustrator 源文件）。
+14 张原片已压到网站尺寸并按命名规范放进 `public/images/`，接入 8 个槽位。用户已把原片目录 `public/XIONS/` 与 29MB 的 Illustrator 源文件移出 `public/`，构建产物随之回到 5.7MB（此前被撑到 178MB）。
 
-它们**未被 git 跟踪**，所以不在任何提交里，Netlify 也拿不到。但 `public/` 会被 Astro 原样复制进 `dist/`，本地构建产物已从 7MB 涨到 178MB；一旦有人 `git add -A`，这些文件就会进仓库并发布到线上——Illustrator 源文件会变成可下载的公开资源。
-
-**压缩已完成**：14 张原片已压到网站尺寸（合计约 3.5MB）并按命名规范放进 `public/images/`，接入 8 个槽位。用户明确要求 `public/XIONS/` 保持不动作为原片，稍后自行移走，因此助手未移动任何原件。
-
-**仍待处理**：这 156MB 一天不移出 `public/`，`dist` 就会一直被撑到 178MB，且任何 `git add -A` 都会把它们连同那个 29MB 的 Illustrator 源文件一起提交并发布上线。建议移到 `local-materials/`。
+`public/images` 现为 4.3MB：两张遗留 PNG 主图已转 JPEG（3.1MB→145KB、3.2MB→321KB）。仍未使用的素材：戛纳红毯第二张、名人手持产品。
 
 ## 已有工作保护
 

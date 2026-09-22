@@ -1,6 +1,6 @@
 # 项目日志与新窗口交接入口
 
-更新：2026-09-22。此目录集中保存 XIONS GROUP 网站的需求演变、实施记录和参数历史。它是决策日志，不是逐字聊天备份。
+更新：2026-09-23。此目录集中保存 XIONS GROUP 网站的需求演变、实施记录和参数历史。它是决策日志，不是逐字聊天备份。
 
 ## 建议阅读顺序
 
@@ -16,11 +16,12 @@
 10. [2026-09-22 · 品牌卡底图、深色段落与滚动动效](2026-09-22-homepage-rhythm-and-motion.md)：打破四段同构、延续 X 语言、全站细微动效。
 11. [2026-09-22 · 自助启动预览与全站尾斜杠](2026-09-22-preview-launcher-and-slashes.md)：双击即可开预览；修掉点导航就 404 的问题。
 12. [2026-09-22 · 素材接入与页面重排](2026-09-22-assets-and-page-redesign.md)：压缩市场部原片、填充空槽位，重排集团/品牌/Press/Engagements。
-13. [上线前检查](../launch-readiness-2026-09-22.md)：距离上线还缺什么，按阻塞程度排序。
-14. [视觉方向备忘 09-17](../visual-direction-2026-09-17.md)：早期的图片与动态优化设想，部分已被后续决定替代。
-15. [Hero 参数历史](hero-parameters.md)：每轮视觉调整及当前确认值。
-16. [Git 提交快照](git-history.md)：截至上一实现提交 `406e803` 的完整可达提交记录；此后的变更以 Git 实时日志为准。
-17. 按任务查阅 [项目规则](../../PROJECT_RULES.md)、[Hero 技术说明](../home-hero-animation.md)、[双语与 SEO](../bilingual-seo.md)。
+13. [2026-09-23 · 导航反色、文案核查与 main 占位页](2026-09-23-nav-copy-audit-and-main-holding.md)：首屏导航透明反色、集团页居中、Press 重排、242 条翻译核查、main 换用 X 动画占位页。
+14. [上线前检查](../launch-readiness-2026-09-22.md)：距离上线还缺什么，按阻塞程度排序。
+15. [视觉方向备忘 09-17](../visual-direction-2026-09-17.md)：早期的图片与动态优化设想，部分已被后续决定替代。
+16. [Hero 参数历史](hero-parameters.md)：每轮视觉调整及当前确认值。
+17. [Git 提交快照](git-history.md)：截至上一实现提交 `406e803` 的完整可达提交记录；此后的变更以 Git 实时日志为准。
+18. 按任务查阅 [项目规则](../../PROJECT_RULES.md)、[Hero 技术说明](../home-hero-animation.md)、[双语与 SEO](../bilingual-seo.md)。
 
 ## 本次交接
 
@@ -31,7 +32,7 @@
 - 流光：**不分阶段，全程不停循环**，强度 290%、速度 0.55×。替代早先“只覆盖完整X三阶段”的方案，详见[流光循环记录](2026-09-22-flow-loop.md)。
 - 退场：**X → 白场是「白场 → X」的倒放**，一轮末帧与首帧相同；旋转角跨轮累加不归零，保证接缝处流光不跳位。替代早先“光沿四臂扩散”的退场，详见[接缝记录](2026-09-22-loop-seam.md)。
 - 用户已明确认可白场阶段的反色观感（白底上的灰色 X），它不是待修问题。
-- 网站是 Astro 静态站，非 Shopify 主题，无 CMS；`dev` 是完整网站，`main` 仍是待上线占位页。
+- 网站是 Astro 静态站，非 Shopify 主题，无 CMS；`dev` 是完整网站；`main` 自 2026-09-23 起是 X 动画占位页（提交 1814787），仍非完整站点。
 - 本轮先落实本地参数和文档，不修改域名、邮件后台或生产分支。不能把本地构建通过写成 Netlify 已上线。
 - 2026-09-22 检查时另有邮件原型未提交改动：`package.json` 的 `preview:email`、`docs/contact-email-preview.html`、`docs/contact-email-setup.md`、`docs/email-prototype/`、`scripts/render-contact-email-preview.mjs`。属于已有工作，不覆盖、不混入本轮提交。
 - 用户提及的 Graphify 原地图属于 **L’Entropiste Shopify** 项目，位于 `/Users/seajelly/Documents/Lentropiste Web/code-map/index.html`；原始 Graphify 数据在同目录 `graphify-native/graphify-out/graph.json`。XIONS 的 [Map](../project-map.md) 是本次依据实际源码整理的 Mermaid 文档，不冒称 Graphify 生成。
