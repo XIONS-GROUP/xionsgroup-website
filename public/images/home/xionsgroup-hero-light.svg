@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice">
+  <defs>
+    <linearGradient id="light" x1="0" y1="0" x2="0.15" y2="1">
+      <stop stop-color="#eeeeee"/><stop offset=".48" stop-color="#cccccc"/><stop offset="1" stop-color="#555555"/>
+    </linearGradient>
+    <filter id="soft" x="-50%" y="-30%" width="200%" height="160%"><feGaussianBlur stdDeviation="32"/></filter>
+  </defs>
+  <path fill="#090909" d="M0 0h1600v1000H0z"/>
+  <path d="M590-100C810 120 1010 290 1010 510S830 840 640 1100H1540C1330 820 1170 700 1170 510S1370 130 1590-100Z" fill="url(#light)" filter="url(#soft)"/>
+</svg>

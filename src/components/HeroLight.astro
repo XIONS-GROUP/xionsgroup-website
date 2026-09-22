@@ -1,0 +1,35 @@
+<div class="hero-light" data-hero-light data-paused="false">
+  <div class="light-art" aria-hidden="true">
+    <img class="light-poster" src="/images/home/xionsgroup-hero-light.svg" alt="" width="1600" height="1000" fetchpriority="high" />
+    <canvas></canvas>
+    <div class="light-shade"></div>
+  </div>
+  <button class="light-toggle" type="button" hidden>
+    <svg class="pause-icon" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M5 3v10M11 3v10" fill="none" stroke="currentColor" stroke-width="1.5" /></svg>
+    <svg class="play-icon" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="m5 3 8 5-8 5Z" fill="none" stroke="currentColor" /></svg>
+    <span class="pause-label">Mettre l’animation en pause</span>
+    <span class="play-label">Reprendre l’animation</span>
+  </button>
+</div>
+<script>
+  import { initHeroLight } from '../scripts/hero-light';
+  document.querySelectorAll<HTMLElement>('[data-hero-light]').forEach(initHeroLight);
+</script>
+<style>
+  .hero-light,.light-art,.light-art canvas,.light-poster,.light-shade { position:absolute; inset:0; width:100%; height:100%; }
+  .hero-light { background:#090909; }
+  .light-art { pointer-events:none; overflow:hidden; }
+  .light-poster { object-fit:cover; }
+  canvas { opacity:0; }
+  [data-ready="true"] canvas { opacity:1; }
+  .light-shade { background:linear-gradient(90deg,rgba(0,0,0,.68),rgba(0,0,0,.38) 35%,transparent 64%),linear-gradient(0deg,rgba(0,0,0,.65),transparent 22%); }
+  .light-toggle { position:absolute; z-index:3; right:var(--pad); bottom:6.8rem; display:flex; align-items:center; gap:.6rem; min-height:44px; padding:.5rem .75rem; border:1px solid #ffffff40; border-radius:0; background:#09090999; color:#fff; cursor:pointer; font-size:.62rem; }
+  .light-toggle[hidden],.play-icon,.play-label { display:none; }
+  [data-paused="true"] .pause-icon,[data-paused="true"] .pause-label { display:none; }
+  [data-paused="true"] .play-icon,[data-paused="true"] .play-label { display:block; }
+  .light-toggle:hover { border-color:#ffffff99; }
+  @media(max-width:700px) {
+    .light-poster { object-position:62% center; }
+    .light-shade { background:linear-gradient(90deg,#090909b8, #09090973 70%,#09090920),linear-gradient(0deg,#090909cc,transparent 26%); }
+  }
+</style>

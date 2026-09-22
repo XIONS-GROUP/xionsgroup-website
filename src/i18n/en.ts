@@ -2,6 +2,8 @@
 // so every localized URL contains complete HTML without client-side translation.
 import { legalCopy } from './legal-en.ts';
 const copy = `
+Mettre l’animation en pause|Pause animation
+Reprendre l’animation|Resume animation
 Rejoindre les équipes de XIONS Group.|Join the teams at XIONS Group.
 Carrières — XIONS GROUP|Careers — XIONS GROUP
 XIONS Group — Accueil|XIONS Group — Home
