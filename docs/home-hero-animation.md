@@ -9,22 +9,24 @@ The French and English homepages now share a procedural monochrome X light anima
 
 The silhouette remains fixed at the hero centre. Scaling is height-based, using the reference ratio 2876:1580. Desktop artwork height is fixed at the approved 650px. Mobile (700px and below) uses the approved 390px artwork height. Both the shader and SVG read these sizes from the shared defaults. This only sizes the X: the animated canvas still covers the entire hero, including all space above and below it. Width changes clip the sides, never squeeze or shrink the X to fit. The static SVG uses the same sizing rule. Text uses difference blending instead of a backdrop gradient. This is an analytic reconstruction, not a pixel-identical copy of the reference.
 
-The approved 2026-09-22 sequence repeats every 23 seconds. Earlier values and their rationale are in [the parameter history](project-log/hero-parameters.md):
+The approved 2026-09-22 sequence repeats every 25 seconds. Earlier values and their rationale are in [the parameter history](project-log/hero-parameters.md):
 
 | Stage | Default duration | Timeline |
 | --- | --- | --- |
-| Full-frame white | 0 s | Starts white, immediately forming |
-| Existing white-to-X formation | 10 s | 0–10 s |
-| Complete X before rotation | 2 s | 10–12 s |
-| Centred 180° rotation | 4 s | 12–16 s |
-| Complete X after rotation | 2 s | 16–18 s |
-| Light spreading back to white | 5 s | 18–23 s |
+| Full-frame white | 2 s | 0–2 s |
+| Existing white-to-X formation | 10 s | 2–12 s |
+| Complete X before rotation | 2 s | 12–14 s |
+| Centred 180° rotation | 4 s | 14–18 s |
+| Complete X after rotation | 2 s | 18–20 s |
+| Formation replayed backwards | 5 s | 20–25 s |
 
-Rotation uses cubic Bézier (0.65, 0, 0.85, 1): a slow departure, late acceleration and a soft arrival at exactly 180°. Coordinates rotate before the reference aspect ratio is applied, so the silhouette never stretches; the background rotates while text remains upright. The return follows the four X arms and expands through the entire viewport, including areas beyond the mobile artwork. The loop boundary is white on both sides, with no hard cut. Each page visit starts at white; replay resets the entire cycle. These timings are approved; the layered lighting added in the same review remains open to visual refinement.
+Rotation is a symmetric quintic S curve: a slow departure, mid acceleration and a soft arrival at exactly 180°. Coordinates rotate before the reference aspect ratio is applied, so the silhouette never stretches; the background rotates while text remains upright. Each cycle keeps turning rather than snapping back to 0°: `angle = π × (turns + ease)` with `turns = floor(elapsed / total) % 2`. The silhouette is 180°-symmetric so this is invisible in itself, but the flow light is evaluated in rotated coordinates, and resetting the angle would mirror the light across the loop seam; the modulo keeps the value bounded and returns it to 0° every second cycle.
 
-Continuous light runs unconditionally, on its own free clock, for the whole sequence: no stage gate, no fade envelope and no reset at the loop boundary. A broad soft band crosses a diagonal, modulating interior light from −28% to +4%; a narrower highlight travels along the opposite curved edge with peak amplitude 0.22. Their periods are 8s and 5s, respectively, and the approved strength is 290% with speed 1.00×. The clock reads raw accumulated playback time rather than the looped stage time, because 23 seconds is a multiple of neither period and reusing the looped value would visibly jump the light at every restart. During exit the light keeps moving and is simply covered by the spreading white. Reduced motion is the only case that zeroes it. Lights follow the rotating artwork coordinates; grain stays stationary.
+The exit is no longer a separate effect. One assembly progress drives the `formation` uniform: 0→1 while forming, held at 1 through both holds and the rotation, then 1→0 during exit. Because `motionEase` is symmetric about its midpoint, 1−E(u) equals E(1−u), so the exit is a strict time reversal of the formation. A cycle's last frame is therefore pixel-identical to its first and the white hold is simply an extension of that same state, giving a seamless loop. The earlier arm-spreading dissolve was removed in the same review; it is recoverable from commit a8812d5. Each page visit starts at white; replay resets the entire cycle.
 
-Because the light is always on at 290%, the sequence no longer opens on a pure white frame: the X silhouette is already softly shaded at t=0 and the whole 10s formation plays under moving light. This is the intended consequence of the "always looping" requirement, recorded for confirmation in [the flow-loop log](project-log/2026-09-22-flow-loop.md).
+Continuous light runs unconditionally, on its own free clock, for the whole sequence: no stage gate, no fade envelope and no reset at the loop boundary. A broad soft band crosses a diagonal, modulating interior light from −28% to +4%; a narrower highlight travels along the opposite curved edge with peak amplitude 0.22. Their periods are 8s and 5s, respectively, and the approved strength is 290% with speed 0.55×. The clock reads raw accumulated playback time rather than the looped stage time, because 25 seconds is a multiple of neither period and reusing the looped value would visibly jump the light at every restart. Reduced motion is the only case that zeroes it. Lights follow the rotating artwork coordinates; grain stays stationary and now fades with the cycle value alone, so it disappears as the exit unwinds the formation.
+
+Because the light is always on at 290%, the white stage is not a blank white frame: the X silhouette reads as a soft grey shape against white, an inverted-contrast counterpart to the lit X. The user approved this look explicitly; it is not a defect to remove. See [the flow-loop log](project-log/2026-09-22-flow-loop.md) and [the loop-seam log](project-log/2026-09-22-loop-seam.md).
 
 The procedural scene has no image-sized clip. The fixed-aspect X uses artwork coordinates, while moving shadow offsets and the final white expansion account for the full viewport extents. Thus a 390px X on a tall phone still has an animated white-to-dark background across the entire hero. The grain pattern remains stationary and fades out in the white stage. Reduced motion skips the sequence and shows the complete reference X. Timing and approved defaults live in `src/config/hero-light.ts`.
 

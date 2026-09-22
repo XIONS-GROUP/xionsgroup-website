@@ -41,7 +41,7 @@ export function getStaticPaths() {
           <label for="time-settle">旋转后停留<input id="time-settle" data-timing="settle" type="number" min="0" max="30" step="0.5" value={heroLightTiming.settle}/></label>
           <label for="time-exit">X → 白场<input id="time-exit" data-timing="exit" type="number" min="1" max="30" step="0.5" value={heroLightTiming.exit}/></label>
         </div>
-        <small>单位：秒。更改时长后自动从头计时。形成、旋转和退场使用缓进缓出 S 曲线：起步慢、中段快、末端慢。</small>
+        <small>单位：秒。更改时长后自动从头计时。缓进缓出 S 曲线：起步慢、中段快、末端慢。X → 白场是「白场 → X」的倒放，所以一轮的末帧与首帧相同，循环无缝。</small>
       </details>
       <div class="transport">
         <label for="timeline">时间轴 · 拖动暂停检查</label><input id="timeline" type="range" min="0" max="1000" step="1" value="0"/>

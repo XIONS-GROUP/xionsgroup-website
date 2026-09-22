@@ -12,7 +12,6 @@ uniform float pixelScale;
 uniform float artHeight;
 uniform float motion;
 uniform float formation;
-uniform float returning;
 uniform float angle;
 float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
 void main(){
@@ -63,17 +62,8 @@ void main(){
   float leftEdge=1.-smoothstep(-.04,.04,p.x);
   float edgeLight=.22*edgeTravel*exp(-pow(d/(softness*1.7),2.))*falloff*leftEdge;
   value+=(broadLight+edgeLight)*flowAmount;
-  // A branched light field follows all four X arms, then fills the full crop.
-  float reach=returning;
-  float armDistance=abs(abs(p.x)-(.035+.34*y));
-  float travel=.4*y+1.2*armDistance;
-  float maxTravel=.4*extent.y+1.2*(extent.x+.035+.34*extent.y)+.4;
-  // One spatial reveal, without the former late full-frame brightness boost.
-  float feather=.20;
-  float spread=mix(-feather,maxTravel+feather,reach);
-  float dissolve=1.-smoothstep(spread-feather,spread+feather,travel);
-  value=mix(value,1.,dissolve);
-  float texture=smoothstep(2.,8.,cycle)*(1.-dissolve);
+  // Exit is the formation run backwards through the same cycle value, so no separate reveal here.
+  float texture=smoothstep(2.,8.,cycle);
   vec2 cell=floor(gl_FragCoord.xy/max(.5,grainSize*pixelScale));
   float grain=hash(cell)+hash(cell+19.7)-1.;
   value+=grain*grainAmount*(.08+.35*sqrt(max(light,0.)))*texture;
@@ -104,7 +94,7 @@ export function initHeroLight(root: HTMLElement) {
   let flowTimeLocation: WebGLUniformLocation | null = null, flowAmountLocation: WebGLUniformLocation | null = null;
   let resolutionLocation: WebGLUniformLocation | null = null;
   let amountLocation: WebGLUniformLocation | null = null, sizeLocation: WebGLUniformLocation | null = null, scaleLocation: WebGLUniformLocation | null = null;
-  let formationLocation: WebGLUniformLocation | null = null, exitLocation: WebGLUniformLocation | null = null, angleLocation: WebGLUniformLocation | null = null;
+  let formationLocation: WebGLUniformLocation | null = null, angleLocation: WebGLUniformLocation | null = null;
   let heightLocation: WebGLUniformLocation | null = null, motionLocation: WebGLUniformLocation | null = null;
   let timing={...heroLightTiming};
   let flow=normalizeFlow();
@@ -148,7 +138,6 @@ export function initHeroLight(root: HTMLElement) {
     heightLocation=context.getUniformLocation(program,'artHeight');
     motionLocation=context.getUniformLocation(program,'motion');
     formationLocation=context.getUniformLocation(program,'formation');
-    exitLocation=context.getUniformLocation(program,'returning');
     angleLocation=context.getUniformLocation(program,'angle');
     return true;
   }
@@ -158,7 +147,7 @@ export function initHeroLight(root: HTMLElement) {
     const state=heroFrame(elapsed,timing,reduced.matches);
     context.uniform1f(flowTimeLocation,state.flowTime*flow.speed);context.uniform1f(flowAmountLocation,state.flowAmount*flow.strength);
     context.uniform1f(formationLocation,state.formation);
-    context.uniform1f(exitLocation,state.exit);context.uniform1f(angleLocation,state.angle);
+    context.uniform1f(angleLocation,state.angle);
     if(import.meta.env.DEV && (Math.abs(elapsed-lastProgress)>.15 || paused)){
       lastProgress=elapsed;window.dispatchEvent(new CustomEvent('xions:hero-progress',{detail:{...state,paused}}));
     }

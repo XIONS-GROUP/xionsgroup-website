@@ -1,7 +1,7 @@
 // Approved on 2026-09-22; see docs/project-log/hero-parameters.md.
 export const heroLightDefaults = { grainAmount: 0.12, grainSize: 0.9, mobileXHeight: 390, desktopXHeight: 650 } as const;
-export const heroLightTiming = { white: 0, formation: 10, hold: 2, rotation: 4, settle: 2, exit: 5 };
-export const heroLightFlow = { widePeriod: 8, edgePeriod: 5, strength: 2.9, speed: 1 } as const;
+export const heroLightTiming = { white: 2, formation: 10, hold: 2, rotation: 4, settle: 2, exit: 5 };
+export const heroLightFlow = { widePeriod: 8, edgePeriod: 5, strength: 2.9, speed: 0.55 } as const;
 export function normalizeFlow(value: {strength?:number;speed?:number} = {}) {
   return {
     strength:Number.isFinite(value.strength)?Math.max(0,Math.min(3,value.strength!)):heroLightFlow.strength,
@@ -29,9 +29,13 @@ export function heroFrame(elapsed:number,timing:HeroTiming,reduced=false){
   const clamp=(v:number)=>Math.max(0,Math.min(1,v));
   const phase=time<timing.white?'white':time<formationEnd?'formation':time<rotationStart?'hold':time<rotationEnd?'rotation':time<exitStart?'settle':'exit';
   // The flow light keeps its own free-running clock: no stage gate, no fade, no reset at the loop.
+  // Exit runs the formation backwards, so a cycle's last frame equals its first.
+  const assembly=time<exitStart?motionEase((time-timing.white)/timing.formation):1-motionEase((time-exitStart)/timing.exit);
+  // Keep turning into the next cycle instead of snapping to 0°, which would jump the flow light
+  // across the seam; the silhouette is 180°-symmetric, so every other cycle lands back at 0.
+  const turns=Math.floor(elapsed/total)%2;
   return {time,total,phase:reduced?'hold':phase,
     flowTime:reduced?0:elapsed,flowAmount:reduced?0:1,
-    formation:reduced?1:motionEase((time-timing.white)/timing.formation),
-    exit:reduced?0:motionEase((time-exitStart)/timing.exit),
-    angle:reduced?0:Math.PI*rotationEase(clamp((time-rotationStart)/timing.rotation))};
+    formation:reduced?1:assembly,
+    angle:reduced?0:Math.PI*(turns+rotationEase(clamp((time-rotationStart)/timing.rotation)))};
 }
