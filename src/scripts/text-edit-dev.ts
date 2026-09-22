@@ -199,3 +199,5 @@ addEventListener('message', event => {
   }
 });
 post('xions:text-ready', { page: location.pathname });
+
+export {};
