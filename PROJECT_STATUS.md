@@ -1,79 +1,52 @@
-# XIONS GROUP Website — Project Status
+# XIONS GROUP — 当前项目状态
 
-Last updated: 2026-09-21
+更新：2026-09-22。历史在[项目日志](docs/project-log/README.md)，结构在[Map](docs/project-map.md)。
 
-## Deployment chain
+## 分支与运行
 
-- GitHub repository: `XIONS-GROUP/xionsgroup-website`
-- Development branch: `dev`
-- Netlify branch preview: `https://dev--xionsgroup.netlify.app`
-- Production branch: `main`
-- Production domain: `https://www.xionsgroup.com`
-- Netlify build: `npm run build`
-- Netlify publish directory: `dist`
-- Netlify base directory: repository root
+- 根目录是唯一运行/部署入口；Astro静态输出dist。
+- dev：法英完整多页站。已推送本轮390/650px、15秒动画、流光与文档整理。
+- 本地main / 已知origin/main：9b56a72预热Logo占位页。本轮未fetch，不把快照当实时云端状态。
+- GitHub：XIONS-GROUP/xionsgroup-website；预览 https://dev--xionsgroup.netlify.app；主域配置 https://www.xionsgroup.com。
+- Netlify：根目录 npm run build → dist；推送触发构建，部署成功需另验。
+- 用户曾确认域名连通，09-21又提供Pending DNS/SSL提示。本轮未重查远端DNS、证书或队列；旧“DNS/TLS已正常”已撤下。
 
-Pushing `dev` triggers the branch preview. Merging `dev` into `main` triggers the production deployment. Pull requests can use Netlify Deploy Previews.
+## 已实现（源码/历史提交可核对）
 
-## Canonical local structure
+- 集团、四品牌共享模板、Press、承诺、招聘、联系、成功页、四法律页及404。
+- 17路由/语言、30公开sitemap URL；法英正文/表单/法律/alt/metadata；无运行时翻译API。
+- 两个桌面下拉共用磨砂面；手机全屏抽屉，集团不展开团队，品牌显示四家；主导航大写。
+- 首页四品牌居中Logo卡、六活动标识；品牌官网/Instagram集中维护，Betenoir保持未上线。
+- 红色#c20000、SVG箭头、白底图标/分享封面。body仍是近白#fefdfb，导航是白色半透明。
+- Netlify Forms分类必填、补充标题可选、成功/错误界面、扫描声明。邮件投递是远端验收项；Resend未启用。
+- SEO canonical/hreflang/JSON-LD/robots/sitemap；所有context仍禁索引。
+- 图片清单与Illustrator脚本；源src/data/visuals.json，非生产素材预览 /fr/visual-plan/。
 
-- `src/pages/` — deployed routes
-- `src/components/` — reusable interface components
-- `src/styles/` — shared styles
-- `public/` — deployable static assets
-- `content/` — editable source copy and content records
-- `docs/` — supporting and archived project documentation
-- `local-materials/` — ignored business source files, kept out of the public repository
-- `archive/` — retained code studies and the duplicate project, excluded from builds
+## 当前 Hero / 工具箱
 
-The repository root is the only development and deployment entry point. Run all npm and Netlify commands from this directory.
+- 手机X **390px**（≤700px），桌面X **650px**，2876:1580比例，中心锁定，窗口裁切。
+- 噪点 **12% / 0.9px**；全画面白场、聚合X、180°旋转、沿四臂扩展回白场。
+- 六段 **0 / 5 / 0 / 4 / 1 / 5秒 = 15秒**。宽柔光+弧边细高光统一时间轴，连续覆盖旋转前/旋转/旋转后，形成/退场不叠加。
+- /design-preview/：380px可收起工具箱、手机/桌面、尺寸/噪点/时长、时间轴/暂停/重播；不进部署产物。
+- 配置src/config/hero-light.ts；[技术说明](docs/home-hero-animation.md)；[参数历史](docs/project-log/hero-parameters.md)。
+- 摄影Hero两槽仅保留为未来选项，不再算上线必需缺图。
 
-## Current website state
+## 发布前剩余事项
 
-- The `dev` branch contains the French and English multi-page site with shared templates and a luxury editorial design system.
-- The `main` branch still contains the approved pre-launch logo holding page.
-- DNS and TLS for `xionsgroup.com` are active through Netlify.
-- Preview builds block search indexing.
-- Production indexing remains disabled until `ALLOW_INDEXING` is enabled in the final launch pull request.
-- Legacy homepage variants no longer create public Astro routes.
+1. 确认流光层次、真实手机可读性/性能、键盘和减弱动态体验。
+2. 补齐团队/品牌/Press摄影和图注；审核集团/品牌/英文陈述。
+3. 公司确认隐私法律依据：原文仍含勾选同意，而实际表单无勾选框，须同步法英。
+4. 授权后用唯一测试标记验收Netlify字段→后台记录→邮箱内容与Reply-To；成功页单独通过不够。
+5. Netlify插件/CLI复查dev部署、DNS/TLS、www跳转、真实404；用户明确避免Computer Use排查Netlify。
+6. 单独处理依赖安全升级并回归，不在视觉微调中顺带大版本升级。
+7. 审核dev→main发布；仅生产启索引；Search Console验证/提交sitemap，发布后观察抓取/性能，尚未执行。
+8. 持续维护内容/外链、图片体积/alt、表单、证书/部署、依赖；CMS按需另定。
+9. 统一尾斜杠链接：本轮观察到本地 /fr 返回404、/fr/ 正常；现有部分法文链接无尾斜杠。核对Astro本地和Netlify重定向，避免仅依赖线上自动补全。
 
-## Validation
+## 本轮已验证
 
-- Local Astro build passes.
-- Production indexing and preview indexing modes are both build-tested.
-- Netlify receives GitHub commit references for automatic `dev` deployments.
+构建通过；38个HTML内部链接与34个双语页面检查通过；Astro 48文件0错误/警告；15秒阶段边界、三阶段连续流光及转换期排除断言通过。浏览器确认390/650px、旧预览高度迁移和静留时流光移动；12份交接文档链接有效。尚未做实体手机GPU验收或远端部署验证。
 
-## Next implementation work
+## 已有工作保护
 
-### Visual planning update — 2026-09-16
-
-- `src/data/visuals.json` is the source of truth for 28 named visual assets, including one optional Betenoir teaser.
-- Home uses separate desktop and mobile cover compositions; body photography uses 3:2 and 4:5 frames. Logos, social cover and icon use dedicated formats.
-- Dev renders labeled image placeholders; `/fr/visual-plan` lists placements and sizes. Production builds omit empty placeholders and the review route.
-- Brand pages share one image-led template. Presse follows the corrected source copy: seven event galleries and three communication galleries, pending actual captions and photography. Home restores six existing event marks.
-- Mobile navigation fills the viewport beneath the header, hides Groupe sublinks, and shows all four brands. Navigation surfaces share the same translucent white treatment; desktop all-brands link is separate beneath the brands.
-- Content and positioning review: ignored `local-materials/website-content-review-2026-09-16.md`.
-- The user's checklist now lives in ignored `local-materials/launch-content-and-visual-checklist.md`; the older copy is backed up under `local-materials/visual-kit/`.
-- `node scripts/generate-visual-kit.mjs` generates the checklist, CSV, named SVG groups and Illustrator artboard script from the manifest. Affinity native artboards are not claimed; desktop import still needs verification.
-- Home currently uses a single desktop/mobile pair. Additional carousel images and accessible playback controls are deferred until the first composition is approved.
-- Dev and production builds/link checks pass. Responsive previews checked at approximately 390×844, 320×568 and 1440×900 CSS pixels.
-
-### Bilingual and SEO update — 2026-09-21
-
-- 17 corresponding routes per language (including thank-you and 404); 30 public URLs in the bilingual sitemap.
-- FR / EN switching in the footer and full-screen mobile menu; footer visual-plan link removed.
-- Static English HTML, localized metadata and image alt text, canonical/hreflang, Open Graph/Twitter, Organization/WebSite/WebPage JSON-LD.
-- Public root image uploads organized into social and awards directories; new share cover wired into metadata.
-- Contact field names and category values preserved across languages; English success/error UI included.
-- Automatic build checks cover full translation, internal links, locale pairs, SEO, assets and form schema.
-- Maintenance and launch instructions: `docs/bilingual-seo.md`.
-
-### Remaining release work
-
-- Replace placeholder imagery with approved brand assets.
-- Confirm the privacy policy's legal basis: its checkbox consent wording does not match the current form. Company registration details are already populated.
-- Connect the remaining page copy to a CMS if browser-based editing is required.
-- Confirm Netlify Forms notification delivery with a real staging submission.
-- Review responsive behavior and accessibility before the `dev` to `main` release.
-- Enable indexing only in the production release and submit the sitemap in Search Console.
-- Schedule maintenance for existing Astro/build dependency security advisories.
+工作区另有之前的邮件原型及package脚本改动，见[交接日志](docs/project-log/README.md)。不激活、不删除、不混入其他发布。旧方案保留docs/archive/。Graphify已找到的图属于L’Entropiste，本项目Map独立整理。

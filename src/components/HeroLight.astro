@@ -1,7 +1,7 @@
 ---
 import { heroLightDefaults } from '../config/hero-light';
 ---
-<div class="hero-light" data-hero-light data-paused="false" style={`--mobile-x-height:${heroLightDefaults.mobileXHeight}px`}>
+<div class="hero-light" data-hero-light data-paused="false" style={`--mobile-x-height:${heroLightDefaults.mobileXHeight}px;--desktop-x-height:${heroLightDefaults.desktopXHeight}px`}>
   <div class="light-art" aria-hidden="true">
     <img class="light-poster" src="/images/home/xionsgroup-hero-light.svg" alt="" width="2876" height="1580" fetchpriority="high" />
     <canvas></canvas>
@@ -20,7 +20,7 @@ import { heroLightDefaults } from '../config/hero-light';
 </script>
 <style>
   .hero-light,.light-art,.light-art canvas { position:absolute; inset:0; width:100%; height:100%; }
-  .hero-light { --x-art-height:clamp(44rem,100svh,64rem); background:#090909; }
+  .hero-light { --x-art-height:var(--desktop-x-height); background:#090909; }
   .light-art { pointer-events:none; overflow:hidden; }
   .light-poster { position:absolute; top:50%; left:50%; height:var(--x-art-height); width:auto; aspect-ratio:2876 / 1580; max-width:none; transform:translate(-50%,-50%); }
   canvas { opacity:0; }

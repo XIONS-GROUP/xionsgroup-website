@@ -1,18 +1,19 @@
-# Documentation index
+# 文档索引
 
-Current operating information lives at the repository root:
+**统一日志入口：[project-log/README.md](project-log/README.md)。** 新窗口先读根README、状态与日志，再定位源码，无需重读全部聊天。
 
-- `README.md` — local development and deployment basics
-- `PROJECT_RULES.md` — canonical project and design rules
-- `PROJECT_STATUS.md` — current branches, URLs and implementation status
+| 内容 | 文档 |
+| --- | --- |
+| 简介、发展阶段、命令 | [根README](../README.md) |
+| 进展、发布状态、待办 | [PROJECT_STATUS](../PROJECT_STATUS.md) |
+| 设计/操作注意事项 | [PROJECT_RULES](../PROJECT_RULES.md) |
+| 页面/代码关系图 | [project-map.md](project-map.md) |
+| 从启动至今逐步需求 | [时间线](project-log/2026-09-12-to-22.md) |
+| Hero历次参数 | [参数历史](project-log/hero-parameters.md) |
+| 提交依据 | [Git历史](project-log/git-history.md) |
+| Hero/工具箱技术 | [home-hero-animation.md](home-hero-animation.md) |
+| 双语/SEO维护 | [bilingual-seo.md](bilingual-seo.md) |
 
-Supporting documentation:
+design/和visual-direction-2026-09-17.md是对应日期的设计评审；content/为模板，deployment/为可选CI示例。旧方案保留archive/planning/、archive/deployment/，不能覆盖最新决定。
 
-- `bilingual-seo.md` — 法英页面维护、素材位置、SEO 与正式上线步骤
-
-- `content/` — legal and content templates
-- `deployment/` — optional CI examples
-- `archive/planning/` — superseded design and structure studies
-- `archive/deployment/` — superseded GitHub, Netlify and DNS setup notes
-
-Archived documents are reference material only. They may describe an earlier folder structure or a connection state that is no longer current.
+公司原文和制作清单在根local-materials/，不随仓库分发。本地contact-email-*和email-prototype/是未启用的旧原型，不能误认为已部署通知服务。

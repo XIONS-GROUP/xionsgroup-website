@@ -1,62 +1,36 @@
-# XIONS GROUP - 项目规范与工作流程手册 (PROJECT RULES)
+# XIONS GROUP — 当前项目规则
 
-## 📌 一、 项目研发与核心代码规范
+更新：2026-09-22。先读[README](README.md)、[状态](PROJECT_STATUS.md)、[日志](docs/project-log/README.md)、[Map](docs/project-map.md)。用户最新决定优先。.agents/AGENTS.md留有早期重复规划，不能据它恢复已替代的旧导航/旧Hero。
 
-1. **核心代码存储唯一入口**：
-   * 唯一生产代码库位于：`src/`（包括页面 `src/pages/`、组件 `src/components/`、静态资源 `public/`）。
-   * 网站所有的生产资产改动均以 `src/` 目录为准。
-   * `archive/` 仅保留历史版本，不参与构建；所有命令从仓库根目录运行。
+## 项目边界
 
-2. **设计美学指导思想 (White Editorial Luxury Rule)**：
-   * **定位**：法国顶级奢华美妆/香水集团（参照 Chanel, Byredo, Aesop, Le Labo 级别）。
-   * **基调**：**高定白色极简社论风格 (White Editorial Luxury Theme)**（纯净高雅白背景 `#FFFFFF` + 黑字 `#0A0A0A`）。
-   * **排版**：强调极简衬线/无衬线高字重对比、呼吸感留白、高定单栏与多栏网格交错版式。
+- 根目录唯一入口；src/public是网站代码/资产，archive不部署，local-materials公司原件不发布。
+- Astro静态集团站，法英共享模板，非Shopify、无CMS。content/home.fr.json不是首页实时数据源。
 
-3. **Logo 使用规范 (Restrained Logo Rule)**：
-   * **禁止在页面主体内滥用 Logo**。Logo (`XIONS_LOGO.svg`) 优雅呈现在**顶部导航栏 (Navigation Header)** 与页脚 (Footer)。
+## 设计与交互
 
-4. **自动悬停下拉大菜单 (Hover Dropdown Mega-Menu)**：
-   * 顶部导航栏分类（GROUPE, MARQUES, ENGAGEMENTS, CONTACT）支持**鼠标移入悬停自动触发下拉大菜单**（无需点击）。
-   * 下拉菜单清晰呈现集团完整的架构树与子页面导航。
+- 简约社论式官网；白/近白主体、黑字、#c20000。首页黑白X动画是明确批准的设计。
+- 不无差别加图片、分隔线、箭头或大写；主导航大写，子项和正文正常大小写。
+- Logo主要在导航/页脚；用户要求的四品牌卡居中Logo保留。
+- 只有Le groupe / Nos marques有桌面下拉且父项可点击；Press、Engagements、Carrières、Contact直链，悬停关闭下拉。
+- 菜单和下拉共享白色磨砂面；手机全屏抽屉，集团不展开团队，品牌展开四家；全部品牌链接另置。
+- 页脚显示当前FR/EN并切同页另一语言，与法律链接同字号/基线；手机菜单保留双语言选择。
+- Hero以src/config/hero-light.ts为唯一参数源：390/650px、固定比例、15秒；工具箱试值确认后才写默认。
+- 流光仅在完整X的三个阶段连续运行，不叠加到形成/退场。
 
-5. **图片替换工作流 (Image Replacement Workflow)**：
-   * 用户提供图片或直接指定图片存放位置与对应组件。
-   * AI 助手负责将图片归档至 `public/images/`，更新对应代码路径，并自动完成响应式与懒加载（`loading="lazy"`）优化。
+## 内容与素材
 
----
+- 修正原文为来源；不擅自删改已确认业务内容，不凭空增加获奖、合作、合规承诺。
+- 当前媒体菜单名Press，不因旧口述Price新增价格页。
+- 图片public/images/分类；尺寸/命名维护src/data/visuals.json。首屏关键资产优先，其余按需懒加载。
+- 修改法文同步英文、alt、metadata；不新增在线翻译API。
+- Contact用Netlify Forms，不因存在旧原型激活Resend；测试邮件需明确授权。
 
-## 🏗️ 二、 网站完整架构树 (Site Architecture)
+## 开发、发布和记录
 
-- **GROUPE (集团介绍)**
-  - *À propos* — 集团愿景与法式传承
-  - *Équipe & Direction* — 创始人团队 (Denis Bellaïche, Kris Fang, Neo Su)
-  - *Presse & Rayonnement* — 国际盛会与媒体声誉 (Oscars, Cannes, Grammys)
-  - *Carrières* — 招贤纳士与岗位入口
-
-- **MARQUES (品牌组合)**
-  - *L'Entropiste* — Parfumerie de Niche (获奖小众香氛)
-  - *Betenoir* — Parfumerie (Coming 2026 预告)
-  - *Sunlution* — Cosmétique & Science (光感护肤)
-  - *Masqly* — Body Care & Rituals (身体护理)
-
-- **ENGAGEMENTS (品质与承诺)**
-  - *Qualité & Formules* — 顶级原料与高标准
-  - *Responsabilité* — 透明度与伦理承诺
-  - *Environnement* — 绿色可持续创新
-
-- **CONTACT (联系入口)**
-  - *Paris Headquarters* — 巴黎总部
-  - *Business & Distribution* — 商务与渠道合作
-  - *Press Contact* — 媒体与公关
-  - *Careers & Talent* — 自荐与人才招募
-
----
-
-## 🔄 三、 Git 与自动构建发布流程
-
-1. **分支策略**：
-   * `dev` 分支：实时开发与预览（对应 Netlify 预览 `https://dev--xionsgroup.netlify.app`）。
-   * `main` 分支：正式生产发布（对应正式域名 `xionsgroup.com`，未正式发布前保持极简 Logo 遮罩预热页）。
-
-2. **自动构建构建流**：
-   * 任何在 `dev` 分支的推送到 GitHub 均会自动触发 Netlify 云端构建。
+- 先git status，保留已有改动。通常dev开发，依当前用户范围决定提交/推送；“先本地修改”优先。
+- dev预览、main生产；未经发布要求不合并main、不强推。
+- npm run build；TypeScript/Astro改动运行相应检查。推送成功不代表部署成功。
+- 预览禁索引，生产启索引属于正式上线步骤。
+- Netlify优先插件/CLI，避免Computer Use。DNS修改不影响公司邮件记录。
+- 每轮实质修改追加docs/project-log/，记录需求/参数前后值/文件/验证/发布状态/待办，更新PROJECT_STATUS、Map或技术说明。历史不覆盖，旧决定标明被替代。

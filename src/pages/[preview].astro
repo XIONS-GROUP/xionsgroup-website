@@ -1,4 +1,5 @@
 ---
+import { heroLightDefaults, heroLightTiming, heroLightFlow } from '../config/hero-light';
 export function getStaticPaths() {
   return process.env.NODE_ENV !== 'production' ? [{params:{preview:'design-preview'}}] : [];
 }
@@ -16,26 +17,31 @@ export function getStaticPaths() {
     <label>当前可见区域</label><p id="region" aria-live="polite">首页 Hero</p>
     <div id="hero-options">
       <details open><summary>尺寸与构图</summary>
-      <div id="desktop-options" hidden><label for="desktop-height">桌面 X 高度 <output id="desktop-height-value"></output></label><input id="desktop-height" type="range" min="500" max="1400" step="10" value="900"/></div>
+      <div id="desktop-options" hidden><label for="desktop-height">桌面 X 高度 <output id="desktop-height-value"></output></label><input id="desktop-height" type="range" min="500" max="1400" step="10" value={heroLightDefaults.desktopXHeight}/></div>
       <div id="mobile-options">
         <label for="hero-height">手机首屏高度 <output id="hero-height-value"></output></label><input id="hero-height" type="range" min="480" max="1100" step="1" value="844"/>
-        <label for="x-height">手机 X 高度 <output id="x-height-value"></output></label><input id="x-height" type="range" min="360" max="1100" step="10" value="360"/>
+        <label for="x-height">手机 X 高度 <output id="x-height-value"></output></label><input id="x-height" type="range" min="360" max="1100" step="10" value={heroLightDefaults.mobileXHeight}/>
       </div>
       </details>
       <details><summary>噪点质感</summary>
       <label for="grain">噪点强度 <output id="grain-value"></output></label><input id="grain" type="range" min="0" max="100" step="1" value="12"/>
       <label for="size">颗粒大小 <output id="size-value"></output></label><input id="size" type="range" min="0.5" max="4" step="0.1" value="0.9"/>
       </details>
+      <details open><summary>持续流光</summary>
+        <label for="flow-strength">流光强度 <output id="flow-strength-value"></output></label><input id="flow-strength" type="range" min="0" max="300" step="5" value={heroLightFlow.strength*100}/>
+        <label for="flow-speed">流光速度 <output id="flow-speed-value"></output></label><input id="flow-speed" type="range" min="0.25" max="3" step="0.05" value={heroLightFlow.speed}/>
+        <small>0% 关闭流光；100% 为原强度。速度只影响光的游走，不改变旋转和各阶段时长。退场沿用最后一帧光影，再自然融入白场。</small>
+      </details>
       <details open><summary>动画时长 <span id="total-time"></span></summary>
         <div class="timing-grid">
-          <label for="time-white">白场停留<input id="time-white" data-timing="white" type="number" min="0" max="30" step="0.5" value="2"/></label>
-          <label for="time-formation">白场 → X<input id="time-formation" data-timing="formation" type="number" min="1" max="30" step="0.5" value="8"/></label>
-          <label for="time-hold">旋转前停留<input id="time-hold" data-timing="hold" type="number" min="0" max="30" step="0.5" value="4"/></label>
-          <label for="time-rotation">旋转 180°<input id="time-rotation" data-timing="rotation" type="number" min="1" max="30" step="0.5" value="6"/></label>
-          <label for="time-settle">旋转后停留<input id="time-settle" data-timing="settle" type="number" min="0" max="30" step="0.5" value="3"/></label>
-          <label for="time-exit">X → 白场<input id="time-exit" data-timing="exit" type="number" min="1" max="30" step="0.5" value="5"/></label>
+          <label for="time-white">白场停留<input id="time-white" data-timing="white" type="number" min="0" max="30" step="0.5" value={heroLightTiming.white}/></label>
+          <label for="time-formation">白场 → X<input id="time-formation" data-timing="formation" type="number" min="1" max="30" step="0.5" value={heroLightTiming.formation}/></label>
+          <label for="time-hold">旋转前停留<input id="time-hold" data-timing="hold" type="number" min="0" max="30" step="0.5" value={heroLightTiming.hold}/></label>
+          <label for="time-rotation">旋转 180°<input id="time-rotation" data-timing="rotation" type="number" min="1" max="30" step="0.5" value={heroLightTiming.rotation}/></label>
+          <label for="time-settle">旋转后停留<input id="time-settle" data-timing="settle" type="number" min="0" max="30" step="0.5" value={heroLightTiming.settle}/></label>
+          <label for="time-exit">X → 白场<input id="time-exit" data-timing="exit" type="number" min="1" max="30" step="0.5" value={heroLightTiming.exit}/></label>
         </div>
-        <small>单位：秒。更改时长后自动从头计时。旋转曲线：先慢后快，末端柔和停稳。</small>
+        <small>单位：秒。更改时长后自动从头计时。形成、旋转和退场使用缓进缓出 S 曲线：起步慢、中段快、末端慢。</small>
       </details>
       <div class="transport">
         <label for="timeline">时间轴 · 拖动暂停检查</label><input id="timeline" type="range" min="0" max="1000" step="1" value="0"/>

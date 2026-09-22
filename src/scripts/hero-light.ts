@@ -1,10 +1,11 @@
-import { heroLightDefaults, heroLightTiming, heroFrame, normalizeTiming, totalDuration } from '../config/hero-light';
+import { heroLightDefaults, heroLightTiming, heroLightFlow, heroFrame, normalizeTiming, normalizeFlow, totalDuration } from '../config/hero-light';
 // Analytic light on a fixed silhouette; grain never animates.
 const vertex = `attribute vec2 position;
 void main(){gl_Position=vec4(position,0.,1.);}`;
 const fragment = `precision highp float;
 uniform vec2 resolution;
-uniform float time;
+uniform float flowTime;
+uniform float flowAmount;
 uniform float grainAmount;
 uniform float grainSize;
 uniform float pixelScale;
@@ -52,15 +53,25 @@ void main(){
   float glint=.09*sweep*exp(-pow(d/(softness*2.5),2.))*falloff;
   glint*=smoothstep(7.,7.6,cycle)*(1.-smoothstep(9.4,10.,cycle))*motion;
   float value=mix(assembled,reference,formed)+glint;
-  value+=.012*sin(time*.5)*light*formed*motion;
+  // Light moves during the complete-X stages; its last state is carried into exit.
+  // Both travel in X coordinates, so they follow its silhouette through rotation.
+  float broadPosition=-.55*cos(flowTime*6.2831853/${heroLightFlow.widePeriod.toFixed(1)});
+  float broad=exp(-pow((p.x*.8+p.y*.7-broadPosition)/.23,2.));
+  float broadLight=light*mix(-.28,.04,broad);
+  float edgePosition=.55*sin(flowTime*6.2831853/${heroLightFlow.edgePeriod.toFixed(1)}-.9);
+  float edgeTravel=exp(-pow((p.y-edgePosition)/.17,2.));
+  float leftEdge=1.-smoothstep(-.04,.04,p.x);
+  float edgeLight=.22*edgeTravel*exp(-pow(d/(softness*1.7),2.))*falloff*leftEdge;
+  value+=(broadLight+edgeLight)*flowAmount;
   // A branched light field follows all four X arms, then fills the full crop.
-  float reach=returning*returning*(3.-2.*returning);
+  float reach=returning;
   float armDistance=abs(abs(p.x)-(.035+.34*y));
   float travel=.4*y+1.2*armDistance;
   float maxTravel=.4*extent.y+1.2*(extent.x+.035+.34*extent.y)+.4;
-  float spread=reach*maxTravel;
-  float dissolve=(1.-smoothstep(spread-.12,spread+.12,travel))*smoothstep(0.,.12,returning);
-  dissolve=mix(dissolve,1.,smoothstep(.82,1.,returning));
+  // One spatial reveal, without the former late full-frame brightness boost.
+  float feather=.20;
+  float spread=mix(-feather,maxTravel+feather,reach);
+  float dissolve=1.-smoothstep(spread-feather,spread+feather,travel);
   value=mix(value,1.,dissolve);
   float texture=smoothstep(2.,8.,cycle)*(1.-dissolve);
   vec2 cell=floor(gl_FragCoord.xy/max(.5,grainSize*pixelScale));
@@ -75,7 +86,7 @@ export function initHeroLight(root: HTMLElement) {
   const canvas = root.querySelector('canvas')!;
   const button = root.querySelector('button')!;
   const storageKey = 'xions-hero-grain-v2';
-  let grainAmount: number = heroLightDefaults.grainAmount, grainSize: number = heroLightDefaults.grainSize, pixelScale = 1, artHeight = 704;
+  let grainAmount: number = heroLightDefaults.grainAmount, grainSize: number = heroLightDefaults.grainSize, pixelScale = 1, artHeight: number = heroLightDefaults.desktopXHeight;
   try {
     const saved = import.meta.env.DEV && JSON.parse(localStorage.getItem(storageKey) || 'null');
     if (saved && Number.isFinite(saved.amount) && Number.isFinite(saved.size)) {
@@ -90,12 +101,13 @@ export function initHeroLight(root: HTMLElement) {
   const context = gl;
   let program: WebGLProgram | null = null;
   let buffer: WebGLBuffer | null = null;
-  let timeLocation: WebGLUniformLocation | null = null;
+  let flowTimeLocation: WebGLUniformLocation | null = null, flowAmountLocation: WebGLUniformLocation | null = null;
   let resolutionLocation: WebGLUniformLocation | null = null;
   let amountLocation: WebGLUniformLocation | null = null, sizeLocation: WebGLUniformLocation | null = null, scaleLocation: WebGLUniformLocation | null = null;
   let formationLocation: WebGLUniformLocation | null = null, exitLocation: WebGLUniformLocation | null = null, angleLocation: WebGLUniformLocation | null = null;
   let heightLocation: WebGLUniformLocation | null = null, motionLocation: WebGLUniformLocation | null = null;
   let timing={...heroLightTiming};
+  let flow=normalizeFlow();
   let frame = 0, elapsed = 0, previous = 0, lastProgress=-1;
   let visible = true, paused = false, lost = false, disposed = false;
 
@@ -127,7 +139,8 @@ export function initHeroLight(root: HTMLElement) {
     const position = context.getAttribLocation(program,'position');
     context.enableVertexAttribArray(position);
     context.vertexAttribPointer(position,2,context.FLOAT,false,0,0);
-    timeLocation=context.getUniformLocation(program,'time');
+    flowTimeLocation=context.getUniformLocation(program,'flowTime');
+    flowAmountLocation=context.getUniformLocation(program,'flowAmount');
     resolutionLocation=context.getUniformLocation(program,'resolution');
     amountLocation=context.getUniformLocation(program,'grainAmount');
     sizeLocation=context.getUniformLocation(program,'grainSize');
@@ -143,7 +156,8 @@ export function initHeroLight(root: HTMLElement) {
     if (lost || disposed) return;
     context.uniform2f(resolutionLocation,canvas.width,canvas.height);
     const state=heroFrame(elapsed,timing,reduced.matches);
-    context.uniform1f(timeLocation,state.time);context.uniform1f(formationLocation,state.formation);
+    context.uniform1f(flowTimeLocation,state.flowTime*flow.speed);context.uniform1f(flowAmountLocation,state.flowAmount*flow.strength);
+    context.uniform1f(formationLocation,state.formation);
     context.uniform1f(exitLocation,state.exit);context.uniform1f(angleLocation,state.angle);
     if(import.meta.env.DEV && (Math.abs(elapsed-lastProgress)>.15 || paused)){
       lastProgress=elapsed;window.dispatchEvent(new CustomEvent('xions:hero-progress',{detail:{...state,paused}}));
@@ -170,7 +184,8 @@ export function initHeroLight(root: HTMLElement) {
     frame=requestAnimationFrame(tick);
     if (!previous) previous=now;
     const delta=now-previous;
-    if (delta<1000/30) return;
+    // Allow timer jitter around a 60Hz refresh instead of accidentally skipping every other frame.
+    if (delta<1000/60-1) return;
     elapsed+=Math.min(delta,100)/1000;
     previous=now;
     draw();
@@ -195,6 +210,7 @@ export function initHeroLight(root: HTMLElement) {
     const detail=(event as CustomEvent).detail;
     if (!Number.isFinite(detail?.amount)||!Number.isFinite(detail?.size))return;
     grainAmount=Math.max(0,Math.min(1,detail.amount));grainSize=Math.max(.5,Math.min(4,detail.size));
+    if(detail.flow)flow=normalizeFlow(detail.flow);
     const next=normalizeTiming(detail.timing);
     const changed=JSON.stringify(next)!==JSON.stringify(timing);
     if(changed){timing=next;elapsed=0;lastProgress=-1;paused=false;root.dataset.paused='false';}
