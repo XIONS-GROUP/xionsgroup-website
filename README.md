@@ -15,9 +15,14 @@ XIONS GROUP 集团官网：Astro 静态多页网站，法语 / 英语共享模�
 | 09-22 · 动效与交接 | 固定比例X、白场形成、180°旋转、持续流光、设计工具箱；确认390/650px，集中整理日志 |
 | 09-22 · 流光循环 | 流光取消阶段门控，改为全程不停循环、强度290% |
 | 09-22 · 首尾衔接 | 退场改为开场动画的倒放、旋转角跨轮累加，整圈无缝；流光0.55× |
-| 09-22 · 缓动与版本 | 缓动曲线可调（默认power 3）；工具箱可保存带名字的参数版本到本地；时长1/6/1/4/2/6共20秒 |
+| 09-22 · 缓动与版本 | 缓动曲线可调；工具箱可保存带名字的参数版本到本地；时长1/6/1/4/2/6共20秒 |
+| 09-22 · 首页排版 | 四个板块标题字号统一；Le portefeuille改Nos marques；六奖项去logo改纯文字；Notre rôle重做 |
+| 09-22 · 页面内改文字 | 工具箱可解锁全站文字直接编辑并存到本地；可双击打开的离线副本 |
+| 09-22 · 节奏与动效 | 品牌卡加底图；奖项段改深色并延续X；全站细微滚动动效 |
 
-详细记录：[需求与实施时间线](docs/project-log/2026-09-12-to-22.md) · [流光循环](docs/project-log/2026-09-22-flow-loop.md) · [首尾衔接](docs/project-log/2026-09-22-loop-seam.md) · [缓动与版本](docs/project-log/2026-09-22-easing-and-presets.md) · [Hero参数历史](docs/project-log/hero-parameters.md) · [Git历史](docs/project-log/git-history.md)。
+详细记录：[需求与实施时间线](docs/project-log/2026-09-12-to-22.md) · [流光循环](docs/project-log/2026-09-22-flow-loop.md) · [首尾衔接](docs/project-log/2026-09-22-loop-seam.md) · [缓动与版本](docs/project-log/2026-09-22-easing-and-presets.md) · [首页排版](docs/project-log/2026-09-22-homepage-typography.md) · [页面内改文字](docs/project-log/2026-09-22-inline-text-editing.md) · [节奏与动效](docs/project-log/2026-09-22-homepage-rhythm-and-motion.md) · [Hero参数历史](docs/project-log/hero-parameters.md) · [Git历史](docs/project-log/git-history.md)。
+
+上线前缺口清单：[上线前检查](docs/launch-readiness-2026-09-22.md)。
 
 ## 当前确认值
 
@@ -34,7 +39,7 @@ npm run build
 npm run astro -- check
 ~~~
 
-[打开本地设计工具箱](http://127.0.0.1:4323/design-preview/)。法文 /fr/、英文 /en/。npm run preview 预览构建产物；工具箱只在本地开发服务存在。工具箱试值不是源码默认值，确认后再写入配置；工具箱里可把整组参数存成带名字的版本，落在 local-materials/hero-presets/（不进仓库），接手时先看这里有没有用户调过的值。不要因端口占用不断启动新的服务。
+[打开本地设计工具箱](http://127.0.0.1:4323/design-preview/)。法文 /fr/、英文 /en/。npm run preview 预览构建产物；工具箱只在本地开发服务存在。工具箱试值不是源码默认值，确认后再写入配置；工具箱里可把整组参数存成带名字的版本，落在 local-materials/hero-presets/（不进仓库），接手时先看这里有没有用户调过的值。工具箱还能解锁页面上的文字直接改，改动存到 local-materials/text-edits/，同样不进仓库、需人工回写源码。不要因端口占用不断启动新的服务。
 
 ## 文件与内容维护
 

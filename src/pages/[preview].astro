@@ -14,6 +14,27 @@ export function getStaticPaths() {
     <header><strong>本地设计预览</strong><button id="close" aria-label="收起工具箱">×</button></header>
     <div class="devices"><button data-device="mobile" aria-pressed="true">手机</button><button data-device="desktop" aria-pressed="false">桌面</button></div>
     <p id="dimensions"></p>
+    <details open class="global-tool"><summary>文字编辑 <span id="edit-count"></span></summary>
+      <button id="edit-toggle" type="button" aria-pressed="false">解锁文字编辑</button>
+      <p id="edit-hint">全站生效，与手机/桌面切换一样是全局开关。解锁后任意页面的文字都能点进去改：删减、Enter 换行。链接在编辑时不会跳转，要换页就用工具箱下方的页面下拉。法文英文各改各的。</p>
+      <label for="edit-page">当前页面</label>
+      <select id="edit-page"></select>
+      <div id="edit-controls" hidden>
+        <p id="edit-target" aria-live="polite"></p>
+        <label for="edit-font">字体</label>
+        <select id="edit-font">
+          <option value="">不覆盖（沿用样式表）</option>
+          <option value="var(--display)">Faculty Glyphic · 标题衬线</option>
+          <option value="var(--sans)">Plus Jakarta Sans · 正文无衬线</option>
+        </select>
+        <label for="edit-size">字号 <output id="edit-size-value"></output></label>
+        <input id="edit-size" type="number" min="8" max="200" step="1" />
+        <button id="edit-size-clear" type="button">清除字号覆盖</button>
+      </div>
+      <div class="edit-actions"><button id="edit-save" type="button">保存修改</button><button id="edit-revert" type="button">还原本页</button></div>
+      <p id="edit-status" aria-live="polite"></p>
+      <small>保存到 local-materials/text-edits/，记录原文与改后文字，不进仓库也不会部署。改动只存在于预览里，不会自动写回源码。换页前记得先保存。</small>
+    </details>
     <label>当前可见区域</label><p id="region" aria-live="polite">首页 Hero</p>
     <div id="hero-options">
       <details open><summary>尺寸与构图</summary>
@@ -44,8 +65,9 @@ export function getStaticPaths() {
         <small>单位：秒。更改时长后自动从头计时。X → 白场是「白场 → X」的倒放，所以一轮的末帧与首帧相同，循环无缝。</small>
       </details>
       <details open><summary>缓动</summary>
-        <label for="ease-power">缓动强度 <output id="ease-power-value"></output></label><input id="ease-power" type="range" min="1" max="8" step="0.1" value={heroLightEase.power}/>
-        <small>形成、旋转和退场共用这条 S 曲线。1.0 是匀速无缓动；数值越大，两端停得越久、中段加速越明显。曲线对称，所以调它不会破坏首尾衔接。</small>
+        <label for="ease-formation">入场 / 退场 <output id="ease-formation-value"></output></label><input id="ease-formation" type="range" min="1" max="8" step="0.1" value={heroLightEase.formation}/>
+        <label for="ease-rotation">旋转 <output id="ease-rotation-value"></output></label><input id="ease-rotation" type="range" min="1" max="8" step="0.1" value={heroLightEase.rotation}/>
+        <small>数值就是中段相对匀速的倍率：1.0 匀速，数值越大两端停得越久、中段冲得越快。入场和退场必须共用一个值才能保持首尾衔接。原来的固定曲线等效 1.875。</small>
       </details>
       <details open><summary>保存与版本</summary>
         <label for="preset-name">版本名称</label><input id="preset-name" type="text" maxlength="40" placeholder="例如 20秒慢旋转"/>
@@ -75,6 +97,18 @@ export function getStaticPaths() {
   @media(min-width:1100px){:global(.toolbox-open) .stage{right:416px}aside{top:18px;bottom:72px;max-height:none}}
   details{border-top:1px solid #ddd;padding:14px 0}summary{cursor:pointer;font-weight:600}summary span{float:right;font-weight:400;color:#777}
   .timing-grid{display:grid;grid-template-columns:1fr 1fr;gap:0 16px}.timing-grid input{padding:7px 9px;background:white;border:1px solid #ccc;border-radius:5px;font:inherit;color:#111}
+  .global-tool{border-top:0;border-bottom:1px solid #ddd;padding-top:4px}
+  #edit-page{width:100%;margin-top:10px;padding:7px 9px;background:white;border:1px solid #ccc;border-radius:5px;font:inherit;color:#111}
+  #edit-toggle{width:100%;margin-top:14px;padding:10px;border:1px solid #171717;background:white;border-radius:7px}
+  #edit-toggle[aria-pressed=true]{background:#c20000;border-color:#c20000;color:white}
+  #edit-hint,#edit-status{margin:10px 0 0;font-size:11px;color:#777;line-height:1.5}
+  #edit-target{margin:0 0 4px;font-size:11px;color:#111;overflow-wrap:anywhere}
+  #edit-controls{margin-top:14px;padding-top:14px;border-top:1px solid #eee}
+  #edit-font,#edit-size{width:100%;margin-top:10px;padding:7px 9px;background:white;border:1px solid #ccc;border-radius:5px;font:inherit;color:#111}
+  #edit-size-clear{margin-top:8px;padding:5px 10px;border:1px solid #ccc;background:white;border-radius:5px;font-size:11px}
+  .edit-actions{display:flex;gap:8px;margin-top:14px}
+  .edit-actions button{flex:1;padding:8px 10px;border:1px solid #bbb;background:white;border-radius:6px}
+  #edit-count{float:right;font-weight:400;color:#777}
   #preset-name{padding:7px 9px;background:white;border:1px solid #ccc;border-radius:5px;font:inherit;color:#111}
   #preset-save{margin-top:10px;padding:8px 12px;border:1px solid #bbb;background:white;border-radius:6px}
   #preset-status{margin:8px 0 0;font-size:11px;color:#555;min-height:1em}

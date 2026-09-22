@@ -1,4 +1,5 @@
-import { heroLightDefaults, heroLightTiming, normalizeTiming, normalizeFlow, normalizeEase, totalDuration, type HeroTiming } from '../config/hero-light';
+import { heroLightDefaults, heroLightTiming, normalizeTiming, normalizeFlow, normalizeEase, totalDuration, type HeroTiming, type HeroEase } from '../config/hero-light';
+import { routes } from '../i18n/routes';
 const iframe=document.querySelector<HTMLIFrameElement>('iframe')!;
 const panel=document.querySelector<HTMLElement>('#toolbox')!;
 const launcher=document.querySelector<HTMLButtonElement>('.launcher')!;
@@ -6,7 +7,7 @@ const byId=(id:string)=>document.getElementById(id)!;
 const inputs={desktop:byId('desktop-height') as HTMLInputElement,height:byId('hero-height') as HTMLInputElement,x:byId('x-height') as HTMLInputElement,grain:byId('grain') as HTMLInputElement,size:byId('size') as HTMLInputElement};
 const timingInputs=[...document.querySelectorAll<HTMLInputElement>('[data-timing]')];
 const flowInputs={strength:byId('flow-strength') as HTMLInputElement,speed:byId('flow-speed') as HTMLInputElement};
-const easeInput=byId('ease-power') as HTMLInputElement;
+const easeInputs={formation:byId('ease-formation') as HTMLInputElement,rotation:byId('ease-rotation') as HTMLInputElement};
 const flowKey='xions-preview-flow-v1';
 const easeKey='xions-preview-ease-v1';
 let flow=normalizeFlow();
@@ -50,8 +51,11 @@ function apply(){
   flowInputs.strength.value=String(flow.strength*100);flowInputs.speed.value=String(flow.speed);
   byId('flow-strength-value').textContent=`${Math.round(flow.strength*100)}%`;
   byId('flow-speed-value').textContent=`${flow.speed.toFixed(2)}×`;
-  easeInput.value=String(ease.power);
-  byId('ease-power-value').textContent=ease.power<=1?'1.0 · 匀速':`${ease.power.toFixed(1)}`;
+  for(const [key,input] of Object.entries(easeInputs)){
+    const value=ease[key as keyof typeof ease];
+    input.value=String(value);
+    byId(`ease-${key}-value`).textContent=value<=1?'1.0 · 匀速':value.toFixed(1);
+  }
   timingInputs.forEach(input=>{
     if(input!==document.activeElement)input.value=String(timing[input.dataset.timing as keyof HeroTiming]);
   });
@@ -105,13 +109,22 @@ for(const [key,input] of Object.entries(flowInputs))input.addEventListener('inpu
   apply();
   try{localStorage.setItem(flowKey,JSON.stringify(flow));}catch{}
 });
-easeInput.addEventListener('input',()=>{
-  ease=normalizeEase({power:Number(easeInput.value)});apply();
+for(const [key,input] of Object.entries(easeInputs))input.addEventListener('input',()=>{
+  ease=normalizeEase({...ease,[key]:Number(input.value)});apply();
   try{localStorage.setItem(easeKey,JSON.stringify(ease));}catch{}
 });
+const pageSelect=byId('edit-page') as HTMLSelectElement;
+for(const [fr,en] of routes){
+  if(fr==='404')continue;
+  for(const [locale,slug] of [['fr',fr],['en',en]] as const){
+    pageSelect.append(Object.assign(document.createElement('option'),
+      {value:`/${locale}/${slug?`${slug}/`:''}`,textContent:`${locale.toUpperCase()} · ${slug||'accueil'}`}));
+  }
+}
+pageSelect.addEventListener('change',()=>{iframe.src=pageSelect.value;});
 const presetName=byId('preset-name') as HTMLInputElement;
 const presetStatus=byId('preset-status'),presetList=byId('preset-list');
-type Preset={file:string;name:string;savedAt:string;settings:{layout?:typeof settings;timing?:Partial<HeroTiming>;flow?:{strength?:number;speed?:number};ease?:{power?:number}}};
+type Preset={file:string;name:string;savedAt:string;settings:{layout?:typeof settings;timing?:Partial<HeroTiming>;flow?:{strength?:number;speed?:number};ease?:Partial<HeroEase>}};
 function store(){
   try{
     localStorage.setItem(layoutKey,JSON.stringify(settings));
@@ -163,6 +176,61 @@ byId('preset-save').addEventListener('click',async()=>{
   }catch(error){presetStatus.textContent=`保存失败：${error instanceof Error?error.message:'未知错误'}`;}
 });
 refresh();
+
+// --- In-place copy editing -------------------------------------------------
+const editToggle=byId('edit-toggle') as HTMLButtonElement;
+const editControls=byId('edit-controls'),editTarget=byId('edit-target'),editStatus=byId('edit-status'),editCount=byId('edit-count');
+const fontSelect=byId('edit-font') as HTMLSelectElement,sizeInput=byId('edit-size') as HTMLInputElement;
+let editingOn=false;
+const toFrame=(type:string,detail?:unknown)=>iframe.contentWindow?.postMessage({type,detail},location.origin);
+function setEditing(next:boolean){
+  editingOn=next;
+  editToggle.setAttribute('aria-pressed',String(next));
+  editToggle.textContent=next?'退出文字编辑':'解锁文字编辑';
+  editControls.hidden=true;editTarget.textContent='';
+  if(!next)editCount.textContent='';
+  toFrame('xions:text-edit-mode',{enabled:next});
+}
+editToggle.addEventListener('click',()=>setEditing(!editingOn));
+byId('edit-revert').addEventListener('click',()=>{toFrame('xions:text-revert');editStatus.textContent='已还原本页的未保存修改。';});
+fontSelect.addEventListener('change',()=>toFrame('xions:text-style',{fontFamily:fontSelect.value}));
+sizeInput.addEventListener('input',()=>{
+  if(Number.isFinite(sizeInput.valueAsNumber))toFrame('xions:text-style',{fontSize:sizeInput.valueAsNumber});
+});
+byId('edit-size-clear').addEventListener('click',()=>{sizeInput.value='';toFrame('xions:text-style',{fontSize:0});});
+let pendingSave=false;
+byId('edit-save').addEventListener('click',()=>{
+  if(!editingOn)return void(editStatus.textContent='先解锁文字编辑。');
+  pendingSave=true;editStatus.textContent='收集修改中…';toFrame('xions:text-collect');
+});
+addEventListener('message',async event=>{
+  if(event.origin!==location.origin)return;
+  const {type,detail}=event.data||{};
+  // Each navigation inside the frame reloads the page, so re-arm edit mode when it announces itself.
+  if(type==='xions:text-ready'){
+    if(detail?.page)pageSelect.value=detail.page;
+    if(editingOn)toFrame('xions:text-edit-mode',{enabled:true});
+  }
+  if(type==='xions:text-dirty')editCount.textContent=detail?.count?`${detail.count} 处改动`:'';
+  if(type==='xions:text-selected'){
+    editControls.hidden=!detail;
+    if(!detail)return;
+    editTarget.textContent=`${detail.path} · 当前 ${detail.computedFamily} ${detail.fontSize}px`;
+    fontSelect.value=detail.fontFamily||'';
+    if(sizeInput!==document.activeElement)sizeInput.value=String(detail.fontSize);
+  }
+  if(type==='xions:text-changes'&&pendingSave){
+    pendingSave=false;
+    if(!detail?.changes?.length)return void(editStatus.textContent='本页没有检测到改动。');
+    try{
+      const response=await fetch('/__text-edits',{method:'POST',headers:{'content-type':'application/json'},
+        body:JSON.stringify({name:detail.page.replace(/\//g,'-').replace(/^-|-$/g,'')||'accueil',page:detail.page,changes:detail.changes})});
+      const body=await response.json();
+      if(!response.ok)throw new Error(body?.error||String(response.status));
+      editStatus.textContent=`已保存 ${detail.changes.length} 处到 local-materials/text-edits/${body.edit.file}`;
+    }catch(error){editStatus.textContent=`保存失败：${error instanceof Error?error.message:'未知错误'}`;}
+  }
+});
 document.querySelectorAll<HTMLButtonElement>('[data-device]').forEach(button=>button.addEventListener('click',()=>{
   device=button.dataset.device as typeof device;
   document.querySelectorAll('[data-device]').forEach(b=>b.setAttribute('aria-pressed',String(b===button)));
