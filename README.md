@@ -18,15 +18,16 @@ XIONS GROUP 集团官网：Astro 静态多页网站，法语 / 英语共享模�
 | 09-22 · 缓动与版本 | 缓动曲线可调；工具箱可保存带名字的参数版本到本地；时长1/6/1/4/2/6共20秒 |
 | 09-22 · 首页排版 | 四个板块标题字号统一；Le portefeuille改Nos marques；六奖项去logo改纯文字；Notre rôle重做 |
 | 09-22 · 页面内改文字 | 工具箱可解锁全站文字直接编辑并存到本地；可双击打开的离线副本 |
-| 09-22 · 节奏与动效 | 品牌卡加底图；奖项段改深色并延续X；全站细微滚动动效 |
+| 09-22 · 素材与重排 | 压缩市场部原片接入空槽位；集团创始人左右并列、品牌图等高去图注、Press去占位图、Engagements去红色 |
+| 09-22 · 节奏与动效 | 奖项段改深色并延续X；全站细微滚动动效（品牌卡底图与粒子动画已按用户要求撤回） |
 
-详细记录：[需求与实施时间线](docs/project-log/2026-09-12-to-22.md) · [流光循环](docs/project-log/2026-09-22-flow-loop.md) · [首尾衔接](docs/project-log/2026-09-22-loop-seam.md) · [缓动与版本](docs/project-log/2026-09-22-easing-and-presets.md) · [首页排版](docs/project-log/2026-09-22-homepage-typography.md) · [页面内改文字](docs/project-log/2026-09-22-inline-text-editing.md) · [节奏与动效](docs/project-log/2026-09-22-homepage-rhythm-and-motion.md) · [Hero参数历史](docs/project-log/hero-parameters.md) · [Git历史](docs/project-log/git-history.md)。
+详细记录：[需求与实施时间线](docs/project-log/2026-09-12-to-22.md) · [流光循环](docs/project-log/2026-09-22-flow-loop.md) · [首尾衔接](docs/project-log/2026-09-22-loop-seam.md) · [缓动与版本](docs/project-log/2026-09-22-easing-and-presets.md) · [首页排版](docs/project-log/2026-09-22-homepage-typography.md) · [页面内改文字](docs/project-log/2026-09-22-inline-text-editing.md) · [节奏与动效](docs/project-log/2026-09-22-homepage-rhythm-and-motion.md) · [素材与重排](docs/project-log/2026-09-22-assets-and-page-redesign.md) · [Hero参数历史](docs/project-log/hero-parameters.md) · [Git历史](docs/project-log/git-history.md)。
 
 上线前缺口清单：[上线前检查](docs/launch-readiness-2026-09-22.md)。
 
 ## 当前确认值
 
-手机X **390px**；桌面X **650px**；固定2876:1580比例、中心锁定、窗口裁切；噪点12% / 0.9px。六段时长 **1 / 6 / 1 / 4 / 2 / 6秒**，共20秒；**X → 白场是白场 → X 的倒放**，一轮末帧与首帧相同，循环无缝。缓动曲线可调，默认power **3**。宽柔光与细弧边高光**不分阶段、全程不停循环**，强度290%、速度0.55×。唯一参数来源：[hero-light.ts](src/config/hero-light.ts)。
+手机X **390px**；桌面X **650px**；固定2876:1580比例、中心锁定、窗口裁切；噪点12% / 0.9px。六段时长 **1 / 6 / 1 / 4 / 2 / 6秒**，共20秒；**X → 白场是白场 → X 的倒放**，一轮末帧与首帧相同，循环无缝。缓动曲线可调，入场/退场与旋转分开，默认 **formation 2 / rotation 3**；两者中入场与退场必须共用同一值，否则首尾衔接会破。宽柔光与细弧边高光**不分阶段、全程不停循环**，强度290%、速度0.55×。唯一参数来源：[hero-light.ts](src/config/hero-light.ts)。
 
 ## 打开本地预览（最简单的方式）
 

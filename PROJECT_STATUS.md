@@ -5,7 +5,7 @@
 ## 分支与运行
 
 - 根目录是唯一运行/部署入口；Astro静态输出dist。
-- dev：法英完整多页站。已推送提交 a25dd52（自助启动器、全站尾斜杠）。上几个实现提交 d83dfb2（预览内改文字与离线副本）、3dd0140（首页排版、深色段落、滚动动效）、9857b3a（可调缓动与版本保存）。
+- dev：法英完整多页站。已推送提交 acddfc3（集团/品牌/Press/Engagements 重排、奖项段背景动效）与 1a491c4（市场部素材压缩接入）。更早：a25dd52（自助启动器与全站尾斜杠）、d83dfb2、3dd0140。
 - 仓库位置已从 Documents/Xionsgroup 移到 **Developer/web-build/Xionsgroup**；node_modules 未随迁，换机需重新 npm ci。
 - 本地main / 已知origin/main：9b56a72预热Logo占位页。本轮未fetch，不把快照当实时云端状态。
 - GitHub：XIONS-GROUP/xionsgroup-website；预览 https://dev--xionsgroup.netlify.app；主域配置 https://www.xionsgroup.com。
@@ -21,7 +21,7 @@
 - 红色#c20000、SVG箭头、白底图标/分享封面。body仍是近白#fefdfb，导航是白色半透明。
 - Netlify Forms分类必填、补充标题可选、成功/错误界面、扫描声明。邮件投递是远端验收项；Resend未启用。
 - SEO canonical/hreflang/JSON-LD/robots/sitemap；所有context仍禁索引。
-- 图片清单与Illustrator脚本；源src/data/visuals.json，非生产素材预览 /fr/visual-plan/。
+- 图片清单与Illustrator脚本；源src/data/visuals.json，非生产素材预览 /fr/visual-plan/。市场部素材已压缩接入8个槽位；Press与品牌页不再渲染占位线框。
 
 ## 当前 Hero / 工具箱
 
@@ -57,7 +57,9 @@
 
 它们**未被 git 跟踪**，所以不在任何提交里，Netlify 也拿不到。但 `public/` 会被 Astro 原样复制进 `dist/`，本地构建产物已从 7MB 涨到 178MB；一旦有人 `git add -A`，这些文件就会进仓库并发布到线上——Illustrator 源文件会变成可下载的公开资源。
 
-正确位置是 gitignore 覆盖的 `local-materials/`。其中的品牌照片很可能正是当前缺的素材（Sunlution、Betenoir 主图、Press 页图片），需要挑选、压缩、按 `src/data/visuals.json` 的命名规范放进 `public/images/` 后再使用。**等用户确认后处理，助手未擅自移动。**
+**压缩已完成**：14 张原片已压到网站尺寸（合计约 3.5MB）并按命名规范放进 `public/images/`，接入 8 个槽位。用户明确要求 `public/XIONS/` 保持不动作为原片，稍后自行移走，因此助手未移动任何原件。
+
+**仍待处理**：这 156MB 一天不移出 `public/`，`dist` 就会一直被撑到 178MB，且任何 `git add -A` 都会把它们连同那个 29MB 的 Illustrator 源文件一起提交并发布上线。建议移到 `local-materials/`。
 
 ## 已有工作保护
 
