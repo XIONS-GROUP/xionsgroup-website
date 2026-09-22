@@ -1,3 +1,6 @@
+---
+import { heroLightDefaults } from '../config/hero-light';
+---
 <div class="hero-light" data-hero-light data-paused="false">
   <div class="light-art" aria-hidden="true">
     <img class="light-poster" src="/images/home/xionsgroup-hero-light.svg" alt="" width="2876" height="1580" fetchpriority="high" />
@@ -11,8 +14,9 @@
   </button>
   {import.meta.env.DEV && <details class="noise-controls" data-noise-controls hidden>
     <summary>Réglages du grain</summary>
-    <label for="hero-grain-amount">Intensité du grain <output data-amount-value>12%</output></label><input id="hero-grain-amount" data-grain-amount type="range" min="0" max="100" value="12" step="1" />
-    <label for="hero-grain-size">Taille du grain <output data-size-value>1.0 px</output></label><input id="hero-grain-size" data-grain-size type="range" min="0.5" max="4" value="1" step="0.1" />
+    <label for="hero-grain-amount">Intensité du grain <output data-amount-value>{heroLightDefaults.grainAmount * 100}%</output></label><input id="hero-grain-amount" data-grain-amount type="range" min="0" max="100" value={heroLightDefaults.grainAmount * 100} step="1" />
+    <label for="hero-grain-size">Taille du grain <output data-size-value>{heroLightDefaults.grainSize.toFixed(1)} px</output></label><input id="hero-grain-size" data-grain-size type="range" min="0.5" max="4" value={heroLightDefaults.grainSize} step="0.1" />
+    <button type="button" class="replay-intro" data-replay-intro>Rejouer l’introduction</button>
     <p>Prévisualisation locale · réglages mémorisés dans ce navigateur.</p>
   </details>}
 </div>
@@ -21,10 +25,10 @@
   document.querySelectorAll<HTMLElement>('[data-hero-light]').forEach(initHeroLight);
 </script>
 <style>
-  .hero-light,.light-art,.light-art canvas,.light-poster,.light-shade { position:absolute; inset:0; width:100%; height:100%; }
-  .hero-light { background:#090909; }
+  .hero-light,.light-art,.light-art canvas { position:absolute; inset:0; width:100%; height:100%; }
+  .hero-light { --x-art-height:clamp(44rem,100svh,64rem); background:#090909; }
   .light-art { pointer-events:none; overflow:hidden; }
-  .light-poster { object-fit:contain; object-position:center; }
+  .light-poster { position:absolute; top:50%; left:50%; height:var(--x-art-height); width:auto; aspect-ratio:2876 / 1580; max-width:none; transform:translate(-50%,-50%); }
   canvas { opacity:0; }
   [data-ready="true"] canvas { opacity:1; }
   .light-toggle { position:absolute; z-index:3; right:var(--pad); bottom:6.8rem; display:flex; align-items:center; gap:.6rem; min-height:44px; padding:.5rem .75rem; border:1px solid #ffffff40; border-radius:0; background:#09090999; color:#fff; cursor:pointer; font-size:.62rem; }
@@ -38,4 +42,6 @@
   label { display:block; margin-top:1rem; } output { float:right; }
   input { display:block; width:100%; margin-top:.75rem; accent-color:white; }
   .noise-controls p { font-size:.65rem; opacity:.65; margin-bottom:0; }
+  .replay-intro { margin-top:1rem; border:1px solid #ffffff55; background:transparent; color:inherit; padding:.5rem .7rem; cursor:pointer; }
+  @media(max-width:700px) { .hero-light { --x-art-height:40rem; } }
 </style>

@@ -2,6 +2,7 @@
 // so every localized URL contains complete HTML without client-side translation.
 import { legalCopy } from './legal-en.ts';
 const copy = `
+Rejouer l’introduction|Replay introduction
 Réglages du grain|Grain settings
 Intensité du grain|Grain intensity
 Taille du grain|Grain size

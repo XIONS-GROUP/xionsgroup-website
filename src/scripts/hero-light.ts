@@ -1,4 +1,5 @@
-// An analytic light field: no textures, noise animation, external services or 3D library.
+import { heroLightDefaults, heroLightTiming } from '../config/hero-light';
+// Analytic light on a fixed silhouette; grain never animates.
 const vertex = `attribute vec2 position;
 void main(){gl_Position=vec4(position,0.,1.);}`;
 const fragment = `precision highp float;
@@ -7,14 +8,14 @@ uniform float time;
 uniform float grainAmount;
 uniform float grainSize;
 uniform float pixelScale;
+uniform float artHeight;
+uniform float motion;
 float hash(vec2 p){return fract(sin(dot(p,vec2(127.1,311.7)))*43758.5453);}
 void main(){
   vec2 uv=gl_FragCoord.xy/resolution;
-  float aspect=resolution.x/resolution.y;
-  // Preserve the reference proportions and lock the centre on every screen.
-  vec2 p=(uv-.5)*vec2(max(aspect/(2876./1580.),1.),max((2876./1580.)/aspect,1.));
+  // One scale for both axes. Width changes crop, never shrink, the artwork.
+  vec2 p=(uv-.5)*resolution/vec2(artHeight*(2876./1580.),artHeight);
   float y=abs(p.y);
-  float phase=time*6.2831853/24.;
   float width=.100+.205*pow(y*2.,1.75);
   float d=width-abs(p.x);
   float softness=.004+.025*pow(clamp(y*2.,0.,1.),2.);
@@ -23,8 +24,18 @@ void main(){
   float wedge=exp(-pow(p.x/(.025+.23*y),2.))*smoothstep(.10,.51,y);
   float falloff=1.-smoothstep(.12,.66,y);
   float light=.86*body*(1.-.96*wedge)*falloff;
-  // Only illumination breathes: silhouette, position and scale are fixed.
-  light*=1.+.018*sin(phase)*smoothstep(.04,.36,y);
+  float cycle=mod(max(time-${heroLightTiming.intro.toFixed(1)},0.),${heroLightTiming.cycle.toFixed(1)});
+  float active=smoothstep(.3,1.4,cycle)*(1.-smoothstep(7.,9.,cycle))*motion;
+  float path=p.y*(smoothstep(-.018,.018,p.x)*2.-1.);
+  float head=mix(.60,-.60,smoothstep(.6,7.2,cycle));
+  float softHead=mix(.60,-.60,smoothstep(1.,8.,cycle));
+  float edgeBeam=exp(-pow((path-head)/.10,2.));
+  float softBeam=exp(-pow((path-softHead)/.19,2.));
+  float edgeLight=exp(-pow(d/(softness*2.8),2.));
+  float meeting=exp(-pow((cycle-3.9)/.85,2.))*exp(-dot(p*vec2(7.,10.),p*vec2(7.,10.)));
+  light=light*(1.-.23*active)+active*falloff*(.22*edgeBeam*edgeLight+.15*softBeam*body+.10*meeting*body);
+  float reveal=mix(1.,mix(.13,1.,smoothstep(0.,${heroLightTiming.intro.toFixed(1)},time)),motion);
+  light*=reveal;
   float value=.042+light+halo*falloff;
   vec2 cell=floor(gl_FragCoord.xy/max(.5,grainSize*pixelScale));
   float grain=hash(cell)+hash(cell+19.7)-1.;
@@ -41,7 +52,7 @@ export function initHeroLight(root: HTMLElement) {
   const amount = root.querySelector<HTMLInputElement>('[data-grain-amount]');
   const size = root.querySelector<HTMLInputElement>('[data-grain-size]');
   const storageKey = 'xions-hero-grain-v2';
-  let grainAmount = .12, grainSize = 1, pixelScale = 1;
+  let grainAmount: number = heroLightDefaults.grainAmount, grainSize: number = heroLightDefaults.grainSize, pixelScale = 1, artHeight = 704;
   try {
     const saved = controls && JSON.parse(localStorage.getItem(storageKey) || 'null');
     if (saved && Number.isFinite(saved.amount) && Number.isFinite(saved.size)) {
@@ -50,6 +61,9 @@ export function initHeroLight(root: HTMLElement) {
     }
   } catch { /* Storage is optional. */ }
   const reduced = matchMedia('(prefers-reduced-motion: reduce)');
+  const introKey='xions-hero-intro-v1';
+  let introSeen=false;
+  try {introSeen=sessionStorage.getItem(introKey)==='true';} catch {}
   let gl: WebGLRenderingContext | null = null;
   try { gl = canvas.getContext('webgl', { alpha:false, antialias:false, depth:false, powerPreference:'low-power' }); } catch { return; }
   if (!gl) return; // The SVG is also the no-JavaScript / unsupported-device poster.
@@ -59,7 +73,8 @@ export function initHeroLight(root: HTMLElement) {
   let timeLocation: WebGLUniformLocation | null = null;
   let resolutionLocation: WebGLUniformLocation | null = null;
   let amountLocation: WebGLUniformLocation | null = null, sizeLocation: WebGLUniformLocation | null = null, scaleLocation: WebGLUniformLocation | null = null;
-  let frame = 0, elapsed = 0, previous = 0;
+  let heightLocation: WebGLUniformLocation | null = null, motionLocation: WebGLUniformLocation | null = null;
+  let frame = 0, elapsed = introSeen ? heroLightTiming.intro : 0, previous = 0;
   let visible = true, paused = false, lost = false, disposed = false;
 
   function setup() {
@@ -95,6 +110,8 @@ export function initHeroLight(root: HTMLElement) {
     amountLocation=context.getUniformLocation(program,'grainAmount');
     sizeLocation=context.getUniformLocation(program,'grainSize');
     scaleLocation=context.getUniformLocation(program,'pixelScale');
+    heightLocation=context.getUniformLocation(program,'artHeight');
+    motionLocation=context.getUniformLocation(program,'motion');
     return true;
   }
   function draw() {
@@ -104,6 +121,8 @@ export function initHeroLight(root: HTMLElement) {
     context.uniform1f(amountLocation,grainAmount);
     context.uniform1f(sizeLocation,grainSize);
     context.uniform1f(scaleLocation,pixelScale);
+    context.uniform1f(heightLocation,artHeight*pixelScale);
+    context.uniform1f(motionLocation,reduced.matches ? 0 : 1);
     context.drawArrays(context.TRIANGLES,0,3);
   }
   function resize() {
@@ -111,6 +130,7 @@ export function initHeroLight(root: HTMLElement) {
     const {width,height}=root.getBoundingClientRect();
     const scale=Math.min(devicePixelRatio || 1,1.5,1600/Math.max(width,height));
     pixelScale=scale;
+    artHeight=root.querySelector('.light-poster')!.getBoundingClientRect().height;
     canvas.width=Math.max(1,Math.round(width*scale));
     canvas.height=Math.max(1,Math.round(height*scale));
     context.viewport(0,0,canvas.width,canvas.height);
@@ -122,6 +142,10 @@ export function initHeroLight(root: HTMLElement) {
     const delta=now-previous;
     if (delta<1000/30) return;
     elapsed+=Math.min(delta,100)/1000;
+    if (!introSeen && elapsed>=heroLightTiming.intro) {
+      introSeen=true;
+      try {sessionStorage.setItem(introKey,'true');} catch {}
+    }
     previous=now;
     draw();
   }
@@ -129,6 +153,7 @@ export function initHeroLight(root: HTMLElement) {
     cancelAnimationFrame(frame);
     previous=0;
     button.hidden=lost || reduced.matches;
+    draw();
     if (!paused && !reduced.matches && visible && !document.hidden && !lost && !disposed) frame=requestAnimationFrame(tick);
   }
   if (!setup()) { context.deleteBuffer(buffer); context.deleteProgram(program); return; }
@@ -152,6 +177,9 @@ export function initHeroLight(root: HTMLElement) {
   const sizing=new ResizeObserver(resize);
   sizing.observe(root);
   const toggle=()=>{paused=!paused;root.dataset.paused=String(paused);sync();};
+  const replayButton=root.querySelector<HTMLButtonElement>('[data-replay-intro]');
+  const replay=()=>{elapsed=0;paused=false;root.dataset.paused='false';sync();};
+  replayButton?.addEventListener('click',replay);
   const onLost=(event:Event)=>{event.preventDefault();lost=true;root.dataset.ready='false';sync();};
   const onRestored=()=>{lost=false;if(setup()){root.dataset.ready='true';resize();sync();}else{lost=true;sync();}};
   button.addEventListener('click',toggle);
@@ -162,6 +190,7 @@ export function initHeroLight(root: HTMLElement) {
   resize();sync();
   document.addEventListener('astro:before-swap',()=>{
     amount?.removeEventListener('input',onGrain);size?.removeEventListener('input',onGrain);
+    replayButton?.removeEventListener('click',replay);
     disposed=true;cancelAnimationFrame(frame);observer.disconnect();sizing.disconnect();
     reduced.removeEventListener('change',sync);document.removeEventListener('visibilitychange',sync);
     button.removeEventListener('click',toggle);canvas.removeEventListener('webglcontextlost',onLost);
