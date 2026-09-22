@@ -37,7 +37,7 @@ Exigence|High standards
 Porter une attention égale à l’idée, au détail et à l’exécution.|Giving equal attention to the idea, the details and the execution.
 Engagement|Commitment
 Prendre part à la construction d’un groupe en développement.|Helping to build a growing group.
-Imaginons la suite|Imagine what comes next
+Imaginons la suite|Imagine the next
 Explorer|Explore
 Découvrir|Discover
 Presse & rayonnement|Press & presence

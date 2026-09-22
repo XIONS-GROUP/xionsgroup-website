@@ -145,7 +145,7 @@ export function initHeroLight(root: HTMLElement) {
   function draw() {
     if (lost || disposed) return;
     context.uniform2f(resolutionLocation,canvas.width,canvas.height);
-    const state=heroFrame(elapsed,timing,reduced.matches,ease.power);
+    const state=heroFrame(elapsed,timing,reduced.matches,ease);
     context.uniform1f(flowTimeLocation,state.flowTime*flow.speed);context.uniform1f(flowAmountLocation,state.flowAmount*flow.strength);
     context.uniform1f(formationLocation,state.formation);
     context.uniform1f(angleLocation,state.angle);

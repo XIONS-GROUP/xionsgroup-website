@@ -68,7 +68,13 @@ const schema = {
     <Navigation />
     <main><slot /></main>
     <Footer />
-    {import.meta.env.DEV && <a id="local-preview-launcher" href={'/design-preview?path=' + encodeURIComponent(Astro.url.pathname)} style="position:fixed;right:18px;bottom:18px;z-index:9999;background:#111;color:white;padding:10px 16px;border-radius:24px;text-decoration:none;font:12px system-ui">设计工具箱</a>}
+    {import.meta.env.DEV && <a id="local-preview-launcher" href={'/design-preview/?path=' + encodeURIComponent(Astro.url.pathname)} style="position:fixed;right:18px;bottom:18px;z-index:9999;background:#111;color:white;padding:10px 16px;border-radius:24px;text-decoration:none;font:12px system-ui">设计工具箱</a>}
     {import.meta.env.DEV && <script is:inline>if(window.self!==window.top)document.getElementById('local-preview-launcher')?.remove();</script>}
+    <script>
+      import { initReveal } from '../scripts/reveal';
+      initReveal();
+      // Dev-only in-place copy editing; the guard lets production tree-shake the whole module.
+      if (import.meta.env.DEV) import('../scripts/text-edit-dev');
+    </script>
   </body>
 </html>

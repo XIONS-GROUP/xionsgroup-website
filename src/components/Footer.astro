@@ -20,6 +20,9 @@ const year = new Date().getFullYear();
   </div>
 </footer>
 <style>
+  /* Keep the arrow on its own line on desktop. Left to wrap naturally it follows the last word
+     or not depending on how long the phrase is, so French and English broke differently. */
+  @media(min-width:701px) { .footer-lead > a span { display:block; } }
   .footer-bottom { align-items:baseline; gap:1rem 2rem; }
   .footer-legal { align-items:baseline; flex-wrap:wrap; }
 </style>
