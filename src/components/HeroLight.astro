@@ -6,11 +6,8 @@ import { heroLightDefaults } from '../config/hero-light';
     <img class="light-poster" src="/images/home/xionsgroup-hero-light.svg" alt="" width="2876" height="1580" fetchpriority="high" />
     <canvas></canvas>
   </div>
-  <button class="light-toggle" type="button" hidden>
-    <svg class="pause-icon" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="M5 3v10M11 3v10" fill="none" stroke="currentColor" stroke-width="1.5" /></svg>
-    <svg class="play-icon" viewBox="0 0 16 16" width="14" height="14" aria-hidden="true"><path d="m5 3 8 5-8 5Z" fill="none" stroke="currentColor" /></svg>
+  <button class="light-toggle" type="button" hidden aria-hidden="true" tabindex="-1">
     <span class="pause-label">Mettre l’animation en pause</span>
-    <span class="play-label">Reprendre l’animation</span>
   </button>
 
 </div>
@@ -25,11 +22,8 @@ import { heroLightDefaults } from '../config/hero-light';
   .light-poster { position:absolute; top:50%; left:50%; height:var(--x-art-height); width:auto; aspect-ratio:2876 / 1580; max-width:none; transform:translate(-50%,-50%); }
   canvas { opacity:0; }
   [data-ready="true"] canvas { opacity:1; }
-  .light-toggle { position:absolute; z-index:3; right:var(--pad); bottom:6.8rem; display:flex; align-items:center; justify-content:center; width:44px; height:44px; padding:0; border:1px solid #ffffff40; border-radius:0; background:#09090999; color:#fff; cursor:pointer; font-size:.62rem; }
-  .light-toggle[hidden],.play-icon,.play-label { display:none; }
-  [data-paused="true"] .pause-icon,[data-paused="true"] .pause-label { display:none; }
-  [data-paused="true"] .play-icon,[data-paused="true"] .play-label { display:block; }
-  .pause-label,.play-label { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip-path:inset(50%); white-space:nowrap; }
-  .light-toggle:hover { border-color:#ffffff99; }
+  /* The visible pause control was dropped; the element stays only so the runtime's existing
+     toggle wiring has something to bind to, and reduced-motion already stops the animation. */
+  .light-toggle { display:none !important; }
   @media(max-width:700px) { .hero-light { --x-art-height:var(--mobile-x-height); } }
 </style>

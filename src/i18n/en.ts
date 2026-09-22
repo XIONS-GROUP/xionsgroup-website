@@ -14,6 +14,7 @@ Rejoindre les équipes de XIONS Group.|Join the teams at XIONS Group.
 Carrières — XIONS GROUP|Careers — XIONS GROUP
 XIONS Group — Accueil|XIONS Group — Home
 Navigation principale|Main navigation
+Navigation secondaire|Secondary navigation
 Le groupe|The Group
 Le Groupe|The Group
 À propos|About us
