@@ -42,13 +42,17 @@ import { eventMarks } from '../data/rayonnement';
   .hero-eyebrow { margin:0; font-size:.82rem; line-height:1.75; font-weight:500; letter-spacing:.06em; }
   /* Desktop reads as one line spanning the hero — left, centre, right — sitting on the X's
      waist. Phones keep the three fragments stacked. */
+  /* Four equal tracks; each fragment spans two of them and centres inside that span, which puts
+     the three centres exactly on 1/4, 2/4 and 3/4 of the width. Overlapping spans (all on row 1)
+     is what keeps the spacing even — space-between instead distributes by word width and pushes
+     the middle off the X's axis. */
   .display { align-self:center; justify-self:stretch; width:100%; max-width:none; display:grid;
-    grid-template-columns:1fr auto 1fr; align-items:baseline; gap:clamp(2rem,6vw,7rem);
+    grid-template-columns:repeat(4,1fr); gap:0; align-items:baseline;
     font-size:clamp(1.7rem,3.6vw,2.9rem); line-height:1.04; letter-spacing:-.015em; }
-  /* Equal outer tracks, so the middle fragment lands on the X's centre line rather than being
-     pushed off it by the differing widths of the words either side. */
-  .display > :first-child { justify-self:start; }
-  .display > :last-child { justify-self:end; }
+  .display > * { grid-row:1; justify-self:center; }
+  .display > :nth-child(1) { grid-column:1 / span 2; }
+  .display > :nth-child(2) { grid-column:2 / span 2; }
+  .display > :nth-child(3) { grid-column:3 / span 2; }
   em { color:var(--wine); font-weight:400; }
   .hero-foot { display:grid; justify-items:center; gap:1.1rem; }
   .hero-sub { margin:0; font-size:.72rem; letter-spacing:.14em; text-transform:uppercase; }
@@ -100,7 +104,7 @@ import { eventMarks } from '../data/rayonnement';
     /* Extra clearance so the eyebrow does not crowd the centred wordmark above it. */
     .home-hero { min-height:max(40rem,100svh); padding-top:calc(var(--header) + 3.25rem); }
     .display { grid-template-columns:1fr; justify-items:center; gap:0; justify-self:center; width:auto; font-size:30px; max-width:12ch; }
-    .display > :first-child,.display > :last-child { justify-self:center; }
+    .display > :nth-child(1),.display > :nth-child(2),.display > :nth-child(3) { grid-column:1; grid-row:auto; justify-self:center; }
     /* Back to the pre-resize value on phones; only desktop needed the readability bump. */
     .hero-eyebrow { font-size:.68rem; line-height:1.7; }
     .hero-core { gap:1.1rem; }
