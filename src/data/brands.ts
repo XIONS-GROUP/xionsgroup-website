@@ -16,7 +16,7 @@ export const brands = [
     pillars: [
       ['Création', 'Des partis pris olfactifs singuliers, pensés comme des expériences à part entière.'],
       ['Matières', 'Une écriture construite autour du contraste, de la texture et de l’inattendu.'],
-      ['Reconnaissance', 'Dorian’s Spleen, récompensé par la Fragrance Foundation France en juin 2026.']
+      ['Reconnaissance', 'Dorian’s Spleen, Prix du Meilleur Parfum de Niche de l’année, décerné par la Fragrance Foundation France en juin 2026.']
     ],
     tone: '#3d2822'
   },

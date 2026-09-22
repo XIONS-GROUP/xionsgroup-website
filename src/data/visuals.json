@@ -100,7 +100,7 @@
     "ratio": "3 / 2",
     "fit": "contain",
     "page": "/fr/marques/lentropiste/",
-    "src": "/images/brands/lentropiste/lentropiste-collection-01.png",
+    "src": "/images/brands/lentropiste/lentropiste-collection-01.jpg",
     "alt": "Collection de parfums L’Entropiste"
   },
   {
@@ -114,7 +114,7 @@
     "fit": "contain",
     "page": "/fr/marques/lentropiste/",
     "src": "/images/brands/lentropiste/lentropiste-dorians-spleen-award-2026.jpg",
-    "alt": "Le trophée Fragrance Foundation France 2026 aux côtés du parfum Dorian's Spleen"
+    "alt": "Le trophée Fragrance Foundation France 2026 aux côtés du parfum Dorian’s Spleen"
   },
   {
     "id": "betenoir-hero",
@@ -179,7 +179,7 @@
     "ratio": "3 / 2",
     "fit": "contain",
     "page": "/fr/marques/masqly/",
-    "src": "/images/brands/masqly/masqly-products-01.png",
+    "src": "/images/brands/masqly/masqly-products-01.jpg",
     "alt": "Produits Masqly"
   },
   {
@@ -219,7 +219,7 @@
     "fit": "cover",
     "page": "/fr/presse/",
     "src": "/images/press/xionsgroup-event-cannes-01.jpg",
-    "alt": "Sur le photocall L'Entropiste de la TIME Cannes House"
+    "alt": "Sur le photocall L’Entropiste de la TIME Cannes House"
   },
   {
     "id": "press-event-oscars",

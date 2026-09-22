@@ -70,7 +70,7 @@ Envoyer la demande|Send enquiry
 La demande n’a pas pu être envoyée. Réessayez ou écrivez-nous à|Your enquiry could not be sent. Please try again or email us at
 La charte de qualité et les engagements de XIONS Group.|XIONS Group’s quality standards and commitments.
 Engagements — XIONS GROUP|Commitments — XIONS GROUP
-L’exigence comme principe.|High standards by principle.
+L’exigence comme principe.|High standards as a principle.
 Performance, sensorialité, créativité, sécurité et responsabilité doivent progresser ensemble.|Performance, sensory experience, creativity, safety and responsibility must progress together.
 Qualité & excellence|Quality & excellence
 La qualité guide la manière dont nous imaginons, développons et faisons évoluer chaque marque : partenaires, matières, formulation, production, design et expérience consommateur.|Quality guides how we imagine, develop and evolve each brand: partners, materials, formulation, production, design and consumer experience.
@@ -80,7 +80,7 @@ Environnement & innovation|Environment & innovation
 Nous questionnons les matériaux, limitons le superflu et améliorons progressivement les emballages avec une approche pragmatique : mesurer, améliorer, avancer.|We question material choices, reduce the unnecessary and progressively improve packaging through a pragmatic approach: measure, improve, move forward.
 Promettre avec mesure.|Promise with care.
 Progresser avec constance.|Progress with consistency.
-Notre méthode|Our approach
+Notre méthode|Our method
 Une amélioration continue, à chaque étape.|Continuous improvement, at every stage.
 Nos engagements s’appliquent du choix des partenaires jusqu’à la mise sur le marché. Ils évoluent avec nos connaissances, nos outils de mesure et les exigences propres à chaque catégorie.|Our commitments apply from partner selection through to launch. They evolve with our knowledge, measurement tools and the requirements of each category.
 Vision, direction et modèle de XIONS Group.|The vision, leadership and approach of XIONS Group.
@@ -111,7 +111,7 @@ Création · Science · Culture|Creativity · Science · Culture
 1440 × 3120 · plein écran · recadrage adaptable|1440 × 3120 · full screen · adaptable crop
 Notre vision|Our vision
 Créer des maisons capables de redéfinir leur catégorie.|Creating houses that redefine their category.
-XIONS Group est un groupe français indépendant qui crée, développe et déploie des marques de beauté premium à l'international.|XIONS Group is an independent French group that creates, develops and grows premium beauty brands internationally.
+XIONS Group est un groupe français indépendant qui crée, développe et déploie des marques de beauté premium à l’international.|XIONS Group is an independent French group that creates, develops and grows premium beauty brands internationally.
 Chaque maison possède son territoire, son langage et sa vision. Toutes partagent une même ambition : inventer de nouveaux standards.|Each house has its own territory, language and vision. All share one ambition: to set new standards.
 Découvrir le Groupe|Discover the Group
 Le portefeuille|The portfolio
@@ -130,7 +130,7 @@ Les marques de Xions Group s’inscrivent dans les grands rendez-vous de la cult
 Cannes · Paris · Los Angeles · Hollywood · New York · Londres|Cannes · Paris · Los Angeles · Hollywood · New York · London
 Explorer le rayonnement|Explore our presence
 Notre rôle|Our role
-De l'idée au rayonnement.|From idea to international presence.
+De l’idée au rayonnement.|From idea to international presence.
 Vision entrepreneuriale, stratégie de marque et direction créative.|Entrepreneurial vision, brand strategy and creative direction.
 Développer|Developing
 Innovation produit, expertise opérationnelle et construction des marchés.|Product innovation, operational expertise and market development.
@@ -163,7 +163,7 @@ Signées par le maître parfumeur Bertrand Duchaufour, les fragrances composent 
 Site officiel|Official website
 L’Entropiste · distinction|L’Entropiste · award
 La distinction|The award
-Dorian’s Spleen, récompensé par la Fragrance Foundation France en juin 2026.|Dorian’s Spleen, recognised by the Fragrance Foundation France in June 2026.
+Dorian’s Spleen, Prix du Meilleur Parfum de Niche de l’année, décerné par la Fragrance Foundation France en juin 2026.|Dorian’s Spleen, named Best Niche Perfume of the Year by the Fragrance Foundation France in June 2026.
 Création|Creation
 Des partis pris olfactifs singuliers, pensés comme des expériences à part entière.|Distinctive olfactory choices, conceived as experiences in their own right.
 Matières|Materials
@@ -221,6 +221,8 @@ Presse & couvertures médiatiques|Press & media coverage
 Campagnes digitales & social media|Digital & social media campaigns
 Notre approche|Our approach
 Créer des marques. Créer des moments.|Creating brands. Creating moments.
+Créer des marques.|Creating brands.
+Créer des moments.|Creating moments.
 Notre approche de la communication repose sur une conviction : une marque devient puissante lorsqu’elle dépasse le produit pour entrer dans la culture.|Our approach to communication rests on one belief: a brand becomes powerful when it moves beyond the product to become part of culture.
 Nous cherchons ainsi à créer des rencontres, des images et des expériences capables de susciter l’attention et de laisser une empreinte.|We seek to create encounters, images and experiences that capture attention and leave a lasting impression.
 Chaque activation est imaginée comme une extension de l’univers de la marque. Chaque prise de parole contribue à construire son identité. Chaque marché est abordé avec la volonté de conjuguer cohérence globale et pertinence locale.|Every activation is conceived as an extension of the brand’s world. Every communication helps build its identity. Every market is approached with a commitment to combining global consistency and local relevance.
@@ -235,13 +237,13 @@ introuvable.|not found.
 La page demandée n’existe pas ou a été déplacée.|The page you requested does not exist or has moved.
 Festival de Cannes, César, Golden Globes, Oscars, Grammy Awards, Emmy Awards.|Festival de Cannes, César, Golden Globes, Oscars, Grammy Awards, Emmy Awards.
 Les fondateurs de XIONS Group|The founders of XIONS Group
-Le trophée Fragrance Foundation France 2026 aux côtés du parfum Dorian's Spleen|The Fragrance Foundation France 2026 trophy beside the Dorian's Spleen fragrance
+Le trophée Fragrance Foundation France 2026 aux côtés du parfum Dorian’s Spleen|The Fragrance Foundation France 2026 trophy beside the Dorian’s Spleen fragrance
 La gamme Sunlution au complet|The complete Sunlution range
-La crème Collagène Revive de Sunlution|Sunlution's Collagen Revive cream
+La crème Collagène Revive de Sunlution|Sunlution’s Collagen Revive cream
 La collection Sunlution présentée sur socles|The Sunlution collection shown on plinths
 Les actifs des masques Masqly|The active ingredients in Masqly masks
 Les masques Masqly mis en scène|Masqly masks in context
-Sur le photocall L'Entropiste de la TIME Cannes House|At the L'Entropiste photocall at TIME Cannes House
+Sur le photocall L’Entropiste de la TIME Cannes House|At the L’Entropiste photocall at TIME Cannes House
 `;
 export const translations: Record<string, string> = Object.fromEntries(`${copy.trim()}\n${legalCopy.trim()}`.split('\n').map(line => line.split('|')));
 for (const brand of ['L’Entropiste', 'Betenoir', 'Sunlution', 'Masqly']) {

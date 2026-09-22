@@ -45,6 +45,28 @@ const directLinks = [
     .navigation { background:transparent; }
     .navigation::before { background:rgba(255,255,255,.72); -webkit-backdrop-filter:blur(20px); backdrop-filter:blur(20px); }
   }
+  /* Over the hero the bar carries no surface and inverts against the animation, matching the
+     hero wordmark. The surface fades in as soon as the page scrolls past it. */
+  .navigation.is-over-hero::before { opacity:0; }
+  .navigation::before { opacity:1; transition:inset .45s var(--ease-luxury),background .35s ease,opacity .4s ease; }
+  .navigation.is-over-hero { mix-blend-mode:difference; }
+  .navigation.is-over-hero .navigation-logo img { filter:invert(1); }
+  .navigation.is-over-hero .navigation-trigger,
+  .navigation.is-over-hero .navigation-direct,
+  .navigation.is-over-hero .navigation-contact,
+  .navigation.is-over-hero .navigation-toggle { color:#fff; }
+  /* An open menu needs its own surface back, whatever the scroll position. */
+  .navigation.is-over-hero.is-mobile-open,.navigation.is-over-hero:has(.navigation-panel:not([hidden])) { mix-blend-mode:normal; }
+  .navigation.is-over-hero.is-mobile-open::before,.navigation.is-over-hero:has(.navigation-panel:not([hidden]))::before { opacity:1; }
+  .navigation.is-over-hero.is-mobile-open .navigation-logo img,
+  .navigation.is-over-hero:has(.navigation-panel:not([hidden])) .navigation-logo img { filter:none; }
+  .navigation.is-over-hero.is-mobile-open .navigation-trigger,
+  .navigation.is-over-hero.is-mobile-open .navigation-direct,
+  .navigation.is-over-hero.is-mobile-open .navigation-contact,
+  .navigation.is-over-hero.is-mobile-open .navigation-toggle,
+  .navigation.is-over-hero:has(.navigation-panel:not([hidden])) .navigation-trigger,
+  .navigation.is-over-hero:has(.navigation-panel:not([hidden])) .navigation-direct,
+  .navigation.is-over-hero:has(.navigation-panel:not([hidden])) .navigation-contact { color:var(--ink); }
   .navigation-logo img { width:8.75rem; height:2.6rem; object-fit:contain; }
   .navigation-desktop { display:flex; align-items:center; gap:clamp(1rem,2vw,2.5rem); height:100%; }
   .navigation-item { display:flex; align-items:center; height:100%; }
@@ -87,6 +109,17 @@ const directLinks = [
     triggers[index].setAttribute('aria-expanded','true');
     panels[index].hidden=false;
     setSurfaceHeight(panels[index].getBoundingClientRect().height);
+  }
+  // Only the homepage has a full-bleed dark hero for the bar to sit on.
+  const hero = document.querySelector<HTMLElement>('.home-hero');
+  if (hero) {
+    const syncHero = () => {
+      const past = hero.getBoundingClientRect().bottom - header.offsetHeight;
+      header.classList.toggle('is-over-hero', past > 0);
+    };
+    syncHero();
+    addEventListener('scroll', syncHero, { passive: true });
+    addEventListener('resize', syncHero);
   }
   const background = [...document.querySelectorAll<HTMLElement>('main,.site-footer')];
   let previousOverflow = '';
