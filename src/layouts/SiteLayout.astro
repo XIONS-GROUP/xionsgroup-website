@@ -69,6 +69,9 @@ const schema = {
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <meta name="description" content={description} />
     <meta name="robots" content={publicPage ? robotsDirective : 'noindex, nofollow'} />
+    <!-- Google Search Console ownership proof for the https://www.xionsgroup.com/ property.
+         Removing it un-verifies the site, so it stays even after verification succeeds. -->
+    <meta name="google-site-verification" content="bsyqGjcgUNSYNL7z8If9GfR_l9vy7_2xglj_Yqls9R4" />
     <link rel="canonical" href={canonical} />
     {routeFor(Astro.url.pathname) && <>
       <link rel="alternate" hreflang="fr" href={origin + localizedPath(Astro.url.pathname, 'fr')} />
