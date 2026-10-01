@@ -70,16 +70,17 @@ const directLinks = [...leftLinks, ...rightLinks];
   .navigation.is-over-hero:has(.navigation-panel:not([hidden])) .navigation-contact { color:var(--ink); }
   .navigation-logo img { width:8.75rem; height:2.6rem; object-fit:contain; }
   .navigation-desktop { display:flex; align-items:center; gap:clamp(1rem,2vw,2.5rem); height:100%; }
-  .navigation-item { display:flex; align-items:center; height:100%; }
+  /* Anchor for the panel: it hangs straight under its own trigger, not under the wordmark. */
+  .navigation-item { position:relative; display:flex; align-items:center; height:100%; }
   .navigation-trigger,.navigation-direct,.navigation-contact,.navigation-toggle { padding:.7rem 0; color:var(--ink); border:0; background:none; font:inherit; font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; text-decoration:none; cursor:pointer; }
   .navigation-trigger:hover,.navigation-direct:hover,.navigation-contact:hover,.navigation-trigger.current,.navigation-direct.current { color:var(--muted); }
-  .navigation-panel { position:absolute; inset:100% 0 auto; padding:2rem var(--pad) 3rem; background:transparent; }
+  .navigation-panel { position:absolute; inset:100% auto auto 0; padding:1.75rem 2.5rem 2.25rem 0; background:transparent; }
   .navigation-panel[hidden],.navigation-mobile[hidden] { display:none; }
-  /* The wordmark is centred now, so the brands drop straight below it as one short column.
-     A wide two-column panel meant the cursor had to travel across the bar to reach a name. */
-  .navigation-panel-inner { display:grid; justify-items:center; gap:.9rem; text-align:center; }
-  .panel-links { display:grid; justify-items:center; gap:.85rem; }
-  .navigation-panel a.panel-all { margin-top:.9rem; font-size:.78rem; text-decoration:underline; text-underline-offset:.35em; }
+  /* Left-aligned under the trigger, two by two: the first name sits a few pixels below the
+     cursor instead of across the bar, and four brands in two rows keep the drop shallow. */
+  .navigation-panel-inner { display:grid; justify-items:start; gap:1.15rem; text-align:left; }
+  .panel-links { display:grid; grid-template-columns:repeat(2,minmax(8.5rem,auto)); justify-items:start; gap:.9rem 2.75rem; }
+  .navigation-panel a.panel-all { margin-top:.35rem; font-size:.78rem; text-decoration:underline; text-underline-offset:.35em; }
   .navigation-panel a { font-size:1.1rem; text-decoration:none; }
   .navigation-panel a:hover { color:var(--muted); }
   .navigation-toggle,.navigation-mobile { display:none; }

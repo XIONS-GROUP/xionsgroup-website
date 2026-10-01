@@ -19,57 +19,57 @@
 # Netlify Redirects for clean navigation routes
 [[redirects]]
   from = "/groupe"
-  to = "/fr/groupe"
+  to = "/fr/groupe/"
   status = 302
 
 [[redirects]]
   from = "/about"
-  to = "/en/group"
+  to = "/en/group/"
   status = 302
 
 [[redirects]]
   from = "/marques"
-  to = "/fr/marques"
+  to = "/fr/marques/"
   status = 302
 
 [[redirects]]
   from = "/brands"
-  to = "/en/brands"
+  to = "/en/brands/"
   status = 302
 
 [[redirects]]
   from = "/engagements"
-  to = "/fr/engagements"
+  to = "/fr/engagements/"
   status = 302
 
 [[redirects]]
   from = "/commitments"
-  to = "/en/commitments"
+  to = "/en/commitments/"
   status = 302
 
 [[redirects]]
   from = "/presse"
-  to = "/fr/presse"
+  to = "/fr/presse/"
   status = 302
 
 [[redirects]]
   from = "/press"
-  to = "/en/press"
+  to = "/en/press/"
   status = 302
 
 [[redirects]]
   from = "/carrieres"
-  to = "/fr/carrieres"
+  to = "/fr/carrieres/"
   status = 302
 
 [[redirects]]
   from = "/careers"
-  to = "/en/careers"
+  to = "/en/careers/"
   status = 302
 
 [[redirects]]
   from = "/contact"
-  to = "/fr/contact"
+  to = "/fr/contact/"
   status = 302
 
 [[headers]]
