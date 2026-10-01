@@ -1,0 +1,30 @@
+---
+import { localeFor, localizedPath } from '../i18n/routes';
+const locale = localeFor(Astro.url.pathname);
+const { compact = false } = Astro.props;
+const other = locale === 'fr' ? 'en' : 'fr';
+---
+<div class:list={['language-switcher', {compact}]} role="group" aria-label={locale === 'en' ? 'Language' : 'Langue'}>
+  {compact ? <a href={localizedPath(Astro.url.pathname,other)} hreflang={other} data-language={other} data-language-toggle aria-label={locale === 'fr' ? 'Langue actuelle : français. Passer en anglais.' : 'Current language: English. Switch to French.'}>{locale.toUpperCase()}</a> : <>
+  <a href={localizedPath(Astro.url.pathname, 'fr')} lang="fr" hreflang="fr" data-language="fr" aria-current={locale === 'fr' ? 'true' : undefined} aria-label="Français">FR</a>
+  <span aria-hidden="true">/</span>
+  <a href={localizedPath(Astro.url.pathname, 'en')} lang="en" hreflang="en" data-language="en" aria-current={locale === 'en' ? 'true' : undefined} aria-label="English">EN</a>
+  </>}
+</div>
+<style>
+  .language-switcher { display:flex; align-items:center; gap:.7rem; font-size:.75rem; letter-spacing:.08em; }
+  .language-switcher a { display:inline-flex; align-items:center; min-height:44px; padding:.35rem; text-decoration:none; color:var(--muted); }
+  /* Both options underlined: in the mobile drawer only the active one was, so the other read
+     as plain text rather than the thing you tap to switch. */
+  .language-switcher a { text-decoration:underline; text-underline-offset:.35em; }
+  .language-switcher a[aria-current] { color:var(--ink); }
+  .language-switcher a:hover { color:var(--wine); }
+  :global(.site-footer) .language-switcher { --ink:#fff; --muted:#b9b6b1; }
+  :global(.navigation-mobile) .language-switcher { margin-top:2rem; padding-top:1rem; }
+  :global(.navigation-mobile) .language-switcher a { display:inline-flex; min-width:44px; justify-content:center; }
+  .language-switcher.compact { font-size:inherit; line-height:inherit; letter-spacing:inherit; }
+  /* Underlined so it reads as a control: on its own in the footer it otherwise looks like a
+     static label rather than the language toggle. */
+  .language-switcher.compact a { position:relative; display:inline; min-height:0; padding:0; color:inherit; text-decoration:underline; text-underline-offset:.35em; }
+  .language-switcher.compact a::after { content:''; position:absolute; inset:-12px -10px; }
+</style>

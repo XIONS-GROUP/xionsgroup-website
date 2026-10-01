@@ -1,0 +1,85 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "26.6.0"
+  ALLOW_INDEXING = "false"
+
+# Keep branch deploys and pull-request previews out of search results.
+[context.branch-deploy.environment]
+  ALLOW_INDEXING = "false"
+
+[context.deploy-preview.environment]
+  ALLOW_INDEXING = "false"
+
+# Production is the live site: this is the one context search engines may index.
+[context.production.environment]
+  ALLOW_INDEXING = "true"
+
+# Netlify Redirects for clean navigation routes
+[[redirects]]
+  from = "/groupe"
+  to = "/fr/groupe/"
+  status = 302
+
+[[redirects]]
+  from = "/about"
+  to = "/en/group/"
+  status = 302
+
+[[redirects]]
+  from = "/marques"
+  to = "/fr/marques/"
+  status = 302
+
+[[redirects]]
+  from = "/brands"
+  to = "/en/brands/"
+  status = 302
+
+[[redirects]]
+  from = "/engagements"
+  to = "/fr/engagements/"
+  status = 302
+
+[[redirects]]
+  from = "/commitments"
+  to = "/en/commitments/"
+  status = 302
+
+[[redirects]]
+  from = "/presse"
+  to = "/fr/presse/"
+  status = 302
+
+[[redirects]]
+  from = "/press"
+  to = "/en/press/"
+  status = 302
+
+[[redirects]]
+  from = "/carrieres"
+  to = "/fr/carrieres/"
+  status = 302
+
+[[redirects]]
+  from = "/careers"
+  to = "/en/careers/"
+  status = 302
+
+[[redirects]]
+  from = "/contact"
+  to = "/fr/contact/"
+  status = 302
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"
+
+[[headers]]
+  for = "/__forms.html"
+  [headers.values]
+    X-Robots-Tag = "noindex, nofollow"

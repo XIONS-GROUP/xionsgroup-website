@@ -1,0 +1,175 @@
+---
+import { brands } from '../data/brands';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+import { localizedPath } from '../i18n/routes';
+// Keep the trailing slash: every href below carries one, and localizedPath already emits one.
+const path = localizedPath(Astro.url.pathname, 'fr');
+// Only the brand list still warrants a dropdown; "Le groupe" is a plain link now.
+const brandLinks = brands.map(b => [b.name, `/fr/marques/${b.slug}/`] as const);
+const items = [{ label: 'Nos marques', href: '/fr/marques/', links: brandLinks }];
+// Split either side of the centred wordmark.
+const leftLinks = [['Le groupe', '/fr/groupe/'], ['Press', '/fr/presse/']] as const;
+const rightLinks = [['Engagements', '/fr/engagements/'], ['Carrières', '/fr/carrieres/']] as const;
+const directLinks = [...leftLinks, ...rightLinks];
+---
+<header class="navigation">
+  <nav class="navigation-desktop nav-left" aria-label="Navigation principale">
+    <a class:list={['navigation-direct', {current: path === leftLinks[0][1]}]} href={leftLinks[0][1]} aria-current={path === leftLinks[0][1] ? 'page' : undefined}>{leftLinks[0][0]}</a>
+    {items.map((item, i) => <div class="navigation-item">
+      <a href={item.href} class:list={['navigation-trigger', {current: item.links.some(([,href]) => path === href.split('#')[0])}]} aria-current={path === item.href ? 'page' : undefined} aria-expanded="false" aria-controls={`navigation-panel-${i}`}>{item.label}</a>
+      <div class="navigation-panel" id={`navigation-panel-${i}`} hidden>
+        <div class="navigation-panel-inner"><div class="panel-links">{item.links.map(([label, href]) => <a href={href} aria-current={path === href ? 'page' : undefined}>{label}</a>)}</div><a class="panel-all" href="/fr/marques/">Toutes nos marques</a></div>
+      </div>
+    </div>)}
+    <a class:list={['navigation-direct', {current: path === leftLinks[1][1]}]} href={leftLinks[1][1]} aria-current={path === leftLinks[1][1] ? 'page' : undefined}>{leftLinks[1][0]}</a>
+  </nav>
+  <a class="navigation-logo" href="/fr/" aria-label="XIONS Group — Accueil"><img src="/images/site/xions-logo.svg" alt="XIONS Group" width="140" height="42" /></a>
+  <nav class="navigation-desktop nav-right" aria-label="Navigation secondaire">
+    {rightLinks.map(([label, href]) => <a class:list={['navigation-direct', {current: path === href}]} href={href} aria-current={path === href ? 'page' : undefined}>{label}</a>)}
+    <a class="navigation-contact" href="/fr/contact/" aria-current={path === '/fr/contact/' ? 'page' : undefined}>Contact</a>
+  </nav>
+  <button class="navigation-toggle" aria-expanded="false" aria-controls="navigation-mobile">Menu</button>
+  <nav class="navigation-mobile" id="navigation-mobile" aria-label="Navigation mobile" hidden>
+    {items.map(item => <div><a class="mobile-primary" href={item.href}>{item.label}</a>{item.links.map(([label,href]) => <a href={href}>{label}</a>)}</div>)}
+    {directLinks.map(([label, href]) => <a class="mobile-primary" href={href}>{label}</a>)}
+    <a class="mobile-primary" href="/fr/contact/">Contact</a>
+    <LanguageSwitcher />
+  </nav>
+</header>
+<style>
+  /* Three tracks so the wordmark sits optically centred whatever the link lengths are. */
+  .navigation { --dropdown-height:0px; position:fixed; inset:0 0 auto; z-index:100; isolation:isolate; height:var(--header); padding-inline:var(--pad); display:grid; grid-template-columns:1fr auto 1fr; align-items:center; background:#fff; }
+  .nav-right { justify-self:end; }
+  .navigation-logo { justify-self:center; }
+  .navigation::before { content:''; position:absolute; inset:0 0 calc(var(--dropdown-height) * -1); z-index:-1; pointer-events:none; background:#fff; transition:inset .45s var(--ease-luxury),background .35s ease; }
+  @supports ((backdrop-filter:blur(20px)) or (-webkit-backdrop-filter:blur(20px))) {
+    .navigation { background:transparent; }
+    .navigation::before { background:rgba(255,255,255,.72); -webkit-backdrop-filter:blur(20px); backdrop-filter:blur(20px); }
+  }
+  /* Over the hero the bar carries no surface and inverts against the animation, matching the
+     hero wordmark. The surface fades in as soon as the page scrolls past it. */
+  .navigation.is-over-hero::before { opacity:0; }
+  .navigation::before { opacity:1; transition:inset .45s var(--ease-luxury),background .35s ease,opacity .4s ease; }
+  .navigation.is-over-hero { mix-blend-mode:difference; }
+  .navigation.is-over-hero .navigation-logo img { filter:invert(1); }
+  .navigation.is-over-hero .navigation-trigger,
+  .navigation.is-over-hero .navigation-direct,
+  .navigation.is-over-hero .navigation-contact,
+  .navigation.is-over-hero .navigation-toggle { color:#fff; }
+  /* An open menu needs its own surface back, whatever the scroll position. */
+  .navigation.is-over-hero.is-mobile-open,.navigation.is-over-hero:has(.navigation-panel:not([hidden])) { mix-blend-mode:normal; }
+  .navigation.is-over-hero.is-mobile-open::before,.navigation.is-over-hero:has(.navigation-panel:not([hidden]))::before { opacity:1; }
+  .navigation.is-over-hero.is-mobile-open .navigation-logo img,
+  .navigation.is-over-hero:has(.navigation-panel:not([hidden])) .navigation-logo img { filter:none; }
+  .navigation.is-over-hero.is-mobile-open .navigation-trigger,
+  .navigation.is-over-hero.is-mobile-open .navigation-direct,
+  .navigation.is-over-hero.is-mobile-open .navigation-contact,
+  .navigation.is-over-hero.is-mobile-open .navigation-toggle,
+  .navigation.is-over-hero:has(.navigation-panel:not([hidden])) .navigation-trigger,
+  .navigation.is-over-hero:has(.navigation-panel:not([hidden])) .navigation-direct,
+  .navigation.is-over-hero:has(.navigation-panel:not([hidden])) .navigation-contact { color:var(--ink); }
+  .navigation-logo img { width:8.75rem; height:2.6rem; object-fit:contain; }
+  .navigation-desktop { display:flex; align-items:center; gap:clamp(1rem,2vw,2.5rem); height:100%; }
+  /* Anchor for the panel: it hangs straight under its own trigger, not under the wordmark. */
+  .navigation-item { position:relative; display:flex; align-items:center; height:100%; }
+  .navigation-trigger,.navigation-direct,.navigation-contact,.navigation-toggle { padding:.7rem 0; color:var(--ink); border:0; background:none; font:inherit; font-size:.72rem; letter-spacing:.12em; text-transform:uppercase; text-decoration:none; cursor:pointer; }
+  .navigation-trigger:hover,.navigation-direct:hover,.navigation-contact:hover,.navigation-trigger.current,.navigation-direct.current { color:var(--muted); }
+  .navigation-panel { position:absolute; inset:100% auto auto 0; padding:1.75rem 2.5rem 2.25rem 0; background:transparent; }
+  .navigation-panel[hidden],.navigation-mobile[hidden] { display:none; }
+  /* Left-aligned under the trigger, two by two: the first name sits a few pixels below the
+     cursor instead of across the bar, and four brands in two rows keep the drop shallow. */
+  .navigation-panel-inner { display:grid; justify-items:start; gap:1.15rem; text-align:left; }
+  .panel-links { display:grid; grid-template-columns:repeat(2,minmax(8.5rem,auto)); justify-items:start; gap:.9rem 2.75rem; }
+  .navigation-panel a.panel-all { margin-top:.35rem; font-size:.78rem; text-decoration:underline; text-underline-offset:.35em; }
+  .navigation-panel a { font-size:1.1rem; text-decoration:none; }
+  .navigation-panel a:hover { color:var(--muted); }
+  .navigation-toggle,.navigation-mobile { display:none; }
+  @media(max-width:900px) {
+    .navigation-desktop { display:none; }
+    /* Empty first track keeps the wordmark centred against the single Menu button. */
+    .navigation { grid-template-columns:1fr auto 1fr; }
+    .navigation-toggle { display:block; justify-self:end; grid-column:3; }
+    .navigation-logo { grid-column:2; }
+    .navigation-logo img { width:6.5rem; height:1.95rem; }
+    .navigation-mobile,.navigation-mobile[hidden] { display:block; position:absolute; inset:100% 0 auto; height:calc(100vh - var(--header)); height:calc(100dvh - var(--header)); overflow-y:auto; overscroll-behavior:contain; padding:2rem var(--pad) max(3rem,env(safe-area-inset-bottom)); background:transparent; opacity:0; visibility:hidden; pointer-events:none; transform:translateY(-1rem); transition:opacity .35s ease,transform .45s var(--ease-luxury),visibility 0s linear .45s; }
+    .navigation.is-mobile-open .navigation-mobile:not([hidden]) { opacity:1; visibility:visible; pointer-events:auto; transform:translateY(0); transition-delay:0s; }
+    .navigation-mobile>div { margin-bottom:1.75rem; }
+    .navigation-mobile a { display:block; width:fit-content; padding:.3rem 0; text-decoration:none; font-size:.95rem; }
+    .navigation-mobile a.mobile-primary { font-family:var(--display); font-size:1.7rem; margin-bottom:.4rem; }
+  }
+</style>
+<script>
+  const header = document.querySelector<HTMLElement>('.navigation')!;
+  const triggers = [...header.querySelectorAll<HTMLAnchorElement>('.navigation-trigger')];
+  const mobileButton = header.querySelector<HTMLButtonElement>('.navigation-toggle')!;
+  const mobile = header.querySelector<HTMLElement>('.navigation-mobile')!;
+  const panels = triggers.map(button => document.getElementById(button.getAttribute('aria-controls')!)!);
+  let mobileCloseTimer: ReturnType<typeof setTimeout> | undefined;
+  function setSurfaceHeight(height: number) { header.style.setProperty('--dropdown-height', `${Math.max(0, Math.ceil(height))}px`); }
+  function closeDesktop() {
+    triggers.forEach((button,i) => { button.setAttribute('aria-expanded','false'); panels[i].hidden=true; });
+    if (!header.classList.contains('is-mobile-open')) setSurfaceHeight(0);
+  }
+  function openPanel(index:number) {
+    closeDesktop();
+    triggers[index].setAttribute('aria-expanded','true');
+    panels[index].hidden=false;
+    setSurfaceHeight(panels[index].getBoundingClientRect().height);
+  }
+  // Only the homepage has a full-bleed dark hero for the bar to sit on.
+  const hero = document.querySelector<HTMLElement>('.home-hero');
+  if (hero) {
+    const syncHero = () => {
+      const past = hero.getBoundingClientRect().bottom - header.offsetHeight;
+      header.classList.toggle('is-over-hero', past > 0);
+    };
+    syncHero();
+    addEventListener('scroll', syncHero, { passive: true });
+    addEventListener('resize', syncHero);
+  }
+  const background = [...document.querySelectorAll<HTMLElement>('main,.site-footer')];
+  let previousOverflow = '';
+  function closeMobile() {
+    if (mobile.hidden) return;
+    document.body.style.overflow=previousOverflow;
+    background.forEach(el=>el.inert=false);
+    mobileButton.setAttribute('aria-expanded','false');
+    mobileButton.textContent='Menu';
+    header.classList.remove('is-mobile-open');
+    setSurfaceHeight(0);
+    mobileCloseTimer = setTimeout(() => {
+      if (!header.classList.contains('is-mobile-open')) mobile.hidden=true;
+    }, 450);
+  }
+  triggers.forEach((button,i) => {
+    button.parentElement!.addEventListener('pointerenter',event => { if(event.pointerType === 'mouse') openPanel(i); });
+    button.addEventListener('keydown',event => { if(event.key === 'ArrowDown') { event.preventDefault(); openPanel(i); panels[i].querySelector('a')?.focus(); } });
+  });
+  header.addEventListener('pointermove',event => {
+    if(event.pointerType === 'mouse' && event.target instanceof Element && !event.target.closest('.navigation-item')) closeDesktop();
+  });
+  header.addEventListener('focusin',event => {
+    if(event.target instanceof Element && !event.target.closest('.navigation-item')) closeDesktop();
+  });
+  header.addEventListener('pointerleave',event => { if(event.pointerType === 'mouse' && !panels.some(panel => panel.contains(document.activeElement))) closeDesktop(); });
+  header.addEventListener('focusout',event => { if(!header.contains(event.relatedTarget as Node)) { closeDesktop(); closeMobile(); } });
+  mobileButton.addEventListener('click',() => {
+    if(!mobile.hidden) { closeMobile(); return; }
+    if (mobileCloseTimer) clearTimeout(mobileCloseTimer);
+    closeDesktop();
+    previousOverflow=document.body.style.overflow;
+    document.body.style.overflow='hidden';
+    background.forEach(el=>el.inert=true);
+    mobile.hidden=false;
+    setSurfaceHeight(window.innerHeight - header.getBoundingClientRect().height);
+    mobileButton.setAttribute('aria-expanded','true');
+    mobileButton.textContent=document.documentElement.lang === 'en' ? 'Close' : 'Fermer';
+    requestAnimationFrame(() => header.classList.add('is-mobile-open'));
+  });
+  header.addEventListener('keydown',event=>{ if(event.key!=='Tab'||mobile.hidden)return; const focusable=[header.querySelector<HTMLAnchorElement>('.navigation-logo')!,mobileButton,...mobile.querySelectorAll<HTMLAnchorElement>('a')]; const first=focusable[0],last=focusable[focusable.length-1]; if(event.shiftKey&&document.activeElement===first){event.preventDefault();last.focus();}else if(!event.shiftKey&&document.activeElement===last){event.preventDefault();first.focus();} });
+  mobile.querySelectorAll('a').forEach(a => a.addEventListener('click',closeMobile));
+  document.addEventListener('pointerdown',event => { if(!header.contains(event.target as Node)) { closeDesktop(); closeMobile(); } });
+  document.addEventListener('keydown',event => { if(event.key !== 'Escape') return; const active=triggers.findIndex(b => b.getAttribute('aria-expanded') === 'true'); if(active>=0) { closeDesktop(); triggers[active].focus(); } if(!mobile.hidden) { closeMobile(); mobileButton.focus(); } });
+  matchMedia('(max-width:900px)').addEventListener('change',() => { closeDesktop(); closeMobile(); });
+  window.addEventListener('resize',() => { if (header.classList.contains('is-mobile-open')) setSurfaceHeight(window.innerHeight - header.getBoundingClientRect().height); });
+</script>

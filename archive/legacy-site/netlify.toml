@@ -1,0 +1,25 @@
+[build]
+  command = "npm run build"
+  publish = "dist"
+
+[build.environment]
+  NODE_VERSION = "26.6.0"
+  ALLOW_INDEXING = "false"
+
+# Keep branch deploys and pull-request previews out of search results.
+[context.branch-deploy.environment]
+  ALLOW_INDEXING = "false"
+
+[context.deploy-preview.environment]
+  ALLOW_INDEXING = "false"
+
+# Change this value to "true" in the final launch pull request.
+# The application also checks that Netlify's context is production.
+[context.production.environment]
+  ALLOW_INDEXING = "false"
+
+[[headers]]
+  for = "/*"
+  [headers.values]
+    X-Content-Type-Options = "nosniff"
+    Referrer-Policy = "strict-origin-when-cross-origin"

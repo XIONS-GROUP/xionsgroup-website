@@ -1,0 +1,443 @@
+---
+import Navigation from '../components/Navigation.astro';
+import Footer from '../components/Footer.astro';
+import BrandsShowcase from '../components/BrandsShowcase.astro';
+import ValuesSection from '../components/ValuesSection.astro';
+
+const pageTitle = 'XIONS GROUP — Groupe de beauté premium français';
+const pageDescription = 'XIONS GROUP est un groupe français indépendant qui crée, développe et déploie des marques de beauté premium à l\'international.';
+---
+
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>{pageTitle}</title>
+  <meta name="description" content={pageDescription}>
+  
+  <!-- Open Graph -->
+  <meta property="og:title" content={pageTitle}>
+  <meta property="og:description" content={pageDescription}>
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://xionsgroup.com/fr">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+</head>
+
+<body>
+  <Navigation />
+  
+  <!-- Hero Section -->
+  <section class="hero" id="hero">
+    <div class="hero-content">
+      <h1 class="hero-title">
+        <span class="hero-line">IMAGINER</span>
+        <span class="hero-line">LA BEAUTÉ</span>
+        <span class="hero-line">DE DEMAIN</span>
+      </h1>
+      
+      <div class="hero-divider"></div>
+      
+      <span class="hero-counter">001 / 007</span>
+    </div>
+  </section>
+  
+  <!-- Group Intro Section -->
+  <section class="group-intro" id="groupe">
+    <div class="group-intro-image">
+      <img 
+        src="https://images.unsplash.com/photo-1615397349754-cfa2066a298e?w=1200&auto=format&fit=crop"
+        alt="XIONS GROUP"
+        loading="lazy"
+      />
+      
+      <div class="stats-badge">
+        <div class="stats-badge-number">4</div>
+        <div class="stats-badge-label">MARQUES</div>
+      </div>
+    </div>
+    
+    <div class="group-intro-content">
+      <span class="section-label">GROUPE</span>
+      
+      <p class="group-intro-text">
+        XIONS GROUP est un groupe français indépendant qui crée, développe et déploie des marques de beauté premium à l'international.
+      </p>
+      
+      <p class="group-intro-text">
+        Notre mission : imaginer la beauté de demain en alliant créativité, rigueur et innovation responsable.
+      </p>
+    </div>
+  </section>
+  
+  <!-- Brands Showcase -->
+  <BrandsShowcase />
+  
+  <!-- Values Section -->
+  <ValuesSection />
+  
+  <!-- CTA Section -->
+  <section class="cta-section">
+    <div class="cta-content">
+      <h2 class="cta-title">
+        PRÊT À DÉCOUVRIR<br>NOS MARQUES ?
+      </h2>
+      
+      <div class="cta-divider"></div>
+      
+      <a href="/fr/marques" class="cta-button">
+        EXPLORER
+      </a>
+    </div>
+  </section>
+  
+  <Footer />
+</body>
+</html>
+
+<style is:global>
+  /* Global Styles */
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+  
+  html {
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+  
+  body {
+    font-family: 'Inter', sans-serif;
+    color: #000;
+    background: #fff;
+    overflow-x: hidden;
+  }
+  
+  /* Hero Section */
+  .hero {
+    min-height: 100vh;
+    background: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    padding: 120px 20px 80px;
+  }
+  
+  .hero-content {
+    text-align: center;
+    z-index: 2;
+    position: relative;
+  }
+  
+  .hero-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 96px;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    line-height: 1;
+    color: #000000;
+    margin: 0;
+  }
+  
+  .hero-line {
+    display: block;
+    opacity: 0;
+    animation: fadeInUp 1.2s cubic-bezier(0.4, 0, 0.2, 1) both;
+  }
+  
+  .hero-line:nth-child(1) { animation-delay: 0.2s; }
+  .hero-line:nth-child(2) { animation-delay: 0.4s; }
+  .hero-line:nth-child(3) { animation-delay: 0.6s; }
+  
+  .hero-divider {
+    width: 60px;
+    height: 0.5px;
+    background: #000000;
+    margin: 60px auto 40px;
+    opacity: 0;
+    animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) 0.8s both;
+  }
+  
+  .hero-counter {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    color: #999999;
+    opacity: 0;
+    animation: fadeIn 0.8s cubic-bezier(0.4, 0, 0.2, 1) 1s both;
+  }
+  
+  /* Group Intro Section */
+  .group-intro {
+    min-height: 100vh;
+    background: #000000;
+    color: #FFFFFF;
+    display: grid;
+    grid-template-columns: 60% 40%;
+    align-items: center;
+    padding: 0;
+    position: relative;
+  }
+  
+  .group-intro-image {
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+  }
+  
+  .group-intro-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    filter: grayscale(100%);
+    transition: filter 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+  
+  .group-intro:hover .group-intro-image img {
+    filter: grayscale(0%);
+  }
+  
+  .group-intro-content {
+    padding: 0 80px 0 60px;
+    position: relative;
+  }
+  
+  .section-label {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #999999;
+    margin-bottom: 8px;
+    position: relative;
+    display: inline-block;
+  }
+  
+  .section-label::after {
+    content: '';
+    display: block;
+    width: 30px;
+    height: 0.5px;
+    background: #999999;
+    margin-top: 8px;
+  }
+  
+  .group-intro-text {
+    font-size: 18px;
+    line-height: 1.8;
+    font-weight: 300;
+    color: #CCCCCC;
+    margin: 24px 0;
+  }
+  
+  .stats-badge {
+    position: absolute;
+    bottom: 60px;
+    right: 80px;
+    border: 0.5px solid rgba(255, 255, 255, 0.2);
+    padding: 24px 32px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    background: rgba(0, 0, 0, 0.3);
+  }
+  
+  .stats-badge-number {
+    font-size: 48px;
+    font-weight: 300;
+    color: #FFFFFF;
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  
+  .stats-badge-label {
+    font-size: 9px;
+    letter-spacing: 0.2em;
+    color: #999999;
+    text-transform: uppercase;
+  }
+  
+  /* CTA Section */
+  .cta-section {
+    min-height: 100vh;
+    background: #000000;
+    color: #FFFFFF;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 80px 20px;
+  }
+  
+  .cta-title {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 64px;
+    font-weight: 300;
+    letter-spacing: -0.02em;
+    line-height: 1.2;
+    margin: 0 0 48px 0;
+  }
+  
+  .cta-divider {
+    width: 120px;
+    height: 0.5px;
+    background: #FFFFFF;
+    margin: 0 auto 48px;
+  }
+  
+  .cta-button {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: #FFFFFF;
+    background: transparent;
+    border: 0.5px solid #FFFFFF;
+    padding: 20px 60px;
+    cursor: pointer;
+    transition: all 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+    text-decoration: none;
+    display: inline-block;
+  }
+  
+  .cta-button::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    border-radius: 50%;
+    background: #FFFFFF;
+    transform: translate(-50%, -50%);
+    transition: width 0.6s, height 0.6s;
+    z-index: -1;
+  }
+  
+  .cta-button:hover::before {
+    width: 300%;
+    height: 600%;
+  }
+  
+  .cta-button:hover {
+    color: #000000;
+  }
+  
+  /* Animations */
+  @keyframes fadeInUp {
+    from {
+      opacity: 0;
+      transform: translateY(60px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+  
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .hero-title {
+      font-size: 64px;
+    }
+    
+    .group-intro {
+      grid-template-columns: 1fr;
+    }
+    
+    .group-intro-image {
+      height: 60vh;
+    }
+    
+    .group-intro-content {
+      padding: 80px 60px;
+    }
+    
+    .stats-badge {
+      bottom: 40px;
+      right: 60px;
+    }
+    
+    .cta-title {
+      font-size: 52px;
+    }
+  }
+  
+  @media (max-width: 767px) {
+    .hero {
+      padding: 100px 24px 60px;
+    }
+    
+    .hero-title {
+      font-size: 42px;
+    }
+    
+    .hero-divider {
+      margin: 40px auto 32px;
+    }
+    
+    .group-intro-image {
+      height: 50vh;
+    }
+    
+    .group-intro-content {
+      padding: 60px 24px;
+    }
+    
+    .group-intro-text {
+      font-size: 16px;
+    }
+    
+    .stats-badge {
+      bottom: 24px;
+      right: 24px;
+      padding: 20px 24px;
+    }
+    
+    .stats-badge-number {
+      font-size: 36px;
+    }
+    
+    .cta-title {
+      font-size: 36px;
+    }
+    
+    .cta-button {
+      padding: 16px 48px;
+      min-height: 48px; /* Better touch target */
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .hero-title {
+      font-size: 36px; /* Much smaller for small phones */
+      line-height: 1.1;
+    }
+    
+    .cta-title {
+      font-size: 32px;
+    }
+    
+    .group-intro-text {
+      font-size: 15px;
+    }
+  }
+</style>

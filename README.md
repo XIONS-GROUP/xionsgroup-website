@@ -1,0 +1,74 @@
+# XIONS GROUP website
+
+XIONS GROUP 集团官网：Astro 静态多页网站，法语 / 英语共享模板；整体为简约社论设计，首页使用黑白 X 程序动画。它不是 Shopify 主题，当前没有 CMS。
+
+**新窗口/新同事请先读[项目日志入口](docs/project-log/README.md)，再读[当前状态](PROJECT_STATUS.md)和[网站与代码 Map](docs/project-map.md)。** 历史需求、实施原因、参数变化与未完成事项集中在日志里，不要仅依赖旧聊天或归档方案。
+
+## 项目如何发展到现在
+
+| 阶段 | 内容 |
+| --- | --- |
+| 09-12—09-13 · 基础链路 | 公司资产归属、Astro、GitHub dev/main、Netlify预览/生产、GoDaddy DNS；根目录统一、旧代码归档 |
+| 09-13—09-15 · 页面与设计 | 集团/四品牌/Press/承诺/招聘/联系/法律页面；共享模板；极简导航、原文与公司资料补全、SVG箭头 |
+| 09-16—09-17 · 视觉与表单 | 图片位置/尺寸/命名、Illustrator画板脚本、活动Logo/图库、磨砂抽屉导航、表单/成功页、品牌外链 |
+| 09-21 · 双语与SEO | 全站英文、法英切换、SEO元数据/结构化数据/分享封面、英文路由重定向修复 |
+| 09-22 · 动效与交接 | 固定比例X、白场形成、180°旋转、持续流光、设计工具箱；确认390/650px，集中整理日志 |
+| 09-22 · 流光循环 | 流光取消阶段门控，改为全程不停循环、强度290% |
+| 09-22 · 首尾衔接 | 退场改为开场动画的倒放、旋转角跨轮累加，整圈无缝；流光0.55× |
+| 09-22 · 缓动与版本 | 缓动曲线可调；工具箱可保存带名字的参数版本到本地；时长1/6/1/4/2/6共20秒 |
+| 09-22 · 首页排版 | 四个板块标题字号统一；Le portefeuille改Nos marques；六奖项去logo改纯文字；Notre rôle重做 |
+| 09-22 · 页面内改文字 | 工具箱可解锁全站文字直接编辑并存到本地；可双击打开的离线副本 |
+| 09-22 · 素材与重排 | 压缩市场部原片接入空槽位；集团创始人左右并列、品牌图等高去图注、Press去占位图、Engagements去红色 |
+| 09-22 · 节奏与动效 | 奖项段改深色并延续X；全站细微滚动动效（品牌卡底图与粒子动画已按用户要求撤回） |
+| 09-23 · 导航与文案 | 首屏导航透明反色、集团页居中、Press重排、242条翻译核查；main换用X动画占位页 |
+
+详细记录：[需求与实施时间线](docs/project-log/2026-09-12-to-22.md) · [流光循环](docs/project-log/2026-09-22-flow-loop.md) · [首尾衔接](docs/project-log/2026-09-22-loop-seam.md) · [缓动与版本](docs/project-log/2026-09-22-easing-and-presets.md) · [首页排版](docs/project-log/2026-09-22-homepage-typography.md) · [页面内改文字](docs/project-log/2026-09-22-inline-text-editing.md) · [节奏与动效](docs/project-log/2026-09-22-homepage-rhythm-and-motion.md) · [素材与重排](docs/project-log/2026-09-22-assets-and-page-redesign.md) · [导航与文案](docs/project-log/2026-09-23-nav-copy-audit-and-main-holding.md) · [Hero参数历史](docs/project-log/hero-parameters.md) · [Git历史](docs/project-log/git-history.md)。
+
+上线前缺口清单：[上线前检查](docs/launch-readiness-2026-09-22.md)。
+
+## 当前确认值
+
+手机X **390px**；桌面X **650px**；固定2876:1580比例、中心锁定、窗口裁切；噪点12% / 0.9px。六段时长 **1 / 6 / 1 / 4 / 2 / 6秒**，共20秒；**X → 白场是白场 → X 的倒放**，一轮末帧与首帧相同，循环无缝。缓动曲线可调，入场/退场与旋转分开，默认 **formation 2 / rotation 3**；两者中入场与退场必须共用同一值，否则首尾衔接会破。宽柔光与细弧边高光**不分阶段、全程不停循环**，强度290%、速度0.55×。唯一参数来源：[hero-light.ts](src/config/hero-light.ts)。
+
+## 打开本地预览（最简单的方式）
+
+双击仓库根目录的 **`启动本地预览.command`**。它会自动装依赖（首次）、启动服务、等就绪后打开设计工具箱。那个终端窗口要一直开着，关掉或按 Control-C 就停止预览。已经在运行时再双击，只会直接打开浏览器。
+
+预览不需要助手在场，也不依赖任何对话会话。工具箱里可以调 Hero 参数、存参数版本、解锁全站文字直接编辑。
+
+另有一份**完全不需要服务器**的离线副本：`local-materials/portable-preview/fr/index.html`，双击即可打开，但它是构建快照，改了代码要重新生成（`npm run build && node scripts/make-portable-preview.mjs`）。
+
+## 本地运行
+
+从仓库根目录运行，Node版本见 .nvmrc：
+
+~~~sh
+npm ci
+npm run dev -- --host 127.0.0.1 --port 4323
+npm run build
+npm run astro -- check
+~~~
+
+[打开本地设计工具箱](http://127.0.0.1:4323/design-preview/)。法文 /fr/、英文 /en/。npm run preview 预览构建产物；工具箱只在本地开发服务存在。工具箱试值不是源码默认值，确认后再写入配置；工具箱里可把整组参数存成带名字的版本，落在 local-materials/hero-presets/（不进仓库），接手时先看这里有没有用户调过的值。工具箱还能解锁页面上的文字直接改，改动存到 local-materials/text-edits/，同样不进仓库、需人工回写源码。不要因端口占用不断启动新的服务。
+
+## 文件与内容维护
+
+- src/pages/fr/、src/components/：实际页面/共享模板；品牌数据在 src/data/brands.ts。
+- src/i18n/：英文/法律翻译和路由对应；改法文需同步英文。详见[双语与SEO](docs/bilingual-seo.md)。
+- src/data/visuals.json：视觉位置、文件名、尺寸；上线图片在 public/images/。
+- local-materials/：忽略的公司原件和制作输出；原文在 local-materials/content/xions-group-web-text-corrected.txt。
+- content/home.fr.json：历史文案资料，当前首页不直接读取；改首页看 HomePage.astro。
+- docs/project-log/：统一日志；docs/project-map.md：当前地图；docs/archive/：旧方案。
+- archive/：旧实现，不部署。
+
+Graphify原地图属于L’Entropiste Shopify项目；本仓库Map已独立核对，详见Map来源说明。
+
+## 发布与交接
+
+本地 → GitHub dev → Netlify分支预览 → 验收 → dev合并main → Netlify生产。
+
+仓库：XIONS-GROUP/xionsgroup-website；[dev预览](https://dev--xionsgroup.netlify.app)；[正式域名](https://www.xionsgroup.com)。main 现为 X 动画占位页（提交 1814787），仍非完整站点。Netlify从根目录执行 npm run build，发布 dist。推送只触发构建，不等同部署成功；远端DNS/TLS发布时重新核对。本轮先保留本地修改。
+
+预览禁索引；正式发布确认后才将 netlify.toml 的 production context 中 ALLOW_INDEXING 设为 true，其他context保持false。Netlify Forms成功页与邮件投递分开验收；未启用Resend原型。
+
+每次接手先看 git status，保留已有工作。每次实质变更追加日志，更新状态/参数文档。阅读 [PROJECT_RULES](PROJECT_RULES.md)；不强推、不擅自合并main、不改公司邮件DNS。Netlify优先插件/CLI，避免不必要Computer Use。

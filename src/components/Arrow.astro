@@ -1,0 +1,10 @@
+---
+interface Props { direction?: 'up-right' | 'down' }
+const { direction = 'up-right' } = Astro.props;
+---
+<svg class="inline-arrow" viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.4" aria-hidden="true" focusable="false">
+  <path d={direction === 'down' ? 'M12 3v18M4 13l8 8 8-8' : 'M4 20 20 4M4 4h16v16'} />
+</svg>
+<style>
+  .inline-arrow { display:inline-block; width:1em; height:1em; vertical-align:-.1em; flex-shrink:0; }
+</style>

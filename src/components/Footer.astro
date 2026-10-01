@@ -1,0 +1,47 @@
+---
+import Arrow from './Arrow.astro';
+import LanguageSwitcher from './LanguageSwitcher.astro';
+const year = new Date().getFullYear();
+---
+<footer class="site-footer">
+  <div class="footer-lead">
+    <p class="eyebrow">Beauty · Creativity · Future</p>
+    <a href="/fr/contact/">Imaginons la suite <span><Arrow /></span></a>
+  </div>
+  <div class="footer-grid">
+    <a class="footer-logo" href="/fr/"><img src="/images/site/xions-logo.svg" alt="XIONS GROUP" /></a>
+    <div><span>Explorer</span><a href="/fr/groupe/">Le groupe</a><a href="/fr/marques/">Nos marques</a><a href="/fr/engagements/">Engagements</a></div>
+    <div><span class="col-spacer" aria-hidden="true"></span><a href="/fr/presse/">Presse & rayonnement</a><a href="/fr/carrieres/">Carrières</a><a href="/fr/contact/">Contact</a></div>
+    <div><span>Suivre</span><a href="https://instagram.com/xionsgroup" target="_blank" rel="noreferrer">Instagram</a><a href="https://www.linkedin.com/company/xions-group" target="_blank" rel="noreferrer">LinkedIn</a><a href="mailto:contact@xionsgroup.com">Email</a></div>
+  </div>
+  <div class="footer-bottom">
+    <p>© {year} XIONS GROUP</p>
+    <div class="footer-meta">
+      <LanguageSwitcher compact />
+      <div class="footer-legal"><a href="/fr/conditions-generales/">Conditions d’utilisation</a><a href="/fr/mentions-legales/">Mentions légales</a><a href="/fr/politique-confidentialite/">Confidentialité</a><a href="/fr/politique-cookies/">Cookies</a></div>
+    </div>
+  </div>
+</footer>
+<style>
+  /* Keep the arrow on its own line on desktop. Left to wrap naturally it follows the last word
+     or not depending on how long the phrase is, so French and English broke differently. */
+  @media(min-width:701px) { .footer-lead > a span { display:block; } }
+  /* One row on desktop: copyright, then the language toggle ahead of the legal links. The
+     global stylesheet already stacks .footer-bottom into two rows below 700px. */
+  .footer-bottom { align-items:baseline; gap:1rem 2rem; }
+  .footer-meta,.footer-legal { display:flex; align-items:baseline; flex-wrap:wrap; gap:1.5rem; }
+  /* Phones put the toggle on the copyright line, hard right, with the legal links beneath.
+     display:contents lifts the two children into the grid so they can be placed separately. */
+  @media(max-width:700px) {
+    .footer-bottom { display:grid; grid-template-columns:1fr auto; align-items:baseline; row-gap:.85rem; }
+    .footer-bottom p { grid-area:1 / 1; }
+    .footer-meta { display:contents; }
+    .footer-meta :global(.language-switcher) { grid-area:1 / 2; justify-self:end; }
+    .footer-legal { grid-area:2 / 1 / auto / -1; gap:.5rem 1.2rem; }
+  }
+  /* This column's heading was dropped as a duplicate, but the row it occupied has to stay so
+     its links keep sitting level with the other columns'. A zero-width space gives it the same
+     line box as a heading with text; min-height:1em was 6px short, ignoring line-height. */
+  .col-spacer { display:block; }
+  .col-spacer::before { content:'\200B'; }
+</style>

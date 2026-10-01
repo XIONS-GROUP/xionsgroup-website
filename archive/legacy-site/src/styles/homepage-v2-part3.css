@@ -1,0 +1,407 @@
+/* 首页样式 - Part 3: Commitments, News, Contact CTA */
+
+/* ===================================
+   ⑤ COMMITMENTS - 品质与承诺
+   =================================== */
+
+.commitments {
+  padding: 140px 80px;
+  background: #FCFCFC;
+}
+
+.commitments-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.commitments .section-label {
+  margin-bottom: 80px;
+}
+
+.commitments-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 60px;
+}
+
+.commitment-item {
+  text-align: center;
+  padding: 48px 32px;
+  transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.commitment-item:hover {
+  transform: translateY(-8px);
+}
+
+.commitment-icon {
+  width: 56px;
+  height: 56px;
+  margin: 0 auto 32px;
+  color: #C9A961;
+  opacity: 0.9;
+  transition: all 0.4s ease;
+}
+
+.commitment-item:hover .commitment-icon {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.commitment-title {
+  font-size: 24px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  color: #0F0F0F;
+  margin-bottom: 16px;
+}
+
+.commitment-description {
+  font-size: 16px;
+  font-weight: 420;
+  line-height: 1.6;
+  color: #666666;
+  margin-bottom: 24px;
+}
+
+.commitment-example {
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  color: #999999;
+  font-style: italic;
+}
+
+/* 响应式 */
+@media (max-width: 1024px) {
+  .commitments {
+    padding: 100px 60px;
+  }
+  
+  .commitments-grid {
+    grid-template-columns: 1fr;
+    gap: 48px;
+  }
+  
+  .commitment-item {
+    text-align: left;
+    padding: 32px 0;
+    border-bottom: 0.5px solid rgba(0, 0, 0, 0.1);
+  }
+  
+  .commitment-item:last-child {
+    border-bottom: none;
+  }
+  
+  .commitment-icon {
+    margin: 0 0 24px 0;
+  }
+}
+
+@media (max-width: 767px) {
+  .commitments {
+    padding: 80px 24px;
+  }
+  
+  .commitments .section-label {
+    margin-bottom: 60px;
+  }
+  
+  .commitments-grid {
+    gap: 40px;
+  }
+  
+  .commitment-title {
+    font-size: 22px;
+  }
+  
+  .commitment-description {
+    font-size: 15px;
+  }
+}
+
+/* ===================================
+   ⑥ NEWS - 最新动态
+   =================================== */
+
+.news {
+  padding: 100px 80px;
+  background: #F8F8F8;
+}
+
+.news-container {
+  max-width: 1400px;
+  margin: 0 auto;
+}
+
+.news-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 60px;
+}
+
+.news-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr;
+  gap: 24px;
+}
+
+.news-item {
+  position: relative;
+  background: #FCFCFC;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.news-item:hover {
+  transform: translateY(-4px);
+}
+
+.news-item--featured {
+  grid-row: span 2;
+}
+
+.news-image {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+}
+
+.news-item--featured .news-image {
+  aspect-ratio: 16 / 12;
+}
+
+.news-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+  filter: grayscale(0.3);
+}
+
+.news-item:hover .news-image img {
+  transform: scale(1.05);
+  filter: grayscale(0);
+}
+
+.news-content {
+  padding: 24px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.news-date {
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: #999999;
+  display: block;
+  margin-bottom: 12px;
+}
+
+.news-title {
+  font-size: 20px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.3;
+  color: #0F0F0F;
+  margin-bottom: 12px;
+}
+
+.news-item--featured .news-title {
+  font-size: 28px;
+  margin-bottom: 16px;
+}
+
+.news-excerpt {
+  font-size: 15px;
+  font-weight: 420;
+  line-height: 1.6;
+  color: #666666;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+/* 响应式 */
+@media (max-width: 1024px) {
+  .news {
+    padding: 80px 60px;
+  }
+  
+  .news-grid {
+    grid-template-columns: 1fr;
+  }
+  
+  .news-item--featured {
+    grid-row: auto;
+  }
+  
+  .news-item--featured .news-image {
+    aspect-ratio: 16 / 10;
+  }
+}
+
+@media (max-width: 767px) {
+  .news {
+    padding: 60px 24px;
+  }
+  
+  .news-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 40px;
+  }
+  
+  .news-grid {
+    gap: 16px;
+  }
+  
+  .news-content {
+    padding: 20px;
+  }
+  
+  .news-title {
+    font-size: 18px;
+  }
+  
+  .news-item--featured .news-title {
+    font-size: 22px;
+  }
+}
+
+/* ===================================
+   ⑦ CONTACT CTA - 大字邀请
+   =================================== */
+
+.contact-cta {
+  padding: 160px 80px;
+  background: #FCFCFC;
+  text-align: center;
+}
+
+.contact-cta-container {
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.contact-cta-title {
+  font-family: 'Cormorant Garamond', serif;
+  font-size: clamp(56px, 10vw, 96px);
+  font-weight: 300;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  color: #0F0F0F;
+  margin-bottom: 64px;
+}
+
+.contact-cta-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 24px;
+}
+
+.cta-button {
+  display: inline-block;
+  padding: 20px 56px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  text-decoration: none;
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cta-button--primary {
+  color: #0F0F0F;
+  background: #C9A961;
+  border: 1px solid #C9A961;
+}
+
+.cta-button--primary:hover {
+  background: #D4AF37;
+  border-color: #D4AF37;
+  transform: translateY(-2px);
+  box-shadow: 0 12px 32px rgba(201, 169, 97, 0.25);
+}
+
+.cta-button--secondary {
+  color: #0F0F0F;
+  background: transparent;
+  border: 1px solid #0F0F0F;
+}
+
+.cta-button--secondary:hover {
+  background: #0F0F0F;
+  color: #FCFCFC;
+  transform: translateY(-2px);
+}
+
+/* 响应式 */
+@media (max-width: 1024px) {
+  .contact-cta {
+    padding: 120px 60px;
+  }
+  
+  .contact-cta-title {
+    margin-bottom: 48px;
+  }
+}
+
+@media (max-width: 767px) {
+  .contact-cta {
+    padding: 100px 24px;
+  }
+  
+  .contact-cta-title {
+    margin-bottom: 40px;
+  }
+  
+  .contact-cta-buttons {
+    flex-direction: column;
+    gap: 16px;
+  }
+  
+  .cta-button {
+    width: 100%;
+    padding: 18px 40px;
+  }
+}
+
+/* ===================================
+   视差滚动效果（可选）
+   =================================== */
+
+@media (min-width: 1024px) and (prefers-reduced-motion: no-preference) {
+  .hero-bg {
+    transition: transform 0.1s ease-out;
+  }
+}
+
+/* ===================================
+   可访问性
+   =================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}
+
+/* Focus states */
+a:focus-visible,
+button:focus-visible {
+  outline: 2px solid #C9A961;
+  outline-offset: 4px;
+}
