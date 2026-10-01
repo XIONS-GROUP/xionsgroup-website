@@ -13,8 +13,9 @@
 [context.deploy-preview.environment]
   ALLOW_INDEXING = "false"
 
+# Production is the live site: this is the one context search engines may index.
 [context.production.environment]
-  ALLOW_INDEXING = "false"
+  ALLOW_INDEXING = "true"
 
 # Netlify Redirects for clean navigation routes
 [[redirects]]

@@ -13,6 +13,16 @@ Reprendre l’animation|Resume animation
 Rejoindre les équipes de XIONS Group.|Join the teams at XIONS Group.
 Carrières — XIONS GROUP|Careers — XIONS GROUP
 XIONS Group — Accueil|XIONS Group — Home
+Accueil|Home
+Aller au contenu|Skip to content
+Visuel d’annonce de la maison Betenoir|Announcement visual for the Betenoir maison
+Contacter XIONS Group : presse, distribution, partenariats et carrières. Siège au 253 rue Saint-Honoré, Paris. Nous répondons sous quelques jours ouvrés.|Contact XIONS Group: press, distribution, partnerships and careers. Head office at 253 rue Saint-Honoré, Paris. We reply within a few working days.
+Rejoindre XIONS Group : création, développement produit, marketing et retail dans un groupe de beauté indépendant présent à Paris, Shanghai et Palm Beach.|Join XIONS Group: creation, product development, marketing and retail in an independent beauty group with offices in Paris, Shanghai and Palm Beach.
+Les quatre maisons de XIONS Group : L’Entropiste, Betenoir, Sunlution et Masqly. Parfumerie de niche, soin et cosmétique, chacune avec son territoire propre.|The four maisons of XIONS Group: L’Entropiste, Betenoir, Sunlution and Masqly. Niche perfumery, skincare and cosmetics, each with its own territory.
+XIONS Group, groupe de beauté français indépendant : vision, direction, modèle de développement des marques et implantations à Paris, Shanghai et Palm Beach.|XIONS Group, an independent French beauty group: vision, leadership, brand development model and offices in Paris, Shanghai and Palm Beach.
+Les engagements de XIONS Group : qualité et sécurité des formules, conformité réglementaire, sourcing responsable et transparence envers les consommateurs.|The commitments of XIONS Group: formula quality and safety, regulatory compliance, responsible sourcing and transparency towards consumers.
+Votre message a bien été transmis aux équipes de XIONS Group. Nous revenons vers vous dans les meilleurs délais.|Your message has been sent to the XIONS Group teams. We will get back to you as soon as possible.
+Cette page n’existe pas ou a été déplacée. Retrouvez le groupe, les marques, le rayonnement et les contacts de XIONS Group depuis la page d’accueil.|This page does not exist or has moved. Find the group, the brands, press and contacts for XIONS Group from the home page.
 Navigation principale|Main navigation
 Navigation secondaire|Secondary navigation
 Le groupe|The Group

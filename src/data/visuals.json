@@ -1,31 +1,5 @@
 [
   {
-    "id": "home-desktop",
-    "name": "xionsgroup-home-hero-01-desktop",
-    "label": "Accueil · campagne desktop",
-    "use": "首页桌面首屏背景；左侧标题留白",
-    "width": 2560,
-    "height": 1440,
-    "ratio": "16 / 9",
-    "fit": "cover",
-    "page": "/fr/",
-    "src": "",
-    "alt": ""
-  },
-  {
-    "id": "home-mobile",
-    "name": "xionsgroup-home-hero-01-mobile",
-    "label": "Accueil · campagne mobile",
-    "use": "手机全屏首屏背景；中央主体，顶部及底部保留裁切余量",
-    "width": 1440,
-    "height": 3120,
-    "ratio": "6 / 13",
-    "fit": "cover",
-    "page": "/fr/",
-    "src": "",
-    "alt": ""
-  },
-  {
     "id": "group-team",
     "name": "xionsgroup-leadership-group",
     "label": "Le groupe · portrait collectif",
@@ -35,7 +9,7 @@
     "ratio": "9 / 16",
     "fit": "cover",
     "page": "/fr/groupe/",
-    "src": "/images/group/xionsgroup-leadership-group.jpg",
+    "src": "/images/group/xionsgroup-leadership-group.webp",
     "alt": "Les fondateurs de XIONS Group"
   },
   {
@@ -100,7 +74,7 @@
     "ratio": "3 / 2",
     "fit": "contain",
     "page": "/fr/marques/lentropiste/",
-    "src": "/images/brands/lentropiste/lentropiste-collection-01.jpg",
+    "src": "/images/brands/lentropiste/lentropiste-collection-01.webp",
     "alt": "Collection de parfums L’Entropiste"
   },
   {
@@ -113,7 +87,7 @@
     "ratio": "4 / 5",
     "fit": "contain",
     "page": "/fr/marques/lentropiste/",
-    "src": "/images/brands/lentropiste/lentropiste-dorians-spleen-award-2026.jpg",
+    "src": "/images/brands/lentropiste/lentropiste-dorians-spleen-award-2026.webp",
     "alt": "Le trophée Fragrance Foundation France 2026 aux côtés du parfum Dorian’s Spleen"
   },
   {
@@ -126,21 +100,21 @@
     "ratio": "4 / 5",
     "fit": "cover",
     "page": "/fr/marques/lentropiste/",
-    "src": "/images/brands/lentropiste/lentropiste-collection-campaign-01.jpg",
+    "src": "/images/brands/lentropiste/lentropiste-collection-campaign-01.webp",
     "alt": "La collection L’Entropiste en campagne"
   },
   {
     "id": "betenoir-hero",
-    "name": "betenoir-teaser-01",
-    "label": "Betenoir · avant-première",
-    "use": "品牌预告横图，可暂缓交付；文字预告仍可发布",
+    "name": "betenoir-coming-soon-hero",
+    "label": "Betenoir · visuel d’annonce",
+    "use": "品牌标题下方横图，取自 betenoir.com 网页版背景图",
     "width": 2400,
-    "height": 1600,
+    "height": 1344,
     "ratio": "3 / 2",
     "fit": "cover",
     "page": "/fr/marques/betenoir/",
-    "src": "",
-    "alt": "",
+    "src": "/images/brands/betenoir/betenoir-coming-soon-hero.webp",
+    "alt": "Visuel d’annonce de la maison Betenoir",
     "optional": true
   },
   {
@@ -153,7 +127,7 @@
     "ratio": "16 / 9",
     "fit": "cover",
     "page": "/fr/marques/sunlution/",
-    "src": "/images/brands/sunlution/sunlution-hero-01.jpg",
+    "src": "/images/brands/sunlution/sunlution-hero-01.webp",
     "alt": "La gamme Sunlution au complet"
   },
   {
@@ -166,7 +140,7 @@
     "ratio": "7 / 10",
     "fit": "cover",
     "page": "/fr/marques/sunlution/",
-    "src": "/images/brands/sunlution/sunlution-products-01.jpg",
+    "src": "/images/brands/sunlution/sunlution-products-01.webp",
     "alt": "La crème Collagène Revive de Sunlution"
   },
   {
@@ -179,7 +153,7 @@
     "ratio": "2 / 3",
     "fit": "cover",
     "page": "/fr/marques/sunlution/",
-    "src": "/images/brands/sunlution/sunlution-collection-01.jpg",
+    "src": "/images/brands/sunlution/sunlution-collection-01.webp",
     "alt": "La collection Sunlution présentée sur socles"
   },
   {
@@ -192,7 +166,7 @@
     "ratio": "3 / 2",
     "fit": "contain",
     "page": "/fr/marques/masqly/",
-    "src": "/images/brands/masqly/masqly-products-01.jpg",
+    "src": "/images/brands/masqly/masqly-products-01.webp",
     "alt": "Produits Masqly"
   },
   {
@@ -205,7 +179,7 @@
     "ratio": "4 / 5",
     "fit": "cover",
     "page": "/fr/marques/masqly/",
-    "src": "/images/brands/masqly/masqly-ingredients-01.jpg",
+    "src": "/images/brands/masqly/masqly-ingredients-01.webp",
     "alt": "Les actifs des masques Masqly"
   },
   {
@@ -218,7 +192,7 @@
     "ratio": "4 / 5",
     "fit": "cover",
     "page": "/fr/marques/masqly/",
-    "src": "/images/brands/masqly/masqly-lifestyle-01.jpg",
+    "src": "/images/brands/masqly/masqly-lifestyle-01.webp",
     "alt": "Les masques Masqly mis en scène"
   },
   {
@@ -231,7 +205,7 @@
     "ratio": "2 / 3",
     "fit": "cover",
     "page": "/fr/presse/",
-    "src": "/images/press/xionsgroup-event-cannes-01.jpg",
+    "src": "/images/press/xionsgroup-event-cannes-01.webp",
     "alt": "Sur le photocall L’Entropiste de la TIME Cannes House"
   },
   {
@@ -244,7 +218,7 @@
     "ratio": "2 / 3",
     "fit": "cover",
     "page": "/fr/presse/",
-    "src": "/images/press/xionsgroup-event-cannes-02.jpg",
+    "src": "/images/press/xionsgroup-event-cannes-02.webp",
     "alt": "Photocall L’Entropiste à la TIME Cannes House"
   },
   {
@@ -257,7 +231,7 @@
     "ratio": "2 / 3",
     "fit": "cover",
     "page": "/fr/presse/",
-    "src": "/images/press/xionsgroup-event-launch-01.jpg",
+    "src": "/images/press/xionsgroup-event-launch-01.webp",
     "alt": "Présentation des parfums L’Entropiste lors d’un événement"
   },
   {
@@ -270,99 +244,8 @@
     "ratio": "2 / 3",
     "fit": "cover",
     "page": "/fr/presse/",
-    "src": "/images/press/xionsgroup-event-talent-01.jpg",
+    "src": "/images/press/xionsgroup-event-talent-01.webp",
     "alt": "Les masques Masqly entre les mains d’une personnalité lors d’un événement"
-  },
-  {
-    "id": "press-event-oscars",
-    "name": "xionsgroup-event-oscars-01",
-    "label": "Oscars",
-    "use": "活动图库；奥斯卡相关传播现场",
-    "width": 2400,
-    "height": 1600,
-    "ratio": "3 / 2",
-    "fit": "cover",
-    "page": "/fr/presse/",
-    "src": "",
-    "alt": ""
-  },
-  {
-    "id": "press-event-golden-globes",
-    "name": "xionsgroup-event-golden-globes-01",
-    "label": "Golden Globes",
-    "use": "活动图库；金球奖相关传播现场",
-    "width": 2400,
-    "height": 1600,
-    "ratio": "3 / 2",
-    "fit": "cover",
-    "page": "/fr/presse/",
-    "src": "",
-    "alt": ""
-  },
-  {
-    "id": "press-event-grammys",
-    "name": "xionsgroup-event-grammys-01",
-    "label": "Grammy Awards",
-    "use": "活动图库；格莱美相关传播现场",
-    "width": 2400,
-    "height": 1600,
-    "ratio": "3 / 2",
-    "fit": "cover",
-    "page": "/fr/presse/",
-    "src": "",
-    "alt": ""
-  },
-  {
-    "id": "press-event-emmys",
-    "name": "xionsgroup-event-emmys-01",
-    "label": "Emmy Awards",
-    "use": "活动图库；艾美奖相关传播现场",
-    "width": 2400,
-    "height": 1600,
-    "ratio": "3 / 2",
-    "fit": "cover",
-    "page": "/fr/presse/",
-    "src": "",
-    "alt": ""
-  },
-  {
-    "id": "press-event-cesar",
-    "name": "xionsgroup-event-cesar-01",
-    "label": "César",
-    "use": "活动图库；凯撒奖相关传播现场",
-    "width": 2400,
-    "height": 1600,
-    "ratio": "3 / 2",
-    "fit": "cover",
-    "page": "/fr/presse/",
-    "src": "",
-    "alt": ""
-  },
-  {
-    "id": "press-event-hollywood",
-    "name": "xionsgroup-event-hollywood-01",
-    "label": "Hollywood",
-    "use": "活动图库；好莱坞相关品牌传播",
-    "width": 2400,
-    "height": 1600,
-    "ratio": "3 / 2",
-    "fit": "cover",
-    "page": "/fr/presse/",
-    "src": "",
-    "alt": ""
-  },
-  {
-    "id": "press-campaign-outdoor",
-    "name": "xionsgroup-press-campaign-01",
-    "label": "Campagnes d’affichage international",
-    "use": "国际户外广告图库；已确认的城市与广告项目",
-    "width": 2400,
-    "height": 1600,
-    "ratio": "3 / 2",
-    "fit": "cover",
-    "page": "/fr/presse/",
-    "src": "",
-    "alt": ""
   },
   {
     "id": "press-campaign-editorial",
@@ -374,21 +257,8 @@
     "ratio": "43 / 60",
     "fit": "cover",
     "page": "/fr/presse/",
-    "src": "/images/brands/lentropiste/lentropiste-collection-lockup-01.jpg",
+    "src": "/images/brands/lentropiste/lentropiste-collection-lockup-01.webp",
     "alt": "Visuel de campagne L’Entropiste"
-  },
-  {
-    "id": "press-campaign-digital",
-    "name": "xionsgroup-press-digital-01",
-    "label": "Campagnes digitales & social media",
-    "use": "数字及社交传播图库；完整保留活动画面",
-    "width": 2400,
-    "height": 1600,
-    "ratio": "3 / 2",
-    "fit": "contain",
-    "page": "/fr/presse/",
-    "src": "",
-    "alt": ""
   },
   {
     "id": "social-cover",

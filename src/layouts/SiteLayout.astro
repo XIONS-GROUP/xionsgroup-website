@@ -2,7 +2,9 @@
 import Navigation from '../components/Navigation.astro';
 import Footer from '../components/Footer.astro';
 import { robotsDirective } from '../config/indexing';
-import { origin, localeFor, localizedPath, routeFor, isPublicPage } from '../i18n/routes';
+import { origin, routes, localeFor, localizedPath, routeFor, isPublicPage } from '../i18n/routes';
+import { brands } from '../data/brands';
+import { breadcrumbLabels } from '../config/seo';
 import { translate } from '../i18n/en';
 import { shareImageOrigin } from '../config/seo';
 import '../styles/global.css';
@@ -14,15 +16,49 @@ const canonical = origin + localizedPath(Astro.url.pathname, locale);
 const publicPage = isPublicPage(Astro.url.pathname);
 const t = (value: string) => locale === 'en' ? translate(value) : value;
 const image = `${shareImageOrigin}/images/social/xionsgroup-og.png`;
+// Breadcrumbs for every page below the home page. Google reads BreadcrumbList to show the
+// site hierarchy in results instead of a bare URL; brand pages get the intermediate level.
+const crumbRow = routeFor(Astro.url.pathname);
+const crumbSlug = crumbRow ? crumbRow[locale === 'fr' ? 0 : 1] : '';
+const crumbTrail = crumbSlug
+  ? crumbSlug.split('/').map((_, i, parts) => parts.slice(0, i + 1).join('/'))
+  : [];
+const crumbName = (slug: string) => {
+  const row = routes.find(r => r[locale === 'fr' ? 0 : 1] === slug);
+  const label = row ? row[0] : slug;
+  return t(breadcrumbLabels[label as keyof typeof breadcrumbLabels] ?? title);
+};
+const breadcrumb = crumbTrail.length ? [{
+  '@type':'BreadcrumbList','@id':`${canonical}#breadcrumb`,
+  itemListElement:[
+    {'@type':'ListItem',position:1,name:t('Accueil'),item:`${origin}/${locale}/`},
+    ...crumbTrail.map((slug, i) => ({
+      '@type':'ListItem', position:i + 2, name:crumbName(slug), item:`${origin}/${locale}/${slug}/`
+    }))
+  ]
+}] : [];
+
 const schema = {
   '@context':'https://schema.org',
   '@graph':[
     {'@type':'Organization','@id':`${origin}/#organization`,name:'XIONS GROUP',legalName:'XIONS GROUP',url:origin,
-      logo:`${origin}/images/site/xionsgroup-icon-512.png`,email:'contact@xionsgroup.com',
+      description:t('Groupe français indépendant qui crée, développe et déploie des marques de beauté premium à l’international.'),
+      logo:{'@type':'ImageObject',url:`${origin}/images/site/xionsgroup-icon-512.png`,width:512,height:512},
+      email:'contact@xionsgroup.com',
       address:{'@type':'PostalAddress',streetAddress:'253 rue Saint-Honoré',postalCode:'75001',addressLocality:'Paris',addressCountry:'FR'},
-      sameAs:['https://instagram.com/xionsgroup','https://linkedin.com/company/xionsgroup']},
+      // Must match the links the site actually shows: a second, different URL for the same
+      // profile splits the entity instead of reinforcing it.
+      sameAs:['https://instagram.com/xionsgroup','https://www.linkedin.com/company/xions-group'],
+      subOrganization:brands.map(brand => ({
+        '@type':'Brand','@id':`${origin}/#brand-${brand.slug}`,name:brand.name,
+        url:`${origin}/${locale}/${locale === 'fr' ? 'marques' : 'brands'}/${brand.slug}/`,
+        ...(brand.websiteLive ? {sameAs:[brand.website,...(brand.instagram ? [brand.instagram] : [])]} : {})
+      }))},
     {'@type':'WebSite','@id':`${origin}/#website`,url:origin,name:'XIONS GROUP',inLanguage:['fr','en'],publisher:{'@id':`${origin}/#organization`}},
-    {'@type':'WebPage','@id':`${canonical}#webpage`,url:canonical,name:t(title),description:t(description),inLanguage:locale,isPartOf:{'@id':`${origin}/#website`}}
+    ...breadcrumb,
+    {'@type':'WebPage','@id':`${canonical}#webpage`,url:canonical,name:t(title),description:t(description),inLanguage:locale,
+      isPartOf:{'@id':`${origin}/#website`},about:{'@id':`${origin}/#organization`},
+      ...(crumbTrail.length ? {breadcrumb:{'@id':`${canonical}#breadcrumb`}} : {})}
   ]
 };
 ---
@@ -65,8 +101,11 @@ const schema = {
     <title>{title}</title>
   </head>
   <body class={className}>
+    <!-- Keyboard and screen-reader users land on the nav first on every single page. This jumps
+         straight past it to the content; it stays off-screen until it takes focus. -->
+    <a class="skip-link" href="#main-content">Aller au contenu</a>
     <Navigation />
-    <main><slot /></main>
+    <main id="main-content" tabindex="-1"><slot /></main>
     <Footer />
     {import.meta.env.DEV && <a id="local-preview-launcher" href={'/design-preview/?path=' + encodeURIComponent(Astro.url.pathname)} style="position:fixed;right:18px;bottom:18px;z-index:9999;background:#111;color:white;padding:10px 16px;border-radius:24px;text-decoration:none;font:12px system-ui">设计工具箱</a>}
     {import.meta.env.DEV && <script is:inline>if(window.self!==window.top)document.getElementById('local-preview-launcher')?.remove();</script>}

@@ -7,7 +7,7 @@ const commitments = [
   ['Environnement & innovation', 'Nous questionnons les matériaux, limitons le superflu et améliorons progressivement les emballages avec une approche pragmatique : mesurer, améliorer, avancer.']
 ];
 ---
-<SiteLayout title="Engagements — XIONS GROUP" description="La charte de qualité et les engagements de XIONS Group.">
+<SiteLayout title="Engagements — XIONS GROUP" description="Les engagements de XIONS Group : qualité et sécurité des formules, conformité réglementaire, sourcing responsable et transparence envers les consommateurs.">
   <PageHero eyebrow="Engagements" title="L’exigence comme principe." intro="Performance, sensorialité, créativité, sécurité et responsabilité doivent progresser ensemble." />
   <section class="section"><div class="measure commitment-grid">{commitments.map((item, index) => <article class="commitment" id={index === 0 ? 'qualite' : index === 1 ? 'responsabilite' : 'environnement'} data-reveal><h2 class="title-md">{item[0]}</h2><p>{item[1]}</p></article>)}</div></section>
   <aside class="statement"><blockquote>Promettre avec mesure.<br />Progresser avec constance.</blockquote></aside>

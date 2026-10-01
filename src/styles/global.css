@@ -73,3 +73,10 @@ main { min-height:70vh; }
 }
 @media (prefers-reduced-motion:reduce) { *,*::before,*::after { scroll-behavior:auto!important; transition-duration:.01ms!important; animation-duration:.01ms!important; } }
 .page-hero,.cta-band,.site-footer { padding-inline:max(var(--pad),calc((100% - 78rem) / 2)); }
+
+/* Skip link: off-screen until focused, then pinned to the top-left above the fixed header. */
+.skip-link { position:fixed; top:0; left:0; z-index:200; padding:.85rem 1.25rem; background:var(--ink);
+  color:#fff; font-size:.78rem; letter-spacing:.08em; text-transform:uppercase; text-decoration:none;
+  transform:translateY(-120%); transition:transform .2s ease; }
+.skip-link:focus,.skip-link:focus-visible { transform:none; }
+main:focus { outline:none; }
