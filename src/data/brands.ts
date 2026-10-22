@@ -26,10 +26,10 @@ export const brands = [
     instagram: null,
     websiteLive: true,
     name: 'Betenoir',
-    // Copy condensed from the BETENOIR brand book 2026 (FR); non-breaking spaces keep French spacing before « : » and in « 37 ml ».
+    // Copy condensed from the BETENOIR brand book 2026 (FR); non-breaking spaces keep French spacing before « : » and in « 37 ml »; a word joiner keeps « avant-gardiste » on one line.
     category: 'Parfumerie de niche',
     status: 'Maison active · Paris',
-    tagline: 'Le parfum comme une pièce de mode : avant-gardiste, décalé, sans masque.',
+    tagline: 'Le parfum comme une pièce de mode : avant-⁠gardiste, décalé, sans masque.',
     intro: 'BETENOIR ne transforme rien. La maison s’adresse à ce qui existe déjà, avant le rôle que le monde impose.',
     story: [
       'BETENOIR emprunte à Jung l’idée de la Persona : ce masque social que chacun construit pour correspondre à ce que le monde attend. Sous ce masque persiste la part non éditée de chacun, celle qui existe avant d’être corrigée pour plaire. C’est elle que BETENOIR appelle la bête.',
