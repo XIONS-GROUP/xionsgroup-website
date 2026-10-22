@@ -2,6 +2,8 @@
 
 更新：2026-09-23。历史在[项目日志](docs/project-log/README.md)，结构在[Map](docs/project-map.md)。
 
+> 2026-10-23：BETENOIR 品牌页换成上线版并发布到生产（main 714ccfd，Neo 10-23 确认），见[项目日志](docs/project-log/2026-10-22-betenoir-launch.md)。下面「分支与运行」等段落仍是 09-23 的状态，main 早已不是占位页（f965a5d 正式上线）。
+
 ## 分支与运行
 
 - 根目录是唯一运行/部署入口；Astro静态输出dist。
@@ -17,7 +19,7 @@
 - 集团、四品牌共享模板、Press、承诺、招聘、联系、成功页、四法律页及404。
 - 17路由/语言、30公开sitemap URL；法英正文/表单/法律/alt/metadata；无运行时翻译API。
 - 两个桌面下拉共用磨砂面；手机全屏抽屉，集团不展开团队，品牌显示四家；主导航大写。
-- 首页四品牌居中Logo卡、六活动标识；品牌官网/Instagram集中维护，Betenoir保持未上线。
+- 首页四品牌居中Logo卡、六活动标识；品牌官网/Instagram集中维护；Betenoir 10-23 起显示官网链接（Instagram 账号待给）。
 - 红色#c20000、SVG箭头、白底图标/分享封面。body仍是近白#fefdfb，导航是白色半透明。
 - Netlify Forms分类必填、补充标题可选、成功/错误界面、扫描声明。邮件投递是远端验收项；Resend未启用。
 - SEO canonical/hreflang/JSON-LD/robots/sitemap；所有context仍禁索引。

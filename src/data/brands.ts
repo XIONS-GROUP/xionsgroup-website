@@ -23,7 +23,7 @@ export const brands = [
   {
     slug: 'betenoir',
     website: 'https://betenoir.com/',
-    instagram: null,
+    instagram: 'https://www.instagram.com/betenoir_paris/',
     websiteLive: true,
     name: 'Betenoir',
     // Copy condensed from the BETENOIR brand book 2026 (FR); non-breaking spaces keep French spacing before « : » and in « 37 ml »; a word joiner keeps « avant-gardiste » on one line.
