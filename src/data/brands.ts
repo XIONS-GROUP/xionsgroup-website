@@ -24,20 +24,21 @@ export const brands = [
     slug: 'betenoir',
     website: 'https://betenoir.com/',
     instagram: null,
-    websiteLive: false,
+    websiteLive: true,
     name: 'Betenoir',
-    category: 'Parfumerie',
-    status: 'À venir · 2026',
-    tagline: 'Une nouvelle maison est en préparation.',
-    intro: 'Betenoir rejoindra prochainement le portefeuille parfumerie de XIONS Group avec une identité et un territoire olfactif qui lui seront propres.',
+    // Copy condensed from the BETENOIR brand book 2026 (FR);   keeps French spacing before « : » and in « 37 ml ».
+    category: 'Parfumerie de niche',
+    status: 'Maison active · Paris',
+    tagline: 'La vérité, à même la peau.',
+    intro: 'BETENOIR ne transforme rien. La maison s’adresse à ce qui existe déjà, avant le rôle que le monde impose.',
     story: [
-      'Le projet se construit dans la discrétion, autour d’une vision forte de la parfumerie contemporaine.',
-      'Une nouvelle identité. Un nouveau territoire olfactif. Une nouvelle histoire à découvrir.'
+      'BETENOIR emprunte à Jung l’idée de la Persona : ce masque social que chacun construit pour correspondre à ce que le monde attend. Sous ce masque persiste la part non éditée de chacun, celle qui existe avant d’être corrigée pour plaire. C’est elle que BETENOIR appelle la bête.',
+      'Dans un paysage lissé, où tout le monde se ressemble, la vraie rareté n’est plus l’audace. C’est la présence. BETENOIR ne provoque pas. BETENOIR prend sa place.'
     ],
     pillars: [
-      ['Territoire', 'Une maison pensée pour occuper un espace distinct dans la parfumerie.'],
-      ['Écriture', 'Une expression visuelle et olfactive développée comme un langage complet.'],
-      ['Lancement', 'La maison sera révélée progressivement au cours de l’année 2026.']
+      ['Cinq visages', 'NO\u00a0FILTER se révèle. SOUVERAIN règne. OFFLINE se retire. DRAMA se met en scène. NUIT\u00a0BLANCHE s’abandonne. Cinq personnalités, pas cinq pyramides olfactives.'],
+      ['Les parfumeurs', 'Bertrand Duchaufour signe NO\u00a0FILTER et NUIT\u00a0BLANCHE, Vincent Ricord SOUVERAIN et OFFLINE, Théo Monterosso DRAMA.'],
+      ['L’objet', '37 ml et 73 ml, les chiffres porte-bonheur des deux fondateurs, en miroir. Un capot laqué noir, aimanté en double direction : un geste, pas un argument.']
     ],
     tone: '#171717'
   },

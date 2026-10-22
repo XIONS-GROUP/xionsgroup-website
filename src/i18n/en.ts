@@ -15,7 +15,9 @@ Carrières — XIONS GROUP|Careers — XIONS GROUP
 XIONS Group — Accueil|XIONS Group — Home
 Accueil|Home
 Aller au contenu|Skip to content
-Visuel d’annonce de la maison Betenoir|Announcement visual for the Betenoir maison
+Campagne BETENOIR : cinq personnages dans une salle d’attente rouge|BETENOIR campaign: five characters in a red waiting room
+Le flacon BETENOIR NO FILTER dans une lumière rouge|The BETENOIR NO\u00a0FILTER bottle in red light
+Le flacon BETENOIR NO FILTER et sa coulure de laque noire|The BETENOIR NO\u00a0FILTER bottle and its drip of black lacquer
 Contacter XIONS Group : presse, distribution, partenariats et carrières. Siège au 253 rue Saint-Honoré, Paris. Nous répondons sous quelques jours ouvrés.|Contact XIONS Group: press, distribution, partnerships and careers. Head office at 253 rue Saint-Honoré, Paris. We reply within a few working days.
 Rejoindre XIONS Group : création, développement produit, marketing et retail dans un groupe de beauté indépendant présent à Paris, Shanghai et Palm Beach.|Join XIONS Group: creation, product development, marketing and retail in an independent beauty group with offices in Paris, Shanghai and Palm Beach.
 Les quatre maisons de XIONS Group : L’Entropiste, Betenoir, Sunlution et Masqly. Parfumerie de niche, soin et cosmétique, chacune avec son territoire propre.|The four maisons of XIONS Group: L’Entropiste, Betenoir, Sunlution and Masqly. Niche perfumery, skincare and cosmetics, each with its own territory.
@@ -133,7 +135,6 @@ Quatre regards.|Four perspectives.
 Parfumerie de niche|Niche perfumery
 Une parfumerie libre, audacieuse et inattendue.|Perfumery that is free, bold and unexpected.
 Parfumerie|Perfumery
-Une nouvelle maison est en préparation.|A new maison is taking shape.
 Cosmétique · Science|Skincare · Science
 La science de la lumière au service de la longévité de la peau.|The science of light for skin longevity.
 Le soin intensif des zones oubliées.|Intensive care for overlooked areas.
@@ -152,18 +153,18 @@ Développer|Developing
 Innovation produit, expertise opérationnelle et construction des marchés.|Product innovation, operational expertise and market development.
 Rayonner|Growing our presence
 Communication, culture et déploiement international.|Communication, culture and international growth.
-Betenoir rejoindra prochainement le portefeuille parfumerie de XIONS Group avec une identité et un territoire olfactif qui lui seront propres.|Betenoir will soon join XIONS Group’s fragrance portfolio with an identity and olfactory territory of its own.
-Betenoir · avant-première|Betenoir · preview
 La maison|The maison
-Le projet se construit dans la discrétion, autour d’une vision forte de la parfumerie contemporaine.|The project is developing behind the scenes, shaped by a strong vision of contemporary perfumery.
-Une nouvelle identité. Un nouveau territoire olfactif. Une nouvelle histoire à découvrir.|A new identity. A new olfactory territory. A new story to discover.
 betenoir.com · Bientôt en ligne|betenoir.com · Coming soon
-Territoire|Territory
-Une maison pensée pour occuper un espace distinct dans la parfumerie.|A maison conceived to occupy a distinctive space in perfumery.
-Écriture|Expression
-Une expression visuelle et olfactive développée comme un langage complet.|A visual and olfactory expression developed as a complete language.
-Lancement|Launch
-La maison sera révélée progressivement au cours de l’année 2026.|The maison will be revealed progressively throughout 2026.
+La vérité, à même la peau.|The truth, on bare skin.
+BETENOIR ne transforme rien. La maison s’adresse à ce qui existe déjà, avant le rôle que le monde impose.|BETENOIR transforms nothing. The maison speaks to what already exists, before the role the world imposes.
+BETENOIR emprunte à Jung l’idée de la Persona : ce masque social que chacun construit pour correspondre à ce que le monde attend. Sous ce masque persiste la part non éditée de chacun, celle qui existe avant d’être corrigée pour plaire. C’est elle que BETENOIR appelle la bête.|BETENOIR borrows from Jung the idea of the Persona: the social mask each of us builds to match what the world expects. Beneath this mask persists the unedited part of each of us, the part that exists before being corrected to please. This is what BETENOIR calls the beast.
+Dans un paysage lissé, où tout le monde se ressemble, la vraie rareté n’est plus l’audace. C’est la présence. BETENOIR ne provoque pas. BETENOIR prend sa place.|In a smoothed-out landscape where everyone looks alike, true rarity is no longer daring. It is presence. BETENOIR does not provoke. BETENOIR takes its place.
+Cinq visages|Five faces
+NO FILTER se révèle. SOUVERAIN règne. OFFLINE se retire. DRAMA se met en scène. NUIT BLANCHE s’abandonne. Cinq personnalités, pas cinq pyramides olfactives.|NO\u00a0FILTER reveals itself. SOUVERAIN reigns. OFFLINE withdraws. DRAMA takes the stage. NUIT\u00a0BLANCHE lets go. Five personalities, not five olfactory pyramids.
+Les parfumeurs|The perfumers
+Bertrand Duchaufour signe NO FILTER et NUIT BLANCHE, Vincent Ricord SOUVERAIN et OFFLINE, Théo Monterosso DRAMA.|Bertrand Duchaufour signs NO\u00a0FILTER and NUIT\u00a0BLANCHE, Vincent Ricord SOUVERAIN and OFFLINE, Théo Monterosso DRAMA.
+L’objet|The object
+37 ml et 73 ml, les chiffres porte-bonheur des deux fondateurs, en miroir. Un capot laqué noir, aimanté en double direction : un geste, pas un argument.|37 ml and 73 ml, the lucky numbers of the two founders, in mirror image. A black lacquered cap with a two-way magnetic system: a gesture, not a selling point.
 Découvrir nos autres maisons|Discover our other maisons
 Toutes les marques|All brands
 Le portefeuille de marques de XIONS Group.|The XIONS Group brand portfolio.

@@ -105,17 +105,42 @@
   },
   {
     "id": "betenoir-hero",
-    "name": "betenoir-coming-soon-hero",
-    "label": "Betenoir · visuel d’annonce",
+    "name": "betenoir-campaign-hero",
+    "label": "Betenoir · campagne",
     "use": "品牌标题下方横图，按原图比例完整显示，不裁切",
     "width": 2400,
     "height": 1344,
     "ratio": "25 / 14",
     "fit": "contain",
     "page": "/fr/marques/betenoir/",
-    "src": "/images/brands/betenoir/betenoir-coming-soon-hero.webp",
-    "alt": "Visuel d’annonce de la maison Betenoir",
-    "optional": true
+    "src": "/images/brands/betenoir/betenoir-campaign-hero.webp",
+    "alt": "Campagne BETENOIR\u00a0: cinq personnages dans une salle d’attente rouge"
+  },
+  {
+    "id": "betenoir-detail-01",
+    "name": "betenoir-no-filter-01",
+    "label": "Betenoir · NO FILTER",
+    "use": "品牌页细节网格第一格；KV 原图 3:4（网盘 00 output/02-brand visual/KV/BN-Visual-1.png），网格裁成 4:5",
+    "width": 1440,
+    "height": 1928,
+    "ratio": "3 / 4",
+    "fit": "cover",
+    "page": "/fr/marques/betenoir/",
+    "src": "/images/brands/betenoir/betenoir-no-filter-01.webp",
+    "alt": "Le flacon BETENOIR NO FILTER dans une lumière rouge"
+  },
+  {
+    "id": "betenoir-detail-02",
+    "name": "betenoir-no-filter-02",
+    "label": "Betenoir · NO FILTER",
+    "use": "品牌页细节网格第二格；KV 原图 3:4（网盘 00 output/02-brand visual/KV/BN-Visual-2.png），网格裁成 4:5",
+    "width": 1440,
+    "height": 1928,
+    "ratio": "3 / 4",
+    "fit": "cover",
+    "page": "/fr/marques/betenoir/",
+    "src": "/images/brands/betenoir/betenoir-no-filter-02.webp",
+    "alt": "Le flacon BETENOIR NO FILTER et sa coulure de laque noire"
   },
   {
     "id": "sunlution-hero",

@@ -1,0 +1,30 @@
+# 2026-10-22 · Betenoir 品牌页从「即将上线」换成上线版
+
+## 需求
+
+Neo 10-22 晚：BN 已上线，集团官网要更新 BN 的品牌信息；从 BN brand book 找内容，先出预览，他说 OK 再上线。
+
+## 改了什么
+
+| 位置 | 之前 | 之后 |
+|---|---|---|
+| `src/data/brands.ts` 的 betenoir | 「À venir · 2026」、「Une nouvelle maison est en préparation.」、三条占位理念、`websiteLive: false`（只显示「betenoir.com · Bientôt en ligne」） | brand book 文案：标语 *La vérité, à même la peau.*；导语、两段正文（Persona 与 la bête、présence）；三栏 Cinq visages / Les parfumeurs / L’objet；`websiteLive: true`，显示「Site officiel ↗」并进 JSON-LD 的 `sameAs` |
+| 类别 | Parfumerie | Parfumerie de niche |
+| `src/data/visuals.json` | `betenoir-hero` 叫 coming-soon、alt 是「Visuel d’annonce」、标 optional | 文件改名 `betenoir-campaign-hero.webp`（同一张图），alt 改成描述画面；新增 `betenoir-detail-01/02`（KV NO FILTER 两张，1440×1928 sRGB WebP q88，网格里裁成 4:5） |
+| `src/i18n/en.ts` | BN 占位文案的英文 | 新文案的英文，用词照 brand book 英文版（the beast、the 5 faces、maison）；删掉不再用的占位行 |
+
+- 文案来源：`BETENOIR_BRANDBOOK_2026_FR`（第 2–4、9–12 页）和它的英文版；只删减、合并，不加新说法。和 BN 官网 À propos 页（`betenoir-website/docs/A_PROPOS.md`）同源、口径一致。
+- 正文里品牌名大写 BETENOIR（BN 品牌规矩）；`name` 仍是 Betenoir，和导航、其他三家的大小写一致。
+- 法文排版：« : » 前、« 37 ml » 里用不断行空格；NO FILTER、NUIT BLANCHE 词内不断行（桌面版第一次截图 NUIT / BLANCHE 被拆成两行）。
+- Instagram 还是 `null`：betenoir.com 和主题里都没有 BN 的账号，等 Neo 给。
+- 没放：Emmy 等媒体曝光（BN 官网 10-21 也先不放）、价格、Neo Su 艺术指导一段。
+
+## 验证
+
+- `npm run build`：构建、38 个文件内链、34 个双语页面文案覆盖全部通过。
+- 本地 `astro preview` + chrome-headless-shell 整页截图：BN 法 / 英、品牌总览，1280 和 390 两种宽度；图片全部加载，控制台无报错。截图在创意系统仓库 `work/XG/2026-10-22_xg-site-bn/shots/`。
+
+## 发布状态
+
+- 已提交并推送 dev → Netlify 分支预览 https://dev--xionsgroup.netlify.app/fr/marques/betenoir/（禁索引）。
+- main（生产）未动，等 Neo 确认后合并。
