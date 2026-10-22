@@ -155,7 +155,7 @@ Rayonner|Growing our presence
 Communication, culture et déploiement international.|Communication, culture and international growth.
 La maison|The maison
 betenoir.com · Bientôt en ligne|betenoir.com · Coming soon
-Le parfum comme une pièce de mode : audacieux, décalé, sans masque.|Fragrance as a fashion piece: bold, offbeat, unmasked.
+Le parfum comme une pièce de mode : avant-gardiste, décalé, sans masque.|Fragrance as a fashion piece: avant-garde, offbeat, unmasked.
 BETENOIR ne transforme rien. La maison s’adresse à ce qui existe déjà, avant le rôle que le monde impose.|BETENOIR transforms nothing. The maison speaks to what already exists, before the role the world imposes.
 BETENOIR emprunte à Jung l’idée de la Persona : ce masque social que chacun construit pour correspondre à ce que le monde attend. Sous ce masque persiste la part non éditée de chacun, celle qui existe avant d’être corrigée pour plaire. C’est elle que BETENOIR appelle la bête.|BETENOIR borrows from Jung the idea of the Persona: the social mask each of us builds to match what the world expects. Beneath this mask persists the unedited part of each of us, the part that exists before being corrected to please. This is what BETENOIR calls the beast.
 Dans un paysage lissé, où tout le monde se ressemble, la vraie rareté n’est plus l’audace. C’est la présence. BETENOIR ne provoque pas. BETENOIR prend sa place.|In a smoothed-out landscape where everyone looks alike, true rarity is no longer daring. It is presence. BETENOIR does not provoke. BETENOIR takes its place.
