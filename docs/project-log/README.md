@@ -17,6 +17,7 @@
 11. [2026-09-22 · 自助启动预览与全站尾斜杠](2026-09-22-preview-launcher-and-slashes.md)：双击即可开预览；修掉点导航就 404 的问题。
 12. [2026-09-22 · 素材接入与页面重排](2026-09-22-assets-and-page-redesign.md)：压缩市场部原片、填充空槽位，重排集团/品牌/Press/Engagements。
 13. [2026-09-23 · 导航反色、文案核查与 main 占位页](2026-09-23-nav-copy-audit-and-main-holding.md)：首屏导航透明反色、集团页居中、Press 重排、242 条翻译核查、main 换用 X 动画占位页。
+13a. [2026-10-22 · Betenoir 品牌页换成上线版](2026-10-22-betenoir-launch.md)：brand book 文案、官网链接、KV 两张；dev 预览后等 Neo 确认上线。
 14. [上线前检查](../launch-readiness-2026-09-22.md)：距离上线还缺什么，按阻塞程度排序。
 15. [视觉方向备忘 09-17](../visual-direction-2026-09-17.md)：早期的图片与动态优化设想，部分已被后续决定替代。
 16. [Hero 参数历史](hero-parameters.md)：每轮视觉调整及当前确认值。
