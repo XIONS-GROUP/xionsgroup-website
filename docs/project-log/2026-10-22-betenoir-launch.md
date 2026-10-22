@@ -31,6 +31,12 @@ Neo 10-22 晚：BN 已上线，集团官网要更新 BN 的品牌信息；从 BN
 - 代码：`pillars` 的第二项可以是 `[名字, 一行]` 列表，`BrandPage.astro` 渲染成 `<dl class="pillar-rows">`；有列表的页三栏改 1.15 : 0.95 : 0.9（1280 宽时每行不折行，700 以下仍一栏）。`check-localization.mjs` 的不翻译词加了五款名、三位调香师名。`[review].astro` 读 `optional` 前先判断字段在不在（首图去掉 optional 后 astro check 报错）。
 - 验证：`npm run build` 全过，`astro check` 0 错；1280 宽实测十行全是一行。
 
+## 第三轮（Neo 10-22 23:35）
+
+- 五款下面那句换回第一版的动词（Se révèle、Règne、Se retire、Se met en scène、S’abandonne，和 BN 官网 À propos 一致；英文 Reveals itself / Reigns / Withdraws / Takes the stage / Lets go），「La bête qui…」那组不用。
+- 改成上下排：名字红字放大（1.15rem），下面一行小字（.8rem）；调香师同样，人名在上、调的款在下。
+- 上下排不再需要加宽栏，去掉第二轮的 `has-rows` 三栏比例，三栏回到等宽。
+
 ## 发布状态
 
 - 已提交并推送 dev → Netlify 分支预览 https://dev--xionsgroup.netlify.app/fr/marques/betenoir/（禁索引）。

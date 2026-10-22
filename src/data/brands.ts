@@ -35,14 +35,14 @@ export const brands = [
       'BETENOIR emprunte à Jung l’idée de la Persona : ce masque social que chacun construit pour correspondre à ce que le monde attend. Sous ce masque persiste la part non éditée de chacun, celle qui existe avant d’être corrigée pour plaire. C’est elle que BETENOIR appelle la bête.',
       'Dans un paysage lissé, où tout le monde se ressemble, la vraie rareté n’est plus l’audace. C’est la présence. BETENOIR ne provoque pas. BETENOIR prend sa place.'
     ],
-    // A pillar may hold [name, line] rows instead of a paragraph; the names render in red.
+    // A pillar may hold [name, line] rows instead of a paragraph: the name in red, the line beneath it.
     pillars: [
       ['Cinq visages', [
-        ['NO FILTER', 'La bête qui refuse le camouflage.'],
-        ['SOUVERAIN', 'La bête qui maîtrise son territoire.'],
-        ['OFFLINE', 'La bête qui protège son espace.'],
-        ['DRAMA', 'La bête qui choisit comment elle apparaît.'],
-        ['NUIT BLANCHE', 'La bête qui laisse le corps prendre le dessus.']
+        ['NO FILTER', 'Se révèle'],
+        ['SOUVERAIN', 'Règne'],
+        ['OFFLINE', 'Se retire'],
+        ['DRAMA', 'Se met en scène'],
+        ['NUIT BLANCHE', 'S’abandonne']
       ]],
       ['Les parfumeurs', [
         ['Vincent Ricord', 'SOUVERAIN · OFFLINE'],

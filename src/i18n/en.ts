@@ -160,11 +160,11 @@ BETENOIR ne transforme rien. La maison s’adresse à ce qui existe déjà, avan
 BETENOIR emprunte à Jung l’idée de la Persona : ce masque social que chacun construit pour correspondre à ce que le monde attend. Sous ce masque persiste la part non éditée de chacun, celle qui existe avant d’être corrigée pour plaire. C’est elle que BETENOIR appelle la bête.|BETENOIR borrows from Jung the idea of the Persona: the social mask each of us builds to match what the world expects. Beneath this mask persists the unedited part of each of us, the part that exists before being corrected to please. This is what BETENOIR calls the beast.
 Dans un paysage lissé, où tout le monde se ressemble, la vraie rareté n’est plus l’audace. C’est la présence. BETENOIR ne provoque pas. BETENOIR prend sa place.|In a smoothed-out landscape where everyone looks alike, true rarity is no longer daring. It is presence. BETENOIR does not provoke. BETENOIR takes its place.
 Cinq visages|Five faces
-La bête qui refuse le camouflage.|The beast that refuses camouflage.
-La bête qui maîtrise son territoire.|The beast that masters its territory.
-La bête qui protège son espace.|The beast that protects its space.
-La bête qui choisit comment elle apparaît.|The beast that chooses how it appears.
-La bête qui laisse le corps prendre le dessus.|The beast that lets the body take over.
+Se révèle|Reveals itself
+Règne|Reigns
+Se retire|Withdraws
+Se met en scène|Takes the stage
+S’abandonne|Lets go
 Les parfumeurs|The perfumers
 L’objet|The object
 37 ml et 73 ml, les chiffres porte-bonheur des deux fondateurs, en miroir. Un capot laqué noir, aimanté en double direction : un geste, pas un argument.|37 ml and 73 ml, the lucky numbers of the two founders, in mirror image. A black lacquered cap with a two-way magnetic system: a gesture, not a selling point.
