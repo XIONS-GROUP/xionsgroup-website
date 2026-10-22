@@ -26,7 +26,7 @@ export const brands = [
     instagram: null,
     websiteLive: true,
     name: 'Betenoir',
-    // Copy condensed from the BETENOIR brand book 2026 (FR);   keeps French spacing before « : » and in « 37 ml ».
+    // Copy condensed from the BETENOIR brand book 2026 (FR); non-breaking spaces keep French spacing before « : » and in « 37 ml ».
     category: 'Parfumerie de niche',
     status: 'Maison active · Paris',
     tagline: 'La vérité, à même la peau.',
@@ -35,9 +35,20 @@ export const brands = [
       'BETENOIR emprunte à Jung l’idée de la Persona : ce masque social que chacun construit pour correspondre à ce que le monde attend. Sous ce masque persiste la part non éditée de chacun, celle qui existe avant d’être corrigée pour plaire. C’est elle que BETENOIR appelle la bête.',
       'Dans un paysage lissé, où tout le monde se ressemble, la vraie rareté n’est plus l’audace. C’est la présence. BETENOIR ne provoque pas. BETENOIR prend sa place.'
     ],
+    // A pillar may hold [name, line] rows instead of a paragraph; the names render in red.
     pillars: [
-      ['Cinq visages', 'NO\u00a0FILTER se révèle. SOUVERAIN règne. OFFLINE se retire. DRAMA se met en scène. NUIT\u00a0BLANCHE s’abandonne. Cinq personnalités, pas cinq pyramides olfactives.'],
-      ['Les parfumeurs', 'Bertrand Duchaufour signe NO\u00a0FILTER et NUIT\u00a0BLANCHE, Vincent Ricord SOUVERAIN et OFFLINE, Théo Monterosso DRAMA.'],
+      ['Cinq visages', [
+        ['NO FILTER', 'La bête qui refuse le camouflage.'],
+        ['SOUVERAIN', 'La bête qui maîtrise son territoire.'],
+        ['OFFLINE', 'La bête qui protège son espace.'],
+        ['DRAMA', 'La bête qui choisit comment elle apparaît.'],
+        ['NUIT BLANCHE', 'La bête qui laisse le corps prendre le dessus.']
+      ]],
+      ['Les parfumeurs', [
+        ['Vincent Ricord', 'SOUVERAIN · OFFLINE'],
+        ['Bertrand Duchaufour', 'NO FILTER · NUIT BLANCHE'],
+        ['Théo Monterosso', 'DRAMA']
+      ]],
       ['L’objet', '37 ml et 73 ml, les chiffres porte-bonheur des deux fondateurs, en miroir. Un capot laqué noir, aimanté en double direction : un geste, pas un argument.']
     ],
     tone: '#171717'

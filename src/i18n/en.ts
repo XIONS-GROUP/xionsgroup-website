@@ -16,7 +16,7 @@ XIONS Group — Accueil|XIONS Group — Home
 Accueil|Home
 Aller au contenu|Skip to content
 Campagne BETENOIR : cinq personnages dans une salle d’attente rouge|BETENOIR campaign: five characters in a red waiting room
-Le flacon BETENOIR NO FILTER dans une lumière rouge|The BETENOIR NO\u00a0FILTER bottle in red light
+Portrait de campagne BETENOIR sur fond rouge|BETENOIR campaign portrait on a red background
 Le flacon BETENOIR NO FILTER et sa coulure de laque noire|The BETENOIR NO\u00a0FILTER bottle and its drip of black lacquer
 Contacter XIONS Group : presse, distribution, partenariats et carrières. Siège au 253 rue Saint-Honoré, Paris. Nous répondons sous quelques jours ouvrés.|Contact XIONS Group: press, distribution, partnerships and careers. Head office at 253 rue Saint-Honoré, Paris. We reply within a few working days.
 Rejoindre XIONS Group : création, développement produit, marketing et retail dans un groupe de beauté indépendant présent à Paris, Shanghai et Palm Beach.|Join XIONS Group: creation, product development, marketing and retail in an independent beauty group with offices in Paris, Shanghai and Palm Beach.
@@ -160,9 +160,12 @@ BETENOIR ne transforme rien. La maison s’adresse à ce qui existe déjà, avan
 BETENOIR emprunte à Jung l’idée de la Persona : ce masque social que chacun construit pour correspondre à ce que le monde attend. Sous ce masque persiste la part non éditée de chacun, celle qui existe avant d’être corrigée pour plaire. C’est elle que BETENOIR appelle la bête.|BETENOIR borrows from Jung the idea of the Persona: the social mask each of us builds to match what the world expects. Beneath this mask persists the unedited part of each of us, the part that exists before being corrected to please. This is what BETENOIR calls the beast.
 Dans un paysage lissé, où tout le monde se ressemble, la vraie rareté n’est plus l’audace. C’est la présence. BETENOIR ne provoque pas. BETENOIR prend sa place.|In a smoothed-out landscape where everyone looks alike, true rarity is no longer daring. It is presence. BETENOIR does not provoke. BETENOIR takes its place.
 Cinq visages|Five faces
-NO FILTER se révèle. SOUVERAIN règne. OFFLINE se retire. DRAMA se met en scène. NUIT BLANCHE s’abandonne. Cinq personnalités, pas cinq pyramides olfactives.|NO\u00a0FILTER reveals itself. SOUVERAIN reigns. OFFLINE withdraws. DRAMA takes the stage. NUIT\u00a0BLANCHE lets go. Five personalities, not five olfactory pyramids.
+La bête qui refuse le camouflage.|The beast that refuses camouflage.
+La bête qui maîtrise son territoire.|The beast that masters its territory.
+La bête qui protège son espace.|The beast that protects its space.
+La bête qui choisit comment elle apparaît.|The beast that chooses how it appears.
+La bête qui laisse le corps prendre le dessus.|The beast that lets the body take over.
 Les parfumeurs|The perfumers
-Bertrand Duchaufour signe NO FILTER et NUIT BLANCHE, Vincent Ricord SOUVERAIN et OFFLINE, Théo Monterosso DRAMA.|Bertrand Duchaufour signs NO\u00a0FILTER and NUIT\u00a0BLANCHE, Vincent Ricord SOUVERAIN and OFFLINE, Théo Monterosso DRAMA.
 L’objet|The object
 37 ml et 73 ml, les chiffres porte-bonheur des deux fondateurs, en miroir. Un capot laqué noir, aimanté en double direction : un geste, pas un argument.|37 ml and 73 ml, the lucky numbers of the two founders, in mirror image. A black lacquered cap with a two-way magnetic system: a gesture, not a selling point.
 Découvrir nos autres maisons|Discover our other maisons

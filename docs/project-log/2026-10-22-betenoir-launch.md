@@ -24,6 +24,13 @@ Neo 10-22 晚：BN 已上线，集团官网要更新 BN 的品牌信息；从 BN
 - `npm run build`：构建、38 个文件内链、34 个双语页面文案覆盖全部通过。
 - 本地 `astro preview` + chrome-headless-shell 整页截图：BN 法 / 英、品牌总览，1280 和 390 两种宽度；图片全部加载，控制台无报错。截图在创意系统仓库 `work/XG/2026-10-22_xg-site-bn/shots/`。
 
+## 第二轮（Neo 10-22 23:20 看过预览）
+
+- 细节图：左边换成 brand book 第 14 页（NUIT BLANCHE）那张女人（`betenoir-portrait-01.webp`，原图 1968×2464）；右边换成为户外广告修过的 Visual 2（KV5 那版，瓶盖重打光、NO FILTER 换色、积液补缺），文件 `betenoir-no-filter-01.webp`。网盘 KV 文件夹的 `BN-Visual-2.png` 也换成了新版，旧版在 `99 archive/02-brand visual/output/KV/`。
+- 「Cinq visages」「Les parfumeurs」从一段话改成一行一个：名字红色（`--wine`），后面是 slogan（BN 官网商品页的 tagline，如 *La bête qui refuse le camouflage.*）/ 调的款；删掉「Cinq personnalités, pas cinq pyramides olfactives.」。调香师顺序 Vincent Ricord、Bertrand Duchaufour、Théo Monterosso。
+- 代码：`pillars` 的第二项可以是 `[名字, 一行]` 列表，`BrandPage.astro` 渲染成 `<dl class="pillar-rows">`；有列表的页三栏改 1.15 : 0.95 : 0.9（1280 宽时每行不折行，700 以下仍一栏）。`check-localization.mjs` 的不翻译词加了五款名、三位调香师名。`[review].astro` 读 `optional` 前先判断字段在不在（首图去掉 optional 后 astro check 报错）。
+- 验证：`npm run build` 全过，`astro check` 0 错；1280 宽实测十行全是一行。
+
 ## 发布状态
 
 - 已提交并推送 dev → Netlify 分支预览 https://dev--xionsgroup.netlify.app/fr/marques/betenoir/（禁索引）。

@@ -12,7 +12,9 @@ const invariant = new Set([
   'contact@xionsgroup.com', '.', 'Denis Bellaïche', 'Kris Fang', 'Neo Su', 'Golden Globes',
   'Grammy Awards', 'César', 'Oscars', 'Festival de Cannes', 'Emmy Awards', 'Hollywood',
   'Contact — XIONS GROUP', 'Betenoir — XIONS GROUP', 'L’Entropiste — XIONS GROUP',
-  'Sunlution — XIONS GROUP', 'Masqly — XIONS GROUP', 'Logo L’Entropiste', 'Logo Betenoir', 'Logo Sunlution', 'Logo Masqly'
+  'Sunlution — XIONS GROUP', 'Masqly — XIONS GROUP',
+  'NO FILTER', 'SOUVERAIN', 'OFFLINE', 'DRAMA', 'NUIT BLANCHE', 'Vincent Ricord', 'Bertrand Duchaufour', 'Théo Monterosso',
+  'SOUVERAIN · OFFLINE', 'NO FILTER · NUIT BLANCHE', 'Logo L’Entropiste', 'Logo Betenoir', 'Logo Sunlution', 'Logo Masqly'
 ]);
 function documentAt(path) {
   const html = readFileSync(`dist${path}index.html`, 'utf8');
