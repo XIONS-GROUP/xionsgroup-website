@@ -45,5 +45,6 @@ Neo 10-22 晚：BN 已上线，集团官网要更新 BN 的品牌信息；从 BN
 
 ## 发布状态
 
-- 已提交并推送 dev → Netlify 分支预览 https://dev--xionsgroup.netlify.app/fr/marques/betenoir/（禁索引）。
-- main（生产）未动，等 Neo 确认后合并。
+- 2026-10-23 Neo 确认（「就维持现在这个预览窗口的样子，然后直接可以上线了」）：dev 合并进 main（714ccfd），`npm run build` 全过，推送后约 30 秒生产更新。
+- 生产核对：https://www.xionsgroup.com/fr/marques/betenoir/、/en/brands/betenoir/、/fr/marques/、/en/brands/、/fr/ 全部 200，`robots` 为 index, follow（无 noindex），`/sitemap.xml` 有 BN 法英两页，三张 BN 图都 200；chrome-headless-shell 整页截图 1280 和 390 宽，图片全加载。
+- 还没做：BN 的 Instagram（@betenoir_paris）还没填进 `brands.ts`，等 Neo 点头再上。
