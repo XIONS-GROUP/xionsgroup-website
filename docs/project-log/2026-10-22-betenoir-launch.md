@@ -8,7 +8,7 @@ Neo 10-22 晚：BN 已上线，集团官网要更新 BN 的品牌信息；从 BN
 
 | 位置 | 之前 | 之后 |
 |---|---|---|
-| `src/data/brands.ts` 的 betenoir | 「À venir · 2026」、「Une nouvelle maison est en préparation.」、三条占位理念、`websiteLive: false`（只显示「betenoir.com · Bientôt en ligne」） | brand book 文案：标语 *La vérité, à même la peau.*；导语、两段正文（Persona 与 la bête、présence）；三栏 Cinq visages / Les parfumeurs / L’objet；`websiteLive: true`，显示「Site officiel ↗」并进 JSON-LD 的 `sameAs` |
+| `src/data/brands.ts` 的 betenoir | 「À venir · 2026」、「Une nouvelle maison est en préparation.」、三条占位理念、`websiteLive: false`（只显示「betenoir.com · Bientôt en ligne」） | brand book 文案：标语 *La vérité, à même la peau.*（第四轮换成定位句）；导语、两段正文（Persona 与 la bête、présence）；三栏 Cinq visages / Les parfumeurs / L’objet；`websiteLive: true`，显示「Site officiel ↗」并进 JSON-LD 的 `sameAs` |
 | 类别 | Parfumerie | Parfumerie de niche |
 | `src/data/visuals.json` | `betenoir-hero` 叫 coming-soon、alt 是「Visuel d’annonce」、标 optional | 文件改名 `betenoir-campaign-hero.webp`（同一张图），alt 改成描述画面；新增 `betenoir-detail-01/02`（KV NO FILTER 两张，1440×1928 sRGB WebP q88，网格里裁成 4:5） |
 | `src/i18n/en.ts` | BN 占位文案的英文 | 新文案的英文，用词照 brand book 英文版（the beast、the 5 faces、maison）；删掉不再用的占位行 |
@@ -36,6 +36,12 @@ Neo 10-22 晚：BN 已上线，集团官网要更新 BN 的品牌信息；从 BN
 - 五款下面那句换回第一版的动词（Se révèle、Règne、Se retire、Se met en scène、S’abandonne，和 BN 官网 À propos 一致；英文 Reveals itself / Reigns / Withdraws / Takes the stage / Lets go），「La bête qui…」那组不用。
 - 改成上下排：名字红字放大（1.15rem），下面一行小字（.8rem）；调香师同样，人名在上、调的款在下。
 - 上下排不再需要加宽栏，去掉第二轮的 `has-rows` 三栏比例，三栏回到等宽。
+
+## 第四轮（Neo 10-23）
+
+- 品牌页大标题下、品牌总览卡片 logo 下那句（`tagline`）改成对外的商业定位句：*Le parfum comme une pièce de mode : avant-gardiste, décalé, sans masque.*（英文 *Fragrance as a fashion piece: avant-garde, offbeat, unmasked.*），替换 brand book 的 *La vérité, à même la peau.*；等 Neo 定稿。
+- 第一稿的 audacieux 换成 avant-gardiste：正文写着「la vraie rareté n’est plus l’audace」，品牌总览上 L’Entropiste 也用 audacieuse。
+- 手机 390 宽会在「avant-」后断行：连字符后加 U+2060（word joiner），`brands.ts` 和 `en.ts` 的键都带上，`translate()` 按原文查。
 
 ## 发布状态
 
