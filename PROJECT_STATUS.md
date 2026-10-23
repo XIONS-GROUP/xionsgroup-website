@@ -19,7 +19,7 @@
 - 集团、四品牌共享模板、Press、承诺、招聘、联系、成功页、四法律页及404。
 - 17路由/语言、30公开sitemap URL；法英正文/表单/法律/alt/metadata；无运行时翻译API。
 - 两个桌面下拉共用磨砂面；手机全屏抽屉，集团不展开团队，品牌显示四家；主导航大写。
-- 首页四品牌居中Logo卡、六活动标识；品牌官网/Instagram集中维护；Betenoir 10-23 起显示官网链接（Instagram 账号待给）。
+- 首页四品牌居中Logo卡、六活动标识；品牌官网/Instagram集中维护；Betenoir 10-23 起显示官网和 Instagram（@betenoir_paris）链接。
 - 红色#c20000、SVG箭头、白底图标/分享封面。body仍是近白#fefdfb，导航是白色半透明。
 - Netlify Forms分类必填、补充标题可选、成功/错误界面、扫描声明。邮件投递是远端验收项；Resend未启用。
 - SEO canonical/hreflang/JSON-LD/robots/sitemap；所有context仍禁索引。
