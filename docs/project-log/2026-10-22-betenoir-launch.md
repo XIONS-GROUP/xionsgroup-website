@@ -48,3 +48,5 @@ Neo 10-22 晚：BN 已上线，集团官网要更新 BN 的品牌信息；从 BN
 - 2026-10-23 Neo 确认（「就维持现在这个预览窗口的样子，然后直接可以上线了」）：dev 合并进 main（714ccfd），`npm run build` 全过，推送后约 30 秒生产更新。
 - 生产核对：https://www.xionsgroup.com/fr/marques/betenoir/、/en/brands/betenoir/、/fr/marques/、/en/brands/、/fr/ 全部 200，`robots` 为 index, follow（无 noindex），`/sitemap.xml` 有 BN 法英两页，三张 BN 图都 200；chrome-headless-shell 整页截图 1280 和 390 宽，图片全加载。
 - 同日 Neo 点头「加上 BN 的 Instagram ＠betenoir_paris，直接上线」：`brands.ts` 的 `instagram` 填 https://www.instagram.com/betenoir_paris/，品牌页「Site officiel」旁出现 Instagram 链接，JSON-LD `sameAs` 也带上；main 4b66848。
+- 同日第五轮：Neo 说 pièce de mode 那句「不行」，要从 brand book、press book 里找，顾及上方已有「Parfumerie de niche」。给了两批原话（A–K）后，Neo 自己给了 *Free-spirited, bold and resolutely contemporary*；法文直译 « Libre, audacieuse… » 和 L’Entropiste 那句「libre, audacieuse et inattendue」撞两个词，Neo 选了换词版：**Affranchie, intrépide et résolument contemporaine.** / *Free-spirited, fearless and resolutely contemporary.*；word joiner 不再需要，已删。main 73e0d7e。
+
